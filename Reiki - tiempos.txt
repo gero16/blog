@@ -1,0 +1,53 @@
+1:10 - 2:50
+3:50 - 4:50
+2:10 - 3:20 
+23:00 - 01:30
++3
+04:00 - 05:00
+19:00 - 20:00hs
+22:20 - 23:00
++2
++4
++3
++6
++3
++4
++3
++8
++6
+
+
+const preTitulo = document.querySelector(".pre-titulo")
+const preAutor = document.querySelector(".pre-autor")
+const preContenido = document.querySelector(".pre-contenido")
+
+/*
+agregar.addEventListener("click", (e) => {
+    // Me queda guardado del etiquetas.addEventListener
+  
+    let texto = "";
+  
+    if (inputTitulo.value && !inputTitulo.disabled) {
+      console.log(inputTitulo);
+      texto = inputTitulo.value;
+      inputTitulo.disabled = true;
+      preTitulo.textContent = texto;
+    } else if (inputAutor.value && !inputAutor.disabled) {
+      console.log(inputAutor);
+      texto = inputAutor.value;
+      inputAutor.disabled = true;
+      preAutor.textContent = texto;
+    } else {
+      texto = inputContenido.value;
+      inputContenido.value = "";
+      agregarTexto(selectEtiqueta, texto);
+      texto += contenidoHTML;
+      preContenido.innerHTML = contenidoHTML;
+      console.log(contenidoHTML);
+  
+      //console.log(actualizarHTML)
+    }
+  
+    // textoPost.innerHTML = actualizarHTML;
+  });
+  */

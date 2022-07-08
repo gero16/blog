@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Importar Fuentes -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet">
+     <!-- CSS PROPIO -->
+     <link rel="stylesheet" href="../css/styles.css">
+     <title>Post Luz de Luna</title>
+</head>
+<body>
+
+    <header>
+        <div class="div-logo">
+            <img class="logo" src="../img/logo.jpg" alt="imagen del logo">
+            <div class="logo-title">
+                <h1>Espacio Luz de Luna</h1>
+               
+            </div>
+        </div>
+        <div class="menu">
+            <ul class="menu-lista">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#">Articulos</a></li>
+                <li><a href="#">Nosotros</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    
+  
+    <main class="container principal">
+        <article class="crear-post">
+            <h1> Crear Post del Blog </h1>
+            <form class="formulario" action="/api/crear-post" method="POST" enctype="multipart/form-data">
+                <ul>
+                         
+                    <li>
+                        <label for="">Imagen</label>
+                        <div>
+                            <input type="file" name="imagen"  id="imagen-post" style="display: none"/>
+                            <label for="imagen-post" class="label-imagen">Seleccionar Archivo  </label>
+                            <span class="span-foto">Ningun archivo seleccionado.</span>
+                        </div>
+                       
+                    </li>
+                    
+                    
+                    <li>
+                        <label for="text">Titulo</label>
+                        <input type="text" name="titulo" id="titulo-post" class="vacio" >
+                    </li>
+                    <li>
+                        <label for="text">Autor</label>
+                        <input type="text" name="autor" id="autor-post" class="vacio">
+                    </li>
+                    <li>
+                        <label for="text">Fecha</label>
+                        <input type="text" name="fecha" id="fecha-post" class="vacio">
+                    </li>
+                    <li>
+                        <label class="label-etiqueta-post" for="etiquetas">Etiqueta</label>
+                        <input type="text" name="etiquetas" class="etiquetas-post" data-id="etiqueta0">
+                        <input type="text" name="etiquetas" class="etiquetas-post" data-id="etiqueta1">
+                    </li>
+                    <li>
+                        <label for="text">Contenido</label>
+                        <textarea type="text" name="contenido" id="contenido-post" placeholder="Seleccione Opcion - Escriba - Agregar Texto"  class="vacio"> </textarea>
+                    </li>
+                    <li>
+                        <div class="etiquetas">
+                            <span class="botones" id="h2">SubTitulos</span>
+                            <span class="botones" id="p">Parrafo</span>
+                            <span class="botones" id="strong">Negrita</span>
+                            <span class="botones" id="img">Imagen</span>           
+                        </div>
+                        <span class="botones" id="terminar">Finalizar Contenido </span> 
+                    </li>
+                    <li class="agregar-texto">
+                        <span> Previsualizar el Contenido</span>
+                        <span data-id="agregar" id="agregar-texto"> Agregar Texto  </span>
+                        <span class="span-enter"> (Presionar Enter) </span>
+                    </li>
+                    <li class="li-button">
+                        <h2> Crear Post </h2><!-- Para cumplir con el css -->
+                        <button id="enviar-post" type="submit"> Crear Post  </button>
+                    </li>
+                </ul>
+
+            </form>
+
+            
+        </article>
+
+        <article class="preview">
+
+            <h1 class="pre-titulo titulo-post"> </h1> <!-- titulo-post - estilos del post.html -->
+            <img class="pre-img" src="" alt="Previsualizacion de la Foto" style="display:none;"> 
+
+            <p class="pre-fecha"> </p>
+            
+            <div class="pre-contenido contenido-post">
+                <h2 class="pre-sub"></h2>
+                <p class="pre-sub"></p>
+            </div>
+
+            <p class="autor-post"> Autor <!-- autor-post - estilos del post.html -->
+                <strong class="pre-autor"> </strong>
+            </p>
+        </article>
+
+    </main>
+
+
+<div class="texto-post">
+
+</div>
+    
+<script src="../js/crear-post.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+
+        link(rel="stylesheet", href="../css/styles.css")
+        title #{titulo}
+    body 
+
+        
+  
+        header 
+            .div-logo 
+                img(class="logo" src="../img/logo.jpg")
+                .logo-title 
+                    h1 Espacio Luz de Luna 
+            
+            .menu 
+                ul(class="menu-lista")
+                    li
+                        a(href="http://localhost:3000/index.html") Inicio
+                    li
+                        a(href="http://localhost:3000/crear.html") Crear Post
+                    li
+                        a(href="#") Nosotros
+                    li
+                        a(href="#") Contacto
+    
+        div(class="container div-editar")
+            
+        form(class="formulario" action="/editar" method="POST" enctype="multipart/form-data")     
+            div(class="container pagina-post")
+          
+                .contenido-post 
+                
+                    .contenedor-flex 
+                        h1(class="titulo-post") #{titulo} 
+                        span(class="editar") Editar
+
+                        input(type="text" class="inputs" id="titulo" value=`${titulo}`) 
+                        img(src="../img/editar.png", alt="" class="ico-editar" )
+                    .contenedor-imagen
+                        img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
+                        img(src="../img/editar.png", alt="" class="ico-editar editar-img")
+                    .contenedor-flex 
+                        p.pautor-post Autor: 
+                            strong.autor-post #{autor}
+
+                        input(type="text" class="inputs " id="autor" value=`${autor}` name="autor" style="display: none") 
+                        img(src="../img/editar.png", alt="" class="ico-editar" )
+                   
+                    .contenedor-flex 
+                        ul(class="texto-post") 
+                            -let dataID = 0
+                            each  val in contenido
+                                li(data-id=`${dataID}` class="contenido-post") !{val}
+                                -dataID = dataID + 1
+                    
+
+
+                        img(src="../img/editar.png", alt="" class="ico-editar")
+                    .contenedor-flex  
+                    .contenedor-contenido
+
+                        input(type="text" class="inputs " id="id" value=`${id}` name="id" style="display: none")    
+                       
+                        ul 
+                            each val, index in contenido
+                                 li(class=`${index}`)
+                                    textarea(cols="100", rows="6" type="text" class="inputs-contenido inputs" value=`${val}` name="contenido" style="display: none") !{val}      
+                                    span(class="guardar" data-id=`${index}` value="guardar") Guardar
+
+                    .div-guardar 
+                        button(class="actualizar" type="submit") Actualizar
+                    
+
+    script(src="../js/post.js") 
+                     
+
