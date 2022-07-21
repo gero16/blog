@@ -16,7 +16,7 @@ const rutas = require('./routes/rutas.js')
 const app = express()
 const port = 3000;
 
-app.set('port', process.env.PORT || port)
+app.set('port', port)
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
