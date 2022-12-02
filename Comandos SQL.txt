@@ -1,0 +1,43 @@
+SELECT * FROM "ComentariosSQL"
+SELECT * FROM "PostSQL"
+SELECT * FROM "UsuariosSQL"
+SELECT * FROM "Post_Comentarios"
+
+/* id, autor, contenido, id_usuario, id_post */
+INSERT INTO "ComentariosSQL"
+ VALUES (4,'Virginia','Hola',2, 1001)
+		 
+/* id, autor, contenido, id_post, id_usuario */		 
+INSERT INTO "ComentariosSQL"
+ VALUES (1'Geronimo')
+
+INSERT INTO "UsuariosSQL"
+ VALUES (2, 'Virginia')
+
+/* id, titulo, contenido, autor, id_comentarios */
+INSERT INTO "PostSQL"
+ VALUES (1002, 'Primer Post', 'Contenido', 'Geronimo', 1002)
+
+Llave FORANEA en id_comentarios Post
+LLave FORANEA en id_usuarios Comentario
+
+BLOG - SEQUELIZE
+SELECT * FROM "Posts"
+SELECT * FROM "Comentarios"
+SELECT * FROM "Post_Comentarios"
+
+SELECT * FROM "Comentarios"
+ 
+SELECT "Posts".id, "Posts".titulo, "Posts".contenido as contenido_post, 
+ "Comentarios".usuario as autor_mensaje,  "Comentarios".mensaje as mensaje_comentario
+ FROM "Posts"
+ INNER JOIN "Post_Comentarios" ON "Post_Comentarios".id_post = "Posts".id
+ INNER JOIN "Comentarios" ON "Comentarios".id = "Post_Comentarios".id_comentario
+
+
+SELECT "Post".id, "Post".titulo, "Post".autor as autor_post, "Post".contenido as contenido_post, 
+ "Comentarios".contenido as contenido_comentario,  "Usuarios".nombre as usuario_comentario 
+ FROM "Post"
+ INNER JOIN "Comentarios" ON "Post"."id_comentarios" = "Comentarios".id_post
+ INNER JOIN  "Usuarios" ON "Comentarios"."id_usuario" = "Usuarios".id
+ WHERE "Post".id = 1001 

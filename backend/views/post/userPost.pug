@@ -1,0 +1,80 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+
+        link(rel="stylesheet", href="/../css/styles.css")
+        link(rel="stylesheet", href="/../css/post.css")
+        title #{titulo}
+    body 
+
+        
+  
+        header.flex-between 
+            .flex-center 
+                img(class="logo" src="/../img/logito3.jpg")
+                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
+                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
+            
+            nav.menu 
+                ul(class="flex-around menu-lista")
+                    li
+                        a(href="#") Inicio
+                    li
+                        a(href="") Crear Post
+                    li
+                        a(href="#") Nosotros
+                    li 
+                        a(href=`/${usuario}/perfil`) Perfil #{miniName}
+                        
+        div(class="container")
+            div(class="pagina-post")
+          
+                .contenido-post 
+                    .contenedor-flex 
+                        h1(class="titulo-post") #{titulo} 
+                        div.algo
+                             
+                    .contenedor-imagen
+                        img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
+                    .contenedor-flex 
+                        p.autor-post Escrito por
+                            strong.autor-post  #{autor}
+                        p.fecha-post #{fecha}
+
+                   
+                    .contenedor-flex 
+                        ul(class="texto-post") 
+                            -let dataID = 1
+                            each  val in contenido
+                                li !{val} 
+                    .contenedor-comentarios
+                        h2 Comentarios
+                        each comentario in comentarios 
+                            .div-comentario-header.flex-between
+                                .user-img
+                                    img(src="https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png")
+                                    .comentario-usuario= comentario.usuario
+                                .comentario-fecha= comentario.fecha
+                            .comentario-mensaje= comentario.mensaje
+                            
+                    .seccion-comentarios 
+                        .img-user 
+                            img(src="https://www.w3schools.com/w3images/avatar6.png", alt="" class="avatar-user")
+                            div 
+                                label Nombre
+                                input(type="text" name="user" id="" class="input-user-name"  value=`${usuario}`) 
+                        .contenido-comentario 
+                            label(for="") Comentario
+                                div 
+                                    textarea(name="" class="comentario") 
+                        button(class="btn-comentario") Publicar Comentario
+                          
+                    
+    script(src="/../js/post.js") 
+                     

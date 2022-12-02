@@ -1,0 +1,10 @@
+{
+    "service": "gmail",
+    "auth": {
+      "type": "OAuth2",
+      "user": "geronicola1696@gmail.com",
+      "clientId": "75011062524-i8a437ajartngh8qe0svgjusaisi48mr.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04ADS9CZWmqLfCgYIARAAGAQSNgF-L9Irqcrvfh-oG3r5LcmXs0teK40kY_n1Zdf0H3fsiPyEJA_lsF_FRPPpJq3bAU6DwTG51A"
+    }
+  }

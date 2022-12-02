@@ -1,0 +1,85 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+       
+        link(rel="stylesheet", href="/css/styles.css")
+        link(rel="stylesheet", href="/css/crear.css")
+        link(rel="icon", href="/img/luna.png", type="image/x-icon")
+        title 
+    body 
+       
+        header.flex-between 
+            .flex-center 
+                img(class="logo" src="/img/logito3.jpg")
+                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
+                img( class="img-menu" src="/img/menu.png" alt="Icono menu")
+            
+            nav.menu 
+                ul(class="flex-around menu-lista")
+                    li
+                        a(href=`/auth/${usuario}/index`) Inicio
+                    li
+                        a(href=`/auth/${usuario}/crear-post`) Crear Post
+                    li
+                        a(href="#") Nosotros
+                    li
+                        a(href="#") Contacto
+    
+        main(class="container principal")
+            article(class="crear-post") 
+                h1 Crear Publicacion
+                form(class="formulario" action="/auth/crear-post" method="POST" enctype="multipart/form-data") 
+                    ul
+                        li 
+                            label(for="" class="label-crear") Imagen
+                            div(class="grid-input-img") 
+                                input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio") 
+                                label(for="imagen-post" class="label-imagen") Seleccionar Archivo
+                                span(class="span-foto") Ningun archivo Seleccionado.
+                        li 
+                            label(for="text" class="label-crear") Titulo
+                            input(type="text" name="titulo" id="titulo-post" class="vacio")                      
+                        li 
+                            label(for="text" class="label-crear") Autor
+                            input(type="text" name="autor" id="autor-post" class="vacio") 
+                        li 
+                            label(for="text" class="label-crear") Fecha
+                            input(type="date" name="fecha" id="fecha-post" class="vacio" value= fecha ) 
+                        
+                        li 
+                            label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
+                            div(class="div-agregar-parrafos") 
+                        li
+                            label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo 
+                            div(class="div-agregar-subtitulo") 
+
+                        li(class="agregar-texto") 
+                            span Previsualizar el Contenido
+                            span(data-id="agregar" id="agregar-texto") Agregar Texto
+                            span(class="span-enter")  Presionar Enter 
+
+                        li(class="li-button") 
+                            h2 Crear Post 
+                            button(id="enviar-post" type="submit") Finalizar
+                        
+            article(class="preview")
+                h1(class="pre-titulo titulo-post")  
+                img( class="pre-img" src="" alt="Previsualizacion de la Foto")
+                div
+                    p(class="pre-fecha") 
+                    p(class="autor-post") Autor: 
+                        strong(class="pre-autor") 
+                div(class="pre-contenido contenido-post") 
+                
+        script(src="/../js/crear-post.js")         
+
+
+                       
+         
+                     

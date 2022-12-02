@@ -1,0 +1,293 @@
+body {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+ 
+body, h1, h2, h3, ul, li, p, a {
+    margin: 0px;
+    padding: 0px;  
+}
+
+/** Utilidades **/
+.container {
+    margin: 0px auto;
+    width: 90vw;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+}
+
+
+header {
+    background-color: #25064D;
+    color: white;
+    font-family: 'Raleway', sans-serif;  
+    
+}
+
+footer{
+    font-family: 'Raleway', sans-serif;
+    background-color: #25064D;
+    color: white;
+    height: 40px;
+    padding: 30px;
+    position: relative;
+    bottom: 0; 
+}
+
+footer > span, div {
+    font-size: 14px;
+}
+
+.mediaquery-block {
+    display: block;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.display-none {
+    display: none;
+}
+.text-align-center{
+    text-align: center;
+}
+.span-autor {
+    font-size: 16px;
+    margin: 0px 0px 0px 0px;
+
+}
+
+.logo-title{
+    margin: auto 0px;
+  
+}
+
+.logo{
+    height: 75px;
+    margin: 0px 0px 0px 20px;
+}
+
+.img-menu{
+    opacity: 0;
+    margin-right: 10px;
+}
+
+.img-menu:hover{
+ cursor: pointer; 
+}
+
+.menu-lista {
+    font-size: 20px;
+    align-items: flex-end;  
+    margin-right: 20px;
+}
+
+
+.menu-lista li {
+    margin: 45px 15px;
+}
+
+.menu-lista a {
+    color: white;
+}
+
+.principal {
+    font-family: Arial, Helvetica, sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+main{
+    width: 100%;
+}
+/*** ACA EMPIEZA EL INDEX ***/
+.titulo-inicio {
+    background-color: rgba(238, 240, 243, 0.921);
+    color: #302D3C;
+    font-family: 'Mulish', sans-serif;
+    height: 160px;
+}
+.portada {
+    width: 100%;
+}
+
+.blog {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 40px 15px 80px 15px;
+}
+
+.post{
+    box-sizing: content-box;
+    color: rgb(122, 122, 121);
+    font-family: 'Mulish', sans-serif;
+    margin: 10px 0px 20px 0px;
+    border-radius: 5px;
+    width: 410px;
+    height: 410px;
+}
+
+
+.post:hover {
+    cursor:pointer;
+    opacity:0.8;
+}
+
+.post-img {
+    transition: all 0.5s ease-out;
+    width: 100%;
+}
+
+.post-fecha, .post-autor {
+    font-size: 16px;
+}
+
+.post:hover .post-img {
+    transition: all 0.5s ease-out;
+    transform:scale(1.15); 
+    /*
+    opacity:0.6;
+    */
+}
+
+.post-titulo {
+    color: #302D3C;
+    font-size: 24px;
+}
+
+.post-div-contenido {
+    padding: 5px 10px 5px 10px;
+}
+
+.post-div-contenido > span, p {
+    font-size: 20px;
+}
+
+.post-contenido{
+    overflow: hidden;
+    max-height: 90px;
+    margin: 10px 0px 10px 0px; 
+}
+
+.post-contenido p{
+    font-size: 14px;
+    max-height: 90px;
+    overflow: hidden;
+}
+
+.post-autor {
+    padding: 0px 0px 10px 0px;
+}
+
+
+
+.div-imagen {
+    width: 410px;
+    height: 200px;
+    overflow: hidden; /*esta propiedad evita que la imagen ocupe mas espacio que su contenedor*/
+    margin-bottom: 5px;
+}
+
+.logout:hover {
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 1500px) {
+    .post {
+        width: 320px;
+        height: 320px;
+    }
+    .div-imagen  {
+        width: 320px;
+        height: 160px;
+    }
+    .post-div-contenido > span, p{
+        font-size: 15px;
+    }
+  }
+
+  
+@media (max-width: 1100px) {
+  .header-logo span, .menu ul {
+    font-size: 14px;
+  }
+  .post {
+    width: 260px;
+    height: 280px;
+  }
+  .post-titulo{
+    font-size: 20px;
+  }
+  .div-imagen  {
+    width: 260px;
+    height: 120px;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .header-logo span, .menu ul {
+      font-size: 12px;
+    }
+    .post {
+      width: 240px;
+      height: 280px;
+    }
+    .div-imagen  {
+      width: 240px;
+      height: 110px;
+  }
+}
+
+@media (max-width: 650px) {
+    .menu-lista{
+        display: none;
+    }
+    .img-menu{
+        opacity: 1;
+    }
+    .post {
+        min-height: 400px;
+        width: 95vw;
+
+   
+    }
+    .div-imagen  {
+        min-height: 250px;
+        width: 95vw;
+    }
+    .post-div-contenido > span, p {
+        font-size: 16px;
+    }
+    .post-titulo {
+        font-size: 18px;
+    }
+  }

@@ -1,0 +1,56 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+        link(rel="stylesheet", href="/../css/styles.css")
+        link(rel="stylesheet", href="/../css/eliminar.css")
+        link(rel="icon" href="/../img/reikii.ico" type="image/x-icon")
+        link(rel="icon", href="/../img/luna.png", type="image/x-icon")
+        title #{titulo}
+    body 
+
+        
+  
+        header.flex-between 
+            .flex-center 
+                img(class="logo" src="/../img/logito3.jpg")
+                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
+                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
+            
+            nav.menu 
+                ul(class="flex-around menu-lista")
+                    li
+                        a(href=`/auth/${usuario}/index`) Inicio
+                    li
+                        a(href=`/auth/${usuario}/crear-post`) Crear Post
+                    li
+                        a(href="#") Nosotros
+                    li 
+                        a(href="#") Bienvenido #{name}
+                    li 
+                        a(href=`/logout/${usuario}`) Cerrar Sesión
+                    li
+                        img(src="/../img/menu.png")
+
+        div(class="container")
+            .div-eliminar
+                h1 ¿Deseas borrar la Publicacion de !{titulo}?
+                div(class="flex-center")
+                    span !{id} 
+                div(class="div-eliminar-btns flex-center")
+                    h2.confirm Confirmar 
+                    h2.delete Cancelar   
+        div.container
+            .flex-center
+                
+
+    script(src="/../js/eliminar.js") 
+
+                       
+         
+                     
