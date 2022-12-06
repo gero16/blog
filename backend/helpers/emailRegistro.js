@@ -5,7 +5,7 @@ const OAuth2 = google.auth.OAuth2;
 const accountTransport = require("../../account_transport.json");
 
 const emailRegistro = async (datos) => {
-    const { email, name, token } = datos;
+    const { correo, nombre, token } = datos;
   /*
   // Mailtrap de Prueba
   const transporter = nodemailer.createTransport({
@@ -55,7 +55,7 @@ const emailRegistro = async (datos) => {
   const transporter = createTransport()
   const info = await transporter.sendMail({
           from: "Espacio Luz de Luna",
-          to: email,
+          to: correo,
           subject: "Confirma tu Cuenta!!",
           text: "Confirma tu cuenta para poder participar en la comunidad",
           html: ` 
@@ -75,12 +75,16 @@ const emailRegistro = async (datos) => {
                     border-radius: 5px;
                     border: none;
                   }
+
+                  button:hover {
+                    cursor: pointer
+                  }
              
                 </style>
               </head>
 
               <body>
-                <p> Hola <strong> ${ name } </strong>, debe confirmar su cuenta en el Espacio Luz de Luna </p>
+                <p> Hola <strong> ${ nombre } </strong>, debe confirmar su cuenta en el Espacio Luz de Luna </p>
 
                 <p> Tu cuenta ya esta lista, solo debes confirmarla en el siguiente enlace: </p>
 

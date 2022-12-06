@@ -23,23 +23,30 @@ const getUsuarios = async (req, res) => {
 const crearUsuario = async (req, res = response) => {
 
     const id = Date.now();
-    const { correo, usuario, nombre, password, rol, estado, confirmado } = req.body;
+    const { correo, usuario, nombre, password } = req.body;
     console.log(req.body)
     
     try {
 
+        const token = generarToken()
         const newUsuario = new Usuario ({
             id,
             nombre, 
             correo,
             usuario,
             password,
-            rol,
-            estado, 
-            confirmado
+            rol : "USER",
+            estado: true,
+            confirmado: false,
+            token_confirmacion: token,
         })
 
-        const token = generarToken()
+        
+        emailRegistro({
+            correo,
+            nombre,
+            token,
+        })
 
         const salt =  bcryptjs.genSaltSync();
         newUsuario.password =  bcryptjs.hashSync( password, salt );
