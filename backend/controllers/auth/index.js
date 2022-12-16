@@ -13,8 +13,6 @@ module.exports = {
     comprobarPassword,
     nuevoPassword,
     perfil,
-    mandarInfoSesion,
-    infoSesion,
     activeSesion,
     indexPrincipal,
     indexPlantilla,

@@ -1,6 +1,6 @@
 
 const colors = require('colors')
-const { Usuario } = require("../model/model")
+const { Usuario } = require("../models/model")
 
 
   const sesiones  = async (req, res) => {

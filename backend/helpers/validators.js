@@ -1,4 +1,4 @@
-const { Usuario } = require('../model/model');
+const { Usuario } = require('../models/model');
 const colors = require('colors');
 
 const esAdmin = async (req, res, next) => {

@@ -9,18 +9,23 @@ const iconosEditar = document.querySelectorAll(".ico-editar")
 
 const inputs = document.querySelectorAll(".inputs")
 const btnActualizar = document.querySelector(".actualizar")
-btnGuardar = document.querySelectorAll(".guardar")
+const btnGuardar = document.querySelectorAll(".guardar")
 
 let actualizarHTML = "";
 let etiquetaContenido = [];
 
 const url = window.location.href;
 
-
-
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
 const btnComentario = document.querySelector(".btn-comentario")
+
+const btnLogout = document.querySelector(".logout")
+
+btnLogout.addEventListener("click", () => {
+   localStorage.removeItem('sesion')
+   window.location.href="/"
+})
 
 window.onload = async function () {
    // await traerDatos();
@@ -35,28 +40,28 @@ window.onload = async function () {
    const enviarToken = () => {
       const getSesion = JSON.parse(localStorage.getItem('sesion'));
       const token = getSesion[2]
+      const usuario = getSesion[1]
 
       const myHeader = new Headers({
-         'Authorization': `BEARER ${ token }`,
+         'auth-token': `BEARER-${ token }`,
          });
 
          const myInit = { 
-            method: 'Post',
+            method: 'GET',
             headers: myHeader,
             mode: 'cors',
             cache: 'default' };
  
  
-      const myRequest = new Request('/api', myInit);
+      const myRequest = new Request(`/auth/${usuario}/editar/one-piece`, myInit);
    
       fetch(myRequest)
          .then (response => response.json())
          .then (data => {
          console.log(data)
       })
-
-      enviarToken()
    }
+   enviarToken()
 }
 
 btnComentario.addEventListener("click", async () => {
@@ -83,6 +88,33 @@ btnComentario.addEventListener("click", async () => {
    }
 })
 
+const editar = document.querySelector(".editar")
+editar.addEventListener("click", (e) => {
+   console.log(e)
+   const getSesion = JSON.parse(localStorage.getItem('sesion'));
+   const token = getSesion[2]
+   const usuario = getSesion[1]
+  
+   const myHeader = new Headers({
+      'auth-token': `BEARER-${ token }`,
+      });
+
+      const myInit = { 
+         method: 'GET',
+         headers: myHeader,
+         mode: 'cors',
+         cache: 'default' };
+
+
+   const myRequest = new Request(`/auth/${usuario}/editar/one-piece`, myInit);
+
+   fetch(myRequest)
+      .then (response => response.json())
+      .then (data => {
+      console.log(data)
+     
+   })
+})
      
 
  

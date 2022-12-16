@@ -19,7 +19,8 @@ app.set("views", path.join(__dirname, "./backend/views"));
 
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false})); // Para que funcionen los formularios
+app.use(express.urlencoded({extended: true})); // Para que funcionen los formularios
+
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "public/uploads"),
@@ -27,7 +28,7 @@ const storage = multer.diskStorage({
       cb(null, new Date().getTime() + path.extname(file.originalname)) // cambiar el nombre de la img
   }
 })
-
+/*
 
 const conectarBD = async () => {
     try {
@@ -42,6 +43,7 @@ const conectarBD = async () => {
 
 conectarBD();
 
+*/
 
 app.use(multer({storage}).single("imagen")) // Ve si estamos enviando una img al servidor
 

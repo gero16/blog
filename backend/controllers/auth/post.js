@@ -1,4 +1,4 @@
-const { Usuario_Comentario, Comentario, Post, Usuario } = require("../../model/model");
+const { Usuario_Comentario, Comentario, Post, Usuario } = require("../../models/model");
 const colors = require('colors');
 const cloudinary = require("cloudinary").v2;
 require("multer");
@@ -15,7 +15,7 @@ cloudinary.config({
 const crearPost = async (req, res) => {
 
   const body =  req.body;
-  console.log(colors.bgRed(body))
+  //console.log(colors.bgRed(body))
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
 
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")

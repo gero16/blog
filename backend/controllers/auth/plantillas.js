@@ -1,4 +1,4 @@
-const { Post, Usuario, Usuario_Sesion, Comentario } = require("../../model/model.js")
+const { Post, Usuario, Usuario_Sesion, Comentario } = require("../../models/model.js")
 const { generarJWT } = require("../../helpers/generar-jwt.js");
 const { generarToken } = require ("../../../account_transport.json");
 const { emailRegistro } = require('../../helpers/emailRegistro');
@@ -36,7 +36,7 @@ const perfil = async (req, res) => {
 
   try {
     const user = await Usuario.findOne({where: {usuario: req.params.user}})
-    console.log(colors.bgRed(user.dataValues))
+    // console.log(colors.bgRed(user.dataValues))
   
     res.render("perfil", {
       usuario: user.dataValues.usuario,
@@ -55,6 +55,7 @@ const indexPlantilla = async (req, res) => {
 
   console.log("Estoy en index Plantilla") 
   const usuario = req.params.user
+  console.log(colors.bgBlue(usuario))
   try {
 
     const registros = await Post.findAll()
@@ -62,14 +63,15 @@ const indexPlantilla = async (req, res) => {
     registros.forEach(element => {
       arrayRegistros.push(element.dataValues)
     });
-            const user = await Usuario.findOne({ where: { usuario }})
-      
+    const user = await Usuario.findOne({ where: { usuario }})
+    console.log(user)
             const existeUsuario = user.dataValues
             const reduceName = existeUsuario.nombre.split(" ")
             const miniName = reduceName[0]
             //console.log(colors.bgBlue(arrayRegistros))
             if(existeUsuario.rol === "ADMIN") {
-                res.render("index/indexAdmin", {
+
+              res.header("auth-token", existeUsuario.token_sesion).render("index/indexAdmin", {
                     url: `/publicaciones/${existeUsuario.usuario}/${arrayRegistros.titulo}`,
                     registros: arrayRegistros,
                     miniName: miniName,
@@ -79,7 +81,6 @@ const indexPlantilla = async (req, res) => {
                     token: existeUsuario.token_sesion,
                     rol: existeUsuario.rol,
                 })
-                
             
             } else {
                 console.log("En User")  
@@ -107,10 +108,10 @@ const crearPostPlantilla = async (req, res) => {
   const day = date.getDate(); //obteniendo dia
   const year = date.getFullYear(); //obteniendo año
   const fecha = `${day}/${month}/${year}`
-  console.log(fecha)
+  console.log(req.user)
   try {
   
-    res.status(200).render("crear", {
+    res.status(200).header("auth-token", req.user).render("crear", {
       usuario: req.params.admin,
       fecha: fecha,
 })
@@ -121,13 +122,13 @@ const crearPostPlantilla = async (req, res) => {
     
 const postPlantilla =  async (req, res) => {
   const url = req.params.titulo
-  
+  console.log(req.body)
   try {
     // NO SE PORQUE FUNCIONA ESTO CON MONGOOSE SI ESTOY USANDO SEQUELIZE
     const datos = await Post.findOne({where: {url}})
-    const {id, titulo, contenido, imagen, autor, fecha}  = datos.dataValues
+    const {id, titulo, contenido, imagen, autor, fecha, tokenSesion}  = datos.dataValues
 
-    res.render("post/publicPost", {
+    res.status(200).header("auth-token", tokenSesion).render("post/publicPost", {
       url,
       id: id,
       url,
@@ -157,7 +158,7 @@ const authPostPlantilla =  async (req, res) => {
         const user = await Usuario.findOne({ where: {usuario} })
         const tokens = await Usuario_Sesion.findOne({where : {id_usuario : user.dataValues.id}})
         
-        console.log(colors.bgRed(tokens))
+    
         const comentarios = await Comentario.findAll({where : {id_post : id}});
         comentarios.forEach(element => {
          arrayComentarios.push(element.dataValues)
@@ -232,21 +233,40 @@ const editarPostPlantilla = async (req, res) => {
     if(datos){
  
     const {id, titulo, contenido, imagen, autor, fecha} = datos;
+    console.log(imagen)
     
     const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
-    const img = image[1].split("/");
+    console.log(image)
+    // Puede que no la haya subido a cloudinary
+      if(image[1]){
+        const img = image[1].split("/");
+        res.render("editar", {
+          id: id,
+          url: title,
+          titulo: titulo,
+          contenido: contenido,
+          imagenMin: img[1] || null,
+          imagen: imagen,
+          usuario: user,
+          autor: autor,
+          fecha: fecha,
+        })
+      } else {
+        res.render("editar", {
+          id: id,
+          url: title,
+          titulo: titulo,
+          contenido: contenido,
+          imagenMin: "imagen",
+          imagen: imagen,
+          usuario: user,
+          autor: autor,
+          fecha: fecha,
+        })
+      }
+  
 
-    res.render("editar", {
-      id: id,
-      url: title,
-      titulo: titulo,
-      contenido: contenido,
-      imagenMin: img[1],
-      imagen: imagen,
-      usuario: user,
-      autor: autor,
-      fecha: fecha,
-    })
+   
   } else {
     return
   }
@@ -254,6 +274,10 @@ const editarPostPlantilla = async (req, res) => {
   } catch (error) {
       console.log(colors.red(error))
   }
+}
+const errorPlantilla = (req, res) => {
+ 
+  res.render("error")
 }
 
 
@@ -266,6 +290,7 @@ module.exports = {
     postPlantilla,
     authPostPlantilla,
     eliminarPlantilla,
-    editarPostPlantilla
+    editarPostPlantilla,
+    errorPlantilla
 
 }

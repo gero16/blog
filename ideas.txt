@@ -1,6 +1,0 @@
-Al iniciar sesion mandar el token generado a un end point, y corroborar que el token enviado coincide con el del endpoint
-
-Con el metodo GET solo puedo traer info, porlo que tengo que volver a la idea de crear un end point, personalizado con la sesion de ese usuario
-
-// HABILITAR ACCESO DE LA API
-https://console.cloud.google.com/apis/enableflow?apiid=gmail.googleapis.com&project=blog-nodejs-363420

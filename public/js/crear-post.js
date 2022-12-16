@@ -54,8 +54,6 @@ const traerInfo = async () => {
 document.addEventListener("DOMContentLoaded", () => {
   traerInfo()
 
- 
-
   document.querySelectorAll(".vacio").forEach((node) =>
     node.addEventListener("keypress", (e) => {
       console.log(document.querySelectorAll(".vacio"))

@@ -1,7 +1,7 @@
 
 const colors = require('colors')
 const cloudinary = require("cloudinary").v2;
-const { Post, Comentario } = require("../model/model")
+const { Post, Comentario } = require("../models/model")
 require("multer");
 
 cloudinary.config({

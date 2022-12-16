@@ -1,5 +1,5 @@
 
-const { Usuario, Usuario_Comentario, Usuario_Sesion } = require("../../model/model.js")
+const { Usuario, Usuario_Comentario, Usuario_Sesion } = require("../../models/model.js")
 const { generarJWT,emailRegistro, generarToken  } = require("../../helpers/index");
 
 const bcryptjs = require('bcryptjs');
@@ -62,19 +62,18 @@ const crearUsuario = async (req, res = response) => {
     }
 }
 
-const mandarInfoSesion = (req, res) => {
-   
+const validateToken = (req, res) => {
+    console.log("se paso la validacion")
+    res.status(200)
 }
 
-const infoSesion = async(req, res) => {
-   
-}
 
 const loginUsuario = async (req, res) => {
 
     const { correo, password } = req.body;
 
     console.log(req.body)
+    
     try {
     
       const usuario = await Usuario.findOne({where : {correo: correo}})
@@ -114,6 +113,7 @@ const loginUsuario = async (req, res) => {
 
       if(usuario.sesion == false){
             console.log("dale forro")
+            /*
 
             const tokenUser = new Usuario_Sesion({
                 id: Math.floor(Math.random(2)*1000),
@@ -123,16 +123,25 @@ const loginUsuario = async (req, res) => {
               })
     
               await tokenUser.save()
+              */
 
               await usuario.update({
                 sesion: true,
                 token_sesion: tokenSesion,
               })
-
+             
              await usuario.save()
-             res.header("auth-token", tokenSesion).redirect(`/auth/${dataValues.usuario}/index`)
+             res.header("auth-token", tokenSesion).json({
+                token: tokenSesion,
+                nombre:  usuario.nombre,
+                usuario:  usuario.nombre,
+                correo: usuario.correo,
+                rol: usuario.rol
+              })
+              .redirect(`/auth/${dataValues.usuario}/index`)
         
       } else {
+        /*
             const tokenUser = new Usuario_Sesion({
                     id: Math.floor(Math.random(2)*1000),
                     user_agent: "otro",
@@ -141,6 +150,7 @@ const loginUsuario = async (req, res) => {
             })
     
             await tokenUser.save()
+            */
 
             await usuario.update({
                 token_sesion: tokenSesion,
@@ -148,8 +158,15 @@ const loginUsuario = async (req, res) => {
 
               
             await usuario.save()
-
-            res.header("auth-token", tokenSesion).redirect(`/auth/${dataValues.usuario}/index`)
+            
+           
+            res.header("auth-token", tokenSesion).json({
+                token: tokenSesion,
+                usuario:  usuario.nombre,
+                correo: usuario.correo,
+                rol: usuario.rol
+              })
+              //.redirect(`/auth/${dataValues.usuario}/index`)
         
     }
       // Si no existe una sesion desde este navegador/cliente
@@ -162,6 +179,7 @@ const loginUsuario = async (req, res) => {
             msg: 'Hable con el administrador'
         });
     }
+    
 }
 
 
@@ -177,7 +195,7 @@ const logoutUsuario = async (req, res) => {
 
         await usuario_sesion.destroy()
 
-        //res.redirect("/")
+        res.redirect("/")
     } catch (error) {
         console.log(error)
     }
@@ -233,8 +251,7 @@ module.exports = {
     olvidePassword,
     comprobarPassword,
     nuevoPassword,
-    mandarInfoSesion,
-    infoSesion,
+    validateToken,
     activeSesion,
     sesion,
     getSesion,

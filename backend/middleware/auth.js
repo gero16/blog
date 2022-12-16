@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const Usuario = require('../model/model');
+const Usuario = require('../models/model');
 const colors = require('colors')
 
 const sendHeader = (req, res, next) => {
@@ -45,15 +45,21 @@ const checkAuth = async (req, res, next) => {
 
 // middleware to validate token (rutas protegidas)
     const verifyToken = (req, res, next) => {
-        console.log(colors.bgYellow(req.headers))
-        
-        const token = req.header('auth-token')
+        //console.log(colors.bgMagenta( req.header('auth-token') ))
+        //const bearerToken = req.header('auth-token')
+        //const tokenB = bearerToken.split("-")
+       // const token = tokenB[1]
+        console.log(colors.bgMagenta( req.header('auth-token')))
+       const token = req.header('auth-token')
+        console.log(colors.bgYellow(token))
 
         if (!token) return res.status(401).json({ error: 'Acceso denegado' })
 
         try {
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
+            req.body = token
+            console.log(colors.bgGreen(req.user))
             console.log(colors.bgRed("token verificado!"))
             next() // continuamos
         } catch (error) {
