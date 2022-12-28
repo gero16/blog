@@ -32,7 +32,7 @@ html(lang="en")
                     li 
                         a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
                     li 
-                        a(href=`/auth/${usuario}/logout`) Cerrar Sesión
+                        a(href=`#`) Cerrar Sesión
                     li
                         img(src="/../img/menu.png")
 
@@ -66,7 +66,7 @@ html(lang="en")
                                 li !{val}
                  
                     .contenedor-comentarios
-                        h2 Comentarios
+                        h3 Comentarios
                         each comentario in comentarios 
                             .div-comentario-header.flex-between
                                 .user-img
@@ -78,9 +78,8 @@ html(lang="en")
                     .seccion-comentarios 
                         .img-user 
                             img(src="https://www.w3schools.com/w3images/avatar6.png", alt="" class="avatar-user")
-                            div 
-                                label Nombre
-                                input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
+                            label Nombre
+                            input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
                         .contenido-comentario 
                             label(for="") Comentario
                                 div 
@@ -90,6 +89,6 @@ html(lang="en")
                                
                     
    
+    script(src="/../js/middlewares.js") 
     script(src="/../js/post.js") 
-    //script(src="/../js/middlewares.js") 
                      

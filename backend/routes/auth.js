@@ -3,7 +3,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { indexPrincipal, indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
-const { authAgregarComentario, crearPost, actualizarPost } = require('../controllers/auth/post');
+const { authAgregarComentario, crearPost, actualizarPost, eliminarPost } = require('../controllers/auth/post');
 const { sesion, getSesion, logoutUsuario, validateToken } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
@@ -20,7 +20,7 @@ router.post("/:user/logout", logoutUsuario)
 
 router.post("/registrar", crearUsuario);
 
-router.get("/validate-token", verifyToken, validateToken)
+router.post("/validate-token", verifyToken, validateToken)
 
 router.get("/confirmar/:token", confirmarCuenta)
 
@@ -49,6 +49,8 @@ router.get("/:user/perfil", perfil)
 router.post("/crear-post", crearPost)
 
 router.post("/actualizar-post", actualizarPost)
+
+router.post("/eliminar-post/:id", verifyToken, eliminarPost)
 
 
 module.exports = router;

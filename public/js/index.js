@@ -1,16 +1,22 @@
 const blog = document.querySelector(".blog");
-const logout = document.querySelector(".logout")
 const refCrear = document.querySelector(".ref-crear")
-
 
 window.onload = async function (e) {
   e.preventDefault()
 
   await traerPublicaciones();
 
-  const urlPost = document.querySelectorAll(".post")//.getAttribute("data-id")
+  const urlPost = document.querySelectorAll(".post")
 
   const sesion = JSON.parse(localStorage.getItem('sesion'));
+  
+  if(window.location.pathname == "/") {
+    urlPost.forEach(element => {
+      element.addEventListener("click", (e) => {
+        console.log(e)
+        window.location.href = `/publicaciones/${e.target.parentNode.dataset.id}`
+    })
+  })}
   
   if(sesion && window.location.pathname == "/") {
     window.location.href = `/auth/${sesion[1]}/index`
@@ -25,7 +31,6 @@ window.onload = async function (e) {
       const miniName = reduceName[0]
       console.log(usuario)
       urlPost.forEach(element => {
-        console.log(element)
         element.addEventListener("click", (e) => {
           console.log(e)
           window.location.href = `http://localhost:4000/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
@@ -33,13 +38,14 @@ window.onload = async function (e) {
     })
   } else {
     urlPost.forEach(element => {
-      console.log(element)
-      console.log(e.target)
+    
         element.addEventListener("click", (e) => {
         window.location.href = `http://localhost:4000/auth/publicaciones/${e.target.parentNode.dataset.id}`
       })
     })
   }
+
+
   }
 }
 
@@ -75,47 +81,7 @@ const traerPublicaciones = async () => {
 
 
 
-const cerrarSesion = async (e) => {
-    e.preventDefault()   
 
-    const getSesion = JSON.parse(localStorage.getItem('sesion'));
-    console.log(getSesion)
-    const usuario = getSesion[1]
-    
-    localStorage.removeItem('sesion');
-    
-    const data = {
-      usuario:usuario,
-    }
-
-    console.log(data)
-    const settings = {
-      method: 'POST',
-      headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-      }};
-    try {
-      const fetchResponse = await fetch(`/auth/${usuario}/logout`, settings);
-      const data = await fetchResponse.json();
-      if(data) {
-        window.location.assign = "/"
-      }
-     
-    
-    } catch (error) {
-      console.log(error)
-    }
-  
-}
-
-const port = 4000
-
-
-if(logout) {
-  logout.addEventListener("click", cerrarSesion)
-
-}
 
 
 

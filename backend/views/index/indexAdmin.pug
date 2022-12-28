@@ -35,13 +35,7 @@ html(lang="en")
                         img(src="/img/menu.png")
     
         .container 
-            div(class="ref-crear")
-                input(class="display-none user-session"  value=`${usuario}`) 
-                input(class="display-none email-session"  value=`${correo}`) 
-                input(class="display-none token-session"  value=`${token}`) 
-                input(class="display-none rol-session"  value=`${rol}`) 
-
-                h1 Desde ADMIN
+                span.frase-cabecera.flex-center Inserte su frase de cabecera 
                 .blog
                     .post 
                         .div-imagen 
@@ -60,4 +54,5 @@ html(lang="en")
                 div Tel: 26131674 
                 div Cel: 26131674
                 
+    script(src="/js/middlewares.js") 
     script(src="/js/index.js") 

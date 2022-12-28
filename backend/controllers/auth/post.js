@@ -62,6 +62,7 @@ const crearPost = async (req, res) => {
 const authAgregarComentario = async (req, res) => {
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+    console.log(colors.bgGreen(req.body))
     //const fecha =
     try {
        const registro = await Post.findOne({where : {url : req.params.titulo}});
@@ -146,8 +147,16 @@ const authAgregarComentario = async (req, res) => {
     }} 
   
 
+    const eliminarPost = async (req, res) => {
+      console.log(req.params)
+      const deletePost = await Post.findOne({ where: { id: req.params.id } });
+      await deletePost.destroy();
+
+    } 
+
   module.exports = {
     crearPost,
     actualizarPost,
-    authAgregarComentario
+    authAgregarComentario,
+    eliminarPost
   }

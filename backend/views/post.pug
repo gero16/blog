@@ -15,8 +15,9 @@ html(lang="en")
         
     body 
         header.flex-between 
-            .flex-center 
-                img(class="logo" src="../img/logito3.jpg")
+            .flex-center
+                a(href="/")   
+                    img(class="logo" src="../img/logito3.jpg")
                 span(class="span-autor") Master Reiki Usui Rose Mary Alvez
                 img( class="img-menu" src="../img/menu.png" alt="Icono menu")
             
@@ -31,7 +32,7 @@ html(lang="en")
                     li 
                         a(href="#") Bienvenido #{name}
                     li 
-                        a(href=`/auth/logout/${usuario}`) Cerrar Sesión
+                        a(class="logout") Cerrar Sesión
                     li
                         img(src="/../img/menu.png")
 
@@ -60,7 +61,7 @@ html(lang="en")
                                 li !{val} 
                                
                     
-    //script(src="../js/middlewares.js") 
+    script(src="../js/middlewares.js") 
     script(src="../js/post.js") 
                      
 

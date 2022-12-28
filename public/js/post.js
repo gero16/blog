@@ -20,15 +20,9 @@ const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
 const btnComentario = document.querySelector(".btn-comentario")
 
-const btnLogout = document.querySelector(".logout")
-
-btnLogout.addEventListener("click", () => {
-   localStorage.removeItem('sesion')
-   window.location.href="/"
-})
 
 window.onload = async function () {
-   // await traerDatos();
+ 
    const sesion = JSON.parse(localStorage.getItem('sesion'));
    if(sesion) {
       const [user, email, token, rol] = sesion;
@@ -36,33 +30,8 @@ window.onload = async function () {
 
    }
  
-
-   const enviarToken = () => {
-      const getSesion = JSON.parse(localStorage.getItem('sesion'));
-      const token = getSesion[2]
-      const usuario = getSesion[1]
-
-      const myHeader = new Headers({
-         'auth-token': `BEARER-${ token }`,
-         });
-
-         const myInit = { 
-            method: 'GET',
-            headers: myHeader,
-            mode: 'cors',
-            cache: 'default' };
- 
- 
-      const myRequest = new Request(`/auth/${usuario}/editar/one-piece`, myInit);
-   
-      fetch(myRequest)
-         .then (response => response.json())
-         .then (data => {
-         console.log(data)
-      })
-   }
-   enviarToken()
 }
+
 
 btnComentario.addEventListener("click", async () => {
    const urlActual = window.location.href
@@ -74,47 +43,24 @@ btnComentario.addEventListener("click", async () => {
    }
    
    try {
-      await (
-         await fetch(url, {
-           method: "POST",
-           body: JSON.stringify(data),
-           headers: {
-             "Content-Type": "application/json",
-           },
+      const fetchResponse = await (fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+               "Content-Type": "application/json",
+            },
          })
-       ).json();
+       )
+       console.log(fetchResponse)
+       if(fetchResponse.ok === true) {
+         console.log("Mensaje agregado Correctamente!")
+         window.location.reload()
+       }
+       
    } catch (error) {
       console.log(error)
    }
 })
 
-const editar = document.querySelector(".editar")
-editar.addEventListener("click", (e) => {
-   console.log(e)
-   const getSesion = JSON.parse(localStorage.getItem('sesion'));
-   const token = getSesion[2]
-   const usuario = getSesion[1]
-  
-   const myHeader = new Headers({
-      'auth-token': `BEARER-${ token }`,
-      });
-
-      const myInit = { 
-         method: 'GET',
-         headers: myHeader,
-         mode: 'cors',
-         cache: 'default' };
-
-
-   const myRequest = new Request(`/auth/${usuario}/editar/one-piece`, myInit);
-
-   fetch(myRequest)
-      .then (response => response.json())
-      .then (data => {
-      console.log(data)
-     
-   })
-})
-     
 
  

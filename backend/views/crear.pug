@@ -16,7 +16,8 @@ html(lang="en")
        
         header.flex-between 
             .flex-center 
-                img(class="logo" src="/img/logito3.jpg")
+                a(href="/")  
+                    img(class="logo" src="/img/logito3.jpg")
                 span(class="span-autor") Master Reiki Usui Rose Mary Alvez
                 img( class="img-menu" src="/img/menu.png" alt="Icono menu")
             
@@ -50,7 +51,7 @@ html(lang="en")
                             input(type="text" name="autor" id="autor-post" class="vacio") 
                         li 
                             label(for="text" class="label-crear") Fecha
-                            input(type="date" name="fecha" id="fecha-post" class="vacio" value= fecha ) 
+                            input(type="date" name="fecha" id="fecha-post" class="vacio" value= `${fecha}` ) 
                         
                         li 
                             label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
@@ -77,6 +78,7 @@ html(lang="en")
                         strong(class="pre-autor") 
                 div(class="pre-contenido contenido-post") 
                 
+        script(src="/../js/middlewares.js")         
         script(src="/../js/crear-post.js")         
 
 

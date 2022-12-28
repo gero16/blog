@@ -1,36 +1,55 @@
 const titulo = document.querySelector("titulo-post")
 const editar = document.querySelector(".editar")
 const eliminar = document.querySelector(".eliminar")
+const logout = document.querySelector(".logout")
 
 const getSesion = JSON.parse(localStorage.getItem('sesion'));
 
-//const url = titulo.value.toLowerCase().replaceAll(" ","-")
+const cerrarSesion = async (e) => {
+    e.preventDefault()   
+    console.log("cerrar sesion")
+    const getSesion = JSON.parse(localStorage.getItem('sesion'));
+    const usuario = getSesion[1]
+    
+    localStorage.removeItem('sesion');
+    
+    const data = {
+      usuario:usuario,
+    }
 
-//const urlEditar = `http://localhost:4000/auth/${getSesion[1]}/editar/${url}`
-//const urlEliminar = `http://localhost:4000/auth/${getSesion[1]}/eliminar/${publicacion}`
+    console.log(data)
+    const settings = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      }};
+    try {
+      const fetchResponse = await fetch(`/auth/${usuario}/logout`, settings);
+      console.log(fetchResponse)
+      if(fetchResponse.ok == true) {
+        window.location.href = "/"
+      }
+     
+    
+    } catch (error) {
+      console.log(error)
+    }
+  
+}
 
 
+if(logout) {
+  logout.addEventListener("click", cerrarSesion)
 
-
-
-
-/*
-
-editar.addEventListener("click", () => {
-    sendToken(urlEditar)
-})
-
-editar.addEventListener("click", () => {
-    sendToken(urlEliminar)
-})
-*/
+}
 
 const sendToken = async () => {
   const sesion =  JSON.parse(localStorage.getItem('sesion'));
   const token = sesion[2]
 
   const settings = { 
-      method: 'GET', 
+      method: 'POST', 
       headers: { 
         "Content-Type": "application/json", 
         "auth-token": token },
@@ -52,3 +71,11 @@ const sendToken = async () => {
 }
 
 sendToken()
+
+
+const updateImg = document.querySelector(".cambiar-foto")
+if(updateImg){
+  updateImg.addEventListener("click", () => {
+    
+  })
+}

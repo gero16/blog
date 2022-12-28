@@ -108,6 +108,7 @@ const crearPostPlantilla = async (req, res) => {
   const day = date.getDate(); //obteniendo dia
   const year = date.getFullYear(); //obteniendo año
   const fecha = `${day}/${month}/${year}`
+  console.log(fecha)
   console.log(req.user)
   try {
   

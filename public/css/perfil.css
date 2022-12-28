@@ -1,16 +1,37 @@
+body {
+    background-image: none;
+}
 
-
+h1 {
+    margin: 20px 0px 50px 0px;
+}
 .datos-perfil {
     margin: 20px 0px;
 }
 
 .lista-perfil {
- 
+    
     font-size: 20px;
 }
 
-.perfil-imagen {
-    width: 100px;
-    height: 100px;
+.lista-perfil li {
+    border: 1px solid rgb(231, 223, 223);
+    padding: 10px;
+    text-align: center;
+    gap: 10px;
+}
 
+.div-perfil-imagen {
+    width: 25vw;
+    height: 35vh;
+    overflow: hidden;
+}
+.perfil-imagen {
+    width: 30vw;
+    height: 40vh;
+    
+}
+
+.editar-perfil {
+    margin: 20px 0px;
 }

@@ -60,6 +60,7 @@ const traerPublicaciones = async (req, res) => {
   
 
   const agregarComentario = async (req, res) => {
+    console.log(colors.bgBlue(req.body))
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
     //const fecha =

@@ -9,6 +9,7 @@ html(lang="en")
         link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
 
         link(rel="stylesheet", href="/../css/styles.css")
+        link(rel="stylesheet", href="/../css/crear.css")
         link(rel="stylesheet", href="/../css/perfil.css")
         
         title #{titulo}
@@ -19,7 +20,8 @@ html(lang="en")
     body 
         header.flex-between 
             .flex-center 
-                img(class="logo" src="/../img/logito3.jpg")
+                a(href="/")  
+                    img(class="logo" src="/../img/logito3.jpg")
                 span(class="span-autor") Master Reiki Usui Rose Mary Alvez
                 img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
             
@@ -34,13 +36,12 @@ html(lang="en")
                     li 
                         a(href="#") Bienvenido #{name}
                     li 
-                        a(href=`/auth/logout/${usuario}`) Cerrar Sesión
+                        a(class="logout") Cerrar Sesión
                     li
                         img(src="/../img/menu.png")
 
     
         div(class="container")
-
             h1 Bienvenido a su Perfil
 
             div(class="flex-around datos-perfil")
@@ -49,9 +50,25 @@ html(lang="en")
                     li !{usuario}
                     li !{correo}
                     li Cambiar Contraseña
-                div
+                    div.editar-perfil 
+                        form(action="#", method="post" class="flex-column") 
+                            input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio") 
+                            label(for="imagen-post" class="label-imagen") Seleccionar Archivo
+                            span(class="span-foto") Ningun archivo Seleccionado.
+                            label(for="") Usuario 
+                            input(type="text")
+                            label(for="") Nombre 
+                            input(type="text") 
+                            label Password 
+                            input(type="text")
+                            button Enviar
+                div.div-perfil-imagen
                     img(class="perfil-imagen" src=imagen)
-                               
+                    p.cambiar-foto Cambiar Foto
+
+                  
+
+        script(src="/../js/middlewares.js")            
                     
 
 

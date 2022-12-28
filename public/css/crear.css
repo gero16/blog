@@ -6,7 +6,7 @@ body {
 .crear-post{
     max-width: 600px;
     color: #454444;
-    background-color: rgba(212, 193, 233);
+    background-color: rgba(212, 193, 233, 0.93);
     border-radius: 10px;
     margin: 15px 0px 25px 0px;
     padding: 20px;
