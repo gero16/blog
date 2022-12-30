@@ -47,7 +47,6 @@ const perfil = async (req, res) => {
 }
 
 const indexPlantilla = async (req, res) => {
-  let arrayRegistros = []   
 
   console.log("Estoy en index Plantilla") 
   const usuario = req.params.user
@@ -58,21 +57,20 @@ const indexPlantilla = async (req, res) => {
 
     const user = await Usuario.findOne({ where: { usuario }})
     console.log(user)
-            const existeUsuario = user.dataValues
-            const reduceName = existeUsuario.nombre.split(" ")
+            const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
             //console.log(colors.bgBlue(arrayRegistros))
-            if(existeUsuario.rol === "ADMIN") {
+            if(user.rol === "ADMIN") {
 
-              res.header("auth-token", existeUsuario.token_sesion).render("index/indexAdmin", {
+              res.header("auth-token", user.token_sesion).render("index/indexAdmin", {
                     url: `/publicaciones/${registros.titulo}`,
                     registros: registros,
                     miniName: miniName,
-                    usuario: existeUsuario.usuario,
-                    correo: existeUsuario.correo,
-                    name: existeUsuario.nombre,
-                    token: existeUsuario.token_sesion,
-                    rol: existeUsuario.rol,
+                    usuario: user.usuario,
+                    correo: user.correo,
+                    name: user.nombre,
+                    token: user.token_sesion,
+                    rol: user.rol,
                 })
             
             } else {
