@@ -6,17 +6,16 @@ const bcryptjs = require('bcryptjs');
 const colors = require('colors');
 
 const getUsuarios = async (req, res) => {
-    const arrayUsuarios = []
 
     const usuarios = await Usuario.findAll()
     
     usuarios.forEach(element => {
       
-        console.log(colors.bgBlue(element.dataValues))
-        arrayUsuarios.push(element.dataValues)
+        console.log(colors.bgBlue(element))
+      
     });
     res.status(200).json({
-        arrayUsuarios,
+        usuarios,
     })
 }
 
@@ -77,8 +76,6 @@ const loginUsuario = async (req, res) => {
     try {
     
       const usuario = await Usuario.findOne({where : {correo: correo}})
-      const { dataValues } = usuario;
-
  
           // console.log(colors.bgBlue(usuario.id))
         if ( !usuario ) {
@@ -100,7 +97,7 @@ const loginUsuario = async (req, res) => {
             });
         }
 
-      const validPassword = await bcryptjs.compareSync( password, dataValues.password );
+      const validPassword = await bcryptjs.compareSync( password, usuario.password );
 
       if ( !validPassword ) {
           return res.status(400).json({
@@ -138,7 +135,7 @@ const loginUsuario = async (req, res) => {
                 correo: usuario.correo,
                 rol: usuario.rol
               })
-              .redirect(`/auth/${dataValues.usuario}/index`)
+              .redirect(`/auth/${usuario.usuario}/index`)
         
       } else {
         /*
@@ -189,9 +186,9 @@ const logoutUsuario = async (req, res) => {
 
     try {
         const usuario = await Usuario.findOne({where: { usuario : user} });
-        console.log(usuario.dataValues.id)
-        const usuario_sesion = await Usuario_Sesion.findOne({where : { id_usuario : usuario.dataValues.id }})
-        console.log(usuario_sesion.dataValues)
+        console.log(usuario.id)
+        const usuario_sesion = await Usuario_Sesion.findOne({where : { id_usuario : usuario.id }})
+        console.log(usuario_sesion)
 
         await usuario_sesion.destroy()
 

@@ -1,4 +1,6 @@
+
 const express = require('express')
+
 const sequelize = require("./backend/db/db")
 const colors = require("colors")
 const path = require("path");
@@ -28,6 +30,8 @@ const storage = multer.diskStorage({
       cb(null, new Date().getTime() + path.extname(file.originalname)) // cambiar el nombre de la img
   }
 })
+
+
 /*
 
 const conectarBD = async () => {

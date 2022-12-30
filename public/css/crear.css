@@ -4,7 +4,7 @@ body {
 }
 /*** CREAR POST ***/
 .crear-post{
-    max-width: 600px;
+    width: 45vw;
     color: #454444;
     background-color: rgba(212, 193, 233, 0.93);
     border-radius: 10px;
@@ -171,8 +171,8 @@ body {
 
 /** PRE-VISUALIZACION DEL POST**/
 .preview {
-    max-width: 600px;
-    margin: 15px  10px 0px 10px;
+    width: 45vw;
+    margin: 15px 10px 0px 10px;
     font-family: 'Mulish', sans-serif;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 5px;
@@ -180,10 +180,9 @@ body {
 
 .pre-img {
     margin: 5px 0px 5px 0px;
-    width: 400px;
+    width: 100%;
     height: auto;
 }
-
 
 @media (max-width: 800px) {
     .principal {

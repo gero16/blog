@@ -35,13 +35,11 @@ const traerPublicaciones = async (req, res) => {
     try {
       // Traer todos las Publicaciones
      const registro = await Post.findOne({where : {url : req.params.url}});
-     const { dataValues } = registro
-     const {id, url, titulo, contenido, imagen, autor, fecha} = dataValues
+   
+     const {id, url, titulo, contenido, imagen, autor, fecha} = registro
      const comentarios = await Comentario.findAll({where : {id_post : id}});
-     comentarios.forEach(element => {
-      arrayComentarios.push(element.dataValues)
-     });
-     //const comentarios = await Comentario.findOne({where: {id : post_comentarios.dataValues.id_comentario}})
+ 
+    
     console.log(arrayComentarios)
     return res.status(200).render("post/publicPost", {
       id: id,
@@ -51,7 +49,7 @@ const traerPublicaciones = async (req, res) => {
       imagen: imagen,
       autor: autor,
       fecha: fecha,
-      comentarios: arrayComentarios,
+      comentarios: comentarios,
   })
    } catch (error) {
      console.log(error)
@@ -66,14 +64,13 @@ const traerPublicaciones = async (req, res) => {
     //const fecha =
     try {
        const registro = await Post.findOne({where : {url : req.params.url}});
-       const { dataValues } = registro
 
         const newComentario = new Comentario ({
           id,
           usuario: req.body.usuario,
           mensaje: req.body.mensaje,
           fecha: date,
-          id_post: parseInt(dataValues.id),
+          id_post: parseInt(registro.id),
         })
         
         await newComentario.save()

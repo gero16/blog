@@ -8,14 +8,10 @@ const colors = require('colors');
 
 
 const indexPrincipal = async (req, res) => {
-  let arrayRegistros = []
+
 
   try {
     const registros = await Post.findAll()
-
-    registros.forEach(element => {
-      arrayRegistros.push(element.dataValues)
-    });
 
     const {url, imagen, fecha, titulo, contenido} = arrayRegistros
   
@@ -39,10 +35,10 @@ const perfil = async (req, res) => {
     // console.log(colors.bgRed(user.dataValues))
   
     res.render("perfil", {
-      usuario: user.dataValues.usuario,
-      correo: user.dataValues.correo,
-      name: user.dataValues.nombre,
-      imagen: user.dataValues.imagen
+      usuario: user.usuario,
+      correo: user.correo,
+      name: user.nombre,
+      imagen: user.imagen
     })
   } catch (error) {
     console.log(error)
@@ -60,9 +56,6 @@ const indexPlantilla = async (req, res) => {
 
     const registros = await Post.findAll()
 
-    registros.forEach(element => {
-      arrayRegistros.push(element.dataValues)
-    });
     const user = await Usuario.findOne({ where: { usuario }})
     console.log(user)
             const existeUsuario = user.dataValues
@@ -72,8 +65,8 @@ const indexPlantilla = async (req, res) => {
             if(existeUsuario.rol === "ADMIN") {
 
               res.header("auth-token", existeUsuario.token_sesion).render("index/indexAdmin", {
-                    url: `/publicaciones/${existeUsuario.usuario}/${arrayRegistros.titulo}`,
-                    registros: arrayRegistros,
+                    url: `/publicaciones/${titulo}`,
+                    registros: registros,
                     miniName: miniName,
                     usuario: existeUsuario.usuario,
                     correo: existeUsuario.correo,
@@ -86,7 +79,7 @@ const indexPlantilla = async (req, res) => {
                 console.log("En User")  
                     res.render("index/indexUser", {
                         url: `/publicaciones/${titulo}`,
-                        registros: arrayRegistros,
+                        registros: registros,
                         miniName: miniName,
                         usuario: existeUsuario.usuario,
                         correo: existeUsuario.correo,
@@ -127,7 +120,7 @@ const postPlantilla =  async (req, res) => {
   try {
     // NO SE PORQUE FUNCIONA ESTO CON MONGOOSE SI ESTOY USANDO SEQUELIZE
     const datos = await Post.findOne({where: {url}})
-    const {id, titulo, contenido, imagen, autor, fecha, tokenSesion}  = datos.dataValues
+    const {id, titulo, contenido, imagen, autor, fecha, tokenSesion}  = datos
 
     res.status(200).header("auth-token", tokenSesion).render("post/publicPost", {
       url,
@@ -154,17 +147,14 @@ const authPostPlantilla =  async (req, res) => {
       const datos = await Post.findOne({where: {url}})
       
       if(datos){
-        const {id, titulo, contenido, imagen, autor, fecha}  = datos.dataValues
+        const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
-        const tokens = await Usuario_Sesion.findOne({where : {id_usuario : user.dataValues.id}})
+        const tokens = await Usuario_Sesion.findOne({where : {id_usuario : user.id}})
         
     
         const comentarios = await Comentario.findAll({where : {id_post : id}});
-        comentarios.forEach(element => {
-         arrayComentarios.push(element.dataValues)
-        });
-    
+      
         const reduceName = user.nombre.split(" ")
         const miniName = reduceName[0]
    
@@ -180,8 +170,8 @@ const authPostPlantilla =  async (req, res) => {
               imagen: imagen,
               autor: autor,
               fecha: fecha,
-              comentarios: arrayComentarios,
-              token: tokens.dataValues.token,
+              comentarios: comentarios,
+              token: tokens.token,
           })
         } else {
             res.render("post/userPost", {
@@ -194,8 +184,8 @@ const authPostPlantilla =  async (req, res) => {
               imagen: imagen,
               autor: autor,
               fecha: fecha,
-              comentarios: arrayComentarios,
-              token: tokens.dataValues.token,
+              comentarios: comentarios,
+              token: tokens.token,
           })
       } 
       }
@@ -210,9 +200,7 @@ const eliminarPlantilla = async (req, res) => {
 
   
   const data = await Post.findOne({where: { url }})
-  const datos = data.dataValues
-
-  const {id, titulo, imagen} = datos;
+  const {id, titulo, imagen} = data;
     res.render("eliminar", {
       usuario: req.params.admin,
       id: id,
@@ -229,11 +217,9 @@ const editarPostPlantilla = async (req, res) => {
     const title = req.params.titulo
 
     const data = await Post.findOne({where: { url: title }})
-    const datos = data.dataValues
 
-    if(datos){
- 
-    const {id, titulo, contenido, imagen, autor, fecha} = datos;
+    if(data){
+    const {id, titulo, contenido, imagen, autor, fecha} = data;
     console.log(imagen)
     
     const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")

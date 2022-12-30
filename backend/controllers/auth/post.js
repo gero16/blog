@@ -66,8 +66,7 @@ const authAgregarComentario = async (req, res) => {
     //const fecha =
     try {
        const registro = await Post.findOne({where : {url : req.params.titulo}});
-       const { dataValues } = registro
-
+    
        const user = await Usuario.findOne({where : {usuario : req.params.user}})
   
     
@@ -77,13 +76,13 @@ const authAgregarComentario = async (req, res) => {
           mensaje: req.body.mensaje,
           fecha: date,
           usuario_registrado: true,
-          id_post: parseInt(dataValues.id),
+          id_post: parseInt(registro.id),
         })
 
         const usuario_comentarios = new Usuario_Comentario ({
             id : id + 103,
-            id_usuario: user.dataValues.id,
-            id_post: parseInt(dataValues.id),
+            id_usuario: user.id,
+            id_post: parseInt(registro.id),
           })
         
         await newComentario.save()

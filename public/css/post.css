@@ -42,8 +42,6 @@
     display:none;
 }
 
-
-
 .contenido-text {
     margin: 10px 10px 5px 20px;
 }
@@ -133,12 +131,18 @@
 .seccion-comentarios textarea {
     width: 100%;
 }
+
 .img-user {
     display: flex;
     justify-content: left;
     align-items: center;
     gap: 5px;
 }
+
+.img-user label {
+    margin-right: 5px;
+}
+
 .avatar-user {
     width: 30px;
     height: 30px;
@@ -210,6 +214,10 @@ margin: 15px 0px 0px 0px;
     font-size: 13px;
     padding: 5px 5px 10px 35px;
     border-bottom: 1px dotted rgb(204, 197, 197);
+}
+
+h2 {
+    font-size: 22px;
 }
 
 @media (min-width: 1300px) {
