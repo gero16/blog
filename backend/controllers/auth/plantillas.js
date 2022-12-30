@@ -13,7 +13,7 @@ const indexPrincipal = async (req, res) => {
   try {
     const registros = await Post.findAll()
 
-    const {url, imagen, fecha, titulo, contenido} = arrayRegistros
+    const {url, imagen, fecha, titulo, contenido} = registros
   
     res.render("index/index", {
         registros: registros,
@@ -65,7 +65,7 @@ const indexPlantilla = async (req, res) => {
             if(existeUsuario.rol === "ADMIN") {
 
               res.header("auth-token", existeUsuario.token_sesion).render("index/indexAdmin", {
-                    url: `/publicaciones/${titulo}`,
+                    url: `/publicaciones/${registros.titulo}`,
                     registros: registros,
                     miniName: miniName,
                     usuario: existeUsuario.usuario,
@@ -78,7 +78,7 @@ const indexPlantilla = async (req, res) => {
             } else {
                 console.log("En User")  
                     res.render("index/indexUser", {
-                        url: `/publicaciones/${titulo}`,
+                        url: `/publicaciones/${registros.titulo}`,
                         registros: registros,
                         miniName: miniName,
                         usuario: existeUsuario.usuario,
