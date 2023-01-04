@@ -26,12 +26,12 @@ window.onload = async function (e) {
 
   if(sesion) {
     const [correo, usuario, token, rol] = sesion;
-/*
+
     if(correo == null || usuario == null || token == null || rol == null) {
       console.log("Elimino sesion porque sus datos estan en null")
       localStorage.removeItem('sesion');
     }
-*/
+
     if(rol == "ADMIN") {
       console.log("Admin desde index.js")
       const reduceName = usuario.split(" ")
