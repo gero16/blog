@@ -22,6 +22,7 @@ console.log(datos)
         const fetchResponse = await fetch(`/auth/login`, settings);
         const data = await fetchResponse.json();
         console.log(data)
+        
         if(data){
           const dataSesion = [data.correo, data.usuario,  data.token, data.rol]
           console.log(dataSesion)

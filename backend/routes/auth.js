@@ -8,13 +8,13 @@ const { sesion, getSesion, logoutUsuario, validateToken } = require('../controll
 
 const { generarJWT } = require('../helpers');
 const { esAdmin } = require('../helpers/validators');
-const { checkAuth, verifyToken } = require('../middleware/auth');
+const { checkAuth, verifyToken, checkEmptyData } = require('../middleware/auth');
 
 const router = Router();
 
 router.get("/", indexPrincipal)
 
-router.post('/login', loginUsuario);
+router.post('/login', checkEmptyData, loginUsuario);
 
 router.post("/:user/logout", logoutUsuario)
 

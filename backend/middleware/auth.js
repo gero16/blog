@@ -6,7 +6,20 @@ const sendHeader = (req, res, next) => {
   // 
 }
 
+const checkEmptyData = (req, res, next) =>{
+    const { correo, password } = req.body;
+    console.log(colors.bgMagenta(correo))
+    if (correo == "" || password == "") {
+        console.log("Empty data")
+        const err = new Error("Ni el correo ni la contraseña pueden estar vacios")
+        res.status(501).json({msg: err.message})   
+     } else {
+        next();
+     }
 
+    
+
+}
 const checkAuth = async (req, res, next) => {
     console.log(req.headers)
     let token;
@@ -45,12 +58,8 @@ const checkAuth = async (req, res, next) => {
 
 // middleware to validate token (rutas protegidas)
     const verifyToken = (req, res, next) => {
-        //console.log(colors.bgMagenta( req.header('auth-token') ))
-        //const bearerToken = req.header('auth-token')
-        //const tokenB = bearerToken.split("-")
-       // const token = tokenB[1]
         console.log(colors.bgMagenta( req.header('auth-token')))
-       const token = req.header('auth-token')
+        const token = req.header('auth-token')
         console.log(colors.bgYellow(token))
 
         if (!token) return res.status(401).json({ error: 'Acceso denegado' })
@@ -71,5 +80,6 @@ const checkAuth = async (req, res, next) => {
 
 module.exports = {
     checkAuth,
-    verifyToken
+    verifyToken,
+    checkEmptyData
 } 

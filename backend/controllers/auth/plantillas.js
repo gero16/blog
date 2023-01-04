@@ -56,8 +56,8 @@ const indexPlantilla = async (req, res) => {
     const registros = await Post.findAll()
 
     const user = await Usuario.findOne({ where: { usuario }})
-    console.log(user)
-            const reduceName = user.nombre.split(" ")
+    if(user){
+      const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
             //console.log(colors.bgBlue(arrayRegistros))
             if(user.rol === "ADMIN") {
@@ -86,7 +86,7 @@ const indexPlantilla = async (req, res) => {
                         rol: existeUsuario.rol,
                       })
                     } 
-  
+    }
   } catch (error) {
     console.log(error)
   } 
