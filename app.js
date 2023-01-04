@@ -1,7 +1,7 @@
 
 const express = require('express')
 
-const sequelize = require("./backend/db/db")
+const cors = require('cors')
 const colors = require("colors")
 const path = require("path");
 const bodyParser = require('body-parser')
@@ -19,7 +19,7 @@ require('dotenv').config()
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "./backend/views"));
 
-
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // Para que funcionen los formularios
 
@@ -32,22 +32,6 @@ const storage = multer.diskStorage({
 })
 
 
-/*
-
-const conectarBD = async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Conexion establecida');
-        await sequelize.sync();
-  
-      } catch (error) {
-        console.error('No se pudo conectar a la base', error);
-      }
-}
-
-conectarBD();
-
-*/
 
 app.use(multer({storage}).single("imagen")) // Ve si estamos enviando una img al servidor
 
