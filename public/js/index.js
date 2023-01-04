@@ -19,7 +19,7 @@ window.onload = async function (e) {
     })
   })}
   
-  if(sesion && window.location.pathname == "/" && sesion[1] != null) {
+  if(sesion && window.location.pathname == "/" && sesion[1]) {
 
     window.location.href = `/auth/${sesion[1]}/index`
   }
