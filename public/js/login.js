@@ -22,13 +22,13 @@ btnLogin.addEventListener("click", async (e) => {
       };
 
   const fetchResponse = await fetch(`/auth/login`, settings);
+  console.log(fetchResponse)
   const data = await fetchResponse.json();
   console.log(data)
         
-  if(data){
+  if(fetchResponse.status === 200){
     const dataSesion = [data.correo, data.usuario,  data.token, data.rol]
-    console.log(dataSesion)
     localStorage.setItem("sesion", JSON.stringify(dataSesion) );
-    window.location.assign("/")
+    window.location.assign(`/auth/${data.usuario}/index`)
   }
 })
