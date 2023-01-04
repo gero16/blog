@@ -39,14 +39,14 @@ window.onload = async function (e) {
       urlPost.forEach(element => {
         element.addEventListener("click", (e) => {
           console.log(e)
-          window.location.href = `http://localhost:4000/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
+          window.location.href = `/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
       })
     })
   } else {
     urlPost.forEach(element => {
     
         element.addEventListener("click", (e) => {
-        window.location.href = `http://localhost:4000/auth/publicaciones/${e.target.parentNode.dataset.id}`
+        window.location.href = `/auth/publicaciones/${e.target.parentNode.dataset.id}`
       })
     })
   }
