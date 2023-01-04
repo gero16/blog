@@ -9,6 +9,7 @@ window.onload = async function (e) {
   const urlPost = document.querySelectorAll(".post")
 
   const sesion = JSON.parse(localStorage.getItem('sesion'));
+  console.log(sesion)
   
   if(window.location.pathname == "/") {
     urlPost.forEach(element => {
@@ -18,7 +19,7 @@ window.onload = async function (e) {
     })
   })}
   
-  if(sesion && window.location.pathname == "/" && sesion.usuario != null) {
+  if(sesion && window.location.pathname == "/" && sesion[1] != null) {
 
     window.location.href = `/auth/${sesion[1]}/index`
   }

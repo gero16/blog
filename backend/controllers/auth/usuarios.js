@@ -63,7 +63,9 @@ const crearUsuario = async (req, res = response) => {
 
 const validateToken = (req, res) => {
     console.log("se paso la validacion")
-    res.status(200)
+    res.status(200).header("auth-token", req.body).json({
+        token: req.body,
+      }) 
 }
 
 
@@ -110,45 +112,24 @@ const loginUsuario = async (req, res) => {
 
       if(usuario.sesion == false){
             console.log("dale forro")
-            /*
-
-            const tokenUser = new Usuario_Sesion({
-                id: Math.floor(Math.random(2)*1000),
-                user_agent: "alguno",
-                token: tokenSesion,
-                id_usuario: usuario.id
-              })
-    
-              await tokenUser.save()
-              */
-
+        
               await usuario.update({
                 sesion: true,
                 token_sesion: tokenSesion,
               })
              
              await usuario.save()
-             res.header("auth-token", tokenSesion).json({
+             res.status(200).header("auth-token", tokenSesion).json({
                 token: tokenSesion,
                 nombre:  usuario.nombre,
                 usuario:  usuario.nombre,
                 correo: usuario.correo,
                 rol: usuario.rol
               })
-              .redirect(`/auth/${usuario.usuario}/index`)
+              //.redirect(`/auth/${usuario.usuario}/index`)
         
       } else {
-        /*
-            const tokenUser = new Usuario_Sesion({
-                    id: Math.floor(Math.random(2)*1000),
-                    user_agent: "otro",
-                    token: tokenSesion,
-                    id_usuario: usuario.id
-            })
-    
-            await tokenUser.save()
-            */
-
+      
             await usuario.update({
                 token_sesion: tokenSesion,
             })
@@ -157,13 +138,13 @@ const loginUsuario = async (req, res) => {
             await usuario.save()
             
            
-            res.header("auth-token", tokenSesion).json({
+            res.status(200).header("auth-token", tokenSesion).json({
                 token: tokenSesion,
                 usuario:  usuario.nombre,
                 correo: usuario.correo,
                 rol: usuario.rol
               })
-              //.redirect(`/auth/${dataValues.usuario}/index`)
+              //.redirect(`/auth/${usuario.usuario}/index`)
         
     }
       // Si no existe una sesion desde este navegador/cliente
@@ -187,10 +168,7 @@ const logoutUsuario = async (req, res) => {
     try {
         const usuario = await Usuario.findOne({where: { usuario : user} });
         console.log(usuario.id)
-        const usuario_sesion = await Usuario_Sesion.findOne({where : { id_usuario : usuario.id }})
-        console.log(usuario_sesion)
 
-        await usuario_sesion.destroy()
 
         res.redirect("/")
     } catch (error) {
@@ -199,8 +177,6 @@ const logoutUsuario = async (req, res) => {
     
 }
   const confirmarCuenta = async (req, res) => {
-
-
   }
 
 
@@ -218,8 +194,6 @@ const nuevoPassword = async (req, res) => {
 }
 
    
-
-
 const activeSesion = async(req, res) => {
    
 }

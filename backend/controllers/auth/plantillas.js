@@ -148,9 +148,7 @@ const authPostPlantilla =  async (req, res) => {
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
-        const tokens = await Usuario_Sesion.findOne({where : {id_usuario : user.id}})
-        
-    
+         
         const comentarios = await Comentario.findAll({where : {id_post : id}});
       
         const reduceName = user.nombre.split(" ")
@@ -169,7 +167,6 @@ const authPostPlantilla =  async (req, res) => {
               autor: autor,
               fecha: fecha,
               comentarios: comentarios,
-              token: tokens.token,
           })
         } else {
             res.render("post/userPost", {
@@ -183,7 +180,6 @@ const authPostPlantilla =  async (req, res) => {
               autor: autor,
               fecha: fecha,
               comentarios: comentarios,
-              token: tokens.token,
           })
       } 
       }
