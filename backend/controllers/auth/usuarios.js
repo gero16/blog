@@ -111,7 +111,7 @@ const loginUsuario = async (req, res) => {
         res.status(200).header("auth-token", tokenSesion).json({
             token: tokenSesion,
             nombre:  usuario.nombre,
-            usuario:  usuario.nombre,
+            usuario:  usuario.usuario,
             correo: usuario.correo,
             rol: usuario.rol
         })

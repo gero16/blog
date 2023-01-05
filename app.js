@@ -7,6 +7,8 @@ const path = require("path");
 const bodyParser = require('body-parser')
 const multer = require("multer");
 
+const sequelize = require("./backend/db/db")
+
 const post = require("./backend/routes/post")
 const auth = require("./backend/routes/auth")
 const public = require("./backend/routes/public")
@@ -23,6 +25,18 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true})); // Para que funcionen los formularios
 
+const conectarBD = async () => {
+  try {
+      await sequelize.authenticate();
+      console.log('Conexion establecida');
+      await sequelize.sync();
+
+    } catch (error) {
+      console.error('No se pudo conectar a la base', error);
+    }
+}
+
+conectarBD();
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "public/uploads"),

@@ -19,6 +19,9 @@ window.onload = async function (e) {
     })
   })}
   
+  if(sesion && window.location.pathname === "/") {
+     window.location.href = `/auth/${sesion[1]}/index`
+  }
 
   if(sesion) {
 
@@ -73,10 +76,7 @@ const traerPublicaciones = async () => {
   });
 };
 
-const sesion = JSON.parse(localStorage.getItem('sesion'));
-if(sesion && window.location.pathname === "/" && sesion[1]) {
-  window.location.assign(`/auth/${sesion[1]}/index`)
-}
+
 
 
 

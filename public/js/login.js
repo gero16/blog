@@ -29,7 +29,8 @@ btnLogin.addEventListener("click", async (e) => {
   if(fetchResponse.status === 200){
     const dataSesion = [data.correo, data.usuario,  data.token, data.rol]
     localStorage.setItem("sesion", JSON.stringify(dataSesion) );
-    //window.location.assign(`/auth/${data.usuario}/index`)
-    window.location.assign(`/`)
+    window.location.assign(`/auth/${data.usuario}/index`)
+    return false;
+    //window.location.assign(`/`)
   }
 })
