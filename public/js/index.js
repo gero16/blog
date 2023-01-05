@@ -11,7 +11,7 @@ window.onload = async function (e) {
   const sesion = JSON.parse(localStorage.getItem('sesion'));
   console.log(sesion)
   
-  if(window.location.pathname == "/") {
+  if(window.location.pathname === "/") {
     urlPost.forEach(element => {
       element.addEventListener("click", (e) => {
         console.log(e)
@@ -19,11 +19,9 @@ window.onload = async function (e) {
     })
   })}
   
-  if(sesion && window.location.pathname === "/" && sesion[1]) {
-     window.location.assign(`/auth/${sesion[1]}/index`)
-  }
 
   if(sesion) {
+
     const [correo, usuario, token, rol] = sesion;
 
     if(correo == null || usuario == null || token == null || rol == null) {
@@ -31,28 +29,19 @@ window.onload = async function (e) {
       localStorage.removeItem('sesion');
     }
 
-    if(rol == "ADMIN") {
-      console.log("Admin desde index.js")
-      const reduceName = usuario.split(" ")
-      const miniName = reduceName[0]
-      console.log(usuario)
+    if(rol === "ADMIN") {
       urlPost.forEach(element => {
         element.addEventListener("click", (e) => {
-          console.log(e)
           window.location.href = `/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
       })
     })
   } else {
     urlPost.forEach(element => {
-    
         element.addEventListener("click", (e) => {
         window.location.href = `/auth/publicaciones/${e.target.parentNode.dataset.id}`
       })
     })
-  }
-
-
-  }
+  }}
 }
 
 const traerPublicaciones = async () => {
@@ -63,7 +52,6 @@ const traerPublicaciones = async () => {
   let post = "";
   registros.forEach((e) => {
     const primerParrafo = e.contenido[0]
-    const limpiarParrafo = primerParrafo.slice(1, primerParrafo.length - 1)
     post +=`
             <div class="post" data-id=${ e.url }>
                 <div class="div-imagen" data-id=${ e.url }>
@@ -76,7 +64,7 @@ const traerPublicaciones = async () => {
                     <h2 class="post-titulo">${ e.titulo }</h2>
                     <div class="post-contenido" data-id=${ e.url }> 
                     
-                      ${ e.contenido[0] } 
+                      ${ primerParrafo } 
                     </div> 
                 </div>
             </div>
@@ -85,7 +73,10 @@ const traerPublicaciones = async () => {
   });
 };
 
-
+const sesion = JSON.parse(localStorage.getItem('sesion'));
+if(sesion && window.location.pathname === "/" && sesion[1]) {
+  window.location.assign(`/auth/${sesion[1]}/index`)
+}
 
 
 
