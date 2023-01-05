@@ -24,28 +24,35 @@ html(lang="en")
                     li
                         a(href=`/auth/${usuario}/index`) Inicio
                     li
+                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`) Crear Post
+                    li
                         a(href="#") Nosotros
                     li
-                        a(href="#") Perfil #{miniName}
+                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                    li 
+                        a(class="logout") Cerrar Sesión
                     li
                         img(src="/img/menu.png")
     
         .container 
-            input(class="display-none user-session"  value=`${usuario}`) 
-            input(class="display-none email-session"  value=`${correo}`) 
-            input(class="display-none token-session"  value=`${token}`) 
-            input(class="display-none rol-session"  value=`${rol}`) 
-            .blog
-               each val in registros
-                .post !{val} 
+                span.frase-cabecera.flex-center Inserte su frase de cabecera 
+                .blog
+                    .post 
+                        .div-imagen 
+                            img(class="post-img" src=`${imagen}`)
+                        .post-div-contenido 
+                            span.post-fecha #{fecha}
+                                span.post-autor | Autor:
+                                    strong #{autor} 
+                            h2.post-titulo #{titulo}
+                            .post-contenido 
+
    
         footer(class="flex-between")
             span © 2022 Espacio Luz de Luna
             div 
                 div Tel: 26131674 
                 div Cel: 26131674
-             
+                
     script(src="/js/middlewares.js") 
     script(src="/js/index.js") 
-                     
-

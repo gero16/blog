@@ -67,7 +67,6 @@ const indexPlantilla = async (req, res) => {
                     usuario: user.usuario,
                     correo: user.correo,
                     name: user.nombre,
-                    token: user.token_sesion,
                     rol: user.rol,
                 })
             
@@ -79,7 +78,6 @@ const indexPlantilla = async (req, res) => {
                         usuario: user.usuario,
                         correo: user.correo,
                         name: user.nombre,
-                        token: user.token_sesion,
                         rol: user.rol,
                       })
                     } 
