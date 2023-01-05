@@ -56,7 +56,9 @@ const crearPost = async (req, res) => {
   
  await nuevoPost.save();
 
- res.status(200).send("Publicacion Agregada!")
+ res.status(200).render("ok", {
+  mensaje: "Publicación agregada exitosamente!"
+})
 };
 
 const authAgregarComentario = async (req, res) => {

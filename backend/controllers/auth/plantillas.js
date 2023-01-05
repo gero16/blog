@@ -71,14 +71,14 @@ const indexPlantilla = async (req, res) => {
                 })
             
             } else {
-                    res.render("index/indexUser", {
-                        url: `/publicaciones/${registros.titulo}`,
-                        registros: registros,
-                        miniName: miniName,
-                        usuario: user.usuario,
-                        correo: user.correo,
-                        name: user.nombre,
-                        rol: user.rol,
+                res.render("index/indexUser", {
+                      url: `/publicaciones/${registros.titulo}`,
+                      registros: registros,
+                      miniName: miniName,
+                      usuario: user.usuario,
+                      correo: user.correo,
+                      name: user.nombre,
+                      rol: user.rol,
                       })
                     } 
     }

@@ -4,7 +4,6 @@ const express = require('express')
 const cors = require('cors')
 const colors = require("colors")
 const path = require("path");
-const bodyParser = require('body-parser')
 const multer = require("multer");
 
 const sequelize = require("./backend/db/db")

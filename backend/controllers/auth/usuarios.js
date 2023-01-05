@@ -51,9 +51,11 @@ const crearUsuario = async (req, res = response) => {
         newUsuario.password =  bcryptjs.hashSync( password, salt );
        // newUsuario.token = token
        await newUsuario.save()
-        res.status(200).json({
-            newUsuario
-        })
+      
+        res.status(200).render("ok", {
+            mensaje: "Usuario Registrado correctamente!",
+            usuario: newUsuario,
+      })
         
     } catch (error) {
         console.log(error)

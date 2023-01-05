@@ -34,3 +34,7 @@ btnLogin.addEventListener("click", async (e) => {
     //window.location.assign(`/`)
   }
 })
+const btnRegistro = document.querySelector("#registro")
+btnRegistro.addEventListener("click", () => {
+  window.location.assign(`/`)
+})
