@@ -59,10 +59,8 @@ const indexPlantilla = async (req, res) => {
     if(user){
       const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
-            //console.log(colors.bgBlue(arrayRegistros))
             if(user.rol === "ADMIN") {
-
-              res.header("auth-token", user.token_sesion).render("index/indexAdmin", {
+              res.render("index/indexAdmin", {
                     url: `/publicaciones/${registros.titulo}`,
                     registros: registros,
                     miniName: miniName,
@@ -74,16 +72,15 @@ const indexPlantilla = async (req, res) => {
                 })
             
             } else {
-                console.log("En User")  
                     res.render("index/indexUser", {
                         url: `/publicaciones/${registros.titulo}`,
                         registros: registros,
                         miniName: miniName,
-                        usuario: existeUsuario.usuario,
-                        correo: existeUsuario.correo,
-                        name: existeUsuario.nombre,
-                        token: existeUsuario.token_sesion,
-                        rol: existeUsuario.rol,
+                        usuario: user.usuario,
+                        correo: user.correo,
+                        name: user.nombre,
+                        token: user.token_sesion,
+                        rol: user.rol,
                       })
                     } 
     }

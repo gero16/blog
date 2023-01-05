@@ -19,8 +19,8 @@ window.onload = async function (e) {
     })
   })}
   
-  if(sesion && window.location.pathname == "/" && sesion[1]) {
-    window.location.assign(`/auth/${sesion[1]}/index`)
+  if(sesion && window.location.pathname === "/" && sesion[1]) {
+    // window.location.assign(`/auth/${sesion[1]}/index`)
   }
 
   if(sesion) {

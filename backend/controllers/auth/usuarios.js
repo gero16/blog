@@ -72,8 +72,6 @@ const validateToken = (req, res) => {
 const loginUsuario = async (req, res) => {
 
     const { correo, password } = req.body;
-
-    console.log(req.body)
     
     try {
     
@@ -99,7 +97,7 @@ const loginUsuario = async (req, res) => {
             });
         }
 
-      const validPassword = await bcryptjs.compareSync( password, usuario.password );
+      const validPassword = bcryptjs.compareSync( password, usuario.password );
 
       if ( !validPassword ) {
           return res.status(400).json({
@@ -109,49 +107,23 @@ const loginUsuario = async (req, res) => {
 
       const tokenSesion = await generarJWT();
       console.log(tokenSesion)
-
-      if(usuario.sesion == false){
-            console.log("dale forro")
         
-              await usuario.update({
-                sesion: true,
-                token_sesion: tokenSesion,
-              })
+        await usuario.update({
+            sesion: true,
+            token_sesion: tokenSesion,
+        })
              
-             await usuario.save()
-             res.status(200).header("auth-token", tokenSesion).json({
-                token: tokenSesion,
-                nombre:  usuario.nombre,
-                usuario:  usuario.nombre,
-                correo: usuario.correo,
-                rol: usuario.rol
-              })
-              //.redirect(`/auth/${usuario.usuario}/index`)
-        
-      } else {
-      
-            await usuario.update({
-                token_sesion: tokenSesion,
-            })
+        await usuario.save()
 
-              
-            await usuario.save()
-            
-           
-            res.status(200).header("auth-token", tokenSesion).json({
-                token: tokenSesion,
-                usuario:  usuario.nombre,
-                correo: usuario.correo,
-                rol: usuario.rol
-              })
-              //.redirect(`/auth/${usuario.usuario}/index`)
-        
-    }
-      // Si no existe una sesion desde este navegador/cliente
-   
+        res.status(200).header("auth-token", tokenSesion).json({
+            token: tokenSesion,
+            nombre:  usuario.nombre,
+            usuario:  usuario.nombre,
+            correo: usuario.correo,
+            rol: usuario.rol
+        })
 
     } catch (error) {
-
         console.log(error)
         res.status(500).json({
             msg: 'Hable con el administrador'
