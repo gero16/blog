@@ -110,10 +110,13 @@ const crearPostPlantilla = async (req, res) => {
 const postPlantilla =  async (req, res) => {
   const url = req.params.titulo
   console.log(req.body)
+
+
   try {
-    // NO SE PORQUE FUNCIONA ESTO CON MONGOOSE SI ESTOY USANDO SEQUELIZE
     const datos = await Post.findOne({where: {url}})
     const {id, titulo, contenido, imagen, autor, fecha, tokenSesion}  = datos
+
+    
 
     res.status(200).header("auth-token", tokenSesion).render("post/publicPost", {
       url,

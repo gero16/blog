@@ -8,15 +8,17 @@ body {
 }
 .login {
     width: 400px;
+
     background-color: #ffffff;
     box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
     margin: 100px auto;
+    position: relative;
 }
-.login h1 {
+.titulo-login {
     text-align: center;
     color: #3a5782;
-    font-size: 24px;
-    padding: 20px 0 20px 0;
+    font-size: 24px;    
+    padding: 40px 0px 20px 0px;
     border-bottom: 1px solid #dee0e4;
 }
 
@@ -92,4 +94,15 @@ body {
     cursor: pointer;
     filter: brightness(1.20);
 
+}
+
+.alert {
+    text-align: center;
+    font-size: 14px;
+    color: rgb(95, 33, 33);
+    background-color: #F8D7DA;
+    padding: 10px;
+    position:absolute;
+    top: 0px;
+    width: 100%;
 }

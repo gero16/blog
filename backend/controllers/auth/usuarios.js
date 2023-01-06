@@ -82,13 +82,13 @@ const loginUsuario = async (req, res) => {
           // console.log(colors.bgBlue(usuario.id))
         if ( !usuario ) {
             return res.status(400).json({
-                msg: 'El Usuario no es correcto'
+                msg: 'El usuario no es correcto'
             });
         }
 
         if ( !usuario.confirmado ) {
             return res.status(400).json({
-                msg: 'El Usuario no fue Confirmado'
+                msg: 'El usuario no fue confirmado'
             });
         }
 
