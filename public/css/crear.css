@@ -165,7 +165,8 @@ body {
 
 .btn-agregar:hover {
     cursor: pointer;
-    font-weight: 600;
+    color: black;
+    
 }
 
 
@@ -182,6 +183,16 @@ body {
     margin: 5px 0px 5px 0px;
     width: 100%;
     height: auto;
+}
+
+#li-agregar {
+    display: flex;
+    justify-content: space-around;
+}
+
+#agregar-input {
+    display: block;
+    width: 100%;
 }
 
 @media (max-width: 800px) {

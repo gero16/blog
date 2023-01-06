@@ -128,7 +128,7 @@ btnAgregarParrafo.addEventListener("click", () => {
       // primerParrafo
       inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
     
-      divAgregarParrafos.append(inputParrafo)
+      divAgregarParrafos.appendChild(inputParrafo)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
       inputParrafo.value = "<p>   </p>"
@@ -148,7 +148,7 @@ btnAgregarSub.addEventListener("click", () => {
       inputSub.name = valor; // Antes - inputSub.name = valor+"Subtitulo";
       let contadorInputs = document.querySelectorAll(".subtitulos-post").length
       inputSub.dataset.id = `subtitulo-${contadorInputs}`
-      divAgregarSub.append(inputSub)
+      divAgregarSub.appendChild(inputSub)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
       inputSub.value = "<h3>   </h3> "
