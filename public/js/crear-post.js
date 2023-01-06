@@ -17,9 +17,8 @@ const preFecha = document.querySelector(".pre-fecha");
 const preFoto = document.querySelector(".pre-img");
 // Botones para agregar el CONTENIDO
 const btnAgregarParrafo = document.querySelector(".agregar-parrafo")
-const divAgregarParrafos = document.querySelector(".div-agregar-parrafos")
+const divAgregarInputs = document.querySelector(".div-agregar-inputs")
 const btnAgregarSub = document.querySelector(".agregar-subtitulo")
-const divAgregarSub = document.querySelector(".div-agregar-subtitulo")
 const btnAgregarTexto = document.querySelector("#agregar-texto")
 let texto = "";
 
@@ -128,7 +127,7 @@ btnAgregarParrafo.addEventListener("click", () => {
       // primerParrafo
       inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
     
-      divAgregarParrafos.appendChild(inputParrafo)
+      divAgregarInputs.appendChild(inputParrafo)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
       inputParrafo.value = "<p>   </p>"
@@ -148,7 +147,7 @@ btnAgregarSub.addEventListener("click", () => {
       inputSub.name = valor; // Antes - inputSub.name = valor+"Subtitulo";
       let contadorInputs = document.querySelectorAll(".subtitulos-post").length
       inputSub.dataset.id = `subtitulo-${contadorInputs}`
-      divAgregarSub.appendChild(inputSub)
+      divAgregarInputs.appendChild(inputSub)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
       inputSub.value = "<h3>   </h3> "
