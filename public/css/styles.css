@@ -42,10 +42,19 @@ footer{
     background-color: rgb(233, 240, 245);
     height: 30px;
     padding: 30px;
-    position: relative;
+    position: absolute;
     bottom: 0; 
+    width: 100%;
 }
+.footer-copy {
+    position: relative;
 
+}
+.footer-info {
+    position: relative;
+    bottom: 50%;
+    left: 90%;
+}
 .menu-lista  a {
     font-size: 14px;
 }
@@ -187,7 +196,10 @@ main{
 }
 
 .post-div-contenido > span, p {
-    font-size: 20px;
+    font-size: 16px;
+}
+.post-div-contenido p {
+    font-size: 18px;
 }
 
 .post-contenido{
@@ -238,8 +250,14 @@ main{
         width: 320px;
         height: 160px;
     }
-    .post-div-contenido > span, p{
+    .post-div-contenido  p{
+        font-size: 18px;
+    }
+    .post-div-contenido span{
         font-size: 15px;
+    }
+    .post-titulo {
+        font-size: 20px;
     }
   }
 

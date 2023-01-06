@@ -44,8 +44,6 @@ const storage = multer.diskStorage({
   }
 })
 
-
-
 app.use(multer({storage}).single("imagen")) // Ve si estamos enviando una img al servidor
 
 app.use("/", public)
