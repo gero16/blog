@@ -34,7 +34,7 @@ router.get("/:user/info-sesion", getSesion)
 
 router.get("/publicaciones/:titulo/", postPlantilla)
 
-router.get("/:admin/publicaciones/:titulo", esAdmin, authPostPlantilla)
+router.get("/:user/publicaciones/:titulo",  authPostPlantilla)
 
 router.get("/:admin/crear-post", esAdmin, crearPostPlantilla)
 

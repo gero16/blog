@@ -4,7 +4,17 @@ const password = document.querySelector("#password")
 const divLogin = document.querySelector(".login")
 const tituloLogin = document.querySelector(".titulo-login")
 
+const crearMensaje = (msg) => {
+  const mensaje = document.createElement("span")
+  mensaje.classList.add("alert")
+  mensaje.textContent = msg
+  divLogin.append(mensaje)
 
+  setTimeout(() => {
+    mensaje.remove()
+  }, 6000)
+  
+}
 
 btnLogin.addEventListener("click", async (e) => {
 
@@ -24,13 +34,7 @@ btnLogin.addEventListener("click", async (e) => {
       };
   
   if(correo.value === "" || password.value === ""){
-      const mensaje = document.createElement("span")
-      mensaje.classList.add("alert")
-      mensaje.textContent = "El Usuario y/o Contraseña no pueden ser vacios"
-      divLogin.append(mensaje)
-      setTimeout(() => {
-        mensaje.remove()
-      }, 5000);
+      crearMensaje("El Usuario y/o Contraseña no pueden quedar Vacios")
   }
   const fetchResponse = await fetch(`/auth/login`, settings);
   console.log(fetchResponse)
@@ -45,37 +49,18 @@ btnLogin.addEventListener("click", async (e) => {
     //window.location.assign(`/`)
   } 
   if(data.msg === 'El usuario no fue confirmado'){
-    const mensaje = document.createElement("span")
-    mensaje.classList.add("alert")
-    mensaje.textContent = "Debe Confirmar su Cuenta!"
-    divLogin.append(mensaje)
-    setTimeout(() => {
-      mensaje.remove()
-    }, 5000);
+    crearMensaje("Debe Confirmar su Cuenta!")
   }
   if (data.msg === 'El usuario no es correcto') {
-    const mensaje = document.createElement("span")
-    mensaje.classList.add("alert")
-    mensaje.textContent = "El Usuario y/o la Constraseña son Incorrectos!"
-    //divLogin.insertBefore(mensaje, tituloLogin)
-    divLogin.append(mensaje)
-    setTimeout(() => {
-      mensaje.remove()
-    }, 5000);
+    crearMensaje("El Usuario y/o la Constraseña son Incorrectos!")
   }
  
   if(data.msg === 'Su cuenta fue eliminada'){
-    const mensaje = document.createElement("span")
-    mensaje.classList.add("alert")
-    mensaje.textContent = "Su Cuenta fue Eliminada!"
-     divLogin.append(mensaje)
-     setTimeout(() => {
-      mensaje.remove()
-    }, 5000);
+    crearMensaje( "Su Cuenta fue Eliminada!")
   }
 })
-const btnRegistro = document.querySelector("#registro")
 
+const btnRegistro = document.querySelector("#registro")
 if(btnRegistro){
   btnRegistro.addEventListener("click", () => {
     window.location.assign(`/`)

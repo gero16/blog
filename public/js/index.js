@@ -1,5 +1,6 @@
 const blog = document.querySelector(".blog");
 const refCrear = document.querySelector(".ref-crear")
+const publicIMG = document.querySelector(".avatar-user")
 
 window.onload = async function (e) {
   e.preventDefault()
@@ -22,8 +23,14 @@ window.onload = async function (e) {
   if(sesion && window.location.pathname === "/") {
      window.location.href = `/auth/${sesion[1]}/index`
   }
-
+ 
   if(sesion) {
+    
+    urlPost.forEach(element => {
+      element.addEventListener("click", (e) => {
+        window.location.href = `/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
+    })
+  })
 
     const [correo, usuario, token, rol] = sesion;
 
@@ -31,21 +38,25 @@ window.onload = async function (e) {
       console.log("Elimino sesion porque sus datos estan en null")
       localStorage.removeItem('sesion');
     }
+} else {
+    const divImagen = document.querySelector(".img-user")
 
-    if(rol === "ADMIN") {
-      urlPost.forEach(element => {
-        element.addEventListener("click", (e) => {
-          window.location.href = `/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
-      })
-    })
-  } else {
-    urlPost.forEach(element => {
-        element.addEventListener("click", (e) => {
-        window.location.href = `/auth/publicaciones/${e.target.parentNode.dataset.id}`
-      })
-    })
-  }}
+    function randomImage(min, max) {
+      const num = Math.floor((Math.random() * (max - min + 1)) + min);
+      console.log(num)
+      const imagen =  num;
+      const userPublic = localStorage.getItem("imagen");
+      if(!userPublic) {
+        const public = localStorage.setItem("imagen", JSON.stringify(imagen) );
+        const avatarImagen = document.createElement("img")
+        avatarImagen.src = `/../img/avatar${num}.png`
+        divImagen.append(avatarImagen)
+      }
+  }
+  randomImage(0, 3);
+  }
 }
+
 
 const traerPublicaciones = async () => {
   const resultado = await fetch("/publicaciones");

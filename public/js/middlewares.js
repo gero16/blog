@@ -45,29 +45,32 @@ if(logout) {
 }
 
 const sendToken = async () => {
-  const sesion =  JSON.parse(localStorage.getItem('sesion'));
-  const token = sesion[2]
-
-  const settings = { 
-      method: 'POST', 
-      headers: { 
-        "Content-Type": "application/json", 
-        "auth-token": token },
-  };
+  if(getSesion) {
+    const sesion =  JSON.parse(localStorage.getItem('sesion'));
+    const token = sesion[2]
   
-  try {
-      const fetchResponse = await fetch(`/auth/validate-token`, settings);
-      console.log(fetchResponse)
-      if(fetchResponse.ok === false){
-         const data = await fetchResponse.json();
-         console.log(data)
-         window.location.assign("/error/401")
-      }
-     
-      console.log(data)
-  } catch (e) {
-      return e;
-  }    
+    const settings = { 
+        method: 'POST', 
+        headers: { 
+          "Content-Type": "application/json", 
+          "auth-token": token },
+    };
+    
+    try {
+        const fetchResponse = await fetch(`/auth/validate-token`, settings);
+        console.log(fetchResponse)
+        if(fetchResponse.ok === false){
+           const data = await fetchResponse.json();
+           console.log(data)
+           window.location.assign("/error/401")
+        }
+       
+        console.log(data)
+    } catch (e) {
+        return e;
+    } 
+  }
+    
 }
 
 sendToken()

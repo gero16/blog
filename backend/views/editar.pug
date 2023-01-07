@@ -69,12 +69,12 @@ html(lang="en")
                                     div
                                     textarea(name="", class="parrafos-post lleno") !{val} 
                         
-                        li 
+                        li(id="li-agregar") 
                             label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
-                            div(class="div-agregar-parrafos") 
-                        li
-                            label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo 
-                            div(class="div-agregar-subtitulo") 
+                            label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo  
+                        li(id="agregar-input")
+                            div(class="div-agregar-inputs") 
+
                         li(class="agregar-texto") 
                             span Previsualizar el Contenido
                             span(data-id="agregar" id="agregar-texto") Agregar Texto
@@ -97,7 +97,7 @@ html(lang="en")
                 
                  
     script(src="/../js/middlewares.js") 
-    script(src="/../js/editar.js") 
+    script(src="/../js/form-post.js") 
 
                        
          

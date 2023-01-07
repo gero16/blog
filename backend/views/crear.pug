@@ -40,18 +40,18 @@ html(lang="en")
                         li 
                             label(for="" class="label-crear") Imagen
                             div(class="grid-input-img") 
-                                input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio") 
+                                input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio input-crear") 
                                 label(for="imagen-post" class="label-imagen") Seleccionar Archivo
                                 span(class="span-foto") Ningun archivo Seleccionado.
                         li 
                             label(for="text" class="label-crear") Titulo
-                            input(type="text" name="titulo" id="titulo-post" class="vacio")                      
+                            input(type="text" name="titulo" id="titulo-post" class="vacio input-crear")                      
                         li 
                             label(for="text" class="label-crear") Autor
-                            input(type="text" name="autor" id="autor-post" class="vacio") 
+                            input(type="text" name="autor" id="autor-post" class="vacio input-crear") 
                         li 
                             label(for="text" class="label-crear") Fecha
-                            input(type="date" name="fecha" id="fecha-post" class="vacio" value= `${fecha}` ) 
+                            input(type="date" name="fecha" id="fecha-post" class="vacio input-crear" value= `${fecha}` ) 
                         
                         li(id="li-agregar") 
                             label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
@@ -78,7 +78,7 @@ html(lang="en")
                 div(class="pre-contenido contenido-post") 
                 
         script(src="/../js/middlewares.js")         
-        script(src="/../js/crear-post.js")         
+        script(src="/../js/form-post.js")     
 
 
                        

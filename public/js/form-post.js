@@ -119,6 +119,10 @@ let contador = 0;
 
 btnAgregarParrafo.addEventListener("click", () => {
   let inputParrafo = document.createElement("textarea")
+  const spanParrafo1 = document.createElement("span")
+  const spanParrafo2 = document.createElement("span")
+  spanParrafo1.textContent = "<p>"
+  spanParrafo2.textContent = "</p>"
   inputParrafo.className = "parrafos-post vacio"
   // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
  
@@ -156,6 +160,13 @@ btnAgregarSub.addEventListener("click", () => {
   }
 })
 
+/* HAY QUE HACERLOOOOOOOOOOOOO 
+const btnAgregarLista = document.querySelector(".agregar-lista")
+btnAgregarLista.addEventListener("click", () => {
+
+})
+*/
+
 
 btnAgregarTexto.addEventListener("click", () => {
   let elementoAgregar = document.querySelector(".vacio")
@@ -176,6 +187,8 @@ btnAgregarTexto.addEventListener("click", () => {
  
 })
 
+
+
 inputFoto.addEventListener("change", (e) => {
   // Esto le hago para poner manualmente el nombre de la foto a la derecha del "input"
   console.log(e.target.files);
@@ -193,55 +206,4 @@ inputFoto.addEventListener("change", (e) => {
 });
 
 const arrayEtiquetas = []
-/*
-agregar.addEventListener("click", (e) => {
-  if (inputTitulo.value && inputTitulo.className == "vacio") {
-    inputTitulo.classList.remove("vacio");
-    texto = inputTitulo.value;
-    preTitulo.textContent = texto;
-  } else if (inputAutor.value && inputAutor.className == "vacio") {
-    inputAutor.classList.remove("vacio");
-    texto = inputAutor.value;
-    preAutor.textContent = texto;
-  } else if (inputFecha.value && inputFecha.className == "vacio") {
-    inputFecha.classList.remove("vacio");
-    texto = inputFecha.value;
-    preFecha.textContent = texto;
-  } else {
-    texto = inputContenido.value;
-    inputContenido.value = "";
-    // Si selectEtiqueta no es undefined
-    if (selectEtiqueta) {
-      inputContenido.textContent = "";
-      let iterador = arrayEtiquetas.length
-      agregarTexto(selectEtiqueta, texto, iterador);
-      // Etiqueta individual
-      arrayEtiquetas.push(etiquetaContenido)
-      // Conjunto de etiquetas en el contenidoFinal
-      preContenido.innerHTML = actualizarHTML;
-      console.log(arrayEtiquetas)
-      console.log(actualizarHTML);
-    }
-  }
-});
-
-
-const inputsContenido = document.querySelectorAll(".etiquetas-post")
-
-
-/*
-terminarContenido.addEventListener("click", () => {
-  inputContenido.value = actualizarHTML;
-  console.log(arrayEtiquetas[0])
-  
-  for (let i = 0 ; i <  inputsContenido.length; i++) {
-    inputsContenido[i].value =  arrayEtiquetas[i];
-    inputsContenido[i].textContent =  arrayEtiquetas[i];
-    console.log(inputsContenido[i])
-
-  }
-
-});
-*/
-
 

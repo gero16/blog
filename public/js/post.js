@@ -29,9 +29,7 @@ window.onload = async function () {
       console.log(sesion)
 
    }
- 
 }
-
 
 btnComentario.addEventListener("click", async () => {
    const urlActual = window.location.href

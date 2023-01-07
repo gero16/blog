@@ -9,20 +9,12 @@ const colors = require('colors');
 
 const indexPrincipal = async (req, res) => {
 
-
   try {
     const registros = await Post.findAll()
-
-    const {url, imagen, fecha, titulo, contenido} = registros
-  
+    const titulo = "Espacio Luz de Luna"
     res.render("index/index", {
-        registros: registros,
-                    imagen,
-                    fecha,
-                    titulo,
-                    url, 
-                    contenido,
-                  })
+        registros: registros, titulo
+      })
   } catch (error) {
     console.log(error)
   }}
@@ -33,12 +25,13 @@ const perfil = async (req, res) => {
   try {
     const user = await Usuario.findOne({where: {usuario: req.params.user}})
     // console.log(colors.bgRed(user.dataValues))
-  
+   const titulo = "Perfil"
     res.render("perfil", {
       usuario: user.usuario,
       correo: user.correo,
       name: user.nombre,
-      imagen: user.imagen
+      imagen: user.imagen,
+      titulo,
     })
   } catch (error) {
     console.log(error)
@@ -51,6 +44,7 @@ const indexPlantilla = async (req, res) => {
   console.log("Estoy en index Plantilla") 
   const usuario = req.params.user
   console.log(colors.bgBlue(usuario))
+  const titulo = "Espacio Luz de Luna"
   try {
 
     const registros = await Post.findAll()
@@ -68,6 +62,7 @@ const indexPlantilla = async (req, res) => {
                     correo: user.correo,
                     name: user.nombre,
                     rol: user.rol,
+                    titulo,
                 })
             
             } else {
@@ -79,6 +74,7 @@ const indexPlantilla = async (req, res) => {
                       correo: user.correo,
                       name: user.nombre,
                       rol: user.rol,
+                      titulo,
                       })
                     } 
     }
@@ -97,10 +93,11 @@ const crearPostPlantilla = async (req, res) => {
   console.log(fecha)
   console.log(req.user)
   try {
-  
+    const titulo = "Crear Publicación"
     res.status(200).header("auth-token", req.user).render("crear", {
       usuario: req.params.admin,
       fecha: fecha,
+      titulo,
 })
   } catch (error) {
     console.log(error)
@@ -135,7 +132,7 @@ const postPlantilla =  async (req, res) => {
 
 const authPostPlantilla =  async (req, res) => {
  
-    const usuario = req.params.admin
+    const usuario = req.params.user
     const url = req.params.titulo
     let arrayComentarios = []
     try {
