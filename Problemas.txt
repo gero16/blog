@@ -1,5 +1,0 @@
-
-
-Al hacer click en el btn editar que esta dentro de un <a> no estoy logrando recibir en el verify-token el token 
-que si puedo recibir cuando lo mando dentro del window.onload
-
