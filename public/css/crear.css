@@ -18,6 +18,8 @@ body {
     margin-bottom: 20px;
 }
 
+
+
 .crear-post li {
     align-items: center;
     display: grid;
@@ -162,6 +164,10 @@ body {
     max-width: 200px;
 }
 
+#agregar-texto:hover {
+    cursor: pointer;
+}
+
 .label-crear {
     padding: 5px;
 }
@@ -186,6 +192,10 @@ body {
     margin: 5px 0px 5px 0px;
     width: 100%;
     height: auto;
+}
+
+.preview h2{
+    font-size: 20px;
 }
 
 #li-agregar {

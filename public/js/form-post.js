@@ -3,18 +3,20 @@ const agregar = document.querySelector(`[data-id="agregar"]`);
 // inputs del Formulario para crear el POST
 const formulario = document.querySelector(".formulario");
 const inputFoto = document.querySelector("#imagen-post");
-const inputTitulo = document.querySelector("#titulo-post");
 const inputContenido = document.querySelector("#contenido-post");
+const inputTitulo = document.querySelector("#titulo-post");
 const inputAutor = document.querySelector("#autor-post");
 const inputFecha = document.querySelector("#fecha-post");
 const enviarPost = document.querySelector("#enviar-post");
 const terminarContenido = document.querySelector("#terminar");
+
 // etiquetas donde previsualizar del Contenido
 const preTitulo = document.querySelector(".pre-titulo");
 const preAutor = document.querySelector(".pre-autor");
 const preContenido = document.querySelector(".pre-contenido");
 const preFecha = document.querySelector(".pre-fecha");
 const preFoto = document.querySelector(".pre-img");
+
 // Botones para agregar el CONTENIDO
 const btnAgregarParrafo = document.querySelector(".agregar-parrafo")
 const divAgregarInputs = document.querySelector(".div-agregar-inputs")
@@ -51,23 +53,27 @@ const traerInfo = async () => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
   traerInfo()
 
   document.querySelectorAll(".vacio").forEach((node) =>
     node.addEventListener("keypress", (e) => {
       console.log(document.querySelectorAll(".vacio"))
+      console.log(inputTitulo.value.length >1)
+      console.log(inputTitulo.classList.contains("vacio"))
       if (e.keyCode == 13) {
         e.preventDefault();
 
-        if (inputTitulo.value && inputTitulo.className == "vacio") {
+        if (inputTitulo.value.length > 1 && inputTitulo.classList.contains("vacio")) {
+          console.log("laputamadre")
           inputTitulo.classList.remove("vacio");
           texto = inputTitulo.value;
           preTitulo.textContent = texto;
-        } else if (inputAutor.value && inputAutor.className == "vacio") {
+        } else if (inputAutor.value.length > 1 && inputAutor.classList.contains("vacio")) {
           inputAutor.classList.remove("vacio");
           texto = inputAutor.value;
           preAutor.textContent = texto;
-        } else if (inputdate.value && inputFecha.className == "vacio") {
+        } else if (inputFecha.value.length > 1 && inputFecha.classList.contains("vacio")) {
           inputFecha.classList.remove("vacio");
           texto = inputFecha.value;
           preFecha.textContent = texto;
@@ -154,7 +160,7 @@ btnAgregarSub.addEventListener("click", () => {
       divAgregarInputs.appendChild(inputSub)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
-      inputSub.value = "<h3>   </h3> "
+      inputSub.value = "<h2>   </h2> "
       break;
     } 
   }
@@ -170,29 +176,21 @@ btnAgregarLista.addEventListener("click", () => {
 
 btnAgregarTexto.addEventListener("click", () => {
   let elementoAgregar = document.querySelector(".vacio")
-  console.log(elementoAgregar.classList.contains("parrafos-post"))
-  if(elementoAgregar.classList.contains("parrafos-post")) {
-    const parrafo = document.createElement("p");
-    parrafo.classList.add("pre-parr")
-    parrafo.innerHTML = elementoAgregar.value;
-    preContenido.append(parrafo)
-    elementoAgregar.classList.remove("vacio")
+  console.log(elementoAgregar)
+  if(elementoAgregar.value.length > 1 &&  elementoAgregar.classList.contains("parrafos-post") ) {
+      console.log("hola")
+      preContenido.innerHTML +=  elementoAgregar.value;
+      elementoAgregar.classList.remove("vacio")
   } else if (elementoAgregar.classList.contains("subtitulos-post")) {
-    const subtitulo = document.createElement("h2");
-    subtitulo.classList.add("pre-sub")
-    subtitulo.innerHTML = elementoAgregar.value;
-    preContenido.append(subtitulo)
-    elementoAgregar.classList.remove("vacio")
+    preContenido.innerHTML +=  elementoAgregar.value;
   } 
- 
 })
 
 
 
 inputFoto.addEventListener("change", (e) => {
   // Esto le hago para poner manualmente el nombre de la foto a la derecha del "input"
-  console.log(e.target.files);
-  console.log(e.target.files[0].name);
+  inputFoto.classList.remove("vacio");
   const nameFoto = e.target.files[0].name;
   document.querySelector(".span-foto").innerHTML = nameFoto;
 

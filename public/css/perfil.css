@@ -22,9 +22,8 @@ h1 {
 }
 
 .div-perfil-imagen {
-    width: 25vw;
-    height: 35vh;
-    overflow: hidden;
+ height: 50vh; 
+ 
 }
 .perfil-imagen {
     width: 100%;
