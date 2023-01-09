@@ -33,8 +33,11 @@ html(lang="en")
                         a(href="/login.html") Iniciar Sesion
                     li
                         a(href="/registro.html") Registrarse
+                    li 
+                        
              
         .container 
+            span !{usuario}
             .blog
                each val in registros
                 .post !{val} 

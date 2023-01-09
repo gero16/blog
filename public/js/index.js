@@ -40,17 +40,19 @@ window.onload = async function (e) {
     }
 } else {
     const divImagen = document.querySelector(".img-user")
-
+ 
     function randomImage(min, max) {
       const num = Math.floor((Math.random() * (max - min + 1)) + min);
       console.log(num)
       const imagen =  num;
       const userPublic = localStorage.getItem("imagen");
+
       if(!userPublic) {
-        const public = localStorage.setItem("imagen", JSON.stringify(imagen) );
-        const avatarImagen = document.createElement("img")
-        avatarImagen.src = `/../img/avatar${num}.png`
-        divImagen.append(avatarImagen)
+        const data = ["public", imagen]
+        const public = localStorage.setItem("imagen", JSON.stringify(data) );
+        //const avatarImagen = document.createElement("img")
+        //avatarImagen.src = `/../img/avatar${num}.png`
+        //divImagen.append(avatarImagen)
       }
   }
   randomImage(0, 3);

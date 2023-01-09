@@ -9,11 +9,16 @@ const colors = require('colors');
 
 const indexPrincipal = async (req, res) => {
 
+  let avatarImage = ""
+ 
   try {
     const registros = await Post.findAll()
     const titulo = "Espacio Luz de Luna"
-    res.render("index/index", {
-        registros: registros, titulo
+    res.render("index/indexPublic", {
+        registros: registros, 
+        titulo,
+        usuario: "public",
+        avatarImage,
       })
   } catch (error) {
     console.log(error)

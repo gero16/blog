@@ -31,7 +31,16 @@ const traerPublicaciones = async (req, res) => {
 
   const mostrarPublicacion = async (req, res) => {
     console.log(req.params.url)
-    let arrayComentarios = []
+    let avatarImage = "";
+
+    function randomImage(min, max) {
+      const num = Math.floor((Math.random() * (max - min + 1)) + min);
+      avatarImage = `/../img/avatar${num}.png`
+      return avatarImage;
+    }
+  
+    randomImage(0,3)
+    console.log(colors.bgBlue(avatarImage))
     try {
       // Traer todos las Publicaciones
      const registro = await Post.findOne({where : {url : req.params.url}});
@@ -39,8 +48,6 @@ const traerPublicaciones = async (req, res) => {
      const {id, url, titulo, contenido, imagen, autor, fecha} = registro
      const comentarios = await Comentario.findAll({where : {id_post : id}});
  
-    
-    console.log(arrayComentarios)
     return res.status(200).render("post/publicPost", {
       id: id,
       url,
@@ -50,6 +57,8 @@ const traerPublicaciones = async (req, res) => {
       autor: autor,
       fecha: fecha,
       comentarios: comentarios,
+      avatarImage,
+      
   })
    } catch (error) {
      console.log(error)
