@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   traerInfo()
 
-  document.querySelectorAll(".vacio").forEach((node) =>
-    node.addEventListener("keypress", (e) => {
+  document.querySelectorAll(".vacio").forEach((inputsVacios) =>
+    inputsVacios.addEventListener("keypress", (e) => {
       console.log(document.querySelectorAll(".vacio"))
       console.log(inputTitulo.value.length >1)
       console.log(inputTitulo.classList.contains("vacio"))
@@ -125,10 +125,6 @@ let contador = 0;
 
 btnAgregarParrafo.addEventListener("click", () => {
   let inputParrafo = document.createElement("textarea")
-  const spanParrafo1 = document.createElement("span")
-  const spanParrafo2 = document.createElement("span")
-  spanParrafo1.textContent = "<p>"
-  spanParrafo2.textContent = "</p>"
   inputParrafo.className = "parrafos-post vacio"
   // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
  
@@ -140,7 +136,7 @@ btnAgregarParrafo.addEventListener("click", () => {
       divAgregarInputs.appendChild(inputParrafo)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
-      inputParrafo.value = "<p>   </p>"
+      //inputParrafo.value = `<p>        </p>`
       break;
     } 
   }  
@@ -160,7 +156,7 @@ btnAgregarSub.addEventListener("click", () => {
       divAgregarInputs.appendChild(inputSub)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
-      inputSub.value = "<h2>   </h2> "
+      //inputSub.value = "<h2>              </h2> "
       break;
     } 
   }
@@ -172,20 +168,6 @@ btnAgregarLista.addEventListener("click", () => {
 
 })
 */
-
-
-btnAgregarTexto.addEventListener("click", () => {
-  let elementoAgregar = document.querySelector(".vacio")
-  console.log(elementoAgregar)
-  if(elementoAgregar.value.length > 1 &&  elementoAgregar.classList.contains("parrafos-post") ) {
-      console.log("hola")
-      preContenido.innerHTML +=  elementoAgregar.value;
-      elementoAgregar.classList.remove("vacio")
-  } else if (elementoAgregar.classList.contains("subtitulos-post")) {
-    preContenido.innerHTML +=  elementoAgregar.value;
-  } 
-})
-
 
 
 inputFoto.addEventListener("change", (e) => {
@@ -204,4 +186,43 @@ inputFoto.addEventListener("change", (e) => {
 });
 
 const arrayEtiquetas = []
+
+
+btnAgregarTexto.addEventListener("click", () => {
+  let elementosVacios = document.querySelectorAll(".vacio")
+  const inputParrafo = document.querySelector(".parrafos-post")
+  const inputSubtitulo = document.querySelector(".subtitulos-post")
+
+  elementosVacios.forEach(element => {
+
+    if(inputTitulo.value.length > 1 && inputTitulo.classList.contains("vacio")) {
+      console.log("laputamadre")
+      inputTitulo.classList.remove("vacio");
+      texto = inputTitulo.value;
+      preTitulo.textContent = texto;
+
+    } else if (inputAutor.value.length > 1 && inputAutor.classList.contains("vacio")) {
+      inputAutor.classList.remove("vacio");
+      texto = inputAutor.value;
+      preAutor.textContent = texto;
+
+    } else if (inputFecha.value.length > 1 && inputFecha.classList.contains("vacio")) {
+      inputFecha.classList.remove("vacio");
+      texto = inputFecha.value;
+      preFecha.textContent = texto;
+
+    } else if (inputParrafo && inputParrafo.value.length > 1 && inputParrafo.classList.contains("vacio")) {
+      const valueFinal = inputParrafo.value
+      inputParrafo.value = `<p>     ${valueFinal}     </p>`
+      preContenido.innerHTML +=  inputParrafo.value;
+      inputParrafo.classList.remove("vacio")
+
+    } else if (inputSubtitulo && inputSubtitulo.value.length > 1 && inputSubtitulo.classList.contains("vacio")) {
+      const valueFinal = inputSubtitulo.value
+      inputSubtitulo.value = `<h2>     ${valueFinal}     </h2>`
+      preContenido.innerHTML +=  inputSubtitulo.value;
+      inputSubtitulo.classList.remove("vacio")
+    }}
+  );
+})
 

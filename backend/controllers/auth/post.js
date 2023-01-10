@@ -15,9 +15,9 @@ cloudinary.config({
 const crearPost = async (req, res) => {
 
   const body =  req.body;
-  //console.log(colors.bgRed(body))
+  console.log(colors.bgRed(body))
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
-
+/*
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
   
   const id = Date.now();
@@ -59,6 +59,7 @@ const crearPost = async (req, res) => {
  res.status(200).render("ok", {
   mensaje: "Publicación agregada exitosamente!"
 })
+*/
 };
 
 const authAgregarComentario = async (req, res) => {
@@ -161,3 +162,5 @@ const authAgregarComentario = async (req, res) => {
     authAgregarComentario,
     eliminarPost
   }
+
+ 
