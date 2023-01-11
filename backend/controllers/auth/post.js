@@ -149,14 +149,24 @@ const authAgregarComentario = async (req, res) => {
   
 
     const eliminarPost = async (req, res) => {
-      console.log(req.params)
+      console.log(req.params.id)
 
       try {
         const deletePost = await Post.findOne({ where: { id: req.params.id } });
-        const deleteComentarios = await Comentario.findOne({ where: { id_post: req.params.id } });
-        //const deleteUsuarioComentarios = await Usuario_Comentario.findOne({ where: { id: req.p } });
+        const deleteComentarios = await Comentario.findOne({ where: { id_post:  req.params.id } });
+
+        if(deleteComentarios) {
+          console.log(colors.bgCyan(deleteComentarios))
+          const deleteUsuarioComentarios = await Usuario_Comentario.findOne({ where: { id_comentario: deleteComentarios.id} });
+          console.log(colors.bgGreen(deleteUsuarioComentarios))
+          await deleteComentarios.destroy()
+          await deleteUsuarioComentarios.destroy()
+        }
+      
+     
         await deletePost.destroy();
-        await deleteComentarios.destroy()
+   
+  
         res.status(200).render("ok", {
           mensaje: "Publicación eliminada correctamente!"
         })
@@ -165,6 +175,7 @@ const authAgregarComentario = async (req, res) => {
         res.status(400).render("error", {
           error: 404
         })
+        
       }
  
 

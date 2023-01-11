@@ -30,9 +30,11 @@ body {
 
 .confirm {
     background-color: rgb(23, 112, 30);
+    cursor: pointer;
 
 }
 
 .delete {
     background-color: rgb(146, 0, 0);
+    cursor: pointer;
 }
