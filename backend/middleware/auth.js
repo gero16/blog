@@ -16,10 +16,8 @@ const checkEmptyData = (req, res, next) =>{
      } else {
         next();
      }
-
-    
-
 }
+
 const checkAuth = async (req, res, next) => {
     console.log(req.headers)
     let token;

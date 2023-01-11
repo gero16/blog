@@ -10,14 +10,15 @@ const esAdmin = async (req, res, next) => {
       console.log(user.dataValues)
       const usuario = user.dataValues;
 
-      if(usuario.rol == "ADMIN") {
+      if(usuario.rol === "ADMIN") {
         console.log("Puede acceder a esta seccion")
     
         next();
       } else {
-        console.log("No tiene permisos para editar y eliminar")
-      // 
-        next()
+        console.log("No tiene permisos")
+        res.status(401).render("error", {
+          error: 401
+      })
     }
     } catch (error) {
       console.log(error)
@@ -28,7 +29,14 @@ const validToken = (req, res, next) => {
 
 }
 
+const rutaInexistente = (req, res) => {
+  res.status(401).render("error", {
+    error: 404
+})
+}
+
 module.exports = {
     esAdmin,
-    validToken
+    validToken,
+    rutaInexistente
 }

@@ -32,7 +32,10 @@ html(lang="en")
 
         div(class="container")
             .div-errores.flex-center 
-                img(src="/../img/401b.png", alt="", srcset="")
+                if error == 401
+                    img(src="/../img/401b.png", alt="", srcset="")
+                if error == 404
+                    img(src="/../img/404.png", alt="", srcset="")
         
                    
         div.container

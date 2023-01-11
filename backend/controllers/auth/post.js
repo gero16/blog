@@ -66,7 +66,6 @@ const authAgregarComentario = async (req, res) => {
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
     console.log(colors.bgGreen(req.body))
-    //const fecha =
     try {
        const registro = await Post.findOne({where : {url : req.params.titulo}});
     
@@ -102,8 +101,8 @@ const authAgregarComentario = async (req, res) => {
  
     const body = req.body;
     const {id, titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
+    // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
-   
     const newID = Date.now();
   
     let contenido = [];
@@ -121,7 +120,7 @@ const authAgregarComentario = async (req, res) => {
         const result = await cloudinary.uploader.upload(req.file.path, { public_id : `${newID}` }, 
         function (error, result) {console.log(result);});
       
-        const { secure_url } = result;
+        const { secure_url } = result;  
         await post.update({
               titulo,
               fecha,

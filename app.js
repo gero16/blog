@@ -10,7 +10,8 @@ const sequelize = require("./backend/db/db")
 
 const post = require("./backend/routes/post")
 const auth = require("./backend/routes/auth")
-const public = require("./backend/routes/public")
+const public = require("./backend/routes/public");
+const { rutaInexistente } = require('./backend/helpers/validators');
 
 const app = express()
 const port = process.env.PORT | 4000
@@ -37,6 +38,7 @@ const conectarBD = async () => {
 
 conectarBD();
 
+
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "public/uploads"),
   filename: (req, file, cb) => {
@@ -55,6 +57,7 @@ app.use('/img',express.static(path.join(__dirname, 'public/img')));
 app.use('/js',express.static(path.join(__dirname, 'public/js')));
 app.use('/css',express.static(path.join(__dirname, 'public/css')));
 app.use('/', express.static('public/html'))
+app.get("/*", rutaInexistente)
 
 app.listen(port, () => {
   console.log(colors.bgYellow(`Corriendo en puerto: ${port}`))

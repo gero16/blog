@@ -4,10 +4,10 @@ const { check } = require('express-validator');
 const { indexPrincipal, indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost } = require('../controllers/auth/post');
-const { sesion, getSesion, logoutUsuario, validateToken } = require('../controllers/auth/usuarios');
+const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
-const { esAdmin } = require('../helpers/validators');
+const { esAdmin, rutaInexistente } = require('../helpers/validators');
 const { checkAuth, verifyToken, checkEmptyData } = require('../middleware/auth');
 
 const router = Router();
@@ -46,11 +46,15 @@ router.post("/:user/publicaciones/:titulo/agregar-comentario", authAgregarComent
 
 router.get("/:user/perfil", perfil)
 
+router.post("/:user/editar-perfil", editarPerfil)
+
 router.post("/crear-post", crearPost)
 
 router.post("/actualizar-post", actualizarPost)
 
 router.post("/eliminar-post/:id", verifyToken, eliminarPost)
+
+//router.get("/*", rutaInexistente)
 
 
 module.exports = router;

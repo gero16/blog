@@ -30,7 +30,9 @@ html(lang="en")
                     li
                         a(href=`/auth/${usuario}/index`) Inicio
                     li
-                        a(href=`/auth/${usuario}/crear-post`) Crear Post
+                        a(href=`/auth/${usuario}/crear-post`) Crear Post 
+                    li 
+                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
                     li
                         a(href="#") Nosotros
                     li 
@@ -45,30 +47,43 @@ html(lang="en")
             h1 Bienvenido a su Perfil
 
             div(class="flex-around datos-perfil")
+                div.editar-perfil 
+                    form(class="flex-column form-perfil"  method="POST" action=`/auth/${usuario}/editar-perfil`  enctype="multipart/form-data") 
+                        ul.lista-editar-perfil
+                            li
+                                label(for="" class="label-crear") Imagen
+                                div(class="flex-column") 
+                                    input(type="file" name="imagen" id="imagen-perfil" style="display: none" value=`${imagen}`)  
+                                    label(for="imagen-perfil" class="label-imagen") Seleccionar Archivo
+                                    span(class="span-foto") !{imagen} 
+                            li 
+                                label(for="") Usuario 
+                                input(name="usuario" type="text" value=`${usuario}`)
+                            li
+                                label(for="") Nombre 
+                                input(name="nombre" type="text" value=`${name}`) 
+                            li
+                                label Correo 
+                                input(name="correo" type="text" value=`${correo}`)
+                            li
+                                label Contraseña 
+                                input(name="password" type="password" value=`${password}`)
+                            li
+                                button.btn-editar-perfil Editar Perfil
                 ul.lista-perfil 
                     li !{name}
                     li !{usuario}
                     li !{correo}
                     li Cambiar Contraseña
-                    div.editar-perfil 
-                        form(action="#", method="post" class="flex-column") 
-                            input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio") 
-                            label(for="imagen-post" class="label-imagen") Seleccionar Archivo
-                            span(class="span-foto") Ningun archivo Seleccionado.
-                            label(for="") Usuario 
-                            input(type="text")
-                            label(for="") Nombre 
-                            input(type="text") 
-                            label Password 
-                            input(type="text")
-                            button Enviar
+            
                 div.div-perfil-imagen
                     img(class="perfil-imagen" src=imagen)
                     p.cambiar-foto Cambiar Foto
 
                   
 
-        script(src="/../js/middlewares.js")            
+        script(src="/../js/middlewares.js")           
+        script(src="/../js/perfil.js")  
                     
 
 

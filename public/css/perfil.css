@@ -3,7 +3,19 @@ body {
 }
 
 h1 {
-    margin: 20px 0px 50px 0px;
+    margin: 20px 0px 50px 10px;
+}
+
+li {
+    font-size: 20px;
+    padding: 10px;
+
+}
+
+input {
+    padding: 8px;
+    border-radius: 3%;
+    border: 1px solid rgb(173, 170, 170);
 }
 .datos-perfil {
     margin: 20px 0px;
@@ -16,9 +28,8 @@ h1 {
 
 .lista-perfil li {
     border: 1px solid rgb(231, 223, 223);
-    padding: 10px;
     text-align: center;
-    gap: 10px;
+  
 }
 
 .div-perfil-imagen {
@@ -31,6 +42,29 @@ h1 {
     
 }
 
-.editar-perfil {
-    margin: 20px 0px;
+.form-perfil {
+    border: 1px solid rgb(223, 221, 221);
+    padding: 5px;
+}
+.lista-editar-perfil li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cambiar-foto {
+    cursor: pointer;
+}
+
+.btn-editar-perfil {
+    padding: 10px;
+    border: solid 1px rgb(178, 184, 178);
+    border-radius: 5px;
+    background-color: rgb(248, 246, 246);
+    font-size: 18px;
+    width: 100%;
+    cursor: pointer;
+}
+
+#imagen-perfil {
+    width: 50%;
 }

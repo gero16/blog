@@ -1,10 +1,17 @@
 
 const { Usuario, Usuario_Comentario, Usuario_Sesion } = require("../../models/model.js")
 const { generarJWT,emailRegistro, generarToken  } = require("../../helpers/index");
-
+const cloudinary = require("cloudinary").v2;
 const bcryptjs = require('bcryptjs');
 const colors = require('colors');
 
+cloudinary.config({
+    cloud_name: "geronicola",
+    api_key: "193984666672594",
+    api_secret: "9uOiJVywMUJBjllIpWmrxTj77Hg",
+    secure: true,
+  });
+  
 const getUsuarios = async (req, res) => {
 
     const usuarios = await Usuario.findAll()
@@ -177,6 +184,74 @@ const getSesion = (req, res) => {
     console.log(req.body)
 }
 
+const editarPerfil = async (req, res) => {
+ 
+    const { correo, usuario, nombre, password } = req.body;
+    const newID = Date.now();
+    
+    try {
+
+        const user = await Usuario.findOne(
+            {   
+                where : { correo }
+            })
+        //console.log(colors.bgGreen(user))
+   
+        if(req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, { public_id : `${newID}` }, 
+            function (error, result) {console.log(result);});
+            const { secure_url } = result;
+            console.log(secure_url)
+
+            await user.update({
+                id: user.id,
+                nombre,
+                correo,
+                password: user.password,
+                usuario,
+                imagen: secure_url,
+                estado: user.estado,
+                token_confirmar: null,
+                token_sesion:null,
+                sesion: user.sesion,
+                rol: user.rol,
+                confirmado: user.confirmado,
+              });
+              res.status(200).render("ok", {
+                mensaje: "Informacion del usuario actualizada correctamente!",
+          })
+            
+        } else {
+            await user.update({
+                id: user.id,
+                nombre,
+                correo,
+                password: user.password,
+                usuario,
+                imagen: user.imagen,
+                estado: user.estado,
+                token_confirmar: null,
+                token_sesion:null,
+                sesion: user.sesion,
+                rol: user.rol,
+                confirmado: user.confirmado,
+              });
+        }  
+        res.status(200).render("ok", {
+            mensaje: "Informacion del usuario actualizada correctamente!",
+      })
+        
+        
+    } catch (error) {
+        console.log(error)
+        res.status(401).render("error", {
+            mensaje: "HA OCURRIDO UN ERROR",
+      })
+        
+    }
+
+
+}
 
 
 
@@ -193,5 +268,6 @@ module.exports = {
     activeSesion,
     sesion,
     getSesion,
+    editarPerfil
 }
 
