@@ -15,9 +15,6 @@ btnEliminar.addEventListener("click", async () => {
               try {
                 const fetchResponse = await fetch(`/auth/eliminar-post/${id.textContent}`, settings);
                 console.log(fetchResponse)
-             
-              
-               console.log(data)
               
               } catch (error) {
                 console.log(error)

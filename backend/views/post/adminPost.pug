@@ -70,14 +70,14 @@ html(lang="en")
                         each comentario in comentarios 
                             .div-comentario-header.flex-between
                                 .user-img
-                                    img(src="https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png")
+                                    img(src=`${comentario.imagen_usuario}`)
                                     .comentario-usuario= comentario.usuario
                                 .comentario-fecha= comentario.fecha
                             .comentario-mensaje= comentario.mensaje
                     
                     .seccion-comentarios 
                         .img-user 
-                            img(src="https://www.w3schools.com/w3images/avatar6.png", alt="" class="avatar-user")
+                            img(src=`${usuario_perfil}`, alt="foto del perfil del usuario" class="avatar-user")
                             label Nombre
                             input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
                         .contenido-comentario 

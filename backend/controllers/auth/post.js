@@ -15,9 +15,8 @@ cloudinary.config({
 const crearPost = async (req, res) => {
 
   const body =  req.body;
-  console.log(colors.bgRed(body))
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
-/*
+
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
   
   const id = Date.now();
@@ -59,34 +58,35 @@ const crearPost = async (req, res) => {
  res.status(200).render("ok", {
   mensaje: "Publicación agregada exitosamente!"
 })
-*/
+
 };
 
 const authAgregarComentario = async (req, res) => {
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    console.log(colors.bgGreen(req.body))
+    //console.log(colors.bgGreen(req.body))
     try {
-       const registro = await Post.findOne({where : {url : req.params.titulo}});
+       const post = await Post.findOne({where : {url : req.params.titulo}});
     
        const user = await Usuario.findOne({where : {usuario : req.params.user}})
   
-    
+      console.log(post.id)
         const newComentario = new Comentario ({
           id,
           usuario: req.body.usuario,
           mensaje: req.body.mensaje,
           fecha: date,
           usuario_registrado: true,
-          id_post: parseInt(registro.id),
+          imagen_usuario: user.imagen,
+          id_post: post.id,
         })
-
+       
         const usuario_comentarios = new Usuario_Comentario ({
             id : id + 103,
             id_usuario: user.id,
-            id_post: parseInt(registro.id),
+            id_comentario: id,
           })
-        
+  
         await newComentario.save()
         await usuario_comentarios.save()
   
@@ -150,8 +150,23 @@ const authAgregarComentario = async (req, res) => {
 
     const eliminarPost = async (req, res) => {
       console.log(req.params)
-      const deletePost = await Post.findOne({ where: { id: req.params.id } });
-      await deletePost.destroy();
+
+      try {
+        const deletePost = await Post.findOne({ where: { id: req.params.id } });
+        const deleteComentarios = await Comentario.findOne({ where: { id_post: req.params.id } });
+        //const deleteUsuarioComentarios = await Usuario_Comentario.findOne({ where: { id: req.p } });
+        await deletePost.destroy();
+        await deleteComentarios.destroy()
+        res.status(200).render("ok", {
+          mensaje: "Publicación eliminada correctamente!"
+        })
+      } catch (error) {
+        console.log(error)
+        res.status(400).render("error", {
+          error: 404
+        })
+      }
+ 
 
     } 
 

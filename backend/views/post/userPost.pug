@@ -24,19 +24,30 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href="/") Inicio
+                        a(href=`/auth/${usuario}/index`) Inicio
                     li
                         a(href="#") Nosotros
                     li 
                         a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
-                        
+                    li 
+                        a(href=`#`) Cerrar Sesión
+                    li
+                        img(src="/../img/menu.png")
+
+    
         div(class="container")
+            h2 Desde Admin PAPA
             div(class="pagina-post")
           
                 .contenido-post 
+                
                     .contenedor-flex 
                         h1(class="titulo-post") #{titulo} 
                         div.algo
+                            a(href=`/auth/${usuario}/editar/${url}`)
+                                button(class=`editar`) Editar
+                            a(href=`/auth/${usuario}/eliminar/${url}`)
+                                img(src="/../img/eliminar.png" class="img-eliminar")
                              
                     .contenedor-imagen
                         img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
@@ -50,29 +61,32 @@ html(lang="en")
                         ul(class="texto-post") 
                             -let dataID = 1
                             each  val in contenido
-                                li !{val} 
+                                li !{val}
+                 
                     .contenedor-comentarios
                         h3 Comentarios
                         each comentario in comentarios 
                             .div-comentario-header.flex-between
                                 .user-img
-                                    img(src="https://cdn.pixabay.com/photo/2019/08/11/18/59/icon-4399701_960_720.png")
+                                    img(src=`${comentario.imagen_usuario}`)
                                     .comentario-usuario= comentario.usuario
                                 .comentario-fecha= comentario.fecha
                             .comentario-mensaje= comentario.mensaje
-                            
+                    
                     .seccion-comentarios 
                         .img-user 
-                            img(src="https://www.w3schools.com/w3images/avatar6.png", alt="" class="avatar-user")
-                            div 
-                                label Nombre
-                                input(type="text" name="user" id="" class="input-user-name"  value=`${usuario}`) 
+                            img(src=`${usuario_perfil}`, alt="foto del perfil del usuario" class="avatar-user")
+                            label Nombre
+                            input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
                         .contenido-comentario 
                             label(for="") Comentario
                                 div 
                                     textarea(name="" class="comentario") 
                         button(class="btn-comentario") Publicar Comentario
-                          
-    script(src="/../js/middlewares.js")             
+                    
+                               
+                    
+   
+    script(src="/../js/middlewares.js") 
     script(src="/../js/post.js") 
                      

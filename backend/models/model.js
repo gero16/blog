@@ -51,6 +51,9 @@ const Comentario = sequelize.define('Comentario', {
     fecha: {
       type: DataTypes.STRING 
     },
+    imagen_usuario: {
+      type: DataTypes.STRING,
+    }
   },
   { 
     timestamps: false,

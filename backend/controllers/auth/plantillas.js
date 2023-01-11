@@ -108,7 +108,8 @@ const crearPostPlantilla = async (req, res) => {
     console.log(error)
   }
 }
-    
+
+// DEBERIA ESTAR FUERA DE AUTH
 const postPlantilla =  async (req, res) => {
   const url = req.params.titulo
   console.log(req.body)
@@ -148,9 +149,11 @@ const authPostPlantilla =  async (req, res) => {
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
+        console.log(colors.bgRed(user.imagen))
          
         const comentarios = await Comentario.findAll({where : {id_post : id}});
-      
+        
+        console.log(colors.bgBlue(comentarios))
         const reduceName = user.nombre.split(" ")
         const miniName = reduceName[0]
    
@@ -167,6 +170,7 @@ const authPostPlantilla =  async (req, res) => {
               autor: autor,
               fecha: fecha,
               comentarios: comentarios,
+              usuario_perfil: user.imagen,
           })
         } else {
             res.render("post/userPost", {
@@ -180,6 +184,7 @@ const authPostPlantilla =  async (req, res) => {
               autor: autor,
               fecha: fecha,
               comentarios: comentarios,
+              usuario_perfil: user.imagen,
           })
       } 
       }
