@@ -159,6 +159,9 @@
 
 .contenedor-comentarios{
     margin-top: 40px;
+    background-color: rgb(241, 236, 236, 0.5);
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .contenedor-comentarios h3{
@@ -206,6 +209,8 @@
 align-items: center;
 font-size: 14px;
 margin: 15px 0px 0px 0px;
+padding-top: 10px;
+border-top: 1px dotted rgb(204, 197, 197);
 
 }
 .comentario-usuario{
@@ -216,7 +221,6 @@ margin: 15px 0px 0px 0px;
 .comentario-mensaje {
     font-size: 13px;
     padding: 5px 5px 10px 35px;
-    border-bottom: 1px dotted rgb(204, 197, 197);
 }
 
 h2 {

@@ -58,9 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".vacio").forEach((inputsVacios) =>
     inputsVacios.addEventListener("keypress", (e) => {
-      console.log(document.querySelectorAll(".vacio"))
-      console.log(inputTitulo.value.length >1)
-      console.log(inputTitulo.classList.contains("vacio"))
+ 
+     
+
       if (e.keyCode == 13) {
         e.preventDefault();
 
@@ -192,9 +192,39 @@ btnAgregarTexto.addEventListener("click", () => {
   let elementosVacios = document.querySelectorAll(".vacio")
   const inputParrafo = document.querySelector(".parrafos-post")
   const inputSubtitulo = document.querySelector(".subtitulos-post")
-
+  console.log(elementosVacios)
   elementosVacios.forEach(element => {
+    console.log(element.name)
+    
+    if(element.classList.contains("vacio") && element.name === "titulo"){
+      inputTitulo.classList.remove("vacio");
+      texto = inputTitulo.value;
+      preTitulo.textContent = texto;
+    } else if (element.classList.contains("vacio") && element.name === "autor") {
+      inputAutor.classList.remove("vacio");
+      texto = inputAutor.value;
+      preAutor.textContent = texto;
 
+    } else if (element.classList.contains("vacio")  && element.name === "fecha") {
+      inputFecha.classList.remove("vacio");
+      texto = inputFecha.value;
+      preFecha.textContent = texto;
+
+    } else if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
+      const valueFinal = element.value
+      element.value = `<p>     ${valueFinal}     </p>`
+      preContenido.innerHTML +=  element.value;
+      element.classList.remove("vacio")
+      
+
+    } else if (element.classList.contains("vacio") && element.classList.contains("subtitulos-post")) {
+      const valueFinal = inputSubtitulo.value
+      inputSubtitulo.value = `<h2>     ${valueFinal}     </h2>`
+      preContenido.innerHTML +=  inputSubtitulo.value;
+      inputSubtitulo.classList.remove("vacio")
+    }
+    
+/*
     if(inputTitulo.value.length > 1 && inputTitulo.classList.contains("vacio")) {
       console.log("laputamadre")
       inputTitulo.classList.remove("vacio");
@@ -222,7 +252,7 @@ btnAgregarTexto.addEventListener("click", () => {
       inputSubtitulo.value = `<h2>     ${valueFinal}     </h2>`
       preContenido.innerHTML +=  inputSubtitulo.value;
       inputSubtitulo.classList.remove("vacio")
-    }}
-  );
+    }*/
+  });
 })
 

@@ -156,7 +156,12 @@ const authPostPlantilla =  async (req, res) => {
         console.log(colors.bgBlue(comentarios))
         const reduceName = user.nombre.split(" ")
         const miniName = reduceName[0]
-   
+        let numComentarios = 0;
+
+        if(comentarios.length > 1) {
+         numComentarios = comentarios.length +1
+        }
+    
         if(user.rol == "ADMIN") {
             console.log("En Admin")
             res.render("post/adminPost", {
@@ -171,6 +176,7 @@ const authPostPlantilla =  async (req, res) => {
               fecha: fecha,
               comentarios: comentarios,
               usuario_perfil: user.imagen,
+              numComentarios: numComentarios
           })
         } else {
             res.render("post/userPost", {
@@ -185,6 +191,7 @@ const authPostPlantilla =  async (req, res) => {
               fecha: fecha,
               comentarios: comentarios,
               usuario_perfil: user.imagen,
+              numComentarios: numComentarios
           })
       } 
       }
