@@ -144,7 +144,7 @@ main{
 
 .blog {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
     margin: 40px 15px 80px 15px;

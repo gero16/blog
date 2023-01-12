@@ -215,10 +215,7 @@ const authAgregarComentario = async (req, res) => {
         res.status(400).render("error", {
           error: 404
         })
-        
       }
- 
-
     } 
 
   module.exports = {
