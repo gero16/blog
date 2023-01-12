@@ -57,6 +57,12 @@ window.onload = async function (e) {
   }
   randomImage(0, 3);
   }
+
+  const bigPost = document.querySelector('[data-id="5"]')
+  console.log(bigPost)
+  if(bigPost) {
+    bigPost.className = "post big-post"
+  }
 }
 
 
@@ -66,10 +72,11 @@ const traerPublicaciones = async () => {
   const { registros } = data;
 
   let post = "";
+  let i = 1;
   registros.forEach((e) => {
     const primerParrafo = e.contenido[0]
     post +=`
-            <div class="post" data-id=${ e.url }>
+            <div class="post" data-id=${i}>
                 <div class="div-imagen" data-id=${ e.url }>
                   <img class="post-img" src="${ e.imagen }" alt="imagen-del-post" data-id=${ e.url }>
                 </div>
@@ -86,8 +93,10 @@ const traerPublicaciones = async () => {
             </div>
           `;
     blog.innerHTML = post;
+    i++;
   });
 };
+
 
 
 

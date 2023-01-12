@@ -219,3 +219,11 @@ body {
         width: 320px;    
     }
   }
+@media (max-width: 400px) {
+   .crear-post{
+        width: 90%;
+   }
+   .preview {
+    width: 90%;
+   }
+  }

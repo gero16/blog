@@ -144,9 +144,9 @@ main{
 
 .blog {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 10px;
     margin: 40px 15px 80px 15px;
 }
 
@@ -272,7 +272,10 @@ main{
   }
   .div-imagen  {
     width: 260px;
-    height: 120px;
+    height: 140px;
+    }
+    .post-div-contenido  p{
+        font-size: 14px;
     }
 }
 
@@ -321,3 +324,9 @@ main{
     display: flex;
     flex-direction: column;
   }
+
+  /*
+  .big-post {
+    width: 100%;
+  }
+  */

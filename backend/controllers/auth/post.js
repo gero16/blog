@@ -13,7 +13,7 @@ cloudinary.config({
 
 /*** CREACION DEL POST ***/
 const crearPost = async (req, res) => {
-/*
+
   const body =  req.body;
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
 
@@ -30,35 +30,53 @@ const crearPost = async (req, res) => {
   });
 
   console.log(contenido)
+  try {
+    if(req.file){
+      const result = await cloudinary.uploader.upload(
+        req.file.path,
+        { public_id: `${id}` },
+        function (error, result) {
+          console.log(result);
+        }
+      );
+      
+    
+      const { secure_url } = result;
+      console.log(secure_url)
+      
+      const nuevoPost = new Post({
+        id,
+        titulo,
+        fecha,
+        autor: autor,
+        contenido,
+        imagen: secure_url,
+        url: tituloURL,
+      });
+      await nuevoPost.save();
+    } else {
 
-  const result = await cloudinary.uploader.upload(
-    req.file.path,
-    { public_id: `${id}` },
-    function (error, result) {
-      console.log(result);
+        
+      const nuevoPost = new Post({
+        id,
+        titulo,
+        fecha,
+        autor: autor,
+        contenido,
+        imagen,
+        url: tituloURL,
+      });
+      await nuevoPost.save();
     }
-  );
+    
+   res.status(200).render("ok", {
+    mensaje: "Publicación agregada exitosamente!"
+  })
+  } catch (error) {
+    console.log(error)
+  }
   
 
-  const { secure_url } = result;
-  console.log(secure_url)
-  
-  const nuevoPost = new Post({
-    id,
-    titulo,
-    fecha,
-    autor: autor,
-    contenido,
-    imagen: secure_url,
-    url: tituloURL,
-  });
-  
- await nuevoPost.save();
-
- res.status(200).render("ok", {
-  mensaje: "Publicación agregada exitosamente!"
-})
-*/
 };
 
 const authAgregarComentario = async (req, res) => {
@@ -142,9 +160,15 @@ const authAgregarComentario = async (req, res) => {
         });   
       }
   
-    res.redirect(`/`)
+      return res.status(200).render("ok", {
+        mensaje: "Publicación eliminada correctamente!"
+      })
+
     } catch (error) {
       console.log(error)
+      res.status(401).render("error", {
+        error: 401
+      })
     }} 
   
 
