@@ -189,10 +189,10 @@ const arrayEtiquetas = []
 
 
 btnAgregarTexto.addEventListener("click", () => {
+  console.log(inputFecha.value)
   let elementosVacios = document.querySelectorAll(".vacio")
   const inputParrafo = document.querySelector(".parrafos-post")
   const inputSubtitulo = document.querySelector(".subtitulos-post")
-  console.log(elementosVacios)
   elementosVacios.forEach(element => {
     console.log(element.name)
     

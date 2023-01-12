@@ -46,7 +46,7 @@ const perfil = async (req, res) => {
 
 const indexPlantilla = async (req, res) => {
 
-  console.log("Estoy en index Plantilla") 
+
   const usuario = req.params.user
   console.log(colors.bgBlue(usuario))
   const titulo = "Espacio Luz de Luna"
@@ -89,14 +89,13 @@ const indexPlantilla = async (req, res) => {
 }
 
 const crearPostPlantilla = async (req, res) => {
-  console.log(colors.bgCyan("crear post"))
+
   const date =  new Date();
-  const month = date.getMonth()+1; //obteniendo mes
-  const day = date.getDate(); //obteniendo dia
+  const month = String(date.getMonth() + 1).padStart(2, '0'); //obteniendo mes
+  const day = String(date.getDate()).padStart(2, '0'); //obteniendo dia
   const year = date.getFullYear(); //obteniendo año
-  const fecha = `${day}/${month}/${year}`
-  console.log(fecha)
-  console.log(req.user)
+  const fecha = `${year}-${month}-${day}`
+
   try {
     const titulo = "Crear Publicación"
     res.status(200).header("auth-token", req.user).render("crear", {
@@ -216,9 +215,7 @@ const eliminarPlantilla = async (req, res) => {
 }
 
 const editarPostPlantilla = async (req, res) => {
-  console.log(colors.bgBlue("En editarPost Plantilla"))
   try {  
-    console.log(colors.bgBlue(req.params))
     const user = req.params.admin
     const title = req.params.titulo
 
@@ -226,10 +223,8 @@ const editarPostPlantilla = async (req, res) => {
 
     if(data){
     const {id, titulo, contenido, imagen, autor, fecha} = data;
-    console.log(imagen)
     
     const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
-    console.log(image)
     // Puede que no la haya subido a cloudinary
       if(image[1]){
         const img = image[1].split("/");

@@ -13,7 +13,7 @@ cloudinary.config({
 
 /*** CREACION DEL POST ***/
 const crearPost = async (req, res) => {
-
+/*
   const body =  req.body;
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
 
@@ -58,7 +58,7 @@ const crearPost = async (req, res) => {
  res.status(200).render("ok", {
   mensaje: "Publicación agregada exitosamente!"
 })
-
+*/
 };
 
 const authAgregarComentario = async (req, res) => {
@@ -163,13 +163,12 @@ const authAgregarComentario = async (req, res) => {
           await deleteUsuarioComentarios.destroy()
         }
       
-     
         await deletePost.destroy();
-   
   
-        res.status(200).render("ok", {
+        return res.status(200).render("ok", {
           mensaje: "Publicación eliminada correctamente!"
         })
+
       } catch (error) {
         console.log(error)
         res.status(400).render("error", {

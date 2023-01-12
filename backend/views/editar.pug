@@ -58,13 +58,13 @@ html(lang="en")
                                 div(class="span-foto") !{imagenMin} 
                         li 
                             label(for="text" class="label-crear") Titulo
-                            input(type="text" name="titulo" id="titulo-post" value=`${titulo}`)                      
+                            input(type="text" name="titulo" id="titulo-post"  class="input-crear" value=`${titulo}`)                      
                         li 
                             label(for="text" class="label-crear") Autor
-                            input(type="text" name="autor" id="autor-post" value=`${autor}`) 
+                            input(type="text" name="autor" id="autor-post"  class="input-crear" value=`${autor}`) 
                         li 
                             label(for="text" class="label-crear") Fecha
-                            input(type="text" name="fecha" id="fecha-post" value=`${fecha}`)
+                            input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
                         div 
                             each  val in contenido
                                 li 
