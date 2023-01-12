@@ -1,11 +1,7 @@
 const { Post, Usuario, Usuario_Sesion, Comentario } = require("../../models/model.js")
-const { generarJWT } = require("../../helpers/generar-jwt.js");
-const { generarToken } = require ("../../../account_transport.json");
-const { emailRegistro } = require('../../helpers/emailRegistro');
 
-const bcryptjs = require('bcryptjs');
 const colors = require('colors');
-
+const fs = require('fs')
 
 const indexPrincipal = async (req, res) => {
 
@@ -28,6 +24,7 @@ const perfil = async (req, res) => {
   let arrayRegistros = []  
 
   try {
+ 
     const user = await Usuario.findOne({where: {usuario: req.params.user}})
     // console.log(colors.bgRed(user.dataValues))
    const titulo = "Perfil"

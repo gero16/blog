@@ -1,8 +1,12 @@
 const { Usuario_Comentario, Comentario, Post, Usuario } = require("../../models/model");
 const colors = require('colors');
 const cloudinary = require("cloudinary").v2;
+const fs = require('fs')
 require("multer");
 const path = require("path");
+//const uploads = require("../../../public/uploads")
+
+
 
 cloudinary.config({
   cloud_name: "geronicola",
@@ -37,12 +41,25 @@ const crearPost = async (req, res) => {
         { public_id: `${id}` },
         function (error, result) {
           console.log(result);
+        
         }
       );
-      
-    
       const { secure_url } = result;
-      console.log(secure_url)
+      const deleteImage = secure_url.split("/")
+      console.log(deleteImage)
+      const extensionImage = secure_url.split(".")
+      const deleteIMG = deleteImage[7]
+
+      
+    // ELIMINAR FOTO TEMPORAL QUE SE SUBE POR EL FORMULARIO
+    fs.unlink(`/uploads/${deleteIMG}`, (err) => {
+      if (err) {
+          console.log("failed to delete local image:"+err);
+      } else {
+          console.log('successfully deleted local image');                                
+      }
+      
+});
       
       const nuevoPost = new Post({
         id,
@@ -188,7 +205,7 @@ const authAgregarComentario = async (req, res) => {
         }
       
         await deletePost.destroy();
-  
+        
         return res.status(200).render("ok", {
           mensaje: "Publicación eliminada correctamente!"
         })

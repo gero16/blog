@@ -53,11 +53,15 @@ app.use("/auth", auth)
 app.use("/publicaciones", post)
 
 // Solo me funciono de esta forma
-app.use('/img',express.static(path.join(__dirname, 'public/img')));
-app.use('/js',express.static(path.join(__dirname, 'public/js')));
-app.use('/css',express.static(path.join(__dirname, 'public/css')));
+/
+app.use('/img', express.static(path.join(__dirname, 'public/img')));
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
+app.use('/css', express.static(path.join(__dirname, 'public/css')));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use('/', express.static('public/html'))
 app.get("/*", rutaInexistente)
+
+app.use(express.static('public'))
 
 app.listen(port, () => {
   console.log(colors.bgYellow(`Corriendo en puerto: ${port}`))
