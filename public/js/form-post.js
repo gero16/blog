@@ -132,7 +132,7 @@ btnAgregarParrafo.addEventListener("click", () => {
     if(orden[valor] === "vacio") {
       // primerParrafo
       inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
-    
+      
       divAgregarInputs.appendChild(inputParrafo)
       // Cambio su valor a lleno
       orden[valor] = "lleno";
@@ -256,3 +256,19 @@ btnAgregarTexto.addEventListener("click", () => {
   });
 })
 
+
+const rellenarLugares = () => {
+
+  for(valor in orden) {
+    if(orden[valor] === "vacio") {
+      // primerParrafo
+      inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
+      
+      divAgregarInputs.appendChild(inputParrafo)
+      // Cambio su valor a lleno
+      orden[valor] = "lleno";
+      //inputParrafo.value = `<p>        </p>`
+      break;
+    } 
+  }  
+}

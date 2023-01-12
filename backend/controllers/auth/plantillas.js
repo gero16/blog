@@ -221,8 +221,46 @@ const editarPostPlantilla = async (req, res) => {
 
     const data = await Post.findOne({where: { url: title }})
 
+    let orden = {
+      primer: "vacio",
+      segundo: "vacio",
+      tercero: "vacio",
+      cuarto: "vacio",
+      quinto: "vacio",
+      sexto: "vacio",
+      septimo: "vacio",
+      octavo: "vacio",
+      noveno: "vacio",
+      decimo: "vacio",
+      decimoPrimero: "vacio",
+      decimoSegundo: "vacio"
+    }
+    
     if(data){
-    const {id, titulo, contenido, imagen, autor, fecha} = data;
+      const {id, titulo, contenido, imagen, autor, fecha} = data;
+    
+      let nuevoContenido = {
+
+      }
+      const newOrden = {}
+
+      let valores = Object.values(orden)
+      let keys = Object.keys(orden)
+      
+      for(let i=0; i< valores.length; i++){
+        console.log(valores[i]);
+        console.log(keys[i])
+        console.log(contenido[i])
+        if(valores[i] === "vacio" && contenido[i]) {
+          let key = keys[i]
+          newOrden[key] = contenido[i]
+
+          console.log(colors.bgGreen(orden))
+          //return nuevoContenido
+        }
+        
+   }
+    
     
     const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
     // Puede que no la haya subido a cloudinary
@@ -238,6 +276,7 @@ const editarPostPlantilla = async (req, res) => {
           usuario: user,
           autor: autor,
           fecha: fecha,
+          nuevoContenido: newOrden
         })
       } else {
         res.render("editar", {
@@ -250,6 +289,7 @@ const editarPostPlantilla = async (req, res) => {
           usuario: user,
           autor: autor,
           fecha: fecha,
+          nuevoContenido: newOrden
         })
       }
   

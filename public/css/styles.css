@@ -241,17 +241,17 @@ main{
 @media (max-width: 1500px) {
     .post {
         width: 320px;
-        height: 320px;
+        height: 310px;
     }
     .div-imagen  {
         width: 320px;
-        height: 160px;
+        height: 150px;
     }
     .post-div-contenido  p{
-        font-size: 18px;
+        font-size: 15px;
     }
     .post-div-contenido span{
-        font-size: 15px;
+        font-size: 13px;
     }
     .post-titulo {
         font-size: 20px;

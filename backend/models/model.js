@@ -118,25 +118,6 @@ const Comentario = sequelize.define('Comentario', {
     timestamps: false,
   })
 
-  const Usuario_Sesion = sequelize.define('Usuario_Sesion', {
-    id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    user_agent: {
-      type: DataTypes.STRING,
-    },
-    token: {
-      type: DataTypes.STRING
-    },
-
-  },
-  { 
-    timestamps: false,
-  })
-
-
   
 Post.hasMany(Comentario,  {
     foreignKey: "id_post",
@@ -150,16 +131,10 @@ Usuario.belongsToMany(Comentario, {
 
 })
 
- Usuario.hasMany(Usuario_Sesion, {
-  foreignKey: "id_usuario",
- })
-
-
 
   module.exports = {
     Post,
     Comentario,
     Usuario,
     Usuario_Comentario,
-    Usuario_Sesion
   }

@@ -122,14 +122,14 @@ const authAgregarComentario = async (req, res) => {
     // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
     const newID = Date.now();
-  
+    
     let contenido = [];
     const filtrarContenido = [primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo];
           filtrarContenido.forEach(element => {
               if(element != undefined) {
                 contenido.push(element)
               }});
-  
+  console.log(colors.bgBlue(body))
     try {
 
       let post = await Post.findOne({ where  : { id }})
@@ -161,7 +161,7 @@ const authAgregarComentario = async (req, res) => {
       }
   
       return res.status(200).render("ok", {
-        mensaje: "Publicación eliminada correctamente!"
+        mensaje: "Publicación actualizada correctamente!"
       })
 
     } catch (error) {

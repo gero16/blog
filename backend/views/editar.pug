@@ -66,10 +66,10 @@ html(lang="en")
                             label(for="text" class="label-crear") Fecha
                             input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
                         div 
-                            each  val in contenido
+                            each  value, nombre in nuevoContenido
                                 li 
                                     div
-                                    textarea(name="", class="parrafos-post lleno") !{val} 
+                                    textarea(name=`${nombre}`, class="parrafos-post lleno") !{value} 
                         
                         li(id="li-agregar") 
                             label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
