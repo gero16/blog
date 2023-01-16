@@ -31,42 +31,57 @@ const crearUsuario = async (req, res = response) => {
     const id = Date.now();
     const { correo, usuario, nombre, password } = req.body;
     console.log(req.body)
+
+    const existEmail = await Usuario.findOne({where : {correo: correo}})
+    const existUser = await Usuario.findOne({where : {usuario: usuario}})
+
+    if(existEmail) {
+        res.status(401).json({
+            mensaje: "El email proporcionado ya esta registrado"
+        })
+    } else if (existUser) {
+        res.status(401).json({
+            mensaje: "El usuario proporcionado ya esta registrado"
+        })
+    }
+    else {
+
+        try {
+
+            const token = generarToken()
+            const newUsuario = new Usuario ({
+                id,
+                nombre, 
+                correo,
+                usuario,
+                password,
+                rol : "USER",
+                estado: true,
+                confirmado: false,
+                token_confirmacion: token,
+            })
     
-    try {
-
-        const token = generarToken()
-        const newUsuario = new Usuario ({
-            id,
-            nombre, 
-            correo,
-            usuario,
-            password,
-            rol : "USER",
-            estado: true,
-            confirmado: false,
-            token_confirmacion: token,
-        })
-
-        
-        emailRegistro({
-            correo,
-            nombre,
-            token,
-        })
-
-        const salt =  bcryptjs.genSaltSync();
-        newUsuario.password =  bcryptjs.hashSync( password, salt );
-       // newUsuario.token = token
-       await newUsuario.save()
-      
-        res.status(200).render("ok", {
-            mensaje: "Usuario Registrado correctamente!",
-            usuario: newUsuario,
-      })
-        
-    } catch (error) {
-        console.log(error)
-        res.status(500)
+            
+            emailRegistro({
+                correo,
+                nombre,
+                token,
+            })
+    
+            const salt =  bcryptjs.genSaltSync();
+            newUsuario.password =  bcryptjs.hashSync( password, salt );
+           // newUsuario.token = token
+           await newUsuario.save()
+          
+            res.status(200).render("ok", {
+                mensaje: "Usuario Registrado correctamente!",
+                usuario: newUsuario,
+          })
+            
+        } catch (error) {
+            console.log(error)
+            res.status(500)
+        }
     }
 }
 
