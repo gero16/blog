@@ -36,7 +36,9 @@ html(lang="en")
                     img(src="/../img/401b.png", alt="", srcset="")
                 if error == 404
                     img(src="/../img/404.png", alt="", srcset="")
-        
+                if error == 400
+                    h1 Error 400 
+                    h2 !{mensaje}
                    
         div.container
             .flex-center

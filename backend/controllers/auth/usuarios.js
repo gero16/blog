@@ -58,7 +58,7 @@ const crearUsuario = async (req, res = response) => {
                 rol : "USER",
                 estado: true,
                 confirmado: false,
-                token_confirmacion: token,
+                token_confirmar: token,
             })
     
             
@@ -66,6 +66,7 @@ const crearUsuario = async (req, res = response) => {
                 correo,
                 nombre,
                 token,
+                usuario,
             })
     
             const salt =  bcryptjs.genSaltSync();
@@ -166,6 +167,24 @@ const logoutUsuario = async (req, res) => {
     
 }
   const confirmarCuenta = async (req, res) => {
+    const { token, user } = req.params
+    try {
+        const usuario = await Usuario.findOne({where: { usuario : user} });
+        console.log(colors.bgBlue(usuario))
+        if(token ==  usuario.token_confirmar ) {
+            usuario.confirmado = true
+            usuario.token_confirmar = null
+            await usuario.save();
+    
+            res.status(200).render("ok", {
+                mensaje: "Usuario Confirmado!",
+          })
+        }
+    } catch (error) {
+        
+    }
+  
+ 
   }
 
 

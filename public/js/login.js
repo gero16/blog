@@ -79,7 +79,9 @@ if(btnRegistro){
     if(correo.value === "" || password.value === "" || usuario.value === ""){
       crearMensaje("El Usuario y/o Contraseña y/o Usuario no pueden quedar Vacios")
       
+  } else {
+    window.location.assign(`/`)
   }
-   // window.location.assign(`/`)
+
   })
 }

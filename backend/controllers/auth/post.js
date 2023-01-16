@@ -20,8 +20,16 @@ const crearPost = async (req, res) => {
 
   const body =  req.body;
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
-
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
+  console.log(tituloURL)
+
+  const existePost = await Post.findOne({where : {url : tituloURL}});
+  if(existePost) {
+    res.status(400).render("error", {
+      error: 400,
+      mensaje: "Ya existe una Publicacion con el mismo titulo"
+    })
+  } else {
   
   const id = Date.now();
 
@@ -92,8 +100,7 @@ const crearPost = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  
-
+  }
 };
 
 const authAgregarComentario = async (req, res) => {

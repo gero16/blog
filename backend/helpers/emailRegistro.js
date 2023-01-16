@@ -5,7 +5,7 @@ const OAuth2 = google.auth.OAuth2;
 const accountTransport = require("../../account_transport.json");
 
 const emailRegistro = async (datos) => {
-    const { correo, nombre, token } = datos;
+    const { correo, nombre, token, usuario } = datos;
   /*
   // Mailtrap de Prueba
   const transporter = nodemailer.createTransport({
@@ -89,7 +89,7 @@ const emailRegistro = async (datos) => {
                 <p> Tu cuenta ya esta lista, solo debes confirmarla en el siguiente enlace: </p>
 
                 <div class="contenedor-button"> 
-                  <a href="${ process.env.URL_FRONTEND }/confirmar/${ token }">
+                  <a href="${ process.env.URL_FRONTEND }/auth/${ usuario }/confirmar/${ token }">
                     <button> Confirmar Cuenta </button>  
                   </a> 
                 </div>

@@ -22,7 +22,7 @@ router.post("/registrar", crearUsuario);
 
 router.post("/validate-token", verifyToken, validateToken)
 
-router.get("/confirmar/:token", confirmarCuenta)
+router.get("/:user/confirmar/:token", confirmarCuenta)
 
 router.get("/users", getUsuarios)
 
