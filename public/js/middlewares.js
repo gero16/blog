@@ -58,7 +58,6 @@ const sendToken = async () => {
     
     try {
         const fetchResponse = await fetch(`/auth/validate-token`, settings);
-        console.log(fetchResponse)
         if(fetchResponse.ok === false){
            const data = await fetchResponse.json();
            console.log(data)

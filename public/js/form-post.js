@@ -30,6 +30,23 @@ const textoPost = document.querySelector(".texto-post");
 let actualizarHTML = "";
 let etiquetaContenido = [];
 
+/** Seccion de contenido para Agregar parrafos y/o subtitulos **/
+let orden = {
+  primer: "vacio",
+  segundo: "vacio",
+  tercero: "vacio",
+  cuarto: "vacio",
+  quinto: "vacio",
+  sexto: "vacio",
+  septimo: "vacio",
+  octavo: "vacio",
+  noveno: "vacio",
+  decimo: "vacio",
+  decimoPrimero: "vacio",
+  decimoSegundo: "vacio"
+}
+
+
 const traerInfo = async () => {
   const sesion =  JSON.parse(localStorage.getItem("sesion"));
 
@@ -44,94 +61,40 @@ const traerInfo = async () => {
 
   try {
     const fetchResponse = await fetch(`/auth/${sesion[1]}/crear-post`, settings);
-    console.log(fetchResponse)
    
   } catch (error) {
     console.log(error)
   }
- 
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+const actualizarOrden = () => {
+  const llenos = document.querySelectorAll(".lleno")
+  console.log(llenos.length)
+  let i = 1
+  for (let clave in orden){
+     if(i <= llenos.length) {
+      orden[clave] = "lleno"
+      console.log(i)
+    
+     }
+     i++;
+  }
+  console.log(orden)
+}
 
-  traerInfo()
-
-  document.querySelectorAll(".vacio").forEach((inputsVacios) =>
-    inputsVacios.addEventListener("keypress", (e) => {
- 
-     
-
-      if (e.keyCode == 13) {
-        e.preventDefault();
-
-        if (inputTitulo.value.length > 1 && inputTitulo.classList.contains("vacio")) {
-          console.log("laputamadre")
-          inputTitulo.classList.remove("vacio");
-          texto = inputTitulo.value;
-          preTitulo.textContent = texto;
-        } else if (inputAutor.value.length > 1 && inputAutor.classList.contains("vacio")) {
-          inputAutor.classList.remove("vacio");
-          texto = inputAutor.value;
-          preAutor.textContent = texto;
-        } else if (inputFecha.value.length > 1 && inputFecha.classList.contains("vacio")) {
-          inputFecha.classList.remove("vacio");
-          texto = inputFecha.value;
-          preFecha.textContent = texto;
-        } else {
-          console.log("hola")
-        }
-      }  
-    }));  
-
-
-  inputFoto.addEventListener("keypress", (e) => {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-
-      if (inputTitulo.value && inputTitulo.className == "vacio") {
-        inputTitulo.classList.remove("vacio");
-        texto = inputTitulo.value;
-        preTitulo.textContent = texto;
-      } else if (inputAutor.value && inputAutor.className == "vacio") {
-        inputAutor.classList.remove("vacio");
-        texto = inputAutor.value;
-        preAutor.textContent = texto;
-      } else if (inputFecha.value && inputFecha.className == "vacio") {
-        inputFecha.classList.remove("vacio");
-        texto = inputFecha.value;
-        preFecha.textContent = texto;
-      } 
-    }
-  });
-});
-
-/** Seccion de contenido para Agregar parrafos y/o subtitulos **/
-let orden = {
-              primer: "vacio",
-              segundo: "vacio",
-              tercero: "vacio",
-              cuarto: "vacio",
-              quinto: "vacio",
-              sexto: "vacio",
-              septimo: "vacio",
-              octavo: "vacio",
-              noveno: "vacio",
-              decimo: "vacio",
-              decimoPrimero: "vacio",
-              decimoSegundo: "vacio"
-            }
-
-let contador = 0;
 
 btnAgregarParrafo.addEventListener("click", () => {
+  console.log(orden)
   let inputParrafo = document.createElement("textarea")
   inputParrafo.className = "parrafos-post vacio"
   // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
  
   for(valor in orden) {
     if(orden[valor] === "vacio") {
+      console.log(orden)
       // primerParrafo
       inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
+      console.log(inputParrafo)
       
       divAgregarInputs.appendChild(inputParrafo)
       // Cambio su valor a lleno
@@ -142,6 +105,7 @@ btnAgregarParrafo.addEventListener("click", () => {
   }  
  
 })
+
 
 btnAgregarSub.addEventListener("click", () => {
   let inputSub = document.createElement("input")
@@ -257,18 +221,56 @@ btnAgregarTexto.addEventListener("click", () => {
 })
 
 
-const rellenarLugares = () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  for(valor in orden) {
-    if(orden[valor] === "vacio") {
-      // primerParrafo
-      inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
-      
-      divAgregarInputs.appendChild(inputParrafo)
-      // Cambio su valor a lleno
-      orden[valor] = "lleno";
-      //inputParrafo.value = `<p>        </p>`
-      break;
-    } 
-  }  
-}
+  traerInfo()
+
+  // Solo para el editar
+  actualizarOrden();
+
+  document.querySelectorAll(".vacio").forEach((inputsVacios) =>
+    inputsVacios.addEventListener("keypress", (e) => {
+
+      if (e.keyCode == 13) {
+        e.preventDefault();
+
+        if (inputTitulo.value.length > 1 && inputTitulo.classList.contains("vacio")) {
+          console.log("laputamadre")
+          inputTitulo.classList.remove("vacio");
+          texto = inputTitulo.value;
+          preTitulo.textContent = texto;
+        } else if (inputAutor.value.length > 1 && inputAutor.classList.contains("vacio")) {
+          inputAutor.classList.remove("vacio");
+          texto = inputAutor.value;
+          preAutor.textContent = texto;
+        } else if (inputFecha.value.length > 1 && inputFecha.classList.contains("vacio")) {
+          inputFecha.classList.remove("vacio");
+          texto = inputFecha.value;
+          preFecha.textContent = texto;
+        } else {
+          console.log("hola")
+        }
+      }  
+    }));  
+
+
+  inputFoto.addEventListener("keypress", (e) => {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+
+      if (inputTitulo.value && inputTitulo.className == "vacio") {
+        inputTitulo.classList.remove("vacio");
+        texto = inputTitulo.value;
+        preTitulo.textContent = texto;
+      } else if (inputAutor.value && inputAutor.className == "vacio") {
+        inputAutor.classList.remove("vacio");
+        texto = inputAutor.value;
+        preAutor.textContent = texto;
+      } else if (inputFecha.value && inputFecha.className == "vacio") {
+        inputFecha.classList.remove("vacio");
+        texto = inputFecha.value;
+        preFecha.textContent = texto;
+      } 
+    }
+  });
+});
