@@ -7,9 +7,12 @@ let imagenHTML = document.querySelector(".foto-post");
 const btnEditar = document.querySelector(".editar")
 const iconosEditar = document.querySelectorAll(".ico-editar")
 
+
 const inputs = document.querySelectorAll(".inputs")
 const btnActualizar = document.querySelector(".actualizar")
 const btnGuardar = document.querySelectorAll(".guardar")
+
+const eliminarComentario = document.querySelectorAll(".eliminar-comentario")
 
 let actualizarHTML = "";
 let etiquetaContenido = [];
@@ -19,6 +22,12 @@ const url = window.location.href;
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
 const btnComentario = document.querySelector(".btn-comentario")
+
+
+const urlPost = window.location.pathname
+const tituloP = urlPost.split("/")
+console.log(tituloP)
+const tituloPost = tituloP[4]
 
 
 window.onload = async function () {
@@ -31,8 +40,11 @@ window.onload = async function () {
    }
 }
 
+const urlActual = window.location.href
+
+
 btnComentario.addEventListener("click", async () => {
-   const urlActual = window.location.href
+ 
    let url = `${urlActual}/agregar-comentario`
 
    const data = {
@@ -61,4 +73,35 @@ btnComentario.addEventListener("click", async () => {
 })
 
 
- 
+
+eliminarComentario.forEach(comentario => {
+   const sesion = JSON.parse(localStorage.getItem('sesion'));
+   const admin = sesion[1]
+
+   comentario.addEventListener("click", () => {
+      console.log(comentario.parentElement.dataset.id)
+      const idComentario = comentario.parentElement.dataset.id
+   
+      const settings = {
+         method: 'POST',
+         headers: {
+           Accept: 'application/json',
+             'Content-Type': 'application/json',
+           }
+         };
+      const mandarInfo = async () => {
+         try {
+            const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloPost}/eliminar-comentario/${ idComentario }`, settings);
+           
+             if(fetchResponse.status === 200) {
+               console.log("Mensaje eliminado Correctamente!")
+               window.location.reload()
+             }
+             
+         } catch (error) {
+            console.log(error)
+         }
+      }
+      mandarInfo()
+   })   
+});

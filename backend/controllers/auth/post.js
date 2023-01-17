@@ -225,11 +225,31 @@ const authAgregarComentario = async (req, res) => {
       }
     } 
 
+  const eliminarComentario = async (req, res) => {
+    try {
+      const comentario = await Comentario.findOne({ where : { id: req.params.id }})
+      const usuario_comentario = await Usuario_Comentario.findOne({ where : {id_comentario : req.params.id }})
+  
+      await comentario.destroy();
+      await usuario_comentario.destroy();
+    /*
+    Estaba al pedo, e igual no funcionaba - No se porque
+      res.status(200).render("ok", {
+        mensaje: "Comentario Borrado Correctamente!"
+      })
+    */
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   module.exports = {
     crearPost,
     actualizarPost,
     authAgregarComentario,
-    eliminarPost
+    eliminarPost,
+    eliminarComentario
   }
 
  

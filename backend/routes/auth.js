@@ -3,7 +3,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { indexPrincipal, indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
-const { authAgregarComentario, crearPost, actualizarPost, eliminarPost } = require('../controllers/auth/post');
+const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario } = require('../controllers/auth/post');
 const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
@@ -53,6 +53,10 @@ router.post("/crear-post", crearPost)
 router.post("/actualizar-post", actualizarPost)
 
 router.post("/eliminar-post/:id", verifyToken, eliminarPost)
+
+router.post("/:admin/editar-comentario/:id" )
+
+router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarComentario)
 
 //router.get("/*", rutaInexistente)
 

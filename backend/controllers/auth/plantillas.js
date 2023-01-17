@@ -145,11 +145,9 @@ const authPostPlantilla =  async (req, res) => {
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
-        console.log(colors.bgRed(user.imagen))
          
         const comentarios = await Comentario.findAll({where : {id_post : id}});
         
-        console.log(colors.bgBlue(comentarios))
         const reduceName = user.nombre.split(" ")
         const miniName = reduceName[0]
         let numComentarios = 0;

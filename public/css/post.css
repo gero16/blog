@@ -226,6 +226,19 @@ border-top: 1px dotted rgb(204, 197, 197);
 h2 {
     font-size: 22px;
 }
+.comentario-actions {
+    font-size: 15px;    
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}
+.eliminar-comentario{
+    cursor: pointer;
+}
+
+.editar-comentario {
+    cursor: pointer;
+}
 
 @media (min-width: 1300px) {
     .texto-post, .autor-post, .fecha-post {

@@ -236,6 +236,10 @@ main{
     border-radius: 5px;
 }
 
+.volver-inicio {
+    cursor: pointer
+}
+
 
 
 @media (max-width: 1500px) {

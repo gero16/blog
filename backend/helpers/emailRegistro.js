@@ -56,8 +56,8 @@ const emailRegistro = async (datos) => {
   const info = await transporter.sendMail({
           from: "Espacio Luz de Luna",
           to: correo,
-          subject: "Confirma tu Cuenta!!",
-          text: "Confirma tu cuenta para poder participar en la comunidad",
+          subject: "Confirma tu Cuenta! - Espacio Luz de Luna",
+          text: "Confirma tu cuenta para poder ser parte de la comunidad",
           html: ` 
               <head>
                 <meta charset="utf-8">
@@ -110,9 +110,6 @@ const emailRegistro = async (datos) => {
   };
 
  
-
-
-
   module.exports = {
     emailRegistro,
   } 

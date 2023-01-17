@@ -1,4 +1,4 @@
-const titulo = document.querySelector("titulo-post")
+const titulo = document.querySelector(".titulo-post")
 const editar = document.querySelector(".editar")
 const eliminar = document.querySelector(".eliminar")
 const logout = document.querySelector(".logout")
@@ -48,7 +48,7 @@ const sendToken = async () => {
   if(getSesion) {
     const sesion =  JSON.parse(localStorage.getItem('sesion'));
     const token = sesion[2]
-  
+
     const settings = { 
         method: 'POST', 
         headers: { 
