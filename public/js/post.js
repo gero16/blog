@@ -13,6 +13,7 @@ const btnActualizar = document.querySelector(".actualizar")
 const btnGuardar = document.querySelectorAll(".guardar")
 
 const eliminarComentario = document.querySelectorAll(".eliminar-comentario")
+const editarComentario = document.querySelectorAll(".editar-comentario")
 
 let actualizarHTML = "";
 let etiquetaContenido = [];
@@ -21,7 +22,7 @@ const url = window.location.href;
 
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
-const btnComentario = document.querySelector(".btn-comentario")
+const btnAddComentario = document.querySelector(".btn-comentario")
 
 
 const urlPost = window.location.pathname
@@ -43,33 +44,68 @@ window.onload = async function () {
 const urlActual = window.location.href
 
 
-btnComentario.addEventListener("click", async () => {
+btnAddComentario.addEventListener("click", async () => {
  
    let url = `${urlActual}/agregar-comentario`
+   const comentarioActions = document.querySelector(".comentario-actions")
+   console.log(comentarioActions.dataset.id)
+   const idActualizar = comentarioActions.dataset.id;
+   console.log(typeof(idActualizar))
+   if(!btnAddComentario.classList.contains("editar-coment")){
+      const data = {
+         usuario: inputUsuario.value,
+         mensaje: inputComentario.value,
+         editar: false,
+      }
+      try {
+         const fetchResponse = await (fetch(url, {
+               method: "POST",
+               body: JSON.stringify(data),
+               headers: {
+                  "Content-Type": "application/json",
+               },
+            })
+          )
+          console.log(fetchResponse)
+          if(fetchResponse.ok === true) {
+            console.log("Mensaje agregado Correctamente!")
+            //window.location.reload()
+          }
+          
+      } catch (error) {
+         console.log(error)
+      }
+   } else {
+      const data = {
+         usuario: inputUsuario.value,
+         mensaje: inputComentario.value,
+         editar: true,
+         id_comentario: idActualizar
+      }
 
-   const data = {
-      usuario: inputUsuario.value,
-      mensaje: inputComentario.value
+      try {
+         const fetchResponse = await (fetch(url, {
+               method: "POST",
+               body: JSON.stringify(data),
+               headers: {
+                  "Content-Type": "application/json",
+               },
+            })
+          )
+          console.log(fetchResponse)
+          if(fetchResponse.ok === true) {
+            console.log("Mensaje agregado Correctamente!")
+            //window.location.reload()
+          }
+          
+      } catch (error) {
+         console.log(error)
+      }
    }
-   
-   try {
-      const fetchResponse = await (fetch(url, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-               "Content-Type": "application/json",
-            },
-         })
-       )
-       console.log(fetchResponse)
-       if(fetchResponse.ok === true) {
-         console.log("Mensaje agregado Correctamente!")
-         window.location.reload()
-       }
-       
-   } catch (error) {
-      console.log(error)
-   }
+  
+   /*
+  
+   */
 })
 
 
@@ -103,5 +139,17 @@ eliminarComentario.forEach(comentario => {
          }
       }
       mandarInfo()
+   })   
+});
+
+editarComentario.forEach(comentario => {
+   const sesion = JSON.parse(localStorage.getItem('sesion'));
+   const admin = sesion[1]
+
+   comentario.addEventListener("click", () => {
+      const idComentario = comentario.parentElement.dataset.id
+      console.log(comentario.parentNode.parentElement.children[2])
+      inputComentario.value = comentario.parentNode.parentElement.children[2].textContent
+      btnAddComentario.classList.add("editar-coment")
    })   
 });

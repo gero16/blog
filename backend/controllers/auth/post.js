@@ -104,6 +104,8 @@ const crearPost = async (req, res) => {
 };
 
 const authAgregarComentario = async (req, res) => {
+    const { editar, id_comentario } = req.body
+    console.log(colors.bgRed(req.body))
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
     //console.log(colors.bgGreen(req.body))
@@ -111,8 +113,9 @@ const authAgregarComentario = async (req, res) => {
        const post = await Post.findOne({where : {url : req.params.titulo}});
     
        const user = await Usuario.findOne({where : {usuario : req.params.user}})
-  
-      console.log(post.id)
+
+      if(editar === false) {
+        
         const newComentario = new Comentario ({
           id,
           usuario: req.body.usuario,
@@ -129,11 +132,27 @@ const authAgregarComentario = async (req, res) => {
             id_comentario: id,
           })
   
-        await newComentario.save()
-        await usuario_comentarios.save()
+        //await newComentario.save()
+        //await usuario_comentarios.save()
   
       
         res.status(200).send("Mensaje enviado!")
+      } else {
+        const comentario = await Comentario.findOne({where : {id : id_comentario}})
+        const usuario_comentario = await Usuario_Comentario.findOne({where : {id_comentario : id_comentario}})
+        await comentario.update({
+          id : id_comentario,
+          usuario: req.body.usuario,
+          mensaje: req.body.mensaje,
+          fecha: comentario.fecha,
+          usuario_registrado: comentario.usuario_registrado,
+          imagen_usuario: comentario.imagen_usuario,
+          id_post: comentario.id_post
+        });
+      
+        // res.status(200).send("Mensaje enviado!")
+      }
+       
     } catch (error) {
         console.log(error)
     }
@@ -142,11 +161,11 @@ const authAgregarComentario = async (req, res) => {
   const actualizarPost = async (req, res) => {
  
     const body = req.body;
-    const {id, titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
+    const {id, titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, editar } = body;
     // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
     const newID = Date.now();
-    
+    console.log(editar)
     let contenido = [];
     const filtrarContenido = [primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo];
           filtrarContenido.forEach(element => {
@@ -224,6 +243,9 @@ const authAgregarComentario = async (req, res) => {
         })
       }
     } 
+const editarComentario = async (req, res) => {
+  console.log(colors.bgMagenta(req.body))
+}
 
   const eliminarComentario = async (req, res) => {
     try {
@@ -232,12 +254,9 @@ const authAgregarComentario = async (req, res) => {
   
       await comentario.destroy();
       await usuario_comentario.destroy();
-    /*
-    Estaba al pedo, e igual no funcionaba - No se porque
-      res.status(200).render("ok", {
-        mensaje: "Comentario Borrado Correctamente!"
-      })
-    */
+    
+      res.status(200).json({mensaje: "Mensaje Eliminado Correctamente"})
+  
     } catch (error) {
       console.log(error)
     }
@@ -249,7 +268,8 @@ const authAgregarComentario = async (req, res) => {
     actualizarPost,
     authAgregarComentario,
     eliminarPost,
-    eliminarComentario
+    eliminarComentario,
+    editarComentario,
   }
 
  

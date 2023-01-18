@@ -3,7 +3,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { indexPrincipal, indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
-const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario } = require('../controllers/auth/post');
+const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
 const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
@@ -42,8 +42,6 @@ router.get("/:admin/editar/:titulo", esAdmin, editarPostPlantilla)
 
 router.get("/:admin/eliminar/:titulo", esAdmin, eliminarPlantilla)
 
-router.post("/:user/publicaciones/:titulo/agregar-comentario", authAgregarComentario)
-
 router.get("/:user/perfil", perfil)
 
 router.post("/:user/editar-perfil", editarPerfil)
@@ -54,7 +52,9 @@ router.post("/actualizar-post", actualizarPost)
 
 router.post("/eliminar-post/:id", verifyToken, eliminarPost)
 
-router.post("/:admin/editar-comentario/:id" )
+router.post("/:user/publicaciones/:titulo/agregar-comentario", authAgregarComentario)
+
+router.post("/:admin/publicaciones/:titulo/editar-comentario/:id", editarComentario )
 
 router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarComentario)
 

@@ -48,17 +48,16 @@ let orden = {
 
 
 const traerInfo = async () => {
+  
   const sesion =  JSON.parse(localStorage.getItem("sesion"));
-
   const token = sesion[2]
   const settings = { 
       method: 'GET', 
       headers: { 
               "Content-Type": "application/json", 
-              "auth-token": token 
-            },
-  };
-
+              "auth-token": token
+            }
+          };
   try {
     const fetchResponse = await fetch(`/auth/${sesion[1]}/crear-post`, settings);
    
