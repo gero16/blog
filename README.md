@@ -33,7 +33,7 @@ Configuradas en App.js
 
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1674170555/hnafei5gqfkabswtjgxr.jpg
+![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1674170555/hnafei5gqfkabswtjgxr.jpg)
 
 
 ## Demo en formato gif
