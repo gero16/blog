@@ -17,9 +17,9 @@ const traerPublicaciones = async (req, res) => {
     try {
        // Traer todos las Publicaciones
       const registros = await Post.findAll();
-  
+      const registrosOrdenados = registros.sort((a, b) =>  new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
       return res.status(200).json({
-        registros,
+        registros: registrosOrdenados
       });
   
     } catch (error) {
@@ -48,6 +48,10 @@ const traerPublicaciones = async (req, res) => {
      const {id, url, titulo, contenido, imagen, autor, fecha} = registro
      const comentarios = await Comentario.findAll({where : {id_post : id}});
  
+     const separar = fecha.split("-")
+     const date = [separar[2], separar[1], separar[0]]
+     const newDate = date.join("-")
+
     return res.status(200).render("post/publicPost", {
       id: id,
       url,
@@ -55,7 +59,7 @@ const traerPublicaciones = async (req, res) => {
       contenido: contenido,
       imagen: imagen,
       autor: autor,
-      fecha: fecha,
+      fecha: newDate,
       comentarios: comentarios,
       avatarImage,
       

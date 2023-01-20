@@ -71,9 +71,13 @@ const traerPublicaciones = async () => {
   const data = await resultado.json();
   const { registros } = data;
 
+
   let post = "";
   let i = 1;
   registros.forEach((e) => {
+    const separar = e.fecha.split("-")
+    const date = [separar[2], separar[1], separar[0]]
+    const newDate = date.join("-")
     const primerParrafo = e.contenido[0]
     post +=`
             <div class="post" data-id=${i}>
@@ -81,12 +85,10 @@ const traerPublicaciones = async () => {
                   <img class="post-img" src="${ e.imagen }" alt="imagen-del-post" data-id=${ e.url }>
                 </div>
                 <div class="post-div-contenido" data-id=${ e.url }>
-                  <span class="post-fecha">${ e.fecha }</span>
-                    <span class="post-autor data-id=${e.url}">| Autor: <STRONG>  ${ e.autor } </STRONG></span>
-                    
-                    <h2 class="post-titulo">${ e.titulo }</h2>
-                    <div class="post-contenido" data-id=${ e.url }> 
-                    
+                  <span class="post-autor data-id=${e.url}">Autor: <STRONG>  ${ e.autor } </STRONG> | </span>
+                  <span class="post-fecha">${ newDate }</span>
+                  <h2 class="post-titulo">${ e.titulo }</h2>
+                  <div class="post-contenido" data-id=${ e.url }> 
                       ${ primerParrafo } 
                     </div> 
                 </div>

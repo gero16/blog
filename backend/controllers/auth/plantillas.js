@@ -9,9 +9,11 @@ const indexPrincipal = async (req, res) => {
  
   try {
     const registros = await Post.findAll()
+    const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
+
     const titulo = "Espacio Luz de Luna"
     res.render("index/indexPublic", {
-        registros: registros, 
+        registros: registrosOrdenados, 
         titulo,
         usuario: "public",
         avatarImage,
@@ -50,6 +52,8 @@ const indexPlantilla = async (req, res) => {
   try {
 
     const registros = await Post.findAll()
+    const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
+    console.log(colors.bgGreen(registrosOrdenados))
 
     const user = await Usuario.findOne({ where: { usuario }})
     if(user){
@@ -57,8 +61,8 @@ const indexPlantilla = async (req, res) => {
             const miniName = reduceName[0]
             if(user.rol === "ADMIN") {
               res.render("index/indexAdmin", {
-                    url: `/publicaciones/${registros.titulo}`,
-                    registros: registros,
+                    url: `/publicaciones/${registrosOrdenados.titulo}`,
+                    registros: registrosOrdenados,
                     miniName: miniName,
                     usuario: user.usuario,
                     correo: user.correo,
@@ -69,8 +73,8 @@ const indexPlantilla = async (req, res) => {
             
             } else {
                 res.render("index/indexUser", {
-                      url: `/publicaciones/${registros.titulo}`,
-                      registros: registros,
+                      url: `/publicaciones/${registrosOrdenados.titulo}`,
+                      registros: registrosOrdenados,
                       miniName: miniName,
                       usuario: user.usuario,
                       correo: user.correo,
@@ -136,11 +140,10 @@ const authPostPlantilla =  async (req, res) => {
 
     const usuario = req.params.user
     const url = req.params.titulo
-    let arrayComentarios = []
     try {
       
       const datos = await Post.findOne({where: {url}})
-      
+
       if(datos){
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
@@ -155,7 +158,11 @@ const authPostPlantilla =  async (req, res) => {
         if(comentarios.length > 1) {
          numComentarios = comentarios.length +1
         }
-    
+        
+        const separar = fecha.split("-")
+        const date = [separar[2], separar[1], separar[0]]
+        const newDate = date.join("-")
+
         if(user.rol == "ADMIN") {
             console.log("En Admin")
             res.render("post/adminPost", {
@@ -167,7 +174,7 @@ const authPostPlantilla =  async (req, res) => {
               contenido: contenido,
               imagen: imagen,
               autor: autor,
-              fecha: fecha,
+              fecha: newDate,
               comentarios: comentarios,
               usuario_perfil: user.imagen,
               numComentarios: numComentarios

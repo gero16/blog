@@ -110,8 +110,8 @@ const authAgregarComentario = async (req, res) => {
             id_comentario: id,
           })
   
-        //await newComentario.save()
-        //await usuario_comentarios.save()
+        await newComentario.save()
+        await usuario_comentarios.save()
   
       
         res.status(200).send("Mensaje enviado!")
