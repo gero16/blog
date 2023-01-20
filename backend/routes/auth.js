@@ -11,27 +11,28 @@ const { checkAuth, verifyToken, checkEmptyData } = require('../middleware/auth')
 
 const router = Router();
 
+// Ruta Principal
 router.get("/", indexPrincipal)
 
+
+// Seccion de Usuarios
 router.post('/login', checkEmptyData, loginUsuario);
 
 router.post("/:user/logout", logoutUsuario)
 
 router.post("/registrar", crearUsuario);
 
-router.post("/validate-token", verifyToken, validateToken)
-
 router.get("/:user/confirmar/:token", confirmarCuenta)
 
 router.get("/users", getUsuarios)
 
+
+// Seccion de plantillas para usuarios autenticados
 router.get("/:user/index", indexPlantilla)
 
 router.post("/:user/info-sesion", sesion)
 
 router.get("/:user/info-sesion", getSesion)
-
-router.get("/publicaciones/:titulo/", postPlantilla)
 
 router.get("/:user/publicaciones/:titulo",  authPostPlantilla)
 
@@ -43,19 +44,25 @@ router.get("/:admin/eliminar/:titulo", esAdmin, eliminarPlantilla)
 
 router.get("/:user/perfil", perfil)
 
+router.get("/publicaciones/:titulo/", postPlantilla) // Esta que hace aca ?
+
+
+// Seccion actualizacion de contenido
 router.post("/:user/editar-perfil", editarPerfil)
 
 router.post("/crear-post", crearPost)
 
 router.post("/actualizar-post", actualizarPost)
 
-router.post("/eliminar-post/:id", verifyToken, eliminarPost)
+router.post("/eliminar-post/:id",  eliminarPost)
 
 router.post("/:user/publicaciones/:titulo/agregar-comentario", authAgregarComentario)
 
-router.post("/:admin/publicaciones/:titulo/editar-comentario/:id", editarComentario )
-
 router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarComentario)
+
+
+// Ruta a la cual se le manda el token header
+router.post("/validate-token", verifyToken, validateToken)
 
 
 module.exports = router;

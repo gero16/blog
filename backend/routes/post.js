@@ -3,6 +3,7 @@ const {crearPost, traerPublicaciones, agregarComentario, mostrarPublicacion} = r
 
 const router = Router()
 
+// /publicaciones
 router.get("/", traerPublicaciones)
 
 router.get("/:url", mostrarPublicacion)

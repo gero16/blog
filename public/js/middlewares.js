@@ -44,6 +44,8 @@ if(logout) {
 
 }
 
+console.log("hola")
+
 const sendToken = async () => {
   if(getSesion) {
     const sesion =  JSON.parse(localStorage.getItem('sesion'));

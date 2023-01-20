@@ -7,7 +7,6 @@ const esAdmin = async (req, res, next) => {
   console.log(colors.bgYellow("ES ADMIN"))
     try {
       const user = await Usuario.findOne({where: { usuario: admin }});
-      console.log(user.dataValues)
       const usuario = user.dataValues;
 
       if(usuario.rol === "ADMIN") {

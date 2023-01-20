@@ -48,9 +48,6 @@ btnAddComentario.addEventListener("click", async () => {
  
    let url = `${urlActual}/agregar-comentario`
    const comentarioActions = document.querySelector(".comentario-actions")
-   console.log(comentarioActions.dataset.id)
-   const idActualizar = comentarioActions.dataset.id;
-   console.log(typeof(idActualizar))
    if(!btnAddComentario.classList.contains("editar-coment")){
       const data = {
          usuario: inputUsuario.value,
@@ -69,13 +66,14 @@ btnAddComentario.addEventListener("click", async () => {
           console.log(fetchResponse)
           if(fetchResponse.ok === true) {
             console.log("Mensaje agregado Correctamente!")
-            //window.location.reload()
+            window.location.reload()
           }
           
       } catch (error) {
          console.log(error)
       }
    } else {
+      const idActualizar = comentarioActions.dataset.id;
       const data = {
          usuario: inputUsuario.value,
          mensaje: inputComentario.value,
@@ -93,9 +91,9 @@ btnAddComentario.addEventListener("click", async () => {
             })
           )
           console.log(fetchResponse)
-          if(fetchResponse.ok === true) {
-            console.log("Mensaje agregado Correctamente!")
-            //window.location.reload()
+          if(fetchResponse.status === 200) {
+            console.log("Mensaje Actualizado Correctamente!")
+            window.location.reload()
           }
           
       } catch (error) {

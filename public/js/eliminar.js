@@ -15,7 +15,11 @@ btnEliminar.addEventListener("click", async () => {
               try {
                 const fetchResponse = await fetch(`/auth/eliminar-post/${id.textContent}`, settings);
                 console.log(fetchResponse)
-              
+                if(fetchResponse.status === 200) {
+                  console.log("Mensaje Eliminado Correctamente!")
+                  window.location.assign("/")
+                }
+                
               } catch (error) {
                 console.log(error)
               }

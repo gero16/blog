@@ -114,7 +114,7 @@ const authAgregarComentario = async (req, res) => {
         await usuario_comentarios.save()
   
       
-        res.status(200).send("Mensaje enviado!")
+        res.status(200).send("Mensaje Agregado!")
       } else {
         const comentario = await Comentario.findOne({where : {id : id_comentario}})
         const usuario_comentario = await Usuario_Comentario.findOne({where : {id_comentario : id_comentario}})
@@ -128,7 +128,7 @@ const authAgregarComentario = async (req, res) => {
           id_post: comentario.id_post
         });
       
-        // res.status(200).send("Mensaje enviado!")
+        res.status(200).send("Mensaje Actualizado!")
       }
        
     } catch (error) {
@@ -195,7 +195,7 @@ const authAgregarComentario = async (req, res) => {
 
     const eliminarPost = async (req, res) => {
       console.log(req.params.id)
-
+     
       try {
         const deletePost = await Post.findOne({ where: { id: req.params.id } });
         const deleteComentarios = await Comentario.findOne({ where: { id_post:  req.params.id } });
@@ -210,7 +210,7 @@ const authAgregarComentario = async (req, res) => {
       
         await deletePost.destroy();
         
-        return res.status(200).render("ok", {
+        res.status(200).render("ok", {
           mensaje: "Publicación eliminada correctamente!"
         })
 
@@ -221,9 +221,6 @@ const authAgregarComentario = async (req, res) => {
         })
       }
     } 
-const editarComentario = async (req, res) => {
-  console.log(colors.bgMagenta(req.body))
-}
 
   const eliminarComentario = async (req, res) => {
     try {
@@ -247,7 +244,7 @@ const editarComentario = async (req, res) => {
     authAgregarComentario,
     eliminarPost,
     eliminarComentario,
-    editarComentario,
+    
   }
 
  
