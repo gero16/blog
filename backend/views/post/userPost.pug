@@ -10,11 +10,10 @@ html(lang="en")
 
         link(rel="stylesheet", href="/../css/styles.css")
         link(rel="stylesheet", href="/../css/post.css")
+        link(rel="icon", href="/img/luna.png", type="image/x-icon")
         title Publicaciones - #{titulo}
-    body 
 
-        
-  
+    body 
         header.flex-between 
             .flex-center 
                 img(class="logo" src="/../img/logito3.jpg")
@@ -30,7 +29,7 @@ html(lang="en")
                     li 
                         a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
                     li 
-                        a(href=`#`) Cerrar Sesión
+                        a(class="logout") Cerrar Sesión
                     li
                         img(src="/../img/menu.png")
 

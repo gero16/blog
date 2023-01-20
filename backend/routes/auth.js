@@ -1,6 +1,5 @@
 const { Router } = require('express');
 
-const { check } = require('express-validator');
 const { indexPrincipal, indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
@@ -57,8 +56,6 @@ router.post("/:user/publicaciones/:titulo/agregar-comentario", authAgregarComent
 router.post("/:admin/publicaciones/:titulo/editar-comentario/:id", editarComentario )
 
 router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarComentario)
-
-//router.get("/*", rutaInexistente)
 
 
 module.exports = router;

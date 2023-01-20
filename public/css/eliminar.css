@@ -38,3 +38,7 @@ body {
     background-color: rgb(146, 0, 0);
     cursor: pointer;
 }
+
+.delete a {
+    color: white;
+}

@@ -1,12 +1,8 @@
 const { Usuario_Comentario, Comentario, Post, Usuario } = require("../../models/model");
 const colors = require('colors');
 const cloudinary = require("cloudinary").v2;
-const fs = require('fs')
 require("multer");
 const path = require("path");
-//const uploads = require("../../../public/uploads")
-
-
 
 cloudinary.config({
   cloud_name: "geronicola",
@@ -21,7 +17,6 @@ const crearPost = async (req, res) => {
   const body =  req.body;
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
-  console.log(tituloURL)
 
   const existePost = await Post.findOne({where : {url : tituloURL}});
   if(existePost) {
@@ -41,34 +36,17 @@ const crearPost = async (req, res) => {
     }
   });
 
-  console.log(contenido)
   try {
-    if(req.file){
+    if(req.file) {
       const result = await cloudinary.uploader.upload(
         req.file.path,
         { public_id: `${id}` },
         function (error, result) {
-          console.log(result);
-        
-        }
-      );
-      const { secure_url } = result;
-      const deleteImage = secure_url.split("/")
-      console.log(deleteImage)
-      const extensionImage = secure_url.split(".")
-      const deleteIMG = deleteImage[7]
+          console.log(colors.bgBlue(result));
+        });
 
-      
-    // ELIMINAR FOTO TEMPORAL QUE SE SUBE POR EL FORMULARIO
-    fs.unlink(`/uploads/${deleteIMG}`, (err) => {
-      if (err) {
-          console.log("failed to delete local image:"+err);
-      } else {
-          console.log('successfully deleted local image');                                
-      }
-      
-});
-      
+      const { secure_url } = result;
+    
       const nuevoPost = new Post({
         id,
         titulo,
@@ -178,7 +156,7 @@ const authAgregarComentario = async (req, res) => {
       let post = await Post.findOne({ where  : { id }})
     
       if(req.file) {
-        const result = await cloudinary.uploader.upload(req.file.path, { public_id : `${newID}` }, 
+        const result = await cloudinary.uploader.upload(req.file.path, { public_id : `blog-luz-de-luna/${newID}` }, 
         function (error, result) {console.log(result);});
       
         const { secure_url } = result;  

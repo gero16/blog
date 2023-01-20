@@ -133,7 +133,7 @@ const postPlantilla =  async (req, res) => {
 }
 
 const authPostPlantilla =  async (req, res) => {
- 
+
     const usuario = req.params.user
     const url = req.params.titulo
     let arrayComentarios = []

@@ -57,10 +57,11 @@ app.use("/publicaciones", post)
 app.use('/img', express.static(path.join(__dirname, 'public/img')));
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '/public/uploads')));
 app.use('/', express.static('public/html'))
 app.get("/*", rutaInexistente)
 
+// Creo que lo tengo por el problema con el token de confirmacion
 app.use(express.static('public'))
 
 app.listen(port, () => {
