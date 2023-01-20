@@ -62,7 +62,7 @@ app.use('/', express.static('public/html'))
 app.get("/*", rutaInexistente)
 
 // Creo que lo tengo por el problema con el token de confirmacion
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
 app.listen(port, () => {
   console.log(colors.bgYellow(`Corriendo en puerto: ${port}`))

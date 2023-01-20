@@ -50,12 +50,12 @@ window.onload = async function (e) {
       if(!userPublic) {
         const data = ["public", imagen]
         const public = localStorage.setItem("imagen", JSON.stringify(data) );
-        //const avatarImagen = document.createElement("img")
-        //avatarImagen.src = `/../img/avatar${num}.png`
-        //divImagen.append(avatarImagen)
+        const avatarImagen = document.createElement("img")
+        avatarImagen.src = `/../img/avatar${num}.png`
+        divImagen.append(avatarImagen)
       }
   }
-  randomImage(0, 3);
+  randomImage(0, 6);
   }
 
   const bigPost = document.querySelector('[data-id="5"]')

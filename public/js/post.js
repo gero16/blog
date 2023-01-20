@@ -41,6 +41,15 @@ window.onload = async function () {
    }
 }
 
+
+const imgUser = document.querySelector(".avatar-user")
+const userPublic = JSON.parse(localStorage.getItem("imagen"));
+
+if(userPublic) {
+   console.log(userPublic[1])
+   imgUser.src = `/../img/avatar${userPublic[1]}.png`
+ }
+
 const urlActual = window.location.href
 
 
@@ -53,6 +62,7 @@ btnAddComentario.addEventListener("click", async () => {
          usuario: inputUsuario.value,
          mensaje: inputComentario.value,
          editar: false,
+         imagen_usuario: `/../img/avatar${userPublic[1]}.png`,
       }
       try {
          const fetchResponse = await (fetch(url, {
