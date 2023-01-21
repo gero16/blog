@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const { indexPrincipal } = require('../controllers/auth');
 const { errorPlantilla } = require('../controllers/auth/plantillas');
+const { indexPublic } = require('../controllers/public/post');
 
 const router = Router();
 
-router.get("/", indexPrincipal)
+router.get("/", indexPublic)
 
 router.get("/error/:numero", errorPlantilla)
 

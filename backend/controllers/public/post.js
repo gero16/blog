@@ -1,7 +1,7 @@
 
 const colors = require('colors')
 const cloudinary = require("cloudinary").v2;
-const { Post, Comentario } = require("../models/model")
+const { Post, Comentario } = require("../../models/model")
 require("multer");
 
 cloudinary.config({
@@ -26,6 +26,22 @@ const traerPublicaciones = async (req, res) => {
       console.log(error)
     }
   }
+
+  const indexPublic = async (req, res) => {
+ 
+    try {
+      const registros = await Post.findAll()
+      const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
+  
+      const titulo = "Espacio Luz de Luna"
+      res.render("index/indexPublic", {
+          registros: registrosOrdenados, 
+          titulo,
+          usuario: "public",
+        })
+    } catch (error) {
+      console.log(error)
+    }}
   
   const mostrarPublicacion = async (req, res) => {
     console.log(req.params.url)
@@ -87,7 +103,7 @@ const traerPublicaciones = async (req, res) => {
 
 module.exports = {
     traerPublicaciones,
-   
+    indexPublic,
     agregarComentario,
     mostrarPublicacion
 

@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const {crearPost, traerPublicaciones, agregarComentario, mostrarPublicacion} = require('../controllers/post')
+const {crearPost, traerPublicaciones, agregarComentario, mostrarPublicacion} = require('../controllers/public/post')
 
 const router = Router()
 

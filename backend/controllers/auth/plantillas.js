@@ -1,26 +1,6 @@
 const { Post, Usuario, Usuario_Sesion, Comentario } = require("../../models/model.js")
 
 const colors = require('colors');
-const fs = require('fs')
-
-const indexPrincipal = async (req, res) => {
-
-  let avatarImage = ""
- 
-  try {
-    const registros = await Post.findAll()
-    const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
-
-    const titulo = "Espacio Luz de Luna"
-    res.render("index/indexPublic", {
-        registros: registrosOrdenados, 
-        titulo,
-        usuario: "public",
-        avatarImage,
-      })
-  } catch (error) {
-    console.log(error)
-  }}
 
 const perfil = async (req, res) => {
   let arrayRegistros = []  
@@ -313,7 +293,7 @@ const errorPlantilla = (req, res) => {
 
 
 module.exports = {
-    indexPrincipal,
+
     perfil,
     crearPostPlantilla,
     indexPlantilla,

@@ -1,8 +1,9 @@
 const { Router } = require('express');
 
-const { indexPrincipal, indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
-const { postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
+const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
+const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
+
 const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
@@ -11,9 +12,7 @@ const { checkAuth, verifyToken, checkEmptyData } = require('../middleware/auth')
 
 const router = Router();
 
-// Ruta Principal
-router.get("/", indexPrincipal)
-
+const { Post } = require("../models/model.js")
 
 // Seccion de Usuarios
 router.post('/login', checkEmptyData, loginUsuario);

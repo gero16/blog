@@ -1,4 +1,4 @@
-const { indexPrincipal, indexPlantilla, crearPostPlantilla, perfil } = require('./plantillas');
+const {  indexPlantilla, crearPostPlantilla, perfil } = require('./plantillas');
 
 const { getUsuarios, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, logoutUsuario, olvidePassword, comprobarPassword, 
     nuevoPassword , mandarInfoSesion , activeSesion} = require('./usuarios');
@@ -14,7 +14,6 @@ module.exports = {
     nuevoPassword,
     perfil,
     activeSesion,
-    indexPrincipal,
     indexPlantilla,
     crearPostPlantilla,
 }
