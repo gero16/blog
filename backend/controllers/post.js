@@ -63,7 +63,6 @@ const traerPublicaciones = async (req, res) => {
     console.log(colors.bgBlue(req.body))
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    //const fecha =
     try {
        const registro = await Post.findOne({where : {url : req.params.url}});
 
@@ -73,6 +72,7 @@ const traerPublicaciones = async (req, res) => {
           mensaje: req.body.mensaje,
           fecha: date,
           id_post: parseInt(registro.id),
+          imagen_usuario: req.body.imagen_usuario,
         })
         
         await newComentario.save()

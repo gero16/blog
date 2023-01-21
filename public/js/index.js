@@ -25,7 +25,7 @@ window.onload = async function (e) {
   }
  
   if(sesion) {
-    
+    localStorage.removeItem("imagen");
     urlPost.forEach(element => {
       element.addEventListener("click", (e) => {
         window.location.href = `/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
@@ -58,11 +58,6 @@ window.onload = async function (e) {
   randomImage(0, 6);
   }
 
-  const bigPost = document.querySelector('[data-id="5"]')
-  console.log(bigPost)
-  if(bigPost) {
-    bigPost.className = "post big-post"
-  }
 }
 
 
