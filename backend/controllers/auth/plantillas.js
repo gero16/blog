@@ -99,8 +99,6 @@ const postPlantilla =  async (req, res) => {
     const datos = await Post.findOne({where: {url}})
     const {id, titulo, contenido, imagen, autor, fecha, tokenSesion}  = datos
 
-    
-
     res.status(200).header("auth-token", tokenSesion).render("post/publicPost", {
       url,
       id: id,
@@ -221,9 +219,6 @@ const editarPostPlantilla = async (req, res) => {
     if(data){
       const {id, titulo, contenido, imagen, autor, fecha} = data;
     
-      let nuevoContenido = {
-
-      }
       const newOrden = {}
 
       let valores = Object.values(orden)
@@ -274,9 +269,6 @@ const editarPostPlantilla = async (req, res) => {
           nuevoContenido: newOrden
         })
       }
-  
-
-   
   } else {
     return
   }
@@ -293,7 +285,6 @@ const errorPlantilla = (req, res) => {
 
 
 module.exports = {
-
     perfil,
     crearPostPlantilla,
     indexPlantilla,

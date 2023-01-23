@@ -273,3 +273,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+enviarPost.disabled = true
+inputTitulo.addEventListener("change", () => {
+  console.log("hola")
+  if(inputTitulo) {
+    enviarPost.disabled = false
+  }
+})

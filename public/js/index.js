@@ -10,12 +10,10 @@ window.onload = async function (e) {
   const urlPost = document.querySelectorAll(".post")
 
   const sesion = JSON.parse(localStorage.getItem('sesion'));
-  console.log(sesion)
   
   if(window.location.pathname === "/") {
     urlPost.forEach(element => {
       element.addEventListener("click", (e) => {
-        console.log(e)
         window.location.href = `/publicaciones/${e.target.parentNode.dataset.id}`
     })
   })}
@@ -43,7 +41,6 @@ window.onload = async function (e) {
  
     function randomImage(min, max) {
       const num = Math.floor((Math.random() * (max - min + 1)) + min);
-      console.log(num)
       const imagen =  num;
       const userPublic = localStorage.getItem("imagen");
 

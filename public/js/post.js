@@ -24,12 +24,13 @@ const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
 const btnAddComentario = document.querySelector(".btn-comentario")
 
-
 const urlPost = window.location.pathname
 const tituloP = urlPost.split("/")
 console.log(tituloP)
 const tituloPost = tituloP[4]
 
+const imgUser = document.querySelector(".avatar-user")
+const userPublic = JSON.parse(localStorage.getItem("imagen"));
 
 window.onload = async function () {
  
@@ -40,10 +41,6 @@ window.onload = async function () {
 
    }
 }
-
-
-const imgUser = document.querySelector(".avatar-user")
-const userPublic = JSON.parse(localStorage.getItem("imagen"));
 
 if(userPublic) {
    console.log(userPublic[1])
@@ -110,10 +107,6 @@ btnAddComentario.addEventListener("click", async () => {
          console.log(error)
       }
    }
-  
-   /*
-  
-   */
 })
 
 
@@ -133,6 +126,7 @@ eliminarComentario.forEach(comentario => {
              'Content-Type': 'application/json',
            }
          };
+         
       const mandarInfo = async () => {
          try {
             const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloPost}/eliminar-comentario/${ idComentario }`, settings);

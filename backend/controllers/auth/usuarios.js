@@ -13,18 +13,14 @@ cloudinary.config({
   });
   
 const getUsuarios = async (req, res) => {
-
     const usuarios = await Usuario.findAll()
     
     usuarios.forEach(element => {
-      
         console.log(colors.bgBlue(element))
-      
     });
     res.status(200).json({
         usuarios,
-    })
-}
+    })}
 
 const crearUsuario = async (req, res = response) => {
 
@@ -45,9 +41,7 @@ const crearUsuario = async (req, res = response) => {
         })
     }
     else {
-
         try {
-
             const token = generarToken()
             const newUsuario = new Usuario ({
                 id,
@@ -201,11 +195,6 @@ const nuevoPassword = async (req, res) => {
    
 }
 
-   
-const activeSesion = async(req, res) => {
-   
-}
-
 const sesion = (req, res) => {
     const token = req.body.token
     console.log(colors.red(req.body.token))
@@ -299,7 +288,6 @@ module.exports = {
     comprobarPassword,
     nuevoPassword,
     validateToken,
-    activeSesion,
     sesion,
     getSesion,
     editarPerfil

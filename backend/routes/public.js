@@ -8,6 +8,5 @@ router.get("/", indexPublic)
 
 router.get("/error/:numero", errorPlantilla)
 
-
 module.exports = router;
 

@@ -38,7 +38,6 @@ const conectarBD = async () => {
 
 conectarBD();
 
-
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "public/uploads"),
   filename: (req, file, cb) => {

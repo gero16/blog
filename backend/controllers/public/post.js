@@ -93,7 +93,6 @@ const traerPublicaciones = async (req, res) => {
         
         await newComentario.save()
   
-      
         res.status(200).send("Mensaje enviado!")
     } catch (error) {
         console.log(error)
@@ -106,6 +105,5 @@ module.exports = {
     indexPublic,
     agregarComentario,
     mostrarPublicacion
-
 }
 
