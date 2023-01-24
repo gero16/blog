@@ -67,6 +67,7 @@ const traerInfo = async () => {
   }
 }
 
+// Voy llenando los inputs, y luego actualizo el objeto
 const actualizarOrden = () => {
   const llenos = document.querySelectorAll(".lleno")
   let i = 1
@@ -80,29 +81,55 @@ const actualizarOrden = () => {
 
 
 btnAgregarParrafo.addEventListener("click", () => {
+
+  const arrayOrden = Object.entries(orden)
+  const indexValor = arrayOrden.findIndex(element => element[1] == "vacio")
+  console.log(indexValor)
+  const divLiContenido = document.querySelector(".div-li-contenido")
+  const liContenedor = document.createElement("li")
+  liContenedor.classList.add(`li-${ arrayOrden[5][0] }`,"li-parrafos")
   console.log(orden)
+  
+  //console.log(liContenedor)
+  //liContenedor[indexValor].classList.add(`li-${ arrayOrden[5][0] }`)
+  // liAgregar.removeAttribute("id")
+  const divVacio1 = document.createElement("div")
+  const divVacio2 = document.createElement("div")
+
   let inputParrafo = document.createElement("textarea")
   inputParrafo.className = "parrafos-post vacio"
 
   const btnQuitar = document.createElement("span")
   //btnQuitar.className = "btn-quitar-contenido"
   btnQuitar.textContent = "Quitar Parrafo"
+ 
 
   // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
   for(valor in orden) {
     if(orden[valor] === "vacio") {
-      console.log(orden)
       // primerParrafo
       inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
       btnQuitar.className = ` ${ valor } btn-quitar-contenido `
       
-      divAgregarInputs.append(inputParrafo, btnQuitar)
-      // Cambio su valor a lleno
+      liContenedor.append(divVacio1, inputParrafo, divVacio2, btnQuitar)
+      divLiContenido.append(liContenedor)
+
+      // Cambio el valor del objeto a lleno
       orden[valor] = "lleno";
-      //inputParrafo.value = `<p>        </p>`
       break;
     } 
   }  
+
+  btnQuitar.addEventListener("click", (e) => {
+    let contenedorParrafos = document.querySelectorAll(".li-parrafos")
+    // const arrayOrden = Object.entries(orden)
+    console.log(e.target.classList[0])
+    const claveVaciar = e.target.classList[0]
+    console.log(e.target.parentNode)
+    contenedorParrafos[contenedorParrafos.length -1].remove();
+    orden[claveVaciar] = "vacio"
+    console.log(orden)
+  })
  
 })
 

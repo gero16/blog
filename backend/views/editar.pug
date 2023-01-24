@@ -66,7 +66,7 @@ html(lang="en")
                         li 
                             label(for="text" class="label-crear") Fecha
                             input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
-                        div 
+                        div(class="div-li-contenido") 
                             each  value, nombre in nuevoContenido
                                 li(class=`li-${ nombre } li-parrafos`) 
                                     div
@@ -78,7 +78,6 @@ html(lang="en")
                             label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
                             label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo  
                         li(id="agregar-input")
-                            div(class="div-agregar-inputs") 
 
                         li(class="agregar-texto") 
                             span Previsualizar el Contenido

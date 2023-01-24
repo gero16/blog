@@ -160,7 +160,7 @@ const authAgregarComentario = async (req, res) => {
         function (error, result) {console.log(result);});
       
         const { secure_url } = result;  
-        /*
+        
         await post.update({
               titulo,
               fecha,
@@ -179,7 +179,7 @@ const authAgregarComentario = async (req, res) => {
           imagen,
           contenido,
           url: tituloURL
-        });     */
+        });     
       }
   
       return res.status(200).render("ok", {
