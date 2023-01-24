@@ -4,7 +4,7 @@ const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
 const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil } = require('../controllers/auth/plantillas');
 
-const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil } = require('../controllers/auth/usuarios');
+const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
 const { esAdmin, rutaInexistente } = require('../helpers/validators');
@@ -62,6 +62,10 @@ router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarCom
 
 // Ruta a la cual se le manda el token header
 router.post("/validate-token", verifyToken, validateToken)
+
+router.post("/olvide-password", olvidePassword)
+// Confirmar - A traves de email
+router.route("/:usuario/olvide-password/:token").get(comprobarPassword).post(nuevoPassword)
 
 
 module.exports = router;

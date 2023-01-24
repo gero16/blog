@@ -238,7 +238,32 @@ main{
     cursor: pointer
 }
 
+.lista-cambiar-password {
+    margin: 30px 0px 0px 0px;
+    width: 300px;
+    text-align: center;
+}
 
+.lista-cambiar-password input {
+   padding: 5px;
+   border-radius: 5px;
+   border: 1px solid rgb(199, 199, 199);
+   margin: 5px 0px 0px 0px;
+   width: 100%;
+}
+
+.btn-cambiar-password {
+    color: #383636;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #f4f0f0;
+    border: 1px solid rgb(135, 132, 132);
+    margin: 10px 0px 0px 0px;
+    width: 100%;
+    cursor: pointer;
+
+}
 
 @media (max-width: 1500px) {
     .post {

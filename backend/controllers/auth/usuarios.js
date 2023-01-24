@@ -4,6 +4,7 @@ const { generarJWT,emailRegistro, generarToken  } = require("../../helpers/index
 const cloudinary = require("cloudinary").v2;
 const bcryptjs = require('bcryptjs');
 const colors = require('colors');
+const { emailRecuperarPassword } = require("../../helpers/emailRegistro.js");
 
 cloudinary.config({
     cloud_name: "geronicola",
@@ -181,18 +182,86 @@ const logoutUsuario = async (req, res) => {
  
   }
 
+  const olvidePassword = async (req, res) => {
+    const { correo } = req.body;
 
-const olvidePassword = async (req, res) => {
-   
+    const existeUsuario = await Usuario.findOne({where: { correo }});
+
+    if (!existeUsuario) {
+        const error = new Error("El Usuario no existe");
+        return res.status(400).json({msg: error.message})
+    }
+
+    try {
+     
+        emailRecuperarPassword({
+            correo,
+            nombre : existeUsuario.nombre,
+            token : existeUsuario.token_confirmar,
+            usuario : existeUsuario.usuario,
+        })
+
+        await existeUsuario.update({
+            id: existeUsuario.id,
+            nombre : existeUsuario.nombre,
+            correo : existeUsuario.correo,
+            password: existeUsuario.password,
+            usuario: existeUsuario.usuario,
+            imagen:existeUsuario.imagen,
+            estado: existeUsuario.estado,
+            token_confirmar: generarToken(),
+            sesion: existeUsuario.sesion,
+            rol: existeUsuario.rol,
+            confirmado: existeUsuario.confirmado,
+          });
+
+        console.log(colors.bgRed(existeUsuario))
+        res.json({msg: "Hemos enviado un email con las instrucciones"})
+    } catch (error) {
+        
+    }
 }
 
+
 const comprobarPassword = async (req,res, next) => {
-    const {token} = req.params;
+    const { token } = req.params;
+
+    // NO ENTIENDO PORQUE CARAJO FUNCIONA
+    const tokenValido = await Usuario.findOne({where : { token_confirmar : token }});
+    if(tokenValido) {
+        console.log("El token es valido")
+        res.status(200).render("newPassword", {
+            usuario: tokenValido.usuario,
+            token: tokenValido.token_confirmar
+      })
+    } else {
+        const error = new Error("Token no valido")
+        return res.status(400).json({msg: error.message})
+    }
 
 }
 
 const nuevoPassword = async (req, res) => {
-   
+    const { token } = req.params;
+
+    const { password } = req.body;
+    const usuario = await Usuario.findOne({where : { token_confirmar : token }});
+
+    if(!usuario) {
+        const error = new Error("Token no valido")
+        return res.status(400).json({msg: error.message})
+    }
+
+    try {
+        // cambiar token
+        usuario.token = null;
+        const salt = bcryptjs.genSaltSync();
+        usuario.password = bcryptjs.hashSync( password, salt );
+        await usuario.save();
+        res.json({msg: "Password modificado correctamente"})
+    } catch (error) {
+        
+    }
 }
 
 const sesion = (req, res) => {
@@ -235,7 +304,7 @@ const editarPerfil = async (req, res) => {
                 imagen: secure_url,
                 estado: user.estado,
                 token_confirmar: null,
-                token_sesion:null,
+    
                 sesion: user.sesion,
                 rol: user.rol,
                 confirmado: user.confirmado,
@@ -254,7 +323,6 @@ const editarPerfil = async (req, res) => {
                 imagen: user.imagen,
                 estado: user.estado,
                 token_confirmar: null,
-                token_sesion:null,
                 sesion: user.sesion,
                 rol: user.rol,
                 confirmado: user.confirmado,

@@ -88,9 +88,7 @@ const Comentario = sequelize.define('Comentario', {
     token_confirmar: {
       type: DataTypes.STRING
     },
-    token_sesion: {
-      type: DataTypes.STRING
-    },
+    
     sesion: {
       type: DataTypes.BOOLEAN            
     },
