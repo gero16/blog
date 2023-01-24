@@ -68,9 +68,11 @@ html(lang="en")
                             input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
                         div 
                             each  value, nombre in nuevoContenido
-                                li 
+                                li(class=`li-${ nombre } li-parrafos`) 
                                     div
-                                    textarea(name=`${nombre}`, class="parrafos-post lleno") !{value} 
+                                    textarea(name=`${ nombre }`, class=`parrafos-post lleno ${ nombre }`) !{value} 
+                                    div
+                                    span(class=`quitar-${ nombre } btn-quitar-contenido`) Quitar
                         
                         li(id="li-agregar") 
                             label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo

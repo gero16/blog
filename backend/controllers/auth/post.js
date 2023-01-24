@@ -139,7 +139,7 @@ const authAgregarComentario = async (req, res) => {
   const actualizarPost = async (req, res) => {
  
     const body = req.body;
-    const {id, titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, editar } = body;
+    const {id, titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, noveno, decimo, editar } = body;
     // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
     const newID = Date.now();
@@ -160,6 +160,7 @@ const authAgregarComentario = async (req, res) => {
         function (error, result) {console.log(result);});
       
         const { secure_url } = result;  
+        /*
         await post.update({
               titulo,
               fecha,
@@ -178,12 +179,13 @@ const authAgregarComentario = async (req, res) => {
           imagen,
           contenido,
           url: tituloURL
-        });   
+        });     */
       }
   
       return res.status(200).render("ok", {
         mensaje: "Publicación actualizada correctamente!"
       })
+    
 
     } catch (error) {
       console.log(error)
