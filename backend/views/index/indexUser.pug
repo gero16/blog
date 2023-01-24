@@ -35,15 +35,19 @@ html(lang="en")
         .container 
                 span.frase-cabecera.flex-center Inserte su frase de cabecera 
                 .blog
-                    .post 
-                        .div-imagen 
-                            img(class="post-img" src=`${imagen}`)
-                        .post-div-contenido 
-                            span.post-fecha #{fecha}
-                                span.post-autor | Autor:
-                                    strong #{autor} 
-                            h2.post-titulo #{titulo}
-                            .post-contenido 
+                    each  publicacion in registros
+                        div(class="post")
+
+                            div(class="div-imagen")
+                                img(src=`${ publicacion.imagen }`, class="post-img" alt="")
+
+                            div(class="post-div-contenido" data-id=`${ publicacion.url }`)
+                                div(class="header-contenido flex-between")
+                                    span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
+                                        strong !{ publicacion.autor }
+                                    span(class="post-fecha")  !{ publicacion.fecha }
+                                h2(class="post-titulo")  !{ publicacion.titulo }
+                                div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
 
    
         footer(class="flex-between")

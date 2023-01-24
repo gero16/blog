@@ -41,7 +41,6 @@ const indexPlantilla = async (req, res) => {
             const miniName = reduceName[0]
             if(user.rol === "ADMIN") {
               res.render("index/indexAdmin", {
-                    url: `/publicaciones/${registrosOrdenados.titulo}`,
                     registros: registrosOrdenados,
                     miniName: miniName,
                     usuario: user.usuario,
@@ -53,7 +52,6 @@ const indexPlantilla = async (req, res) => {
             
             } else {
                 res.render("index/indexUser", {
-                      url: `/publicaciones/${registrosOrdenados.titulo}`,
                       registros: registrosOrdenados,
                       miniName: miniName,
                       usuario: user.usuario,

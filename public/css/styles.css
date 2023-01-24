@@ -2,6 +2,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
+    font-family: 'Raleway', sans-serif;
 }
 
 ul {
@@ -22,25 +23,22 @@ body, h1, h2, h3, ul, li, p, a {
 .container {
     margin: 0px auto;
     width: 90vw;
-    font-family: 'Raleway', sans-serif;
     font-size: 20px;
 }
 
 header {
     background-color: #100540;
     color: white;
-    font-family: 'Raleway', sans-serif;  
     height: 100px;
     align-items: center;
 }
 
 footer{
-    font-family: 'Raleway', sans-serif;
+ 
     font-size: 13px;;
     background-color: rgb(233, 240, 245);
     height: 30px;
     padding: 30px;
-   
 }
 .footer-copy {
     position: relative;
@@ -74,6 +72,12 @@ footer{
     display: flex;
     justify-content: space-around;
 }
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+  }
+
 
 .display-none {
     display: none;
@@ -177,9 +181,6 @@ main{
 .post:hover .post-img {
     transition: all 0.5s ease-out;
     transform:scale(1.15); 
-    /*
-    opacity:0.6;
-    */
 }
 
 .post-titulo {
@@ -213,8 +214,6 @@ main{
 .post-autor {
     padding: 0px 0px 10px 0px;
 }
-
-
 
 .div-imagen {
     width: 410px;
@@ -323,13 +322,4 @@ main{
   }
 
 
-  .flex-column{
-    display: flex;
-    flex-direction: column;
-  }
 
-  /*
-  .big-post {
-    width: 100%;
-  }
-  */
