@@ -110,3 +110,6 @@ body {
 .recuperar-password {
     cursor: pointer;
 }
+.recuperar-password a {
+    font-size: medium;
+}

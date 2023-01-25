@@ -281,7 +281,18 @@ const errorPlantilla = (req, res) => {
 }
 
 const olvidePasswordPlantilla = (req, res) => {
-  res.render("recuperar-password")
+  res.render("recuperar-password", {
+    mensaje: "Recuperar Cuenta",
+    mensajeP: "Introduzca su correo electrónico para buscar tu cuenta."
+  })
+ 
+}
+
+const cambiarPassword = (req, res) => {
+  res.render("recuperar-password", {
+    mensaje: "Cambiar Contraseña",
+    mensajeP: "Introduzca su correo electrónico para poder cambiar su contraseña."
+  })
 }
 
 module.exports = {
@@ -293,5 +304,6 @@ module.exports = {
     eliminarPlantilla,
     editarPostPlantilla,
     errorPlantilla,
-    olvidePasswordPlantilla
+    olvidePasswordPlantilla,
+    cambiarPassword
 }

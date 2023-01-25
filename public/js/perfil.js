@@ -60,31 +60,7 @@ cambiarFoto.addEventListener("click", () => {
 })
 
 
-const btnRecuperarPassword = document.querySelector(".recuperar-password")
-btnRecuperarPassword.addEventListener("click", async () => {
-
-  const data = {
-
-  }
-  /*
-  const settings = {
-    method: 'POST',
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        body: ""
-    }};
-  try {
-    const fetchResponse = await fetch(`/auth/olvide-password`, settings);
-    console.log(fetchResponse)
-    if(fetchResponse.ok == true) {
-      window.location.href = "/"
-    }
-   
-  
-  } catch (error) {
-    console.log(error)
-  }
-  */
-
+const cambiarPassword = document.querySelector(".olvide-password")
+cambiarPassword.addEventListener("click", () => {
+  window.location.href = "/auth/cambiar-password"
 })

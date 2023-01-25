@@ -134,23 +134,52 @@ btnAgregarParrafo.addEventListener("click", () => {
 })
 
 
-btnAgregarSub.addEventListener("click", () => {
-  let inputSub = document.createElement("input")
-  inputSub.className = "subtitulos-post vacio";
+btnAgregarSub.addEventListener("click", () => { 
+  const arrayOrden = Object.entries(orden)
+  const indexValor = arrayOrden.findIndex(element => element[1] == "vacio")
+  console.log(indexValor)
+  const divLiContenido = document.querySelector(".div-li-contenido")
+  const liContenedor = document.createElement("li")
+  liContenedor.classList.add(`li-${ arrayOrden[5][0] }`,"li-parrafos")
   console.log(orden)
+  
+  const divVacio1 = document.createElement("div")
+  const divVacio2 = document.createElement("div")
+
+  let inputSubtitulo = document.createElement("textarea")
+  inputSubtitulo.className = "subtitulos-post vacio"
+
+  const btnQuitar = document.createElement("span")
+  //btnQuitar.className = "btn-quitar-contenido"
+  btnQuitar.textContent = "Quitar Subtitulo"
+ 
+
+  // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
   for(valor in orden) {
-    console.log(orden[valor] === "vacio")
     if(orden[valor] === "vacio") {
-      inputSub.name = valor; // Antes - inputSub.name = valor+"Subtitulo";
-      let contadorInputs = document.querySelectorAll(".subtitulos-post").length
-      inputSub.dataset.id = `subtitulo-${contadorInputs}`
-      divAgregarInputs.appendChild(inputSub)
-      // Cambio su valor a lleno
+      // primerParrafo
+      inputSubtitulo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
+      btnQuitar.className = ` ${ valor } btn-quitar-contenido `
+      
+      liContenedor.append(divVacio1, inputSubtitulo, divVacio2, btnQuitar)
+      divLiContenido.append(liContenedor)
+
+      // Cambio el valor del objeto a lleno
       orden[valor] = "lleno";
-      //inputSub.value = "<h2>              </h2> "
       break;
     } 
-  }
+  }  
+
+  btnQuitar.addEventListener("click", (e) => {
+    let contenedorParrafos = document.querySelectorAll(".li-parrafos")
+    // const arrayOrden = Object.entries(orden)
+    console.log(e.target.classList[0])
+    const claveVaciar = e.target.classList[0]
+    console.log(e.target.parentNode)
+    contenedorParrafos[contenedorParrafos.length -1].remove();
+    orden[claveVaciar] = "vacio"
+    console.log(orden)
+  })
 })
 
 /* HAY QUE HACERLOOOOOOOOOOOOO 

@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
-const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla } = require('../controllers/auth/plantillas');
+const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword } = require('../controllers/auth/plantillas');
 
 const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword } = require('../controllers/auth/usuarios');
 
@@ -64,6 +64,7 @@ router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarCom
 router.post("/validate-token", verifyToken, validateToken)
 
 router.get("/olvide-password", olvidePasswordPlantilla)
+router.get("/cambiar-password", cambiarPassword)
 
 router.post("/olvide-password", olvidePassword)
 // Confirmar - A traves de email
