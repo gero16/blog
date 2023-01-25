@@ -35,7 +35,7 @@ if(btnLogin){
         };
     
     if(correo.value === "" || password.value === ""){
-        crearMensaje("El Usuario y/o Contraseña no pueden quedar Vacios")
+        crearMensaje("El Usuario y/o Contraseña no pueden quedar vacios")
     }
     const fetchResponse = await fetch(`/auth/login`, settings);
     console.log(fetchResponse)
@@ -47,13 +47,12 @@ if(btnLogin){
       localStorage.setItem("sesion", JSON.stringify(dataSesion) );
       window.location.assign(`/auth/${data.usuario}/index`)
       return false;
-      //window.location.assign(`/`)
     } 
     if(data.msg === 'El usuario no fue confirmado'){
       crearMensaje("Debe Confirmar su Cuenta!")
     }
-    if (data.msg === 'El usuario no es correcto') {
-      crearMensaje("El Usuario y/o la Constraseña son Incorrectos!")
+    if (data.msg === 'La contraseña no es correcta') {
+      crearMensaje("El Usuario y/o Constraseña son Incorrectos!")
     }
    
     if(data.msg === 'Su cuenta fue eliminada'){

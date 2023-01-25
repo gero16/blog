@@ -194,13 +194,7 @@ const logoutUsuario = async (req, res) => {
 
     try {
      
-        emailRecuperarPassword({
-            correo,
-            nombre : existeUsuario.nombre,
-            token : existeUsuario.token_confirmar,
-            usuario : existeUsuario.usuario,
-        })
-
+   
         await existeUsuario.update({
             id: existeUsuario.id,
             nombre : existeUsuario.nombre,
@@ -215,7 +209,15 @@ const logoutUsuario = async (req, res) => {
             confirmado: existeUsuario.confirmado,
           });
 
-        console.log(colors.bgRed(existeUsuario))
+          await emailRecuperarPassword({
+            correo,
+            nombre : existeUsuario.nombre,
+            token : existeUsuario.token_confirmar,
+            usuario : existeUsuario.usuario,
+        })
+
+
+        //console.log(colors.bgRed(existeUsuario))
         res.json({msg: "Hemos enviado un email con las instrucciones"})
     } catch (error) {
         
@@ -243,24 +245,39 @@ const comprobarPassword = async (req,res, next) => {
 
 const nuevoPassword = async (req, res) => {
     const { token } = req.params;
-
     const { password } = req.body;
-    const usuario = await Usuario.findOne({where : { token_confirmar : token }});
+    console.log(colors.bgWhite(req.body))
+    const user = await Usuario.findOne({where : { token_confirmar : token }});
 
-    if(!usuario) {
+    if(!user) {
         const error = new Error("Token no valido")
         return res.status(400).json({msg: error.message})
     }
 
     try {
-        // cambiar token
-        usuario.token = null;
         const salt = bcryptjs.genSaltSync();
-        usuario.password = bcryptjs.hashSync( password, salt );
-        await usuario.save();
-        res.json({msg: "Password modificado correctamente"})
-    } catch (error) {
+        const newPassword = bcryptjs.hashSync( password, salt );
+        // cambiar token
+        await user.update({
+            id: user.id,
+            nombre: user.nombre,
+            correo: user.correo,
+            password: newPassword,
+            usuario: user.usuario,
+            imagen: user.secure_url,
+            estado: user.estado,
+            token_confirmar: null,
+            sesion: user.sesion,
+            rol: user.rol,
+            confirmado: user.confirmado,
+          });
+        console.log(colors.bgYellow("Password actualizada correctamente!"))
         
+        res.status(200).render("ok", {
+            mensaje: "Contraseña actualziada correctamente!",
+        })
+    } catch (error) {
+     console.log(error)   
     }
 }
 
@@ -304,7 +321,6 @@ const editarPerfil = async (req, res) => {
                 imagen: secure_url,
                 estado: user.estado,
                 token_confirmar: null,
-    
                 sesion: user.sesion,
                 rol: user.rol,
                 confirmado: user.confirmado,

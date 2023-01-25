@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer")
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
+const colors = require('colors');
 
 const accountTransport = require("../../account_transport.json");
 
@@ -111,7 +112,7 @@ const emailRegistro = async (datos) => {
 
   const emailRecuperarPassword = async (datos) => {
     const { correo, nombre, token, usuario } = datos;
-  
+    console.log(colors.bgBlue(token))
     // Con GMAIL funcionando!
     const createTransport = () => {
         const transporter = nodemailer.createTransport({
@@ -181,7 +182,7 @@ const emailRegistro = async (datos) => {
               expires: 1484314697598,
             },
       });
-      console.log(info)
+      console.log(colors.bgGreen(info))
       console.log("Mensaje enviado: %s", info.messageId)
   };
 
