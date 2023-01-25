@@ -51,16 +51,20 @@ const urlActual = window.location.href
 
 
 btnAddComentario.addEventListener("click", async () => {
- 
+   let imagen_usuario = " ";
+   const data = {
+      usuario: inputUsuario.value,
+      mensaje: inputComentario.value,
+      editar: false,
+      imagen_usuario: userPublic ? `/../img/avatar${userPublic[1]}.png` : " ",
+   }
+
    let url = `${urlActual}/agregar-comentario`
+   
    const comentarioActions = document.querySelector(".comentario-actions")
    if(!btnAddComentario.classList.contains("editar-coment")){
-      const data = {
-         usuario: inputUsuario.value,
-         mensaje: inputComentario.value,
-         editar: false,
-         imagen_usuario: `/../img/avatar${userPublic[1]}.png`,
-      }
+
+    
       try {
          const fetchResponse = await (fetch(url, {
                method: "POST",

@@ -45,7 +45,8 @@ html(lang="en")
             h1 Bienvenido a su Perfil
 
             div(class="flex-around datos-perfil")
-                div.editar-perfil 
+
+                div(class="editar-perfil display-none") 
                     form(class="flex-column form-perfil"  method="POST" action=`/auth/${usuario}/editar-perfil`  enctype="multipart/form-data") 
                         ul.lista-editar-perfil
                             li
@@ -64,7 +65,9 @@ html(lang="en")
                                 label Correo 
                                 input(name="correo" type="text" value=`${correo}`)
                             li
-                                label Contraseña 
+                                div
+                                    label Contraseña 
+                                    span(class="olvide-password") Cambiar Contraseña    
                                 input(name="password" type="password" value=`${password}`)
                             li
                                 button.btn-editar-perfil Editar Perfil
@@ -72,8 +75,9 @@ html(lang="en")
                     li !{name}
                     li !{usuario}
                     li !{correo}
-                    li Cambiar Contraseña
-            
+                span(class="actualizar-datos-perfil") Actualizar Datos
+                span(class="volver-mostrar-info display-none") Volver
+                
                 div.div-perfil-imagen
                     img(class="perfil-imagen" src=imagen)
                     p.cambiar-foto Cambiar Foto

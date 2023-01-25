@@ -17,6 +17,29 @@ inputFoto.addEventListener("change", (e) => {
   console.log(objectURL);
   perfilImagen.src = objectURL;
 });
+
+const actualizarInfo = document.querySelector(".actualizar-datos-perfil")
+const editarPerfil = document.querySelector(".editar-perfil")
+const listaPerfil = document.querySelector(".lista-perfil")
+const volverMostrarPerfil = document.querySelector(".volver-mostrar-info")
+
+actualizarInfo.addEventListener("click", () => {
+  editarPerfil.classList.remove("display-none")
+  volverMostrarPerfil.classList.remove("display-none")
+
+  listaPerfil.classList.add("display-none")
+  actualizarInfo.classList.add("display-none")
+
+})
+
+volverMostrarPerfil.addEventListener("click", () => {
+  listaPerfil.classList.remove("display-none")
+  actualizarInfo.classList.remove("display-none")
+  
+  editarPerfil.classList.add("display-none")
+  volverMostrarPerfil.classList.add("display-none")
+
+})
    
   
 

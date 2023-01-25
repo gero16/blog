@@ -12,6 +12,7 @@ html(lang="en")
         link(rel="stylesheet", href="/../css/post.css")
         link(rel="icon", href="/img/luna.png", type="image/x-icon")
         title Publicaciones - #{titulo}
+       
     body 
 
         
@@ -78,8 +79,9 @@ html(lang="en")
                                 span(class="eliminar-comentario") Eliminar 
                     
                     .seccion-comentarios 
-                        .img-user 
-                            img(src=`${usuario_perfil}`, alt="foto del perfil del usuario" class="avatar-user")
+                        div(class="img-user" )
+                            //img(src=`${usuario_perfil}`, alt="foto del perfil del usuario" class="avatar-user")
+                            div( class="avatar-user" style={"background-image":`url(${ usuario_perfil })`, "background-position": "center center", "background-size": "55px 55px"})
                             label Nombre
                             input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
                         .contenido-comentario 

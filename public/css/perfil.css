@@ -68,3 +68,14 @@ input {
 #imagen-perfil {
     width: 50%;
 }
+.display-none {
+    display: none;
+}
+
+.datos-perfil span {
+    cursor: pointer;
+}
+
+.olvide-password {
+    font-size: 13px;
+}
