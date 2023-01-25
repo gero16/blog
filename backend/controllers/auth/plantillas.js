@@ -280,7 +280,9 @@ const errorPlantilla = (req, res) => {
   res.render("error")
 }
 
-
+const olvidePasswordPlantilla = (req, res) => {
+  res.render("recuperar-password")
+}
 
 module.exports = {
     perfil,
@@ -290,6 +292,6 @@ module.exports = {
     authPostPlantilla,
     eliminarPlantilla,
     editarPostPlantilla,
-    errorPlantilla
-
+    errorPlantilla,
+    olvidePasswordPlantilla
 }

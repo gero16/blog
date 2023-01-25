@@ -106,3 +106,7 @@ body {
     top: 0px;
     width: 100%;
 }
+
+.recuperar-password {
+    cursor: pointer;
+}

@@ -8,6 +8,8 @@ html(lang="en")
         link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
         
         link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+        
+        link(rel="stylesheet" href="css/cropper.css")
         link(rel="stylesheet", href="/../css/styles.css")
         link(rel="stylesheet", href="/../css/crear.css")
         link(rel="stylesheet", href="/../css/perfil.css")
@@ -72,6 +74,7 @@ html(lang="en")
                             li
                                 button.btn-editar-perfil Editar Perfil
                 ul.lista-perfil 
+                    li  Informacion del Usuario
                     li !{name}
                     li !{usuario}
                     li !{correo}
@@ -79,9 +82,11 @@ html(lang="en")
                 span(class="volver-mostrar-info display-none") Volver
                 
                 div.div-perfil-imagen
-                    img(class="perfil-imagen" src=imagen)
+                    //img(class="perfil-imagen" src=imagen)
+                    div( class="perfil-imagen" style={"background-image":`url(${ imagen })`, "background-position": "center center",  "background-repeat": "no-repeat",
+                     "background-size" : "cover"})
                     p.cambiar-foto Cambiar Foto
-
+                    
                   
 
         script(src="/../js/middlewares.js")           

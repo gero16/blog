@@ -84,3 +84,34 @@ if(btnRegistro){
 
   })
 }
+/*
+const btnRecuperarPassword = document.querySelector(".btn-recuperar-password")
+
+if(btnRecuperarPassword) {
+  const inputCorreo = document.querySelector(".input-correo-password")
+  const data = {
+    correo: inputCorreo.value
+  }
+  btnRecuperarPassword.addEventListener("click", async () => {
+    const settings = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      body: data
+      }};
+    try {
+      const fetchResponse = await fetch(`/auth/olvide-password`, settings);
+      console.log(fetchResponse)
+      if(fetchResponse.ok == true) {
+        // window.location.href = "/"
+      }
+     
+    
+    } catch (error) {
+      console.log(error)
+    }
+  
+  })
+}
+*/

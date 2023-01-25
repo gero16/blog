@@ -218,9 +218,11 @@ const logoutUsuario = async (req, res) => {
 
 
         //console.log(colors.bgRed(existeUsuario))
-        res.json({msg: "Hemos enviado un email con las instrucciones"})
+        res.status(200).render("ok", {
+            mensaje: "Hemos enviado un email con las instrucciones",
+        })
     } catch (error) {
-        
+        console.log(error)
     }
 }
 

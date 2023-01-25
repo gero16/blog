@@ -4,9 +4,12 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
         link(rel="preconnect", href="https://fonts.googleapis.com")
         link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
         link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+
+  
 
         link(rel="stylesheet", href="/../css/styles.css")
         link(rel="stylesheet", href="/../css/post.css")
@@ -81,7 +84,7 @@ html(lang="en")
                     .seccion-comentarios 
                         div(class="img-user" )
                             //img(src=`${usuario_perfil}`, alt="foto del perfil del usuario" class="avatar-user")
-                            div( class="avatar-user" style={"background-image":`url(${ usuario_perfil })`, "background-position": "center center", "background-size": "55px 55px"})
+                            div( class="avatar-user" style={"background-image":`url(${ usuario_perfil })`, "background-position": "50% 45%", "background-size" : "62px 62px" })
                             label Nombre
                             input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
                         .contenido-comentario 

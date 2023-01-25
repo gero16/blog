@@ -2,12 +2,9 @@ const inputFoto = document.querySelector("#imagen-perfil");
 const perfilImagen = document.querySelector(".perfil-imagen")
 
 
-console.log(inputFoto)
 inputFoto.addEventListener("change", (e) => {
-  console.log(e)
-  // Esto le hago para poner manualmente el nombre de la foto a la derecha del "input"
+  inputFoto.classList.remove("vacio");
   const nameFoto = e.target.files[0].name;
-  console.log(nameFoto)
   document.querySelector(".span-foto").innerHTML = nameFoto;
 
   // Como no se me muestra completa la url, me creo una propia para poder usarla en el preview
@@ -15,6 +12,7 @@ inputFoto.addEventListener("change", (e) => {
   const primerArchivo = archivos[0];
   const objectURL = URL.createObjectURL(primerArchivo);
   console.log(objectURL);
+  perfilImagen
   perfilImagen.src = objectURL;
 });
 
@@ -43,3 +41,50 @@ volverMostrarPerfil.addEventListener("click", () => {
    
   
 
+const cambiarFoto = document.querySelector(".cambiar-foto")
+/*
+const inputCambiarFoto = document.querySelector(".input-foto")
+const labelCambiarFoto = document.querySelector(".label-foto")
+const spanCambiarFoto = document.querySelector(".span-foto")
+const btnCambiarFoto = document.querySelector(".btn-cambiar-foto")
+*/
+const liCambiarFoto = document.querySelector(".li-cambiar-foto")
+const liBtnCambiarFoto = document.querySelector(".li-btn-cambiar-foto")
+
+cambiarFoto.addEventListener("click", () => {
+  editarPerfil.classList.remove("display-none")
+  volverMostrarPerfil.classList.remove("display-none")
+
+  listaPerfil.classList.add("display-none")
+  actualizarInfo.classList.add("display-none")
+})
+
+
+const btnRecuperarPassword = document.querySelector(".recuperar-password")
+btnRecuperarPassword.addEventListener("click", async () => {
+
+  const data = {
+
+  }
+  /*
+  const settings = {
+    method: 'POST',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        body: ""
+    }};
+  try {
+    const fetchResponse = await fetch(`/auth/olvide-password`, settings);
+    console.log(fetchResponse)
+    if(fetchResponse.ok == true) {
+      window.location.href = "/"
+    }
+   
+  
+  } catch (error) {
+    console.log(error)
+  }
+  */
+
+})
