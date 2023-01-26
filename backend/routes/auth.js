@@ -4,7 +4,7 @@ const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
 const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword } = require('../controllers/auth/plantillas');
 
-const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones } = require('../controllers/auth/usuarios');
+const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones, actualizarNotificacion } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
 const { esAdmin, rutaInexistente } = require('../helpers/validators');
@@ -72,6 +72,8 @@ router.route("/:usuario/olvide-password/:token").get(comprobarPassword).post(nue
 
 // Notificaciones
 router.get("/:admin/notificaciones", adminNotificaciones)
+
+router.post("/:admin/notificaciones", actualizarNotificacion)
 
 
 module.exports = router;

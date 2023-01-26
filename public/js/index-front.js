@@ -105,15 +105,39 @@ const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
 
 if(btnNotificaciones){
-  btnNotificaciones.addEventListener("click", () => {
+  const sesion = JSON.parse(localStorage.getItem('sesion'));
+
+  btnNotificaciones.addEventListener("click", async () => {
     modalNotificaciones.style.display = "block"
     // Hacer un POST para cambiar el estado de las notifaciones de leido a true
+    const data = {
+      notificacion : true,
+    }
+
+    console.log(data)
+    const settings = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      }};
+    try {
+      const fetchResponse = await fetch(`/auth/${ sesion[1] }/notificaciones`, settings);
+      console.log(fetchResponse)
+       if(fetchResponse.status === 200) {
+        document.querySelector(".notificacion-numero").innerHTML = "0"
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  
   })
 }
 
 if(btnSalirNotificaciones) {
   btnSalirNotificaciones.addEventListener("click", () => {
     modalNotificaciones.style.display = "none"
+    location.reload();
   })  
 }
 
