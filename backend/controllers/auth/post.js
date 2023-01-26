@@ -61,6 +61,7 @@ const crearPost = async (req, res) => {
       });
 
       const admin_post = new Admin_Post({
+        id: id +12134,
         id_admin: adminUser.id,
         id_post: id,
       })

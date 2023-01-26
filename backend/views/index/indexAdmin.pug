@@ -62,7 +62,7 @@ html(lang="en")
             ul(class="lista-notificaciones") 
                 each notificacion in notificaciones 
                     li
-                        a(href=`/auth/elgero16/publicaciones/${ url_publicacion }`)  
+                        a(href=`/auth/elgero16/publicaciones/${ notificacion.url_publicacion }`)  
                             div(class="li-notificacion flex-between") 
                                 div(class="img-user")
                                     img(src="/img/avatar1.png", alt="" class="avatar-notificacion")
