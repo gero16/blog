@@ -116,12 +116,32 @@ const Comentario = sequelize.define('Comentario', {
     timestamps: false,
   })
 
-  
+  const Admin_Post = sequelize.define('Admin_Post', {
+    id: {
+      type: DataTypes.BIGINT,
+      primaryKey: true
+    },
+  },
+  { 
+    timestamps: false,
+  })
+
+
+// En comentarios - tengo un solo idPost
 Post.hasMany(Comentario,  {
     foreignKey: "id_post",
 
   })
  
+  // Solo para el admin
+Usuario.belongsToMany(Post, {
+  foreignKey: "id_admin",
+  otherKey: "id_post",
+  through: 'Admin_Post',
+
+})
+
+// Tabla Nueva con id_usuario y id_comentario |||| Esta en realidad no esta funcionando  -  en sql es Usuairo_Comentario y la de arriba es Usuario_Comentarios
 Usuario.belongsToMany(Comentario, {
   foreignKey: "id_usuario",
   otherKey: "id_comentario",
@@ -135,4 +155,5 @@ Usuario.belongsToMany(Comentario, {
     Comentario,
     Usuario,
     Usuario_Comentario,
+    Admin_Post
   }

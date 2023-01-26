@@ -24,11 +24,11 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${usuario}/index`) Inicio
+                        a(href=`/auth/${ usuario }/index`) Inicio
                     li
-                        a(href=`/auth/${usuario}/crear-post`) Crear Post
+                        a(href=`/auth/${ usuario }/crear-post`) Crear Post
                     li 
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                        a(href=`/auth/${ usuario }/perfil`) Perfil #{miniName}
                     li
                         a(href="#") Nosotros
                     li
@@ -39,7 +39,7 @@ html(lang="en")
         main(class="container principal")
             article(class="crear-post") 
                 h1 Crear Publicacion
-                form(class="formulario" action="/auth/crear-post" method="POST" enctype="multipart/form-data") 
+                form(class="formulario" action=`/auth/${ usuario }/crear-post` method="POST" enctype="multipart/form-data") 
                     ul
                         li 
                             label(for="" class="label-crear") Imagen

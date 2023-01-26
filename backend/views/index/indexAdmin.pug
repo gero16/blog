@@ -33,7 +33,9 @@ html(lang="en")
                     li 
                         a(class="logout") Cerrar Sesión
                     li
-                        img(src="/img/menu.png")
+                        div(class="li-notificaciones") 
+                            img(src="/../img/notificacion.png" class="icono-notificacion")
+                            span(class="notificacion-numero") 1
     
         main.container 
                 span.frase-cabecera.flex-center Inserte su frase de cabecera 
@@ -53,7 +55,16 @@ html(lang="en")
                                 div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
                     
 
-   
+        div(class="contenedor-notificaciones")
+            div(class="titulo-notificaciones") 
+                h3 Notificaciones
+                span(class="salir-notificaciones") X
+            ul(class="lista-notificaciones") 
+                li 
+                    p Primera Notificacion 
+                li 
+                    p Segunda Notificacion
+
         footer(class="flex-between")
             span © 2022 Espacio Luz de Luna
             div 

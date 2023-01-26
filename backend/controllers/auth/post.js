@@ -1,4 +1,4 @@
-const { Usuario_Comentario, Comentario, Post, Usuario } = require("../../models/model");
+const { Usuario_Comentario, Admin_Post, Comentario, Post, Usuario, A} = require("../../models/model");
 const colors = require('colors');
 const cloudinary = require("cloudinary").v2;
 require("multer");
@@ -15,9 +15,11 @@ cloudinary.config({
 const crearPost = async (req, res) => {
 
   const body =  req.body;
+  const { admin } = req.params
   const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
 
+  const adminUser = await Usuario.findOne({ where : { usuario : admin }})
   const existePost = await Post.findOne({where : {url : tituloURL}});
   if(existePost) {
     res.status(400).render("error", {
@@ -27,6 +29,7 @@ const crearPost = async (req, res) => {
   } else {
   
   const id = Date.now();
+  const idAdmin = (Date.now() + 113 + 4 + 2 )
 
   let contenido = [];
   const filtrarContenido = [primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo];
@@ -56,7 +59,13 @@ const crearPost = async (req, res) => {
         imagen: secure_url,
         url: tituloURL,
       });
+
+      const admin_post = new Admin_Post({
+        id_admin: adminUser.id,
+        id_post: id,
+      })
       await nuevoPost.save();
+      await admin_post.save();
     } else {
 
         
@@ -69,7 +78,14 @@ const crearPost = async (req, res) => {
         imagen,
         url: tituloURL,
       });
+
+      const admin_post = new Admin_Post ({
+        id: idAdmin,
+        id_admin: adminUser.id,
+        id_post: id,
+      })
       await nuevoPost.save();
+      await admin_post.save();
     }
     
    res.status(200).render("ok", {

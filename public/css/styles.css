@@ -238,6 +238,56 @@ main{
     cursor: pointer
 }
 
+
+.li-notificaciones {
+    position: relative;
+    cursor: pointer;
+}
+
+.icono-notificacion {
+    width: 26px;
+}
+
+.notificacion-numero {
+    position: absolute;
+    background-color: rgb(112, 9, 9);
+    color: white;
+    border-radius: 60%;
+    padding: 5px;
+    font-size: x-small;
+}
+
+.contenedor-notificaciones {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: none;
+   
+}
+
+.titulo-notificaciones {
+    background-color: #100540;
+    color: white;
+    padding: 20px;
+    border:  2px solid rgb(255, 255, 255);
+    display: flex;
+    gap: 20px;
+}
+.salir-notificaciones {
+    cursor: pointer;
+}
+
+.lista-notificaciones {
+   
+}
+
+.lista-notificaciones li {
+    border-bottom: 1px solid rgb(223, 224, 223);
+    padding: 10px;
+}
+
+/** CAMBIAR PASSWORD **/
 .lista-cambiar-password {
     margin: 30px 0px 0px 0px;
     width: 300px;

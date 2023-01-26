@@ -49,7 +49,7 @@ router.get("/publicaciones/:titulo/", postPlantilla) // Esta que hace aca ?
 // Seccion actualizacion de contenido
 router.post("/:user/editar-perfil", editarPerfil)
 
-router.post("/crear-post", crearPost)
+router.post("/:admin/crear-post", crearPost)
 
 router.post("/actualizar-post", actualizarPost)
 
