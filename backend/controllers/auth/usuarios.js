@@ -358,7 +358,9 @@ const editarPerfil = async (req, res) => {
       })
         
     }
+}
 
+const adminNotificaciones = (req, res) => {
 
 }
 
@@ -376,6 +378,7 @@ module.exports = {
     validateToken,
     sesion,
     getSesion,
-    editarPerfil
+    editarPerfil,
+    adminNotificaciones
 }
 

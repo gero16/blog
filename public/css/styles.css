@@ -242,6 +242,7 @@ main{
 .li-notificaciones {
     position: relative;
     cursor: pointer;
+    right: 15px;
 }
 
 .icono-notificacion {
@@ -257,7 +258,17 @@ main{
     font-size: x-small;
 }
 
+.li-notificacion {
+    gap: 5px;
+}
+
+.avatar-notificacion {
+    width: 30px;
+    border-radius: 50%;
+}
+
 .contenedor-notificaciones {
+    width: 240px;
     background-color: white;
     position: fixed;
     top: 0;
@@ -272,14 +283,15 @@ main{
     padding: 20px;
     border:  2px solid rgb(255, 255, 255);
     display: flex;
+    justify-content: space-around;
     gap: 20px;
 }
 .salir-notificaciones {
     cursor: pointer;
 }
 
-.lista-notificaciones {
-   
+.fecha-mensaje-notificacion {
+   font-size: small;
 }
 
 .lista-notificaciones li {

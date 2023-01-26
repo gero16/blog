@@ -133,21 +133,21 @@ Post.hasMany(Comentario,  {
 
   })
  
-  // Solo para el admin
-Usuario.belongsToMany(Post, {
-  foreignKey: "id_admin",
-  otherKey: "id_post",
-  through: 'Admin_Post',
-
-})
 
 // Tabla Nueva con id_usuario y id_comentario |||| Esta en realidad no esta funcionando  -  en sql es Usuairo_Comentario y la de arriba es Usuario_Comentarios
 Usuario.belongsToMany(Comentario, {
   foreignKey: "id_usuario",
   otherKey: "id_comentario",
   through: 'Usuario_Comentario',
-
 })
+
+  // Solo para el admin
+  Usuario.belongsToMany(Post, {
+    foreignKey: "id_admin",
+    otherKey: "id_post",
+    through: 'Admin_Post',
+  
+  })
 
 
   module.exports = {

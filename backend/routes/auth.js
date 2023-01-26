@@ -4,7 +4,7 @@ const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
 const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword } = require('../controllers/auth/plantillas');
 
-const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword } = require('../controllers/auth/usuarios');
+const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones } = require('../controllers/auth/usuarios');
 
 const { generarJWT } = require('../helpers');
 const { esAdmin, rutaInexistente } = require('../helpers/validators');
@@ -69,6 +69,9 @@ router.get("/cambiar-password", cambiarPassword)
 router.post("/olvide-password", olvidePassword)
 // Confirmar - A traves de email
 router.route("/:usuario/olvide-password/:token").get(comprobarPassword).post(nuevoPassword)
+
+// Notificaciones
+router.get("/:admin/notificaciones", adminNotificaciones)
 
 
 module.exports = router;

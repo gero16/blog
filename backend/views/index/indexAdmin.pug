@@ -35,7 +35,7 @@ html(lang="en")
                     li
                         div(class="li-notificaciones") 
                             img(src="/../img/notificacion.png" class="icono-notificacion")
-                            span(class="notificacion-numero") 1
+                            span(class="notificacion-numero") 0
     
         main.container 
                 span.frase-cabecera.flex-center Inserte su frase de cabecera 
@@ -60,10 +60,18 @@ html(lang="en")
                 h3 Notificaciones
                 span(class="salir-notificaciones") X
             ul(class="lista-notificaciones") 
-                li 
-                    p Primera Notificacion 
-                li 
-                    p Segunda Notificacion
+                li(class="li-notificacion flex-between") 
+                    div(class="img-user")
+                        img(src="/img/avatar1.png", alt="" class="avatar-notificacion")
+                    div(class="div-mensaje-notificacion")
+                        p(class="mensaje-notificacion") Geronimo Nicola ha comentado tu Publicación 
+                        span(class="fecha-mensaje-notificacion") 12 de Julio, 2023
+                li(class="li-notificacion flex-between") 
+                    div(class="img-user")
+                        img(src="/img/avatar3.png", alt="" class="avatar-notificacion")
+                    div(class="div-mensaje-notificacion")
+                        p(class="mensaje-notificacion") Lucas Rodriguez ha comentado tu Publicación 
+                        span(class="fecha-mensaje-notificacion") 15 de Marzo, 2023
 
         footer(class="flex-between")
             span © 2022 Espacio Luz de Luna
