@@ -1,5 +1,5 @@
 
-const { Usuario, Usuario_Comentario, Usuario_Sesion } = require("../../models/model.js")
+const { Usuario, Usuario_Comentario, Usuario_Sesion, Notificaciones } = require("../../models/model.js")
 const { generarJWT,emailRegistro, generarToken  } = require("../../helpers/index");
 const cloudinary = require("cloudinary").v2;
 const bcryptjs = require('bcryptjs');
@@ -360,8 +360,15 @@ const editarPerfil = async (req, res) => {
     }
 }
 
-const adminNotificaciones = (req, res) => {
+const adminNotificaciones = async (req, res) => {
+    const { admin } = req.params
+    
+    const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
+    console.log(colors.bgMagenta(notificaciones))
 
+    return res.status(200).json({
+        notificaciones: notificaciones,
+      });
 }
 
 
