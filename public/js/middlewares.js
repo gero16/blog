@@ -84,3 +84,39 @@ if(updateImg){
   })
 }
 
+const listaNotificaciones = document.querySelector(".lista-notificaciones")
+
+const notificaciones = async () => {
+
+  const getSesion = JSON.parse(localStorage.getItem('sesion'));
+
+  const resultado = await fetch(`/auth/${ getSesion[1] }/notificaciones`);
+  const data = await resultado.json();
+  const { notificaciones } = data;
+  console.log(notificaciones)
+  let notificacionNueva;
+
+  notificaciones.forEach(notificacion => {
+    notificacionNueva += ` 
+    <li>
+      <a(href="/auth/elgero16/publicaciones/el-gran-oceano")>  
+        <div(class="li-notificacion flex-between")> 
+            <div(class="img-user")>
+                img(src="/img/avatar1.png", alt="" class="avatar-notificacion")
+            </div>
+            <div(class="div-mensaje-notificacion")>
+                <p(class="mensaje-notificacion")> ${ notificacion.nombre_remitente } ha comentado tu Publicación  </p>
+                <span(class="fecha-mensaje-notificacion")> 12 de Julio, 2023 </span>
+            </div>
+        </div>
+      </a>
+    </li>
+    `
+  });
+  //listaNotificaciones.append(notificacionNueva)
+ 
+}
+
+
+ 
+  notificaciones();

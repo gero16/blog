@@ -364,7 +364,7 @@ const adminNotificaciones = async (req, res) => {
     const { admin } = req.params
     
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
-    console.log(colors.bgMagenta(notificaciones))
+    //console.log(colors.bgMagenta(notificaciones))
 
     return res.status(200).json({
         notificaciones: notificaciones,

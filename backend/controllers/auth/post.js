@@ -130,6 +130,7 @@ const authAgregarComentario = async (req, res) => {
             id: id + 12 +3,
             nombre_admin: req.body.autor_post,
             nombre_remitente: req.body.usuario,
+            url_publicacion: req.body.url_publicacion,
             mensaje: req.body.mensaje,
           })
         
@@ -156,8 +157,9 @@ const authAgregarComentario = async (req, res) => {
         
         const notifiaciones = new Notificaciones ({
           id: id + 12 +3,
-          nombre_admin: req.body.autor,
+          nombre_admin: req.body.autor_post,
           nombre_remitente: req.body.usuario,
+          url_publicacion: req.body.url_publicacion,
           mensaje: req.body.mensaje,
         })
 

@@ -19,6 +19,7 @@ let actualizarHTML = "";
 let etiquetaContenido = [];
 
 const url = window.location.href;
+console.log(url)
 
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
@@ -58,6 +59,7 @@ btnAddComentario.addEventListener("click", async () => {
       usuario: inputUsuario.value,
       autor_post: adminPost.textContent,
       mensaje: inputComentario.value,
+      url_publicacion: tituloPost,
       editar: false,
       imagen_usuario: userPublic ? `/../img/avatar${userPublic[1]}.png` : " ",
    }
@@ -108,6 +110,7 @@ btnAddComentario.addEventListener("click", async () => {
           console.log(fetchResponse)
           if(fetchResponse.status === 200) {
             console.log("Mensaje Actualizado Correctamente!")
+
             window.location.reload()
           }
           

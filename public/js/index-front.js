@@ -107,15 +107,16 @@ const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
 if(btnNotificaciones){
   btnNotificaciones.addEventListener("click", () => {
     modalNotificaciones.style.display = "block"
+    // Hacer un POST para cambiar el estado de las notifaciones de leido a true
   })
 }
 
 if(btnSalirNotificaciones) {
   btnSalirNotificaciones.addEventListener("click", () => {
     modalNotificaciones.style.display = "none"
-  })
-  
+  })  
 }
+
 
 
 

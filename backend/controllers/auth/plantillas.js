@@ -1,4 +1,4 @@
-const { Post, Usuario, Comentario, Admin_Post } = require("../../models/model.js")
+const { Post, Usuario, Comentario, Admin_Post, Notificaciones } = require("../../models/model.js")
 
 const colors = require('colors');
 
@@ -33,7 +33,11 @@ const indexPlantilla = async (req, res) => {
 
     const registros = await Post.findAll()
     const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
-    console.log(colors.bgGreen(registrosOrdenados))
+  
+    const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
+    // console.log(colors.bgRed(notificaciones))
+    const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+    console.log(colors.bgBlue(notificacion_sinleer))
 
     const user = await Usuario.findOne({ where: { usuario }})
     if(user){
@@ -48,6 +52,9 @@ const indexPlantilla = async (req, res) => {
                     name: user.nombre,
                     rol: user.rol,
                     titulo,
+                    notificaciones,
+                    notificacion_sinleer,
+                    cantidad_notificaciones : notificacion_sinleer.length
                 })
             
             } else {
@@ -59,6 +66,7 @@ const indexPlantilla = async (req, res) => {
                       name: user.nombre,
                       rol: user.rol,
                       titulo,
+                      
                       })
                     } 
     }

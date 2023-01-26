@@ -140,6 +140,9 @@ const Comentario = sequelize.define('Comentario', {
     mensaje: {
       type: DataTypes.STRING,
     },
+    url_publicacion: {
+      type: DataTypes.STRING,
+    },
     leida: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

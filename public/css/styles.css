@@ -299,6 +299,12 @@ main{
     padding: 10px;
 }
 
+
+.notificacion-leida {
+    background-color: rgb(214, 210, 210);
+
+}
+
 /** CAMBIAR PASSWORD **/
 .lista-cambiar-password {
     margin: 30px 0px 0px 0px;
