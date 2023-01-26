@@ -84,39 +84,46 @@ if(updateImg){
   })
 }
 
-const listaNotificaciones = document.querySelector(".lista-notificaciones")
 
-const notificaciones = async () => {
-
-  const getSesion = JSON.parse(localStorage.getItem('sesion'));
-
-  const resultado = await fetch(`/auth/${ getSesion[1] }/notificaciones`);
-  const data = await resultado.json();
-  const { notificaciones } = data;
-  console.log(notificaciones)
-  let notificacionNueva;
-
-  notificaciones.forEach(notificacion => {
-    notificacionNueva += ` 
-    <li>
-      <a(href="/auth/elgero16/publicaciones/el-gran-oceano")>  
-        <div(class="li-notificacion flex-between")> 
-            <div(class="img-user")>
-                img(src="/img/avatar1.png", alt="" class="avatar-notificacion")
-            </div>
-            <div(class="div-mensaje-notificacion")>
-                <p(class="mensaje-notificacion")> ${ notificacion.nombre_remitente } ha comentado tu Publicación  </p>
-                <span(class="fecha-mensaje-notificacion")> 12 de Julio, 2023 </span>
-            </div>
-        </div>
-      </a>
-    </li>
-    `
-  });
-  //listaNotificaciones.append(notificacionNueva)
  
+
+const btnNotificaciones = document.querySelector(".li-notificaciones")
+const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
+const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
+
+if(btnNotificaciones){
+  const sesion = JSON.parse(localStorage.getItem('sesion'));
+
+  btnNotificaciones.addEventListener("click", async () => {
+    modalNotificaciones.style.display = "block"
+    // Hacer un POST para cambiar el estado de las notifaciones de leido a true
+    const data = {
+      notificacion : true,
+    }
+
+    console.log(data)
+    const settings = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      }};
+    try {
+      const fetchResponse = await fetch(`/auth/${ sesion[1] }/notificaciones`, settings);
+      console.log(fetchResponse)
+       if(fetchResponse.status === 200) {
+        document.querySelector(".notificacion-numero").innerHTML = "0"
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  
+  })
 }
 
-
- 
-  notificaciones();
+if(btnSalirNotificaciones) {
+  btnSalirNotificaciones.addEventListener("click", () => {
+    modalNotificaciones.style.display = "none"
+    location.reload();
+  })  
+}

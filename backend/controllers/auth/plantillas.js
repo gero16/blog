@@ -3,13 +3,29 @@ const { Post, Usuario, Comentario, Admin_Post, Notificaciones } = require("../..
 const colors = require('colors');
 
 const perfil = async (req, res) => {
-  let arrayRegistros = []  
+  
 
   try {
  
+
     const user = await Usuario.findOne({where: {usuario: req.params.user}})
+    const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
+    // console.log(colors.bgRed(notificaciones))
+    const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
     // console.log(colors.bgRed(user.dataValues))
-   const titulo = "Perfil"
+    const titulo = "Perfil"
+   if(user.rol === "ADMIN") {
+    res.render("perfil", {
+      usuario: user.usuario,
+      correo: user.correo,
+      name: user.nombre,
+      imagen: user.imagen,
+      titulo,
+      notificaciones,
+      notificacion_sinleer,
+      cantidad_notificaciones : notificacion_sinleer.length
+    })
+   } else {
     res.render("perfil", {
       usuario: user.usuario,
       correo: user.correo,
@@ -17,6 +33,9 @@ const perfil = async (req, res) => {
       imagen: user.imagen,
       titulo,
     })
+   }
+ 
+ 
   } catch (error) {
     console.log(error)
   }

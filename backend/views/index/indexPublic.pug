@@ -39,7 +39,7 @@ html(lang="en")
             span !{usuario}
             .blog
                each  publicacion in registros
-                    div(class="post")
+                    div(class="post"  data-id=`${ publicacion.url }`)
 
                         div(class="div-imagen" data-id=`${ publicacion.url }`)
                             img(src=`${ publicacion.imagen }`, class="post-img" alt="")
