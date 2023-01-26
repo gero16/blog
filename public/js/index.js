@@ -104,13 +104,18 @@ const btnNotificaciones = document.querySelector(".li-notificaciones")
 const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
 
-btnNotificaciones.addEventListener("click", () => {
-  modalNotificaciones.style.display = "block"
-})
+if(btnNotificaciones){
+  btnNotificaciones.addEventListener("click", () => {
+    modalNotificaciones.style.display = "block"
+  })
+}
 
-btnSalirNotificaciones.addEventListener("click", () => {
-  modalNotificaciones.style.display = "none"
-})
+if(btnSalirNotificaciones) {
+  btnSalirNotificaciones.addEventListener("click", () => {
+    modalNotificaciones.style.display = "none"
+  })
+  
+}
 
 
 

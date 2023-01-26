@@ -1,4 +1,4 @@
-const { Usuario_Comentario, Admin_Post, Comentario, Post, Usuario, A} = require("../../models/model");
+const { Usuario_Comentario, Admin_Post, Comentario, Post, Usuario, Notificaciones } = require("../../models/model");
 const colors = require('colors');
 const cloudinary = require("cloudinary").v2;
 require("multer");
@@ -125,15 +125,25 @@ const authAgregarComentario = async (req, res) => {
             id_usuario: user.id,
             id_comentario: id,
           })
-  
+        
+          const notifiaciones = new Notificaciones ({
+            id: id + 12 +3,
+            nombre_admin: req.body.autor_post,
+            nombre_remitente: req.body.usuario,
+            mensaje: req.body.mensaje,
+          })
+        
         await newComentario.save()
         await usuario_comentarios.save()
+        await notifiaciones.save()
   
       
         res.status(200).send("Mensaje Agregado!")
       } else {
         const comentario = await Comentario.findOne({where : {id : id_comentario}})
         const usuario_comentario = await Usuario_Comentario.findOne({where : {id_comentario : id_comentario}})
+
+    
         await comentario.update({
           id : id_comentario,
           usuario: req.body.usuario,
@@ -143,7 +153,16 @@ const authAgregarComentario = async (req, res) => {
           imagen_usuario: comentario.imagen_usuario,
           id_post: comentario.id_post
         });
-      
+        
+        const notifiaciones = new Notificaciones ({
+          id: id + 12 +3,
+          nombre_admin: req.body.autor,
+          nombre_remitente: req.body.usuario,
+          mensaje: req.body.mensaje,
+        })
+
+        await notifiaciones.save()
+
         res.status(200).send("Mensaje Actualizado!")
       }
        

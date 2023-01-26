@@ -49,11 +49,14 @@ if(userPublic) {
 
 const urlActual = window.location.href
 
+const adminPost = document.querySelector(".label-admin")
+console.log(adminPost)
 
 btnAddComentario.addEventListener("click", async () => {
    let imagen_usuario = " ";
    const data = {
       usuario: inputUsuario.value,
+      autor_post: adminPost.textContent,
       mensaje: inputComentario.value,
       editar: false,
       imagen_usuario: userPublic ? `/../img/avatar${userPublic[1]}.png` : " ",
@@ -87,6 +90,7 @@ btnAddComentario.addEventListener("click", async () => {
       const idActualizar = comentarioActions.dataset.id;
       const data = {
          usuario: inputUsuario.value,
+         autor_post: adminPost.textContent,
          mensaje: inputComentario.value,
          editar: true,
          id_comentario: idActualizar

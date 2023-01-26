@@ -1,4 +1,4 @@
-const { Post, Usuario, Usuario_Sesion, Comentario } = require("../../models/model.js")
+const { Post, Usuario, Comentario, Admin_Post } = require("../../models/model.js")
 
 const colors = require('colors');
 
@@ -124,6 +124,11 @@ const authPostPlantilla =  async (req, res) => {
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
+
+        //const admin = await
+        const post_admin = await Admin_Post.findOne({where : { id_post : datos.id }})
+        const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
+        console.log(colors.bgYellow(admin))
          
         const comentarios = await Comentario.findAll({where : {id_post : id}});
         
@@ -153,7 +158,8 @@ const authPostPlantilla =  async (req, res) => {
               fecha: newDate,
               comentarios: comentarios,
               usuario_perfil: user.imagen,
-              numComentarios: numComentarios
+              numComentarios: numComentarios,
+              admin_post : admin.usuario,
           })
         } else {
             res.render("post/userPost", {
@@ -168,7 +174,8 @@ const authPostPlantilla =  async (req, res) => {
               fecha: fecha,
               comentarios: comentarios,
               usuario_perfil: user.imagen,
-              numComentarios: numComentarios
+              numComentarios: numComentarios,
+              admin_post : admin.usuario,
           })
       } 
       }

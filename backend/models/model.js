@@ -126,6 +126,24 @@ const Comentario = sequelize.define('Comentario', {
     timestamps: false,
   })
 
+  const Notificaciones = sequelize.define('Notificaciones', {
+    id: {
+      type: DataTypes.BIGINT,
+      primaryKey: true
+    },
+    nombre_admin: {
+      type: DataTypes.STRING,
+    },
+    nombre_remitente: {
+      type: DataTypes.STRING,
+    },
+    mensaje: {
+      type: DataTypes.STRING,
+    }
+  },
+  { 
+    timestamps: false,
+  })
 
 // En comentarios - tengo un solo idPost
 Post.hasMany(Comentario,  {
@@ -142,12 +160,12 @@ Usuario.belongsToMany(Comentario, {
 })
 
   // Solo para el admin
-  Usuario.belongsToMany(Post, {
+Usuario.belongsToMany(Post, {
     foreignKey: "id_admin",
     otherKey: "id_post",
     through: 'Admin_Post',
   
-  })
+})
 
 
   module.exports = {
@@ -155,5 +173,6 @@ Usuario.belongsToMany(Comentario, {
     Comentario,
     Usuario,
     Usuario_Comentario,
-    Admin_Post
+    Admin_Post,
+    Notificaciones
   }
