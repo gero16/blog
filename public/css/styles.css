@@ -176,12 +176,15 @@ main{
 }
 
 .notificacion-numero {
-    position: absolute;
     background-color: rgb(112, 9, 9);
     color: white;
     border-radius: 60%;
     padding: 3px;
     font-size: xx-small;
+    
+}
+.notificacion-numero-normal {
+    position: absolute;
     right: 0px;
 }
 
@@ -274,7 +277,15 @@ main{
 
 .header-elementos {
     gap: 10px;
+   
 }
+
+.li-notificaciones-mobile {  
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
 
 @media (max-width: 430px) {
     .menu {

@@ -91,6 +91,7 @@
     background-color: #d2d0daaf;
     padding: 20px;
     border-radius: 5px;
+    text-align: center;
 }
 
 @media (max-width: 1500px) {
@@ -142,13 +143,13 @@
         opacity: 1;
     }
     .post {
-        min-height: 400px;
-        width: 95vw;
-
-   
+        min-height: 350px;
+        width: 90vw;
+  
     }
     .div-imagen  {
-        min-height: 250px;
-        width: 95vw;
+        min-height: 170px;
+        width: 90vw;
     }
+   
   }

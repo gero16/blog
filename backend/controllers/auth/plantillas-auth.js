@@ -102,12 +102,19 @@ const crearPostPlantilla = async (req, res) => {
   const year = date.getFullYear(); //obteniendo año
   const fecha = `${year}-${month}-${day}`
 
+  const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.admin }});
+  // console.log(colors.bgRed(notificaciones))
+  const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+
   try {
     const titulo = "Crear Publicación"
     res.status(200).header("auth-token", req.user).render("crear", {
       usuario: req.params.admin,
       fecha: fecha,
       titulo,
+      notificaciones,
+      notificacion_sinleer,
+      cantidad_notificaciones : notificacion_sinleer.length
 })
   } catch (error) {
     console.log(error)
@@ -117,8 +124,6 @@ const crearPostPlantilla = async (req, res) => {
 // DEBERIA ESTAR FUERA DE AUTH
 const postPlantilla =  async (req, res) => {
   const url = req.params.titulo
-  console.log(req.body)
-
 
   try {
     const datos = await Post.findOne({where: {url}})
@@ -140,12 +145,15 @@ const postPlantilla =  async (req, res) => {
 }
 
 const authPostPlantilla =  async (req, res) => {
-
+  console.log(colors.bgGreen(req.params))
     const usuario = req.params.user
     const url = req.params.titulo
+
     try {
       
       const datos = await Post.findOne({where: {url}})
+      const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : usuario }});
+      const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
 
       if(datos){
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
@@ -155,7 +163,6 @@ const authPostPlantilla =  async (req, res) => {
         //const admin = await
         const post_admin = await Admin_Post.findOne({where : { id_post : datos.id }})
         const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
-        console.log(colors.bgYellow(admin))
          
         const comentarios = await Comentario.findAll({where : {id_post : id}});
         
@@ -187,6 +194,9 @@ const authPostPlantilla =  async (req, res) => {
               usuario_perfil: user.imagen,
               numComentarios: numComentarios,
               admin_post : admin.usuario,
+              notificaciones,
+              notificacion_sinleer,
+              cantidad_notificaciones : notificacion_sinleer.length
           })
         } else {
             res.render("post/userPost", {
@@ -203,6 +213,9 @@ const authPostPlantilla =  async (req, res) => {
               usuario_perfil: user.imagen,
               numComentarios: numComentarios,
               admin_post : admin.usuario,
+              notificaciones,
+              notificacion_sinleer,
+              cantidad_notificaciones : notificacion_sinleer.length
           })
       } 
       }
@@ -218,20 +231,31 @@ const eliminarPlantilla = async (req, res) => {
   
   const data = await Post.findOne({where: { url }})
   const {id, titulo, imagen} = data;
+
+  const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.admin }});
+  const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+
     res.render("eliminar", {
       usuario: req.params.admin,
       id: id,
       titulo: titulo,
       imagen: imagen,
+      notificaciones,
+      notificacion_sinleer,
+      cantidad_notificaciones : notificacion_sinleer.length
     })
 }
 
 const editarPostPlantilla = async (req, res) => {
+
   try {  
     const user = req.params.admin
     const title = req.params.titulo
 
     const data = await Post.findOne({where: { url: title }})
+
+    const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : user }});
+    const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
 
     let orden = {
       primer: "vacio",
@@ -263,8 +287,6 @@ const editarPostPlantilla = async (req, res) => {
         if(valores[i] === "vacio" && contenido[i]) {
           let key = keys[i]
           newOrden[key] = contenido[i]
-
-          console.log(colors.bgGreen(orden))
           //return nuevoContenido
         }
         
@@ -285,7 +307,10 @@ const editarPostPlantilla = async (req, res) => {
           usuario: user,
           autor: autor,
           fecha: fecha,
-          nuevoContenido: newOrden
+          nuevoContenido: newOrden,
+          notificaciones,
+          notificacion_sinleer,
+          cantidad_notificaciones : notificacion_sinleer.length
         })
       } else {
         res.render("editar", {
@@ -298,7 +323,10 @@ const editarPostPlantilla = async (req, res) => {
           usuario: user,
           autor: autor,
           fecha: fecha,
-          nuevoContenido: newOrden
+          nuevoContenido: newOrden,
+          notificaciones,
+          notificacion_sinleer,
+          cantidad_notificaciones : notificacion_sinleer.length
         })
       }
   } else {
