@@ -108,14 +108,21 @@ if(btnNotificaciones){
       }};
     try {
       const fetchResponse = await fetch(`/auth/${ sesion[1] }/notificaciones`, settings);
+   
       console.log(fetchResponse)
        if(fetchResponse.status === 200) {
-        document.querySelector(".notificacion-numero").innerHTML = "0"
-        location.reload();
+        if(!modalNotificaciones.classList.contains("active")) {
+          window.location.reload()
+          document.querySelector(".notificacion-numero").innerHTML = "0"
+        }
+       
       }
+    
     } catch (error) {
       console.log(error)
     }
+
+   
   })
 }
 

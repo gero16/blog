@@ -370,7 +370,7 @@ const actualizarNotificacion = async (req, res) => {
     
         console.log(colors.bgCyan(actualizar))
 
-        res.status(200)
+        res.status(200).json({msg: "Comementario Leido"})
        
     } catch (error) {
         console.log(error)
