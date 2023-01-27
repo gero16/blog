@@ -59,6 +59,8 @@ const indexPlantilla = async (req, res) => {
     console.log(colors.bgBlue(notificacion_sinleer))
 
     const user = await Usuario.findOne({ where: { usuario }})
+ 
+
     if(user){
       const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
@@ -222,7 +224,7 @@ const authPostPlantilla =  async (req, res) => {
      
   } catch (error) {
     console.log(error) 
-  }
+  } 
 }
 
 const eliminarPlantilla = async (req, res) => {

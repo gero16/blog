@@ -1,15 +1,18 @@
 const jwt = require("jsonwebtoken")
-const Usuario = require('../models/model');
-const colors = require('colors')
+
+const colors = require('colors');
+const { Usuario } = require("../models/model");
 
 
 const checkEmptyData = (req, res, next) =>{
     const { correo, password } = req.body;
     console.log(colors.bgMagenta(correo))
+
     if (correo == "" || password == "") {
         console.log("Empty data")
         const err = new Error("Ni el correo ni la contraseña pueden estar vacios")
-        res.status(501).json({msg: err.message})   
+        res.status(501).json({msg: err.message})  
+
      } else {
         next();
      }
@@ -72,9 +75,34 @@ const checkAuth = async (req, res, next) => {
 }
 
 
+const datosExistentes = async (req, res, next) => {
+    try {
+        const existUsuario = await Usuario.findOne({where : {usuario: req.body.usuario }})
+        const existCorreo = await Usuario.findOne({where : {correo: req.body.correo }})
+        console.log(colors.bgBlue(existCorreo))
+        console.log(colors.bgYellow(existUsuario))
+        if(existCorreo != null || existUsuario != null ) {
+            if(existUsuario) {
+                const err = new Error("El Usuario proporcionado ya existe")
+                res.status(501).json({msg: err.message})  
+            }
+            if(existCorreo){
+                const err = new Error("El Correo proporcionado ya existe")
+                res.status(501).json({msg: err.message})  
+            }
+        } else {
+            next();
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 
 module.exports = {
     checkAuth,
     verifyToken,
-    checkEmptyData
+    checkEmptyData,
+    datosExistentes
 } 

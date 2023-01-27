@@ -18,6 +18,8 @@ const traerPublicaciones = async (req, res) => {
        // Traer todos las Publicaciones
       const registros = await Post.findAll();
       const registrosOrdenados = registros.sort((a, b) =>  new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
+  
+
       return res.status(200).json({
         registros: registrosOrdenados
       });
@@ -32,7 +34,8 @@ const traerPublicaciones = async (req, res) => {
     try {
       const registros = await Post.findAll()
       const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
-  
+    
+      
       const titulo = "Espacio Luz de Luna"
       res.render("index/indexPublic", {
           registros: registrosOrdenados, 
@@ -58,6 +61,12 @@ const traerPublicaciones = async (req, res) => {
      const date = [separar[2], separar[1], separar[0]]
      const newDate = date.join("-")
 
+     let numComentarios = 0;
+
+     if(comentarios.length > 1) {
+      numComentarios = comentarios.length +1
+     }
+
     return res.status(200).render("post/publicPost", {
       id: id,
       url,
@@ -67,6 +76,7 @@ const traerPublicaciones = async (req, res) => {
       autor: autor,
       fecha: newDate,
       comentarios: comentarios,
+      numComentarios
       
   })
    } catch (error) {

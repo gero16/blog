@@ -89,16 +89,20 @@ if(updateImg){
 const btnNotificaciones = document.querySelector(".li-notificaciones")
 const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
+const divNotificacion = document.querySelector(".notificacion-noleida")
 
 if(btnNotificaciones){
   const sesion = JSON.parse(localStorage.getItem('sesion'));
 
   btnNotificaciones.addEventListener("click", async () => {
-    modalNotificaciones.style.display = "block"
-    // Hacer un POST para cambiar el estado de las notifaciones de leido a true
-    const data = {
-      notificacion : true,
-    }
+    modalNotificaciones.classList.toggle("active")
+
+    console.log(modalNotificaciones)
+
+      // Hacer un POST para cambiar el estado de las notifaciones de leido a true
+      const data = {
+        notificacion : true,
+      }
 
     console.log(data)
     const settings = {
@@ -116,13 +120,12 @@ if(btnNotificaciones){
     } catch (error) {
       console.log(error)
     }
-  
   })
 }
 
 if(btnSalirNotificaciones) {
   btnSalirNotificaciones.addEventListener("click", () => {
-    modalNotificaciones.style.display = "none"
+    modalNotificaciones.classList.remove("active")
     location.reload();
   })  
 }
@@ -140,3 +143,22 @@ imgPhoneMenu.addEventListener("click", () => {
   } 
   
 })
+
+
+const notificacionNumero = document.querySelector(".notificacion-numero")
+const liNotificacion = document.querySelectorAll(".li-notificacion")
+const arrayNotificaciones = Array.apply(null, liNotificacion);
+console.log(arrayNotificaciones)
+
+if(notificacionNumero){
+  if(notificacionNumero.textContent !== 0) {
+    console.log("hola")
+    const num = Number(notificacionNumero.textContent)
+    console.log(num)
+    for (let i = 0; i < num; i++) {
+         liNotificacion[i].classList.add("notificacion-noleida")
+         console.log(liNotificacion[i])
+      
+    }
+  }
+}

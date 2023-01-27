@@ -27,19 +27,6 @@ const crearUsuario = async (req, res = response) => {
     const { correo, usuario, nombre, password } = req.body;
     console.log(req.body)
 
-    const existEmail = await Usuario.findOne({where : {correo: correo}})
-    const existUser = await Usuario.findOne({where : {usuario: usuario}})
-
-    if(existEmail) {
-        res.status(401).json({
-            mensaje: "El email proporcionado ya esta registrado"
-        })
-    } else if (existUser) {
-        res.status(401).json({
-            mensaje: "El usuario proporcionado ya esta registrado"
-        })
-    }
-    else {
         try {
             const token = generarToken()
             const newUsuario = new Usuario ({
@@ -75,7 +62,6 @@ const crearUsuario = async (req, res = response) => {
         } catch (error) {
             console.log(error)
             res.status(500)
-        }
     }
 }
 

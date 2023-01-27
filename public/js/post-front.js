@@ -55,6 +55,8 @@ console.log(adminPost)
 
 btnAddComentario.addEventListener("click", async () => {
    let imagen_usuario = " ";
+   const sesion = JSON.parse(localStorage.getItem('sesion'));
+  
    const data = {
       usuario: inputUsuario.value,
       autor_post: adminPost.textContent,

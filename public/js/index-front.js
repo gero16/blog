@@ -24,12 +24,7 @@ window.onload = async function (e) {
  
   if(sesion) {
     localStorage.removeItem("imagen");
-    urlPost.forEach(element => {
-      element.addEventListener("click", (e) => {
-        window.location.href = `/auth/${usuario}/publicaciones/${e.target.parentNode.dataset.id}`
-    })
-  })
-
+    
     const [correo, usuario, token, rol] = sesion;
 
     if(correo == null || usuario == null || token == null || rol == null) {
@@ -54,7 +49,6 @@ window.onload = async function (e) {
   }
   randomImage(0, 6);
   }
-
 }
 
 

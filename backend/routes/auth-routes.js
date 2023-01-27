@@ -8,7 +8,7 @@ const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePas
 
 const { generarJWT } = require('../helpers');
 const { esAdmin, rutaInexistente } = require('../helpers/validators');
-const { checkAuth, verifyToken, checkEmptyData } = require('../middleware/auth');
+const { checkAuth, verifyToken, checkEmptyData, datosExistentes } = require('../middleware/auth');
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.post('/login', checkEmptyData, loginUsuario);
 
 router.post("/:user/logout", logoutUsuario)
 
-router.post("/registrar", crearUsuario);
+router.post("/registrar", datosExistentes, crearUsuario);
 
 router.get("/:user/confirmar/:token", confirmarCuenta)
 
@@ -60,10 +60,11 @@ router.post("/:user/publicaciones/:titulo/agregar-comentario", authAgregarComent
 router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id", eliminarComentario)
 
 
-// Ruta a la cual se le manda el token header
+// Ruta a la que se le manda el token header
 router.post("/validate-token", verifyToken, validateToken)
 
 router.get("/olvide-password", olvidePasswordPlantilla)
+
 router.get("/cambiar-password", cambiarPassword)
 
 router.post("/olvide-password", olvidePassword)
@@ -74,6 +75,8 @@ router.route("/:usuario/olvide-password/:token").get(comprobarPassword).post(nue
 router.get("/:admin/notificaciones", adminNotificaciones)
 
 router.post("/:admin/notificaciones", actualizarNotificacion)
+
+
 
 
 module.exports = router;

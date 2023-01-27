@@ -45,9 +45,13 @@ footer{
     bottom: 0;
     width: 100%;
     gap: 25%;
-
 }
 
+.btns {
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
 
 .footer-info {
     position: relative;
@@ -90,7 +94,6 @@ footer{
     align-items: center;
   }
 
-
 .display-none {
     display: none;
 }
@@ -100,7 +103,6 @@ footer{
 .span-autor {
     font-size: 12px;
     margin: 0px 0px 0px 0px;
-
 }
 
 .logo-title{
@@ -128,7 +130,6 @@ footer{
     margin-right: 20px;
 }
 
-
 .menu-lista li {
     margin: 45px 15px;
 }
@@ -146,7 +147,6 @@ footer{
 main{
     width: 100%;
 }
-
 
 .logout:hover {
     cursor: pointer;
@@ -188,7 +188,7 @@ main{
     right: 0px;
 }
 
-.li-notificacion {
+.div-notificacion {
     gap: 5px;
 }
 
@@ -201,20 +201,27 @@ main{
     width: 240px;
     background-color: white;
     position: fixed;
-    top: 0;
+    top: 100px;
     right: 0;
-    display: none;
+
+    opacity: 0;
+    transition: all 1s;
+    overflow: hidden;
+    max-height: 0;
    
 }
+
+.active {
+    opacity: 1;
+    max-height: 9999999px;
+}
+
 
 .titulo-notificaciones {
     background-color: #100540;
     color: white;
-    padding: 20px;
-    border:  2px solid rgb(255, 255, 255);
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+    padding: 10px;
+    text-align: center;
 }
 .salir-notificaciones {
     cursor: pointer;
@@ -230,20 +237,15 @@ main{
 }
 
 
-.notificacion-leida {
-    background-color: rgb(214, 210, 210);
 
+.notificacion-noleida {
+    background-color: #ebeaecaf;
+    opacity: 0.7;
 }
 
-
-
-.btns {
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
+.notificacion-noleida p {
+    font-weight: bold;
 }
-
-
 
 .menu-phone {
     border: 1px solid rgb(218, 218, 218);
@@ -271,9 +273,6 @@ main{
     padding: 14px;
 }
 
-.menu-lista-phone a {
-   
-}
 
 .header-elementos {
     gap: 10px;

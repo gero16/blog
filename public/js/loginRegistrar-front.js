@@ -58,6 +58,8 @@ if(btnLogin){
     if(data.msg === 'Su cuenta fue eliminada'){
       crearMensaje( "Su Cuenta fue Eliminada!")
     }
+
+    console.log(data.msg)
   })  
 }
 
@@ -67,16 +69,17 @@ if(btnRegistro){
   const password = document.querySelector("#password")
   const usuario = document.querySelector("#user")
 
-
-  const datos = {
-    correo: correo.value,
-    usuario: usuario.value,
-    password: password.value,
-  }
-
   btnRegistro.addEventListener("click", () => {
     if(correo.value === "" || password.value === "" || usuario.value === ""){
       crearMensaje("El Usuario y/o Contraseña y/o Usuario no pueden quedar Vacios")
+    
+    if(data.msg === "El Usuario proporcionado ya existe") {
+        crearMensaje( "El Usuario proporcionado ya existe")
+    }
+  
+    if(data.msg === "El Correo proporcionado ya existe") {
+        crearMensaje( "El Correo proporcionado ya existe")
+    }
       
   } else {
     window.location.assign(`/`)
@@ -84,34 +87,4 @@ if(btnRegistro){
 
   })
 }
-/*
-const btnRecuperarPassword = document.querySelector(".btn-recuperar-password")
 
-if(btnRecuperarPassword) {
-  const inputCorreo = document.querySelector(".input-correo-password")
-  const data = {
-    correo: inputCorreo.value
-  }
-  btnRecuperarPassword.addEventListener("click", async () => {
-    const settings = {
-      method: 'POST',
-      headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-      body: data
-      }};
-    try {
-      const fetchResponse = await fetch(`/auth/olvide-password`, settings);
-      console.log(fetchResponse)
-      if(fetchResponse.ok == true) {
-        // window.location.href = "/"
-      }
-     
-    
-    } catch (error) {
-      console.log(error)
-    }
-  
-  })
-}
-*/
