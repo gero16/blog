@@ -16,7 +16,7 @@ html(lang="en")
     body 
 
         header.flex-between 
-            .flex-center 
+            .flex-center.header-elementos 
                 img(class="logo" src="/img/logito3.jpg")
                 span(class="span-autor") Master Reiki Usui Rose Mary Alvez
                 img( class="img-menu" src="/img/menu.png" alt="Icono menu")
@@ -71,8 +71,24 @@ html(lang="en")
                                     p(class="mensaje-notificacion") !{notificacion.nombre_remitente} ha comentado tu Publicación 
                                     span(class="fecha-mensaje-notificacion") 12 de Julio, 2023
                  
+        nav.menu-phone.ocultar-transition
+                ul(class="flex-column text-align-center menu-lista-phone ")
+                    li
+                        a(href=`/auth/${usuario}/index`) Inicio
+                    li
+                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`) Crear Post
+                    li
+                        a(href="#") Nosotros
+                    li
+                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                    li 
+                        a(class="logout") Cerrar Sesión
+                    li
+                        div(class="li-notificaciones") 
+                            img(src="/../img/notificacion.png" class="icono-notificacion")
+                            span(class="notificacion-numero") !{ cantidad_notificaciones }
 
-        footer(class="flex-between")
+        footer(class="flex-around")
             span © 2022 Espacio Luz de Luna
             div 
                 div Tel: 26131674 

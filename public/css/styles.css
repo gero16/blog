@@ -1,8 +1,11 @@
 body {
     width: 100vw;
     height: 100vh;
+    /*
     overflow-x: hidden;
+    */
     font-family: 'Raleway', sans-serif;
+    position: relative;
 }
 
 ul {
@@ -37,12 +40,15 @@ footer{
     font-size: x-small;
     background-color: rgb(233, 240, 245);
     height: 30px;
-    padding: 30px;
-}
-.footer-copy {
-    position: relative;
+    padding: 30px 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    gap: 25%;
 
 }
+
+
 .footer-info {
     position: relative;
     bottom: 50%;
@@ -75,6 +81,13 @@ footer{
 .flex-column{
     display: flex;
     flex-direction: column;
+  }
+
+.flex-column-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
 
@@ -229,5 +242,45 @@ main{
 
 
 
+.menu-phone {
+    border: 1px solid rgb(218, 218, 218);
+    background-color: white;
+    width: 150px;
+    position: absolute;
+    top: 100px;
+    right: 14px;
+}
 
+.ocultar-transition {
+    opacity: 0;
+    transition: all 1s;
+    overflow: hidden;
+    max-height: 0;
+}
 
+.ocultar-transition.active {
+    opacity: 1;
+    max-height: 9999999px;
+}
+
+.menu-lista-phone li {
+    border-bottom: 1px solid rgb(218, 218, 218);
+    padding: 14px;
+}
+
+.menu-lista-phone a {
+   
+}
+
+.header-elementos {
+    gap: 10px;
+}
+
+@media (max-width: 430px) {
+    .menu {
+        display: none;
+    }
+    .span-autor {
+        font-size: x-small;
+    }
+  }

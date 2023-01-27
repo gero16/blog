@@ -44,7 +44,6 @@ if(logout) {
 
 }
 
-console.log("hola")
 
 const sendToken = async () => {
   if(getSesion) {
@@ -127,3 +126,17 @@ if(btnSalirNotificaciones) {
     location.reload();
   })  
 }
+const imgPhoneMenu = document.querySelector(".img-menu") 
+
+
+imgPhoneMenu.addEventListener("click", () => {
+  const menuPhone = document.querySelector(".ocultar-transition") 
+  console.log(menuPhone.classList.contains("active"))
+  if(menuPhone.classList.contains("active")) {
+    return menuPhone.classList.remove("active")
+  } 
+  if(menuPhone.className !== "active") {
+    return menuPhone.classList.add("active")
+  } 
+  
+})

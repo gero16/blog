@@ -1,6 +1,8 @@
 
 /** Contenido del POST **/
-
+body {
+    Overflow: overlay;
+}
 .pagina-post {
     margin: 30px auto;
     width: 60vw;
