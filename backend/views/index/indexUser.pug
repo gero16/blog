@@ -38,19 +38,20 @@ html(lang="en")
                 span.frase-cabecera.flex-center Inserte su frase de cabecera 
                 .blog
                     each  publicacion in registros
-                        div(class="post"  data-id=`${ publicacion.url }`)
+                        a(href=`/auth/${ usuario }/publicaciones/${ publicacion.url}`) 
+                            div(class="post"  data-id=`${ publicacion.url }`)
 
-                            div(class="div-imagen" data-id=`${ publicacion.url }`)
-                                img(src=`${ publicacion.imagen }`, class="post-img" alt="")
+                                div(class="div-imagen" data-id=`${ publicacion.url }`)
+                                    img(src=`${ publicacion.imagen }`, class="post-img" alt="")
 
-                            div(class="post-div-contenido" data-id=`${ publicacion.url }`)
-                                div(class="header-contenido flex-between")
-                                    span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
-                                        strong !{ publicacion.autor }
-                                    span(class="post-fecha")  !{ publicacion.fecha }
-                                h2(class="post-titulo")  !{ publicacion.titulo }
-                                div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
-   
+                                div(class="post-div-contenido" data-id=`${ publicacion.url }`)
+                                    div(class="header-contenido flex-between")
+                                        span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
+                                            strong !{ publicacion.autor }
+                                        span(class="post-fecha")  !{ publicacion.fecha }
+                                    h2(class="post-titulo")  !{ publicacion.titulo }
+                                    div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
+    
         footer(class="flex-between")
             span © 2022 Espacio Luz de Luna
             div 
