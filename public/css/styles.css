@@ -34,8 +34,7 @@ header {
 }
 
 footer{
- 
-    font-size: 13px;;
+    font-size: x-small;
     background-color: rgb(233, 240, 245);
     height: 30px;
     padding: 30px;
@@ -50,7 +49,7 @@ footer{
     left: 90%;
 }
 .menu-lista  a {
-    font-size: 14px;
+    font-size:medium
 }
 
 .mediaquery-block {
@@ -134,93 +133,7 @@ footer{
 main{
     width: 100%;
 }
-/*** ACA EMPIEZA EL INDEX ***/
-.titulo-inicio {
-    background-color: rgba(238, 240, 243, 0.921);
-    color: #302D3C;
-    font-family: 'Mulish', sans-serif;
-    height: 160px;
-}
-.portada {
-    width: 100%;
-}
 
-.blog {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 40px 15px 80px 15px;
-}
-
-.post{
-    box-sizing: content-box;
-    color: rgb(122, 122, 121);
-    font-family: 'Mulish', sans-serif;
-    margin: 10px 0px 20px 0px;
-    border-radius: 5px;
-    width: 410px;
-    height: 410px;
-}
-
-
-.post:hover {
-    cursor:pointer;
-    opacity:0.8;
-}
-
-.post-img {
-    transition: all 0.5s ease-out;
-    width: 100%;
-}
-
-.post-fecha, .post-autor {
-    font-size: 15px;
-}
-
-.post:hover .post-img {
-    transition: all 0.5s ease-out;
-    transform:scale(1.15); 
-}
-
-.post-titulo {
-    color: #302D3C;
-    font-size: 24px;
-}
-
-.post-div-contenido {
-    padding: 5px 10px 5px 10px;
-}
-
-.post-div-contenido > span, p {
-    font-size: 16px;
-}
-.post-div-contenido p {
-    font-size: 18px;
-}
-
-.post-contenido{
-    overflow: hidden;
-    max-height: 90px;
-    margin: 5px 0px 10px 0px; 
-}
-
-.post-contenido p{
-    font-size: 14px;
-    max-height: 90px;
-    overflow: hidden;
-}
-
-.post-autor {
-    padding: 0px 0px 10px 0px;
-}
-
-.div-imagen {
-    width: 410px;
-    height: 200px;
-    overflow: hidden; /*esta propiedad evita que la imagen ocupe mas espacio que su contenedor*/
-    margin-bottom: 5px;
-}
 
 .logout:hover {
     cursor: pointer;
@@ -246,7 +159,7 @@ main{
 }
 
 .icono-notificacion {
-    width: 26px;
+    width: 28px;
 }
 
 .notificacion-numero {
@@ -254,8 +167,9 @@ main{
     background-color: rgb(112, 9, 9);
     color: white;
     border-radius: 60%;
-    padding: 5px;
-    font-size: x-small;
+    padding: 3px;
+    font-size: xx-small;
+    right: 0px;
 }
 
 .li-notificacion {
@@ -305,87 +219,7 @@ main{
 
 }
 
-/** CAMBIAR PASSWORD **/
-.lista-cambiar-password {
-    margin: 30px 0px 0px 0px;
-    width: 300px;
-    text-align: center;
-}
 
-.lista-cambiar-password input {
-   padding: 5px;
-   border-radius: 5px;
-   border: 1px solid rgb(199, 199, 199);
-   margin: 5px 0px 0px 0px;
-   width: 100%;
-}
-
-.btn-cambiar-password {
-    color: #383636;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    background-color: #f4f0f0;
-    border: 1px solid rgb(135, 132, 132);
-    margin: 10px 0px 0px 0px;
-    width: 100%;
-    cursor: pointer;
-
-}
-.body-recuperar-password {
-    background-color: #dadadb;
-}
-
-.div-recuperar-password {
-    margin: 30px 0px 30px 0px;
-    padding: 10px 0px;
-    background-color: rgb(255, 255, 255);;
-    border: 1px solid rgb(223, 220, 220);
-    width: 400px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.div-recuperar-password div {
-    padding: 10px 0px;
-}
-
-
-
-.div-recuperar-password h1 {
-    border-bottom: 1px solid rgb(220, 221, 220);
-    padding: 10px;
-    font-size:xx-large;
-}
-
-.li-recuperar-password{
-    margin: 10px 0px;
-    
-}
-
-.li-recuperar-password label {
-    font-size: 16px;
-    margin-right: 5px;
-    padding: 5px;
-}
-
-.li-recuperar-password input {
-    margin-right: 5px;
-    padding: 5px;
-}
-
-.btn-recuperar-password {
-    background-color: #100540;
-    color: white;
-}
-
-.li-btns-recuperar-password {
-    border-top: 1px solid rgb(220, 221, 220);
-    gap: 5px;
-    padding: 10px;
-    font-size: large;
-}   
 
 .btns {
     border-radius: 5px;
@@ -394,86 +228,6 @@ main{
 }
 
 
-@media (max-width: 1500px) {
-    .post {
-        width: 320px;
-        height: 310px;
-    }
-    .div-imagen  {
-        width: 320px;
-        height: 150px;
-    }
-    .post-div-contenido  p{
-        font-size: 15px;
-    }
-    .post-div-contenido span{
-        font-size: 13px;
-    }
-    .post-titulo {
-        font-size: 20px;
-    }
-  }
-
-  
-@media (max-width: 1100px) {
-  .header-logo span, .menu ul {
-    font-size: 14px;
-  }
-  .post {
-    width: 260px;
-    height: 280px;
-  }
-  .post-titulo{
-    font-size: 20px;
-  }
-  .div-imagen  {
-    width: 260px;
-    height: 140px;
-    }
-    .post-div-contenido  p{
-        font-size: 14px;
-    }
-}
-
-
-@media (max-width: 900px) {
-    .header-logo span, .menu ul {
-      font-size: 12px;
-    }
-    .post {
-      width: 240px;
-      height: 280px;
-    }
-    .div-imagen  {
-      width: 240px;
-      height: 110px;
-  }
-}
-
-@media (max-width: 650px) {
-    .menu-lista{
-        display: none;
-    }
-    .img-menu{
-        opacity: 1;
-    }
-    .post {
-        min-height: 400px;
-        width: 95vw;
-
-   
-    }
-    .div-imagen  {
-        min-height: 250px;
-        width: 95vw;
-    }
-    .post-div-contenido > span, p {
-        font-size: 16px;
-    }
-    .post-titulo {
-        font-size: 18px;
-    }
-  }
 
 
 

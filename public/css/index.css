@@ -1,0 +1,154 @@
+.titulo-inicio {
+    background-color: rgba(238, 240, 243, 0.921);
+    color: #302D3C;
+    font-family: 'Mulish', sans-serif;
+    height: 160px;
+}
+.portada {
+    width: 100%;
+}
+
+.blog {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 40px 15px 80px 15px;
+}
+
+.post{
+    box-sizing: content-box;
+    color: rgb(122, 122, 121);
+    font-family: 'Mulish', sans-serif;
+    margin: 10px 0px 20px 0px;
+    border-radius: 5px;
+    width: 410px;
+    height: 410px;
+}
+
+
+.post:hover {
+    cursor:pointer;
+    opacity:0.8;
+}
+
+.post-img {
+    transition: all 0.5s ease-out;
+    width: 100%;
+}
+
+.post-fecha, .post-autor {
+    font-size: small
+}
+
+.post:hover .post-img {
+    transition: all 0.5s ease-out;
+    transform:scale(1.15); 
+}
+
+.post-titulo {
+    color: #302D3C;
+    font-size: x-large;
+}
+
+.post-div-contenido {
+    padding: 5px 10px 5px 10px;
+}
+
+.post-div-contenido > span, p {
+    font-size: 16px;
+}
+.post-div-contenido p {
+    font-size: 18px;
+}
+
+.post-contenido{
+    overflow: hidden;
+    max-height: 100px;
+    margin: 5px 0px 10px 0px; 
+}
+
+.post-contenido p{
+    font-size: medium;
+    overflow: hidden;
+}
+
+.post-autor {
+    padding: 0px 0px 10px 0px;
+}
+
+.div-imagen {
+    width: 410px;
+    height: 200px;
+    overflow: hidden; /*esta propiedad evita que la imagen ocupe mas espacio que su contenedor*/
+    margin-bottom: 5px;
+}
+
+
+.frase-cabecera {
+    color: rgb(99, 99, 104);
+    margin: 10px;
+    background-color: #d2d0daaf;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+@media (max-width: 1500px) {
+    .post {
+        width: 260px;
+        height: 300px;
+    }
+    .div-imagen  {
+        width: 260px;
+        height: 120px;
+    }
+    .post-titulo {
+        font-size: 20px;
+    }
+  }
+
+  
+@media (max-width: 1100px) {
+  .header-logo span, .menu ul {
+    font-size: 14px;
+  }
+  .post {
+    width: 270px;
+    height: 320px;
+  }
+  .div-imagen  {
+    width: 260px;
+    height: 140px;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .post {
+      width: 240px;
+      height: 280px;
+    }
+    .div-imagen  {
+      width: 240px;
+      height: 110px;
+  }
+}
+
+@media (max-width: 650px) {
+    .menu-lista{
+        display: none;
+    }
+    .img-menu{
+        opacity: 1;
+    }
+    .post {
+        min-height: 400px;
+        width: 95vw;
+
+   
+    }
+    .div-imagen  {
+        min-height: 250px;
+        width: 95vw;
+    }
+  }
