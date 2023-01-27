@@ -1,7 +1,7 @@
 
 const colors = require('colors')
 const cloudinary = require("cloudinary").v2;
-const { Post, Comentario } = require("../../models/model")
+const { Post, Comentario, Notificaciones, Admin_Post, Usuario } = require("../../models/model")
 require("multer");
 
 cloudinary.config({
@@ -29,12 +29,12 @@ const traerPublicaciones = async (req, res) => {
     }
   }
 
-  const indexPublic = async (req, res) => {
+  const indexPublicPlantilla = async (req, res) => {
  
     try {
       const registros = await Post.findAll()
       const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
-    
+   
       
       const titulo = "Espacio Luz de Luna"
       res.render("index/indexPublic", {
@@ -46,21 +46,24 @@ const traerPublicaciones = async (req, res) => {
       console.log(error)
     }}
   
-  const mostrarPublicacion = async (req, res) => {
+  const postPlantillaPublic = async (req, res) => {
     console.log(req.params.url)
     let avatarImage = "";
 
     try {
       // Traer todos las Publicaciones
-     const registro = await Post.findOne({where : {url : req.params.url}});
+     const post = await Post.findOne({where : {url : req.params.url}});
+
+     const post_admin = await Admin_Post.findOne({where : { id_post : post.id }})
+     const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
    
-     const {id, url, titulo, contenido, imagen, autor, fecha} = registro
+     const {id, url, titulo, contenido, imagen, autor, fecha} = post
      const comentarios = await Comentario.findAll({where : {id_post : id}});
  
      const separar = fecha.split("-")
      const date = [separar[2], separar[1], separar[0]]
      const newDate = date.join("-")
-
+      console.log(colors.bgYellow(admin.usuario))
      let numComentarios = 0;
 
      if(comentarios.length > 1) {
@@ -76,7 +79,8 @@ const traerPublicaciones = async (req, res) => {
       autor: autor,
       fecha: newDate,
       comentarios: comentarios,
-      numComentarios
+      numComentarios,
+      admin_post : admin.usuario,
       
   })
    } catch (error) {
@@ -101,6 +105,16 @@ const traerPublicaciones = async (req, res) => {
           imagen_usuario: req.body.imagen_usuario,
         })
         
+        console.log(colors.bgRed(req.body.autor_post))
+        const notifiaciones = new Notificaciones ({
+          id: id + 12 +3,
+          nombre_admin: req.body.autor_post,
+          nombre_remitente: req.body.usuario,
+          url_publicacion: req.body.url_publicacion,
+          mensaje: req.body.mensaje,
+        })
+        
+        await notifiaciones.save()
         await newComentario.save()
   
         res.status(200).send("Mensaje enviado!")
@@ -112,8 +126,8 @@ const traerPublicaciones = async (req, res) => {
 
 module.exports = {
     traerPublicaciones,
-    indexPublic,
+    indexPublicPlantilla,
     agregarComentario,
-    mostrarPublicacion
+    postPlantillaPublic
 }
 

@@ -7,7 +7,7 @@ const getSesion = JSON.parse(localStorage.getItem('sesion'));
 
 const cerrarSesion = async (e) => {
     e.preventDefault()   
-    console.log("cerrar sesion")
+
     const getSesion = JSON.parse(localStorage.getItem('sesion'));
     const usuario = getSesion[1]
     
@@ -17,7 +17,6 @@ const cerrarSesion = async (e) => {
       usuario:usuario,
     }
 
-    console.log(data)
     const settings = {
       method: 'POST',
       headers: {
@@ -26,7 +25,6 @@ const cerrarSesion = async (e) => {
       }};
     try {
       const fetchResponse = await fetch(`/auth/${usuario}/logout`, settings);
-      console.log(fetchResponse)
       if(fetchResponse.ok == true) {
         window.location.href = "/"
       }
@@ -61,7 +59,6 @@ const sendToken = async () => {
         const fetchResponse = await fetch(`/auth/validate-token`, settings);
         if(fetchResponse.ok === false){
            const data = await fetchResponse.json();
-           console.log(data)
            window.location.assign("/error/401")
         }
        
@@ -84,8 +81,6 @@ if(updateImg){
 }
 
 
- 
-
 const btnNotificaciones = document.querySelector(".li-notificaciones")
 const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
@@ -96,8 +91,6 @@ if(btnNotificaciones){
 
   btnNotificaciones.addEventListener("click", async () => {
     modalNotificaciones.classList.toggle("active")
-
-    console.log(modalNotificaciones)
 
       // Hacer un POST para cambiar el estado de las notifaciones de leido a true
       const data = {
@@ -134,7 +127,6 @@ const imgPhoneMenu = document.querySelector(".img-menu")
 
 imgPhoneMenu.addEventListener("click", () => {
   const menuPhone = document.querySelector(".ocultar-transition") 
-  console.log(menuPhone.classList.contains("active"))
   if(menuPhone.classList.contains("active")) {
     return menuPhone.classList.remove("active")
   } 
@@ -148,16 +140,13 @@ imgPhoneMenu.addEventListener("click", () => {
 const notificacionNumero = document.querySelector(".notificacion-numero")
 const liNotificacion = document.querySelectorAll(".li-notificacion")
 const arrayNotificaciones = Array.apply(null, liNotificacion);
-console.log(arrayNotificaciones)
 
 if(notificacionNumero){
   if(notificacionNumero.textContent !== 0) {
-    console.log("hola")
     const num = Number(notificacionNumero.textContent)
-    console.log(num)
+  
     for (let i = 0; i < num; i++) {
          liNotificacion[i].classList.add("notificacion-noleida")
-         console.log(liNotificacion[i])
       
     }
   }

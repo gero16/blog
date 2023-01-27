@@ -103,7 +103,7 @@ const authAgregarComentario = async (req, res) => {
     console.log(colors.bgRed(req.body))
     const id = Date.now()
     const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    //console.log(colors.bgGreen(req.body))
+
     try {
        const post = await Post.findOne({where : {url : req.params.titulo}});
     

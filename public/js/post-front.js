@@ -19,7 +19,6 @@ let actualizarHTML = "";
 let etiquetaContenido = [];
 
 const url = window.location.href;
-console.log(url)
 
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
@@ -28,7 +27,7 @@ const btnAddComentario = document.querySelector(".btn-comentario")
 const urlPost = window.location.pathname
 const tituloP = urlPost.split("/")
 console.log(tituloP)
-const tituloPost = tituloP[4]
+
 
 const imgUser = document.querySelector(".avatar-user")
 const userPublic = JSON.parse(localStorage.getItem("imagen"));
@@ -38,34 +37,29 @@ window.onload = async function () {
    const sesion = JSON.parse(localStorage.getItem('sesion'));
    if(sesion) {
       const [user, email, token, rol] = sesion;
-      console.log(sesion)
-
    }
 }
 
 if(userPublic) {
-   console.log(userPublic[1])
    imgUser.src = `/../img/avatar${userPublic[1]}.png`
  }
 
 const urlActual = window.location.href
 
 const adminPost = document.querySelector(".label-admin")
-console.log(adminPost)
 
 btnAddComentario.addEventListener("click", async () => {
-   let imagen_usuario = " ";
    const sesion = JSON.parse(localStorage.getItem('sesion'));
-  
+
    const data = {
       usuario: inputUsuario.value,
       autor_post: adminPost.textContent,
       mensaje: inputComentario.value,
-      url_publicacion: tituloPost,
+      url_publicacion: sesion ? tituloP[4] : tituloP[2],
       editar: false,
       imagen_usuario: userPublic ? `/../img/avatar${userPublic[1]}.png` : " ",
    }
-
+   console.log(data)
    let url = `${urlActual}/agregar-comentario`
    
    const comentarioActions = document.querySelector(".comentario-actions")
