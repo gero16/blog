@@ -136,8 +136,7 @@ eliminarComentario.forEach(comentario => {
          
       const mandarInfo = async () => {
          try {
-            const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloPost}/eliminar-comentario/${ idComentario }`, settings);
-           
+            const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloP[4] }/eliminar-comentario/${ idComentario }`, settings);
              if(fetchResponse.status === 200) {
                console.log("Mensaje eliminado Correctamente!")
                window.location.reload()

@@ -81,9 +81,11 @@ if(updateImg){
 }
 
 
-const btnNotificaciones = document.querySelector(".li-notificaciones")
+const btnNotificaciones = document.querySelector(".li-btn-notificaciones")
+console.log(btnNotificaciones)
 const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
+console.log()
 const divNotificacion = document.querySelector(".notificacion-noleida")
 
 if(btnNotificaciones){
@@ -109,33 +111,13 @@ if(btnNotificaciones){
       console.log(fetchResponse)
        if(fetchResponse.status === 200) {
         document.querySelector(".notificacion-numero").innerHTML = "0"
+        location.reload();
       }
     } catch (error) {
       console.log(error)
     }
   })
 }
-
-if(btnSalirNotificaciones) {
-  btnSalirNotificaciones.addEventListener("click", () => {
-    modalNotificaciones.classList.remove("active")
-    location.reload();
-  })  
-}
-const imgPhoneMenu = document.querySelector(".img-menu") 
-
-
-imgPhoneMenu.addEventListener("click", () => {
-  const menuPhone = document.querySelector(".ocultar-transition") 
-  if(menuPhone.classList.contains("active")) {
-    return menuPhone.classList.remove("active")
-  } 
-  if(menuPhone.className !== "active") {
-    return menuPhone.classList.add("active")
-  } 
-  
-})
-
 
 const notificacionNumero = document.querySelector(".notificacion-numero")
 const liNotificacion = document.querySelectorAll(".li-notificacion")
@@ -151,3 +133,17 @@ if(notificacionNumero){
     }
   }
 }
+
+const imgPhoneMenu = document.querySelector(".img-menu") 
+imgPhoneMenu.addEventListener("click", () => {
+  const menuPhone = document.querySelector(".ocultar-transition") 
+  if(menuPhone.classList.contains("active")) {
+    return menuPhone.classList.remove("active")
+  } 
+  if(menuPhone.className !== "active") {
+    return menuPhone.classList.add("active")
+  } 
+  
+})
+
+

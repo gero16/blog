@@ -360,24 +360,17 @@ const actualizarNotificacion = async (req, res) => {
 
     try {
         // const notificaciones_admin = await Notificaciones.findAll({where : { nombre_admin  : admin }});
-        await Notificaciones.update({
+        const actualizar = await Notificaciones.update({
             leida : true
         }, {
             where: {
                 nombre_admin: admin,
             }
         });
-       /*
-            await notificacion.update({
-                id: notificacion.id,
-                nombre_admin : notificacion.nombre_admin,
-                nombre_remitente : notificacion.nombre_remitente,
-                mensaje : notificacion.mensaje,
-                url_publicacion : notificacion.url_publicacion,
-                leida : true
-              });
-              */
-       
+    
+        console.log(colors.bgCyan(actualizar))
+
+        res.status(200)
        
     } catch (error) {
         console.log(error)
