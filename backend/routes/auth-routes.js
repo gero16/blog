@@ -1,10 +1,10 @@
 const { Router } = require('express');
 
-const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index');
-const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post');
-const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword } = require('../controllers/auth/plantillas');
+const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index-auth');
+const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post-auth');
+const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword } = require('../controllers/auth/plantillas-auth');
 
-const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones, actualizarNotificacion } = require('../controllers/auth/usuarios');
+const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones, actualizarNotificacion } = require('../controllers/auth/usuarios-auth');
 
 const { generarJWT } = require('../helpers');
 const { esAdmin, rutaInexistente } = require('../helpers/validators');

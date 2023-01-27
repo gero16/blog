@@ -43,7 +43,7 @@ const crearPost = async (req, res) => {
     if(req.file) {
       const result = await cloudinary.uploader.upload(
         req.file.path,
-        { public_id: `${id}` },
+        { public_id : `blog-luz-de-luna/${ id }` },
         function (error, result) {
           console.log(colors.bgBlue(result));
         });
