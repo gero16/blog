@@ -58,23 +58,26 @@ html(lang="en")
                                 li !{val} 
 
                     .contenedor-comentarios
-                        h3 Comentarios
+                        h3 Comentarios (!{numComentarios})
                         each comentario in comentarios 
-                            .div-comentario-header.flex-between
+                            div(class="div-comentario-header flex-between" )
                                 .user-img
                                     img(src=`${comentario.imagen_usuario}`)
                                     span.comentario-usuario= comentario.usuario
                                 span.comentario-fecha= comentario.fecha
                             span.comentario-mensaje= comentario.mensaje
-                                 
+                            div(class="comentario-actions" data-id=comentario.id)
+                                span(class="editar-comentario") Editar
+                                span(class="eliminar-comentario") Eliminar 
+                    
                     .seccion-comentarios 
-                        .img-user 
-                            img( alt="" class="avatar-user")
-                            div 
-                                label Nombre
-                                input(type="text" name="nombre-publico" id="" class="input-user-name") 
-                                label(class="label-admin" style="display: none") !{ admin_post }
-                                
+                        div(class="img-user" )
+                            img(src="", alt="foto del perfil del usuario" class="avatar-user")
+                            label Nombre
+                            input(type="text" name="user" id="" class="input-user-name") 
+                            label(class="label-admin" style="display: none") !{ admin_post }
+
+
                         .contenido-comentario 
                             label(for="") Comentario
                                 div 

@@ -126,28 +126,7 @@ const crearPostPlantilla = async (req, res) => {
   }
 }
 
-// DEBERIA ESTAR FUERA DE AUTH
-const postPlantilla =  async (req, res) => {
-  const url = req.params.titulo
 
-  try {
-    const datos = await Post.findOne({where: {url}})
-    const {id, titulo, contenido, imagen, autor, fecha, tokenSesion}  = datos
-
-    res.status(200).header("auth-token", tokenSesion).render("post/publicPost", {
-      url,
-      id: id,
-      url,
-      titulo: titulo,
-      contenido: contenido,
-      imagen: imagen,
-      autor: autor,
-      fecha: fecha,
-  })
-  } catch (error) {
-    console.log(error)
-  }
-}
 
 const authPostPlantilla =  async (req, res) => {
   console.log(colors.bgGreen(req.params))
@@ -367,7 +346,6 @@ module.exports = {
     perfilPlantilla,
     crearPostPlantilla,
     indexPlantilla,
-    postPlantilla,
     authPostPlantilla,
     eliminarPlantilla,
     editarPostPlantilla,

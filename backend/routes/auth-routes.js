@@ -42,7 +42,7 @@ router.get("/:admin/eliminar/:titulo", esAdmin, eliminarPlantilla)
 
 router.get("/:user/perfil", perfilPlantilla)
 
-router.get("/publicaciones/:titulo/", postPlantilla) // Esta que hace aca ?
+
 
 
 // Seccion actualizacion de contenido

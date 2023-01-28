@@ -47,12 +47,12 @@ const traerPublicaciones = async (req, res) => {
     }}
   
   const postPlantillaPublic = async (req, res) => {
-    console.log(req.params.url)
+    console.log(req.params.titulo)
     let avatarImage = "";
 
     try {
       // Traer todos las Publicaciones
-     const post = await Post.findOne({where : {url : req.params.url}});
+     const post = await Post.findOne({where : {url : req.params.titulo}});
 
      const post_admin = await Admin_Post.findOne({where : { id_post : post.id }})
      const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
