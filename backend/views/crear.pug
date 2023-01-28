@@ -37,51 +37,53 @@ html(lang="en")
                         a(class="logout") Cerrar Sesión
                   
     
-        main(class="container principal")
-            article(class="crear-post") 
-                h1 Crear Publicacion
-                form(class="formulario" action=`/auth/${ usuario }/crear-post` method="POST" enctype="multipart/form-data") 
-                    ul
-                        li 
-                            label(for="" class="label-crear") Imagen
-                            div(class="grid-input-img") 
-                                input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio input-crear") 
-                                label(for="imagen-post" class="label-imagen") Seleccionar Archivo
-                                span(class="span-foto") Ningun archivo Seleccionado.
-                        li 
-                            label(for="text" class="label-crear") Titulo
-                            input(type="text" name="titulo" id="titulo-post" class="vacio input-crear")                      
-                        li 
-                            label(for="text" class="label-crear") Autor
-                            input(type="text" name="autor" id="autor-post" class="vacio input-crear") 
-                        li 
-                            label(for="text" class="label-crear") Fecha
-                            input(type="date" name="fecha" id="fecha-post" class="vacio input-crear" value= `${fecha}` ) 
-                        
-                        div(class="div-li-contenido") 
-
-                        li(id="li-agregar") 
-                            label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
-                            label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo  
-            
+        div(class="container")
+            main(class="principal")
+                article(class="crear-post") 
+                    h1 Crear Publicacion
+                    form(class="formulario" action=`/auth/${ usuario }/crear-post` method="POST" enctype="multipart/form-data") 
+                        ul
+                            li 
+                                label(for="" class="label-crear") Imagen
+                                div(class="grid-input-img") 
+                                    input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio input-crear") 
+                                    label(for="imagen-post" class="label-imagen") Seleccionar Archivo
+                                    span(class="span-foto") Ningun archivo Seleccionado.
+                            li 
+                                label(for="text" class="label-crear") Titulo
+                                input(type="text" name="titulo" id="titulo-post" class="vacio input-crear")                      
+                            li 
+                                label(for="text" class="label-crear") Autor
+                                input(type="text" name="autor" id="autor-post" class="vacio input-crear") 
+                            li 
+                                label(for="text" class="label-crear") Fecha
+                                input(type="date" name="fecha" id="fecha-post" class="vacio input-crear" value= `${fecha}` ) 
                             
-                        li(class="agregar-texto") 
-                            span Previsualizar el Contenido
-                            span(data-id="agregar" id="agregar-texto") Agregar Texto
-                            span(class="span-enter")  Presionar Enter 
+                            div(class="div-li-contenido") 
 
-                        li(class="li-button") 
-                            h2 Crear Post 
-                            button(id="enviar-post" type="submit") Finalizar
-                        
-            article(class="preview")
-                h1(class="pre-titulo titulo-post")  
-                img( class="pre-img" src="" alt="Previsualizacion de la Foto")
-                div
-                    p(class="pre-fecha") 
-                    p(class="autor-post") Autor: 
-                        strong(class="pre-autor") 
-                div(class="pre-contenido contenido-post") 
+                            li(id="li-agregar") 
+                                label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
+                                label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo  
+                
+                                
+                            li(class="agregar-texto") 
+                                span Previsualizar el Contenido
+                                span(data-id="agregar" id="agregar-texto") Agregar Texto
+                                span(class="span-enter")  Presionar Enter 
+
+                            li(class="li-button") 
+                                h2 Crear Post 
+                                button(id="enviar-post" type="submit") Finalizar
+                            
+                article(class="preview")
+                    h2 Mostrar Publicacion
+                    h2(class="pre-titulo titulo-post")  
+                    img( class="pre-img" src="" alt="Previsualizacion de la Foto")
+                    div
+                        p(class="pre-fecha") 
+                        p(class="autor-post") Autor: 
+                            strong(class="pre-autor") 
+                    div(class="pre-contenido contenido-post") 
                 
         script(src="/../js/middlewares-front.js")         
         script(src="/../js/crearEditar-front.js")     

@@ -44,62 +44,63 @@ html(lang="en")
                             span(class="notificacion-numero  notificacion-numero-normal") 0
 
     
-        main(class="container principal")
-            article(class="crear-post") 
-                h1 Editar Publicacion
-                form(class="formulario" action="/auth/actualizar-post" method="POST" enctype="multipart/form-data") 
-                    ul
-                        li 
-                            label(for="") ID 
-                            span(type="text") !{id}
-                            input(type="text" name="id" value=`${id}` style="display: none" ) 
-                        li 
-                            label(for="" class="label-crear") Imagen
-                            div(class="grid-input-img") 
-                                input(type="file" name="imagen" id="imagen-post" style="display: none") 
-                                label(for="imagen-post" class="label-imagen") Seleccionar Archivo
-                                div(class="span-foto") !{imagenMin} 
-                        li 
-                            label(for="text" class="label-crear") Titulo
-                            input(type="text" name="titulo" id="titulo-post"  class="input-crear" value=`${titulo}`)                      
-                        li 
-                            label(for="text" class="label-crear") Autor
-                            input(type="text" name="autor" id="autor-post"  class="input-crear" value=`${autor}`) 
-                        li 
-                            label(for="text" class="label-crear") Fecha
-                            input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
-                        div(class="div-li-contenido") 
-                            each  value, nombre in nuevoContenido
-                                li(class=`li-${ nombre } li-parrafos`) 
-                                    div
-                                    textarea(name=`${ nombre }`, class=`parrafos-post lleno ${ nombre }`) !{value} 
-                                    div
-                                    span(class=`quitar-${ nombre } btn-quitar-contenido`) Quitar
-                        
-                        li(id="li-agregar") 
-                            label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
-                            label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo  
-                        li(id="agregar-input")
+        div(class="container")
+            main(class="principal")
+                article(class="crear-post") 
+                    h1 Editar Publicacion
+                    form(class="formulario" action="/auth/actualizar-post" method="POST" enctype="multipart/form-data") 
+                        ul
+                            li 
+                                label(for="") ID 
+                                span(type="text") !{id}
+                                input(type="text" name="id" value=`${id}` style="display: none" ) 
+                            li 
+                                label(for="" class="label-crear") Imagen
+                                div(class="grid-input-img") 
+                                    input(type="file" name="imagen" id="imagen-post" style="display: none") 
+                                    label(for="imagen-post" class="label-imagen") Seleccionar Archivo
+                                    div(class="span-foto") !{imagenMin} 
+                            li 
+                                label(for="text" class="label-crear") Titulo
+                                input(type="text" name="titulo" id="titulo-post"  class="input-crear" value=`${titulo}`)                      
+                            li 
+                                label(for="text" class="label-crear") Autor
+                                input(type="text" name="autor" id="autor-post"  class="input-crear" value=`${autor}`) 
+                            li 
+                                label(for="text" class="label-crear") Fecha
+                                input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
+                            div(class="div-li-contenido") 
+                                each  value, nombre in nuevoContenido
+                                    li(class=`li-${ nombre } li-parrafos`) 
+                                        div
+                                        textarea(name=`${ nombre }`, class=`parrafos-post lleno ${ nombre }`) !{value} 
+                                        div
+                                        span(class=`quitar-${ nombre } btn-quitar-contenido`) Quitar
+                            
+                            li(id="li-agregar") 
+                                label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Parrafo
+                                label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtitulo  
+                            li(id="agregar-input")
 
-                        li(class="agregar-texto") 
-                            span Previsualizar el Contenido
-                            span(data-id="agregar" id="agregar-texto") Agregar Texto
-                            span(class="span-enter")  Presionar Enter 
+                            li(class="agregar-texto") 
+                                span Previsualizar el Contenido
+                                span(data-id="agregar" id="agregar-texto") Agregar Texto
+                                span(class="span-enter")  Presionar Enter 
 
-                        li(class="li-button") 
-                            h2 Crear Post 
-                            button(id="enviar-post" type="submit") Finalizar
-                        
-            article(class="preview")
-                h1(class="pre-titulo titulo-post")  !{titulo}
-                img( class="pre-img" src=`${imagen}` alt="Previsualizacion de la Foto")
-                div.flex-between
-                    p(class="pre-fecha") !{fecha}
-                    p(class="autor-post") Autor: 
-                        strong(class="pre-autor")  !{autor}
-                div(class="pre-contenido contenido-post") 
-                each  val in contenido
-                    div.texto-post !{val} 
+                            li(class="li-button") 
+                                h2 Crear Post 
+                                button(id="enviar-post" type="submit") Finalizar
+                            
+                article(class="preview")
+                    h1(class="pre-titulo titulo-post")  !{titulo}
+                    img( class="pre-img" src=`${imagen}` alt="Previsualizacion de la Foto")
+                    div.flex-between
+                        p(class="pre-fecha") !{fecha}
+                        p(class="autor-post") Autor: 
+                            strong(class="pre-autor")  !{autor}
+                    div(class="pre-contenido contenido-post") 
+                    each  val in contenido
+                        div.texto-post !{val} 
                 
                  
     script(src="/../js/middlewares-front.js") 
