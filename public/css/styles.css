@@ -6,6 +6,7 @@ body {
     */
     font-family: 'Raleway', sans-serif;
     position: relative;
+    box-sizing: border-box;
 }
 
 ul {
@@ -44,7 +45,7 @@ footer{
     position: absolute;
     bottom: 0;
     width: 100%;
-    gap: 25%;
+ 
 }
 
 .btns {
@@ -302,5 +303,7 @@ article {
     }
     .span-autor {
         font-size: x-small;
+        width: 60px;
+        margin: 0px 20px;
     }
   }

@@ -31,18 +31,14 @@ html(lang="en")
                     li
                         a(href="/registro.html") Registrarse
     
-        .white 
         
         div(class="container")
-              
+
             div(class="pagina-post")
-          
                 .contenido-post 
-                
                     .contenedor-flex 
                         h1(class="titulo-post") #{titulo} 
-                        div.algo
-                             
+                        div.algo    
                     .contenedor-imagen
                         img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
                     .contenedor-flex 
@@ -50,7 +46,6 @@ html(lang="en")
                             strong.autor-post  #{autor}
                         p.fecha-post #{fecha}
 
-                   
                     .contenedor-flex 
                         ul(class="texto-post") 
                             -let dataID = 1
