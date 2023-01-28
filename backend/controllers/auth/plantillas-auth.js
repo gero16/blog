@@ -17,7 +17,7 @@ const perfilPlantilla = async (req, res) => {
     // console.log(colors.bgRed(user.dataValues))
     const titulo = "Perfil"
    if(user.rol === "ADMIN") {
-    res.render("perfil/perfilADMIN", {
+    res.render("perfil/perfilAdmin", {
       usuario: user.usuario,
       correo: user.correo,
       name: user.nombre,
@@ -364,7 +364,7 @@ const cambiarPassword = (req, res) => {
 }
 
 module.exports = {
-  perfilPlantilla,
+    perfilPlantilla,
     crearPostPlantilla,
     indexPlantilla,
     postPlantilla,
