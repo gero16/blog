@@ -36,10 +36,6 @@ html(lang="en")
                     li 
                         a(class="logout") Cerrar Sesión
 
-                    li    
-                        div(class="li-btn-notificaciones") 
-                            img(src="/../img/notificacion.png" class="icono-notificacion")
-                            span(class="notificacion-numero  notificacion-numero-normal") 0
 
         div(class="container flex-center")
             main.div-eliminar
@@ -50,38 +46,7 @@ html(lang="en")
                     h2.confirm Confirmar 
                     h2.delete 
                         a(href="/") Cancelar   
-        
-        div(class="contenedor-notificaciones")
-            div(class="titulo-notificaciones") 
-                h3 Notificaciones
-            ul(class="lista-notificaciones") 
-                each notificacion in notificaciones 
-                    li
-                        a(href=`/auth/elgero16/publicaciones/${ notificacion.url_publicacion }`)  
-                            div(class="li-notificacion flex-between") 
-                                div(class="img-user")
-                                    img(src="/img/avatar1.png", alt="" class="avatar-notificacion")
-                                div(class="div-mensaje-notificacion")
-                                    p(class="mensaje-notificacion") !{notificacion.nombre_remitente} ha comentado tu Publicación 
-                                    span(class="fecha-mensaje-notificacion") 12 de Julio, 2023
-                 
-        nav.menu-phone.ocultar-transition
-                ul(class="flex-column text-align-center menu-lista-phone ")
-                    li
-                        a(href=`/auth/${usuario}/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`) Crear Post
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        div(class="li-notificaciones-mobile") 
-                            span Notificaciones
-                            span(class="notificacion-numero  notificacion-numero-mobile") !{ cantidad_notificaciones }
-
+    
                 
 
     script(src="/../js/middlewares-front.js")    
