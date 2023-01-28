@@ -138,6 +138,7 @@ const authAgregarComentario = async (req, res) => {
             fecha: fecha,
             hora: actual,
             mensaje: req.body.mensaje,
+            imagen_remitente: req.body.imagen_usuario
           })
         
         await newComentario.save()
@@ -171,6 +172,7 @@ const authAgregarComentario = async (req, res) => {
           mensaje: mensajeNotificacion,
           hora: actual,
           fecha: fecha,
+          imagen_remitente: req.body.imagen_usuario
         })
 
         await notifiaciones.save()

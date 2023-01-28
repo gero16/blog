@@ -31,7 +31,7 @@ console.log(tituloP)
 
 const imgUser = document.querySelector(".avatar-user")
 const userPublic = JSON.parse(localStorage.getItem("imagen"));
-
+console.log(userPublic)
 window.onload = async function () {
  
    const sesion = JSON.parse(localStorage.getItem('sesion'));
@@ -43,6 +43,7 @@ window.onload = async function () {
 if(userPublic) {
    imgUser.src = `/../img/avatar${userPublic[1]}.png`
  }
+ 
 
 const urlActual = window.location.href
 
@@ -50,14 +51,14 @@ const adminPost = document.querySelector(".label-admin")
 
 btnAddComentario.addEventListener("click", async () => {
    const sesion = JSON.parse(localStorage.getItem('sesion'));
-
+   console.log(imgUser.src)
    const data = {
       usuario: inputUsuario.value,
       autor_post: adminPost.textContent,
       mensaje: inputComentario.value,
       url_publicacion: sesion ? tituloP[4] : tituloP[2],
       editar: false,
-      imagen_usuario: userPublic ? `/../img/avatar${userPublic[1]}.png` : " ",
+      imagen_usuario: userPublic ? `/../img/avatar${userPublic[1]}.png` : imgUser.src,
    }
    console.log(data)
    let url = `${urlActual}/agregar-comentario`
@@ -91,7 +92,8 @@ btnAddComentario.addEventListener("click", async () => {
          autor_post: adminPost.textContent,
          mensaje: inputComentario.value,
          editar: true,
-         id_comentario: idActualizar
+         id_comentario: idActualizar,
+         imagen_usuario: imgUser.src
       }
 
       try {

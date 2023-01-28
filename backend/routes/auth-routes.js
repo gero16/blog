@@ -2,12 +2,11 @@ const { Router } = require('express');
 
 const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index-auth');
 const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post-auth');
-const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword } = require('../controllers/auth/plantillas-auth');
+const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword, perfilPlantilla } = require('../controllers/auth/plantillas-auth');
 
 const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones, actualizarNotificacion } = require('../controllers/auth/usuarios-auth');
 
-const { generarJWT } = require('../helpers');
-const { esAdmin, rutaInexistente } = require('../helpers/validators');
+const { esAdmin } = require('../helpers/validators');
 const { checkAuth, verifyToken, checkEmptyData, datosExistentes } = require('../middleware/auth');
 
 const router = Router();
@@ -41,7 +40,7 @@ router.get("/:admin/editar/:titulo", esAdmin, editarPostPlantilla)
 
 router.get("/:admin/eliminar/:titulo", esAdmin, eliminarPlantilla)
 
-router.get("/:user/perfil", perfil)
+router.get("/:user/perfil", perfilPlantilla)
 
 router.get("/publicaciones/:titulo/", postPlantilla) // Esta que hace aca ?
 

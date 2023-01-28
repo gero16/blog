@@ -156,6 +156,9 @@ const Comentario = sequelize.define('Comentario', {
     },
     hora: {
       type: DataTypes.STRING,
+    },
+    imagen_remitente : {
+      type: DataTypes.STRING,
     }
   },
   { 

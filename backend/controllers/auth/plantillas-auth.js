@@ -2,7 +2,7 @@ const { Post, Usuario, Comentario, Admin_Post, Notificaciones } = require("../..
 
 const colors = require('colors');
 
-const perfil = async (req, res) => {
+const perfilPlantilla = async (req, res) => {
   
 
   try {
@@ -36,7 +36,6 @@ const perfil = async (req, res) => {
       titulo,
     })
    }
- 
  
   } catch (error) {
     console.log(error)
@@ -365,7 +364,7 @@ const cambiarPassword = (req, res) => {
 }
 
 module.exports = {
-    perfil,
+  perfilPlantilla,
     crearPostPlantilla,
     indexPlantilla,
     postPlantilla,
