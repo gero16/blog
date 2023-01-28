@@ -1,0 +1,111 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+        
+        link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+        
+        link(rel="stylesheet", href="/../css/styles.css")
+        link(rel="stylesheet", href="/../css/crear.css")
+        link(rel="stylesheet", href="/../css/perfil.css")
+
+        link(rel="icon", href="/../img/luna.png", type="image/x-icon")
+        title #{titulo}
+        
+    body 
+        header.flex-between 
+            .flex-center 
+                a(href="/")  
+                    img(class="logo" src="/../img/logito3.jpg")
+                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
+                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
+            
+            nav.menu 
+                ul(class="flex-around menu-lista")
+                    li
+                        a(href=`/auth/${usuario}/index`) Inicio
+                    li
+                        a(href=`/auth/${usuario}/crear-post`) Crear Post 
+                    li 
+                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                    li
+                        a(href="#") Nosotros
+                    li 
+                        a(href="#") Bienvenido #{name}
+                    li 
+                        a(class="logout") Cerrar Sesión
+                    li    
+                        div(class="li-btn-notificaciones") 
+                            img(src="/../img/notificacion.png" class="icono-notificacion")
+                            span(class="notificacion-numero  notificacion-numero-normal") 0
+
+    
+        div(class="container")
+            h1 Bienvenido a su Perfil
+
+            div(class="flex-around datos-perfil")
+
+                div(class="editar-perfil display-none") 
+                    form(class="flex-column form-perfil"  method="POST" action=`/auth/${usuario}/editar-perfil`  enctype="multipart/form-data") 
+                        ul.lista-editar-perfil
+                            li
+                                label(for="" class="label-crear") Imagen
+                                div(class="flex-column") 
+                                    input(type="file" name="imagen" id="imagen-perfil" style="display: none" value=`${imagen}`)  
+                                    label(for="imagen-perfil" class="label-imagen") Seleccionar Archivo
+                                    span(class="span-foto") !{imagen} 
+                            li 
+                                label(for="") Usuario 
+                                input(name="usuario" type="text" value=`${usuario}`)
+                            li
+                                label(for="") Nombre 
+                                input(name="nombre" type="text" value=`${name}`) 
+                            li
+                                label Correo 
+                                input(name="correo" type="text" value=`${correo}`)
+                            li
+                                div
+                                    label Contraseña 
+                                    span(class="olvide-password") Cambiar Contraseña    
+                                input(name="password" type="password" value=`${password}`)
+                            li
+                                button.btn-editar-perfil Editar Perfil
+                ul.lista-perfil 
+                    li  Informacion del Usuario
+                    li !{name}
+                    li !{usuario}
+                    li !{correo}
+                span(class="actualizar-datos-perfil") Actualizar Datos
+                span(class="volver-mostrar-info display-none") Volver
+                
+                div.div-perfil-imagen
+                    //img(class="perfil-imagen" src=imagen)
+                    div( class="perfil-imagen" style={"background-image":`url(${ imagen })`, "background-position": "center center",  "background-repeat": "no-repeat",
+                     "background-size" : "cover"})
+                    p.cambiar-foto Cambiar Foto
+                
+                                    
+                 
+        nav.menu-phone.ocultar-transition
+                ul(class="flex-column text-align-center menu-lista-phone ")
+                    li
+                        a(href=`/auth/${usuario}/index`) Inicio
+                    li
+                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`) Crear Post
+                    li
+                        a(href="#") Nosotros
+                    li
+                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                    li 
+                        a(class="logout") Cerrar Sesión
+                  
+
+        script(src="/../js/middlewares-front.js")           
+        script(src="/../js/perfil.js")  
+                    
+
+

@@ -17,7 +17,7 @@ const perfil = async (req, res) => {
     // console.log(colors.bgRed(user.dataValues))
     const titulo = "Perfil"
    if(user.rol === "ADMIN") {
-    res.render("perfil", {
+    res.render("perfil/perfilADMIN", {
       usuario: user.usuario,
       correo: user.correo,
       name: user.nombre,
@@ -28,7 +28,7 @@ const perfil = async (req, res) => {
       cantidad_notificaciones : notificacion_sinleer.length
     })
    } else {
-    res.render("perfil", {
+    res.render("perfil/perfilUser", {
       usuario: user.usuario,
       correo: user.correo,
       name: user.nombre,
@@ -159,6 +159,7 @@ const authPostPlantilla =  async (req, res) => {
       
       const datos = await Post.findOne({where: {url}})
       const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : usuario }});
+       const notificacionesOrdenadas = notificaciones.reverse()
       const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
 
       if(datos){
@@ -200,7 +201,7 @@ const authPostPlantilla =  async (req, res) => {
               usuario_perfil: user.imagen,
               numComentarios: numComentarios,
               admin_post : admin.usuario,
-              notificaciones,
+              notificaciones: notificacionesOrdenadas,
               notificacion_sinleer,
               cantidad_notificaciones : notificacion_sinleer.length
           })
