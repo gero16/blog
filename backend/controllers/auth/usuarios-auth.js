@@ -348,10 +348,10 @@ const adminNotificaciones = async (req, res) => {
     const { admin } = req.params
     
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
-    //console.log(colors.bgMagenta(notificaciones))
-
+    const notificacionesOrdenadas = notificaciones.reverse()
+    console.log(colors.bgRed(notificacionesOrdenadas))
     return res.status(200).json({
-        notificaciones: notificaciones,
+        notificaciones: notificacionesOrdenadas,
       });
 }
 

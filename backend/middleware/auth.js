@@ -58,7 +58,7 @@ const checkAuth = async (req, res, next) => {
     const verifyToken = (req, res, next) => {
         //console.log(colors.bgMagenta( req.header('auth-token')))
         const token = req.header('auth-token')
-        console.log(colors.bgYellow(token))
+        //console.log(colors.bgYellow(token))
 
         if (!token) return res.status(401).json({ error: 'Acceso denegado' })
 
@@ -66,8 +66,8 @@ const checkAuth = async (req, res, next) => {
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
             req.body = token
-            console.log(colors.bgGreen(req.user))
-            console.log(colors.bgRed("token verificado!"))
+            //console.log(colors.bgGreen(req.user))
+            //console.log(colors.bgRed("token verificado!"))
             next() // continuamos
         } catch (error) {
             res.status(400).json({error: 'Token inválido'})
@@ -79,8 +79,7 @@ const datosExistentes = async (req, res, next) => {
     try {
         const existUsuario = await Usuario.findOne({where : {usuario: req.body.usuario }})
         const existCorreo = await Usuario.findOne({where : {correo: req.body.correo }})
-        console.log(colors.bgBlue(existCorreo))
-        console.log(colors.bgYellow(existUsuario))
+      
         if(existCorreo != null || existUsuario != null ) {
             if(existUsuario) {
                 const err = new Error("El Usuario proporcionado ya existe")

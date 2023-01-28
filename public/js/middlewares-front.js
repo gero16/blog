@@ -115,9 +115,7 @@ if(btnNotificaciones){
           window.location.reload()
           document.querySelector(".notificacion-numero").innerHTML = "0"
         }
-       
       }
-    
     } catch (error) {
       console.log(error)
     }

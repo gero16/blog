@@ -10,8 +10,10 @@ const perfil = async (req, res) => {
 
     const user = await Usuario.findOne({where: {usuario: req.params.user}})
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
+    
     // console.log(colors.bgRed(notificaciones))
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+    const notificacionesOrdenadas = notificaciones.reverse()
     // console.log(colors.bgRed(user.dataValues))
     const titulo = "Perfil"
    if(user.rol === "ADMIN") {
@@ -21,7 +23,7 @@ const perfil = async (req, res) => {
       name: user.nombre,
       imagen: user.imagen,
       titulo,
-      notificaciones,
+      notificaciones: notificacionesOrdenadas,
       notificacion_sinleer,
       cantidad_notificaciones : notificacion_sinleer.length
     })
@@ -54,6 +56,7 @@ const indexPlantilla = async (req, res) => {
     const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
   
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
+    const notificacionesOrdenadas = notificaciones.reverse()
     // console.log(colors.bgRed(notificaciones))
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
     console.log(colors.bgBlue(notificacion_sinleer))
@@ -73,7 +76,7 @@ const indexPlantilla = async (req, res) => {
                     name: user.nombre,
                     rol: user.rol,
                     titulo,
-                    notificaciones,
+                    notificaciones: notificacionesOrdenadas,
                     notificacion_sinleer,
                     cantidad_notificaciones : notificacion_sinleer.length
                 })
@@ -105,6 +108,7 @@ const crearPostPlantilla = async (req, res) => {
   const fecha = `${year}-${month}-${day}`
 
   const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.admin }});
+  const notificacionesOrdenadas = notificaciones.reverse()
   // console.log(colors.bgRed(notificaciones))
   const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
 
@@ -114,7 +118,7 @@ const crearPostPlantilla = async (req, res) => {
       usuario: req.params.admin,
       fecha: fecha,
       titulo,
-      notificaciones,
+      notificaciones: notificacionesOrdenadas,
       notificacion_sinleer,
       cantidad_notificaciones : notificacion_sinleer.length
 })

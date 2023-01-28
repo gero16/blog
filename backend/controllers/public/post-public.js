@@ -63,7 +63,7 @@ const traerPublicaciones = async (req, res) => {
      const separar = fecha.split("-")
      const date = [separar[2], separar[1], separar[0]]
      const newDate = date.join("-")
-      console.log(colors.bgYellow(admin.usuario))
+
      let numComentarios = 0;
 
      if(comentarios.length > 1) {

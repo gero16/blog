@@ -272,16 +272,16 @@ const authAgregarComentario = async (req, res) => {
     } 
 
   const eliminarComentario = async (req, res) => {
+  
     try {
       const comentario = await Comentario.findOne({ where : { id: req.params.id }})
       const usuario_comentario = await Usuario_Comentario.findOne({ where : {id_comentario : req.params.id }})
-  
+
+ 
       await comentario.destroy();
       if(usuario_comentario) {
         await usuario_comentario.destroy();
       }
-  
-    
       res.status(200).json({mensaje: "Mensaje Eliminado Correctamente"})
   
     } catch (error) {
