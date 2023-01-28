@@ -102,8 +102,10 @@ const authAgregarComentario = async (req, res) => {
     const { editar, id_comentario } = req.body
     console.log(colors.bgRed(req.body))
     const id = Date.now()
-    const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-
+    const date = new Date()
+    const fecha = date.toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+    const actual = date.toLocaleTimeString('es-uy');
+  console.log(actual)
     try {
        const post = await Post.findOne({where : {url : req.params.titulo}});
     
@@ -115,7 +117,8 @@ const authAgregarComentario = async (req, res) => {
           id,
           usuario: req.body.usuario,
           mensaje: req.body.mensaje,
-          fecha: date,
+          fecha : fecha,
+          hora: actual,
           usuario_registrado: true,
           imagen_usuario: user.imagen,
           id_post: post.id,
@@ -132,12 +135,13 @@ const authAgregarComentario = async (req, res) => {
             nombre_admin: req.body.autor_post,
             nombre_remitente: req.body.usuario,
             url_publicacion: req.body.url_publicacion,
+            hora: actual,
             mensaje: req.body.mensaje,
           })
         
-        await newComentario.save()
-        await usuario_comentarios.save()
-        await notifiaciones.save()
+        //await newComentario.save()
+        //await usuario_comentarios.save()
+        //await notifiaciones.save()
   
       
         res.status(200).send("Mensaje Agregado!")
@@ -151,6 +155,7 @@ const authAgregarComentario = async (req, res) => {
           usuario: req.body.usuario,
           mensaje: req.body.mensaje,
           fecha: comentario.fecha,
+          hora: actual,
           usuario_registrado: comentario.usuario_registrado,
           imagen_usuario: comentario.imagen_usuario,
           id_post: comentario.id_post
@@ -161,6 +166,7 @@ const authAgregarComentario = async (req, res) => {
           nombre_admin: req.body.autor_post,
           nombre_remitente: req.body.usuario,
           url_publicacion: req.body.url_publicacion,
+          hora: actual,
           mensaje: req.body.mensaje,
         })
 

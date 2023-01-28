@@ -51,9 +51,13 @@ const Comentario = sequelize.define('Comentario', {
     fecha: {
       type: DataTypes.STRING 
     },
+    hora: {
+      type: DataTypes.STRING 
+    },
     imagen_usuario: {
       type: DataTypes.STRING,
     }
+
   },
   { 
     timestamps: false,
@@ -146,6 +150,9 @@ const Comentario = sequelize.define('Comentario', {
     leida: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    hora: {
+      type: DataTypes.STRING,
     }
   },
   { 
