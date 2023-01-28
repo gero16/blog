@@ -68,8 +68,13 @@ html(lang="en")
                                 div(class="img-user")
                                     img(src="/img/avatar1.png", alt="" class="avatar-notificacion")
                                 div(class="div-mensaje-notificacion ")
-                                    p(class="mensaje-notificacion") !{notificacion.nombre_remitente} ha comentado tu Publicación 
-                                    span(class="fecha-mensaje-notificacion") 12 de Julio, 2023
+                                    p(class="mensaje-notificacion") 
+                                        strong !{ notificacion.nombre_remitente } 
+                                        span ha comentado tu Publicación : "!{ notificacion.mensaje }..." 
+                                    span(class="fecha-mensaje-notificacion")  !{ notificacion.fecha } 
+                                    br/
+                                    span(class="fecha-mensaje-notificacion") a las !{ notificacion.hora }
+                                    
                  
         nav.menu-phone.ocultar-transition
                 ul(class="flex-column text-align-center menu-lista-phone ")

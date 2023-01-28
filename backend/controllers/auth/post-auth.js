@@ -135,13 +135,14 @@ const authAgregarComentario = async (req, res) => {
             nombre_admin: req.body.autor_post,
             nombre_remitente: req.body.usuario,
             url_publicacion: req.body.url_publicacion,
+            fecha: fecha,
             hora: actual,
             mensaje: req.body.mensaje,
           })
         
-        //await newComentario.save()
-        //await usuario_comentarios.save()
-        //await notifiaciones.save()
+        await newComentario.save()
+        await usuario_comentarios.save()
+        await notifiaciones.save()
   
       
         res.status(200).send("Mensaje Agregado!")
@@ -149,6 +150,7 @@ const authAgregarComentario = async (req, res) => {
         const comentario = await Comentario.findOne({where : {id : id_comentario}})
         const usuario_comentario = await Usuario_Comentario.findOne({where : {id_comentario : id_comentario}})
 
+        const mensajeNotificacion = req.body.mensaje.slice(0, 21)
     
         await comentario.update({
           id : id_comentario,
@@ -166,8 +168,9 @@ const authAgregarComentario = async (req, res) => {
           nombre_admin: req.body.autor_post,
           nombre_remitente: req.body.usuario,
           url_publicacion: req.body.url_publicacion,
+          mensaje: mensajeNotificacion,
           hora: actual,
-          mensaje: req.body.mensaje,
+          fecha: fecha,
         })
 
         await notifiaciones.save()

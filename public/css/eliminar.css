@@ -1,10 +1,10 @@
 body {
     background-image: url("../img/fondo.png");
+
 }
 
 
 .div-eliminar {
-
     background-color: rgba(223, 219, 219, 0.8);
     border-radius: 5px;
     border: 1px solid rgb(175, 172, 172);
@@ -12,6 +12,7 @@ body {
     text-align: center;
     margin: 25px 0px 25px 0px;
     padding: 35px;
+    width: 600px;
     
 }
 

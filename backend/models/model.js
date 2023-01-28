@@ -151,6 +151,9 @@ const Comentario = sequelize.define('Comentario', {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    fecha: {
+      type: DataTypes.STRING,
+    },
     hora: {
       type: DataTypes.STRING,
     }

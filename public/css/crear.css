@@ -4,14 +4,13 @@ body {
 }
 /*** CREAR POST ***/
 .crear-post{
-    width: 45vw;
+    width: 40vw;
     color: #454444;
     background-color: rgba(212, 193, 233, 0.93);
     border-radius: 10px;
     margin: 15px 0px 25px 0px;
     padding: 20px;
 } 
-
 
 
 .crear-post h1 {
@@ -62,11 +61,7 @@ body {
 }
 
 
-@media (min-width: 1024px) {
-    .span-foto {
-        margin: 0px 5px 0px 5px;
-    }
-  }
+
 
 .grid-input-img {
     display: flex;
@@ -181,7 +176,7 @@ body {
 
 /** PRE-VISUALIZACION DEL POST**/
 .preview {
-    width: 45vw;
+    width: 40vw;
     margin: 15px 10px 0px 10px;
     font-family: 'Mulish', sans-serif;
     background-color: rgba(255, 255, 255, 0.8);
@@ -220,6 +215,12 @@ body {
     text-align: center;
     
 }
+
+@media (min-width: 1024px) {
+    .span-foto {
+        margin: 0px 5px 0px 5px;
+    }
+  }
 
 @media (max-width: 800px) {
     .principal {
