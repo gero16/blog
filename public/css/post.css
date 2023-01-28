@@ -58,7 +58,7 @@ body {
 }
 
 .texto-post p {
- font-size: medium;
+ font-size: large;
 }
 
 .texto-post li {
@@ -126,7 +126,7 @@ body {
 }
 
 .seccion-comentarios input, textarea, label {
-    font-size: 14px;
+    font-size: large
 }
 
 
@@ -146,8 +146,8 @@ body {
 }
 
 .avatar-user {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
@@ -184,6 +184,7 @@ body {
     color: white;
     background-color: brown;
     font-size: 15px;
+    display: block;
 }
 
 .div-comentario{
@@ -199,8 +200,8 @@ body {
 }
 
 .user-img img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
 }
 .div-comentario-header {
@@ -211,7 +212,7 @@ body {
 }
 
 .div-comentario-header span {
-    font-size: small;
+    font-size: medium;
 }
 
 .comentario-usuario{
@@ -220,7 +221,7 @@ body {
 }
 
 .comentario-mensaje {
-    font-size: 13px;
+    font-size: medium;
     padding: 5px 5px 10px 35px;
 }
 
@@ -237,6 +238,19 @@ body {
 .editar-comentario {
     cursor: pointer;
 }
+
+.alert {
+    text-align: center;
+    font-size: 14px;
+    background-color: rgb(233, 104, 104);
+    color: #f8f8f8;
+    padding: 10px;
+    position: fixed;
+    border-radius: 5px;
+    bottom: 0px;
+   
+}
+
 
 @media (max-width: 450px) {
     .contenido-post {

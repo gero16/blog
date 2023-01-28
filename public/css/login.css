@@ -93,7 +93,6 @@ body {
 #registro:hover {
     cursor: pointer;
     filter: brightness(1.20);
-
 }
 
 .alert {

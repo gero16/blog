@@ -65,12 +65,15 @@ html(lang="en")
                     .contenedor-comentarios
                         h3 Comentarios
                         each comentario in comentarios 
-                            .div-comentario-header.flex-between
+                            div(class="div-comentario-header flex-between" )
                                 .user-img
                                     img(src=`${comentario.imagen_usuario}`)
-                                    .comentario-usuario= comentario.usuario
-                                .comentario-fecha= comentario.fecha
-                            .comentario-mensaje= comentario.mensaje
+                                    span.comentario-usuario= comentario.usuario
+                                span.comentario-fecha= comentario.fecha
+                            span.comentario-mensaje= comentario.mensaje
+                            div(class="comentario-actions" data-id=comentario.id)
+                                span(class="editar-comentario") Editar
+                                span(class="eliminar-comentario") Eliminar 
                     
                     .seccion-comentarios 
                         .img-user 

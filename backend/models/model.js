@@ -46,7 +46,7 @@ const Comentario = sequelize.define('Comentario', {
       defaultValue: false
     },
     mensaje: {
-        type: DataTypes.TEXT,
+        type: DataTypes.TEXT('long')
     },
     fecha: {
       type: DataTypes.STRING 

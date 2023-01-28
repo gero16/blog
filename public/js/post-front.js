@@ -23,6 +23,8 @@ const url = window.location.href;
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
 const btnAddComentario = document.querySelector(".btn-comentario")
+const seccionComentarios = document.querySelector(".seccion-comentarios")
+const divUsuarioComentario = document.querySelector(".img-user")
 
 const urlPost = window.location.pathname
 const tituloP = urlPost.split("/")
@@ -32,17 +34,18 @@ console.log(tituloP)
 const imgUser = document.querySelector(".avatar-user")
 const userPublic = JSON.parse(localStorage.getItem("imagen"));
 console.log(userPublic)
-window.onload = async function () {
- 
-   const sesion = JSON.parse(localStorage.getItem('sesion'));
-   if(sesion) {
-      const [user, email, token, rol] = sesion;
-   }
-}
 
-if(userPublic) {
-   imgUser.src = `/../img/avatar${userPublic[1]}.png`
- }
+const crearMensaje = (msg, anterior) => {
+   const mensaje = document.createElement("span")
+   mensaje.classList.add("alert")
+   mensaje.textContent = msg
+   anterior.appendChild(mensaje)
+ 
+   setTimeout(() => {
+     mensaje.remove()
+   }, 6000)
+} 
+
  
 
 const urlActual = window.location.href
@@ -62,6 +65,12 @@ btnAddComentario.addEventListener("click", async () => {
    }
    console.log(data)
    let url = `${urlActual}/agregar-comentario`
+
+   if(inputComentario.value.length > 249) {
+      console.log("Su mensaje es demasaido largo")
+      crearMensaje("Su mensaje tiene mas de 250 caracteres", seccionComentarios)
+      return 
+   }
    
    const comentarioActions = document.querySelector(".comentario-actions")
    if(!btnAddComentario.classList.contains("editar-coment")){
@@ -87,6 +96,7 @@ btnAddComentario.addEventListener("click", async () => {
       }
    } else {
       const idActualizar = comentarioActions.dataset.id;
+    
       const data = {
          usuario: inputUsuario.value,
          autor_post: adminPost.textContent,
@@ -163,3 +173,16 @@ editarComentario.forEach(comentario => {
       btnAddComentario.classList.add("editar-coment")
    })   
 });
+
+
+window.onload = async function () {
+ 
+   const sesion = JSON.parse(localStorage.getItem('sesion'));
+   if(sesion) {
+      const [user, email, token, rol] = sesion;
+   }
+}
+
+if(userPublic) {
+   imgUser.src = `/../img/avatar${userPublic[1]}.png`
+ }
