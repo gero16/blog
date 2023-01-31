@@ -79,8 +79,6 @@ console.log(imgMin)
 
 imgMin.forEach(imagen => {
   imagen.addEventListener("click", (e) => {
-    console.log(e.target.src)
-    console.log(e.target)
     let separar = e.target.src.split("/")
     console.log(separar)
     const imagen = separar[4]
@@ -96,8 +94,6 @@ imgMin.forEach(imagen => {
 
 
 seleccionImagen.addEventListener("click", (e) => {
-  console.log(e.target.classList.contains("flechas") )
-  console.log(e.target.classList)
   if(!e.target.classList.contains("flechas")) {
     seleccionImagen.classList.toggle("mostrar-imagen")
     seleccionImagen.classList.toggle("ocultar-imagen")

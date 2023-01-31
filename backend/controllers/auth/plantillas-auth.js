@@ -47,7 +47,7 @@ const indexPlantilla = async (req, res) => {
 
 
   const usuario = req.params.user
-  console.log(colors.bgBlue(usuario))
+  //console.log(colors.bgBlue(usuario))
   const titulo = "Espacio Luz de Luna"
   try {
 
@@ -58,14 +58,10 @@ const indexPlantilla = async (req, res) => {
     const notificacionesOrdenadas = notificaciones.reverse()
     // console.log(colors.bgRed(notificaciones))
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
-    console.log(colors.bgBlue(notificacion_sinleer))
+    //console.log(colors.bgBlue(notificacion_sinleer))
 
     const user = await Usuario.findOne({ where: { usuario }})
     
-    
-    registrosOrdenados.forEach(element => {
-      console.log(colors.bgRed(element.dataValues.fecha))
-    });
     if(user){
       const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
@@ -132,7 +128,7 @@ const crearPostPlantilla = async (req, res) => {
 
 
 const authPostPlantilla =  async (req, res) => {
-  console.log(colors.bgGreen(req.params))
+  //console.log(colors.bgGreen(req.params))
     const usuario = req.params.user
     const url = req.params.titulo
 
@@ -269,9 +265,7 @@ const editarPostPlantilla = async (req, res) => {
       let keys = Object.keys(orden)
       
       for(let i=0; i< valores.length; i++){
-        console.log(valores[i]);
-        console.log(keys[i])
-        console.log(contenido[i])
+      
         if(valores[i] === "vacio" && contenido[i]) {
           let key = keys[i]
           newOrden[key] = contenido[i]
