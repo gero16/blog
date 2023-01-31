@@ -232,7 +232,10 @@ btnAgregarTexto.addEventListener("click", () => {
 
     } else if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
       const valueFinal = element.value
-      element.value = `<p>     ${valueFinal}     </p>`
+      element.value = `
+      <p>
+       ${valueFinal} 
+      </p>`
       preContenido.innerHTML +=  element.value;
       element.classList.remove("vacio")
       

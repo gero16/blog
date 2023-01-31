@@ -277,44 +277,60 @@ const editarPostPlantilla = async (req, res) => {
         
    }
     
-    
-    const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
-    // Puede que no la haya subido a cloudinary
-      if(image[1]){
-        const img = image[1].split("/");
-        res.render("editar", {
-          id: id,
-          url: title,
-          titulo: titulo,
-          contenido: contenido,
-          imagenMin: img[1] || null,
-          imagen: imagen,
-          usuario: user,
-          autor: autor,
-          fecha: fecha,
-          nuevoContenido: newOrden,
-          notificaciones,
-          notificacion_sinleer,
-          cantidad_notificaciones : notificacion_sinleer.length
-        })
-      } else {
-        res.render("editar", {
-          id: id,
-          url: title,
-          titulo: titulo,
-          contenido: contenido,
-          imagenMin: "imagen",
-          imagen: imagen,
-          usuario: user,
-          autor: autor,
-          fecha: fecha,
-          nuevoContenido: newOrden,
-          notificaciones,
-          notificacion_sinleer,
-          cantidad_notificaciones : notificacion_sinleer.length
-        })
-      }
+    if(imagen){
+      const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
+      // Puede que no la haya subido a cloudinary
+        if(image[1]){
+          const img = image[1].split("/");
+          res.render("editar", {
+            id: id,
+            url: title,
+            titulo: titulo,
+            contenido: contenido,
+            imagenMin: img[1] || null,
+            imagen: imagen,
+            usuario: user,
+            autor: autor,
+            fecha: fecha,
+            nuevoContenido: newOrden,
+            notificaciones,
+            notificacion_sinleer,
+            cantidad_notificaciones : notificacion_sinleer.length
+          })
+        } else {
+          res.render("editar", {
+            id: id,
+            url: title,
+            titulo: titulo,
+            contenido: contenido,
+            imagenMin: "imagen",
+            imagen: imagen,
+            usuario: user,
+            autor: autor,
+            fecha: fecha,
+            nuevoContenido: newOrden,
+            notificaciones,
+            notificacion_sinleer,
+            cantidad_notificaciones : notificacion_sinleer.length
+          })
+        }
+    } else {
+      res.render("editar", {
+        id: id,
+        url: title,
+        titulo: titulo,
+        contenido: contenido,
+        usuario: user,
+        autor: autor,
+        fecha: fecha,
+        nuevoContenido: newOrden,
+        notificaciones,
+        notificacion_sinleer,
+        cantidad_notificaciones : notificacion_sinleer.length
+      })
+    }
   } else {
+
     return
   }
   
