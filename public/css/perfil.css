@@ -33,8 +33,8 @@ input {
 }
 
 .div-perfil-imagen {
- height: 50vh; 
- 
+    height: 50vh; 
+    text-align: center;
 }
 .perfil-imagen {
     width: 100%;
@@ -52,6 +52,7 @@ input {
 }
 
 .cambiar-foto {
+    margin: 15px 0px;
     cursor: pointer;
 }
 
