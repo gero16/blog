@@ -49,19 +49,19 @@ html(lang="en")
                 .contenido-post 
                 
                     .contenedor-flex 
-                        h1(class="titulo-post") #{titulo} 
+                        h1(class="titulo-post") #{ titulo } 
                         div.algo
-                            a(href=`/auth/${usuario}/editar/${url}`)
+                            a(href=`/auth/${ usuario }/editar/${ url }`)
                                 button(class=`editar`) Editar
-                            a(href=`/auth/${usuario}/eliminar/${url}`)
+                            a(href=`/auth/${ usuario }/eliminar/${ url }`)
                                 img(src="/../img/eliminar.png" class="img-eliminar")
                              
                     .contenedor-imagen
                         img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
                     .contenedor-flex 
                         p.autor-post Escrito por
-                            strong.autor-post  #{autor}
-                        p.fecha-post #{fecha}
+                            strong.autor-post  #{ autor }
+                        p.fecha-post #{ fecha }
 
                    
                     .contenedor-flex 
@@ -71,7 +71,7 @@ html(lang="en")
                                 li !{val}
                  
                     .contenedor-comentarios
-                        h3 Comentarios (!{numComentarios})
+                        h3 Comentarios (!{ numComentarios })
                         each comentario in comentarios 
                             div(class="div-comentario-header flex-between" )
                                 .user-img

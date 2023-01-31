@@ -62,7 +62,10 @@ const indexPlantilla = async (req, res) => {
 
     const user = await Usuario.findOne({ where: { usuario }})
     
-
+    
+    registrosOrdenados.forEach(element => {
+      console.log(colors.bgRed(element.dataValues.fecha))
+    });
     if(user){
       const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]

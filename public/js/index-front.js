@@ -57,40 +57,14 @@ const traerPublicaciones = async () => {
   const data = await resultado.json();
   const { registros } = data;
 
+  const fechas = document.querySelectorAll(".post-fecha")
 
-  let post = "";
-
-  registros.forEach((e) => {
-    const separar = e.fecha.split("-")
-    const date = [separar[2], separar[1], separar[0]]
-    const newDate = date.join("-")
-    const fechas = document.querySelectorAll(".post-fecha")
-    fechas.forEach(element => {
-      element.textContent = newDate;
-    });
-    /*
-    const primerParrafo = e.contenido[0]
-
-    post +=`
-            <div class="post" data-id=${i}>
-
-                <div class="div-imagen" data-id=${ e.url }>
-                  <img class="post-img" src="${ e.imagen }" alt="imagen-del-post" data-id=${ e.url }>
-                </div>
-
-                <div class="post-div-contenido" data-id=${ e.url }>
-                  <span class="post-autor data-id=${e.url}">Autor: <STRONG>  ${ e.autor } </STRONG> | </span>
-                  <span class="post-fecha">${ newDate } </span>
-                  <h2 class="post-titulo">${ e.titulo } </h2>
-                  <div class="post-contenido" data-id=${ e.url }>  ${ primerParrafo } </div> 
-                </div>
-
-            </div>
-          `;
-          console.log(post)
-    blog.innerHTML = post;
-    */
-  });
+  for (let index = 0; index < registros.length; index++) {
+    let separar = registros[index].fecha.split("-")
+    let date = [separar[2], separar[1], separar[0]]
+    let newDate = date.join("-")
+    fechas[index].textContent = newDate;
+  }
 };
 
 
