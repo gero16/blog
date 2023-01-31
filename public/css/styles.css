@@ -48,6 +48,10 @@ footer{
  
 }
 
+.color-principal {
+    background-color: #100540;
+}
+
 .btns {
     border-radius: 5px;
     padding: 5px;
