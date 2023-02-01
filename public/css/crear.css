@@ -216,12 +216,14 @@ body {
     text-align: center;
     
 }
-
+.pre-titulo {
+    font-size: large;
+}
  p {
-    font-size: medium;
+    font-size: small;
 }
 .datos-post p {
-    font-size: small;
+    font-size:x-small;
     margin-bottom: 5px;
 }
 @media (min-width: 1024px) {

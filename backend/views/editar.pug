@@ -57,7 +57,7 @@ html(lang="en")
                             li 
                                 label(for="" class="label-crear") Imagen
                                 div(class="grid-input-img") 
-                                    input(type="file" name="imagen" id="imagen-post" style="display: none") 
+                                    input(type="file" name="imagen" id="imagen-post" style="display: none" class="editar") 
                                     label(for="imagen-post" class="label-imagen") Seleccionar Archivo
                                     div(class="span-foto") !{imagenMin} 
                             li 
@@ -95,9 +95,9 @@ html(lang="en")
                     h1(class="pre-titulo titulo-post")  !{titulo}
                     img( class="pre-img" src=`${imagen}` alt="Previsualizacion de la Foto")
                     div.flex-between.datos-post
-                        p(class="pre-fecha") !{fecha}
                         p(class="autor-post") Autor: 
                             strong(class="pre-autor")  !{autor}
+                        p(class="pre-fecha") !{fecha}
                     .pre-contenido
                         each  value, nombre in nuevoContenido
                             div(class="contenido-post" data-id=`${ nombre }`) !{ value } 

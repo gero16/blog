@@ -3,6 +3,12 @@
 body {
     Overflow: overlay;
 }
+
+h3 {
+    margin-bottom: 20px;
+    font-size: large;
+}
+
 .pagina-post {
     margin: 30px auto;
     width: 60vw;
@@ -29,15 +35,17 @@ body {
     justify-content: space-between;
     align-items:baseline;
 }
+
 .contenedor-imagen {
  width: 100%;
 }
+
 .contenedor-titulo:hover {
     cursor: pointer;
 }
 
 .editar {
-    font-size: 20px;
+    font-size: medium;
     padding: 10px;
 }
 
@@ -96,7 +104,6 @@ body {
     cursor: pointer;
 }
 
-
 .actualizar {
     padding: 10px;
     border-radius: 5px;
@@ -105,18 +112,16 @@ body {
 
 .algo {
     display: flex;
-    
 }
 
 .img-eliminar{
     margin: 0px 0px 0px 20px;
-    height: 45px;
+    height: 40px;
 }
 
 .img-eliminar:hover {
     cursor: pointer
 }
-
 
 .seccion-comentarios {
     margin: 20px 0px;
@@ -128,7 +133,6 @@ body {
 .seccion-comentarios input, textarea, label {
     font-size: large
 }
-
 
 .seccion-comentarios textarea {
     width: 100%;
@@ -164,10 +168,7 @@ body {
     padding: 10px;
 }
 
-    h3{
-    margin-bottom: 20px;
-    font-size: large;
-}
+
 .contenido-comentario {
     margin: 5px 0px;
 }
