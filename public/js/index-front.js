@@ -77,6 +77,7 @@ const imgMin = document.querySelectorAll(".imagen-galeria-mini")
 const body = document.querySelector("body")
 console.log(imgMin)
 
+
 imgMin.forEach(imagen => {
   imagen.addEventListener("click", (e) => {
     let separar = e.target.src.split("/")
@@ -87,10 +88,42 @@ imgMin.forEach(imagen => {
     if(!e.target.classList.contains("flechas")) {
       seleccionImagen.classList.toggle("mostrar-imagen")
       seleccionImagen.classList.toggle("ocultar-imagen")
-
+      
+    } else if (e.target.classList.contains("flecha-izq")){
+      
     }
   })
 });
+
+let posicionActual = 1;
+const flechaDer = document.querySelector(".flecha-der")
+const flechaIzq = document.querySelector(".flecha-izq")
+
+flechaDer.addEventListener("click", () => {
+  if(posicionActual === 4) {
+    console.log(posicionActual)
+    posicionActual = 1;
+    imgMax.src = `/img/foto${ posicionActual}.jpg`
+  } else {
+    console.log(posicionActual)
+    posicionActual++;
+    imgMax.src = `/img/foto${ posicionActual }.jpg`
+
+}
+})
+
+flechaIzq.addEventListener("click", () => {
+  if(posicionActual === 1) {
+    console.log(posicionActual)
+    posicionActual = 4;
+    imgMax.src = `/img/foto${ posicionActual}.jpg`
+  } else {
+    posicionActual--;
+    console.log(posicionActual)
+    imgMax.src = `/img/foto${ posicionActual }.jpg`
+}
+})
+
 
 
 seleccionImagen.addEventListener("click", (e) => {
