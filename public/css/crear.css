@@ -148,7 +148,8 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
-#agregar-texto {
+
+#agregar-texto-crear, #agregar-texto-editar {
     background-color: #f4f0f0;
     color: #383636;
     border: 1px solid rgb(135, 132, 132);

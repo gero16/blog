@@ -53,7 +53,7 @@ html(lang="en")
                             li 
                                 label(for="") ID 
                                 span(type="text") !{id}
-                                input(type="text" name="id" value=`${id}` style="display: none" ) 
+                                input(type="text" name="id" value=`${id}` style="display: none") 
                             li 
                                 label(for="" class="label-crear") Imagen
                                 div(class="grid-input-img") 
@@ -62,13 +62,13 @@ html(lang="en")
                                     div(class="span-foto") !{imagenMin} 
                             li 
                                 label(for="text" class="label-crear") Titulo
-                                input(type="text" name="titulo" id="titulo-post"  class="input-crear" value=`${titulo}`)                      
+                                input(type="text" name="titulo" id="titulo-post"  class="input-crear editar" value=`${titulo}`)                      
                             li 
                                 label(for="text" class="label-crear") Autor
-                                input(type="text" name="autor" id="autor-post"  class="input-crear" value=`${autor}`) 
+                                input(type="text" name="autor" id="autor-post"  class="input-crear editar" value=`${autor}`) 
                             li 
                                 label(for="text" class="label-crear") Fecha
-                                input(type="date" name="fecha" id="fecha-post" class="input-crear" value=`${fecha}`)
+                                input(type="date" name="fecha" id="fecha-post" class="input-crear editar" value=`${fecha}`)
                             div(class="div-li-contenido") 
                                 each  value, nombre in nuevoContenido
                                     li(class=`li-${ nombre } li-parrafos`) 
@@ -84,7 +84,7 @@ html(lang="en")
 
                             li(class="agregar-texto") 
                                 span Previsualizar el Contenido
-                                span(data-id="agregar" id="agregar-texto") Previsualización del Contenido
+                                span(data-id="agregar" id="agregar-texto-editar") Previsualización del Contenido
                                 span(class="span-enter")  Presionar Enter 
 
                             li(class="li-button") 

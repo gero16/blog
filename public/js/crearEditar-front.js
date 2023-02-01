@@ -21,7 +21,7 @@ const preFoto = document.querySelector(".pre-img");
 const btnAgregarParrafo = document.querySelector(".agregar-parrafo")
 const divAgregarInputs = document.querySelector(".div-agregar-inputs")
 const btnAgregarSub = document.querySelector(".agregar-subtitulo")
-const btnAgregarTexto = document.querySelector("#agregar-texto")
+const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 
 let texto = "";
 
@@ -202,49 +202,80 @@ inputFoto.addEventListener("change", (e) => {
 const arrayEtiquetas = []
 
 
-btnAgregarTexto.addEventListener("click", () => {
-  let elementosVacios = document.querySelectorAll(".vacio")
-  const inputParrafo = document.querySelector(".parrafos-post")
-  const inputSubtitulo = document.querySelector(".subtitulos-post")
-  console.log(preContenido)
-  elementosVacios.forEach(element => {
-    
-    if(element.classList.contains("vacio") && element.name === "titulo"){
-      inputTitulo.classList.remove("vacio");
-      texto = inputTitulo.value;
-      preTitulo.textContent = texto;
-    } else if (element.classList.contains("vacio") && element.name === "autor") {
-      inputAutor.classList.remove("vacio");
-      texto = inputAutor.value;
-      preAutor.textContent = texto;
+// CAPAZ QUE PRECISO UN MODO EDICION = FALSE, en crear, para tener en cuenta los editar mientras creo, que afectarian solo a la previsualizacion
 
-    } else if (element.classList.contains("vacio")  && element.name === "fecha") {
-      inputFecha.classList.remove("vacio");
-      texto = inputFecha.value;
-      preFecha.textContent = texto;
+if(btnPrevisualizarCrear) {
+  btnPrevisualizarCrear.addEventListener("click", () => {
 
-    } else if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
-      const valueFinal = element.value
-      element.value = `<p>       ${valueFinal}       </p>`
-      // no se porque no funciona el innerHTML con el nuevoElemento
-      let nuevoElemento = `<div class="contenido-post> ${ element.value }  </div>` 
-      console.log(nuevoElemento)
-      preContenido.innerHTML +=  element.value;
-      element.classList.remove("vacio")
+    let elementosVacios = document.querySelectorAll(".vacio")
+    const inputSubtitulo = document.querySelector(".subtitulos-post")
+  
+    elementosVacios.forEach(element => {
+      
+      if(element.classList.contains("vacio") && element.name === "titulo"){
+        inputTitulo.classList.remove("vacio");
+        texto = inputTitulo.value;
+        preTitulo.textContent = texto;
+      } else if (element.classList.contains("vacio") && element.name === "autor") {
+        inputAutor.classList.remove("vacio");
+        texto = inputAutor.value;
+        preAutor.textContent = texto;
+  
+      } else if (element.classList.contains("vacio")  && element.name === "fecha") {
+        inputFecha.classList.remove("vacio");
+        texto = inputFecha.value;
+        preFecha.textContent = texto;
+  
+      } else if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
+        const valueFinal = element.value
+        element.value = `<p>       ${valueFinal}       </p>`
+        // no se porque no funciona el innerHTML con el nuevoElemento
+        let nuevoElemento = `<div class="contenido-post> ${ element.value }  </div>` 
+        console.log(nuevoElemento)
+        preContenido.innerHTML +=  element.value;
+        element.classList.remove("vacio")
+  
+      } else if (element.classList.contains("vacio") && element.classList.contains("subtitulos-post")) {
+        const valueFinal = inputSubtitulo.value
+        inputSubtitulo.value = `<h2>       ${valueFinal}       </h2>`
+        preContenido.innerHTML +=  inputSubtitulo.value;
+        inputSubtitulo.classList.remove("vacio")
+      } 
+    });
+  })
+}
 
-    } else if (element.classList.contains("vacio") && element.classList.contains("subtitulos-post")) {
-      const valueFinal = inputSubtitulo.value
-      inputSubtitulo.value = `<h2>       ${valueFinal}       </h2>`
-      preContenido.innerHTML +=  inputSubtitulo.value;
-      inputSubtitulo.classList.remove("vacio")
-    } 
-  });
+const btnPrevisualizarEditar = document.querySelector("#agregar-texto-editar")
 
-})
+if(btnPrevisualizarEditar) {
+
+  btnPrevisualizarEditar.addEventListener("click", () => {
+
+    let elementosEditar = document.querySelectorAll(".editar")
+  
+    elementosEditar.forEach(element => {
+      console.log(element.name)
+      if(element.name === "titulo"){
+        inputTitulo.classList.remove("vacio");
+        texto = inputTitulo.value;
+        preTitulo.textContent = texto;
+      } else if (element.name === "autor") {
+        inputAutor.classList.remove("vacio");
+        texto = inputAutor.value;
+        preAutor.textContent = texto;
+  
+      } else if (element.name === "fecha") {
+        inputFecha.classList.remove("vacio");
+        texto = inputFecha.value;
+        preFecha.textContent = texto;
+      } 
+    });
+  })
+}
+
 
 enviarPost.disabled = true
 inputTitulo.addEventListener("change", () => {
-  console.log("hola")
   if(inputTitulo) {
     enviarPost.disabled = false
   }
