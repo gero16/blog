@@ -69,6 +69,7 @@ html(lang="en")
                             li 
                                 label(for="text" class="label-crear") Fecha
                                 input(type="date" name="fecha" id="fecha-post" class="input-crear editar" value=`${fecha}`)
+                                
                             div(class="div-li-contenido") 
                                 each  value, nombre in nuevoContenido
                                     li(class=`li-${ nombre } li-parrafos`) 

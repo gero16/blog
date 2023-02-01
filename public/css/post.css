@@ -79,7 +79,12 @@ h3 {
 }
 
 .subtitulo-post {
+
     margin: 15px 0px 5px 0px;
+}
+
+h2 {
+    font-size: x-large;
 }
 
 .autor-post {

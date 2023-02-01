@@ -249,9 +249,11 @@ const btnPrevisualizarEditar = document.querySelector("#agregar-texto-editar")
 
 if(btnPrevisualizarEditar) {
 
-  btnPrevisualizarEditar.addEventListener("click", () => {
+  let elementosEditar = document.querySelectorAll(".editar")
+  const inputSubtitulo = document.querySelector(".subtitulos-post")
+  console.log(elementosEditar)
 
-    let elementosEditar = document.querySelectorAll(".editar")
+  btnPrevisualizarEditar.addEventListener("click", () => {
   
     elementosEditar.forEach(element => {
       console.log(element.name)
@@ -268,6 +270,21 @@ if(btnPrevisualizarEditar) {
         inputFecha.classList.remove("vacio");
         texto = inputFecha.value;
         preFecha.textContent = texto;
+      } 
+      else if (element.classList.contains("parrafos-post")) {
+        const valueFinal = element.value
+        element.value = `<p>       ${valueFinal}       </p>`
+        // no se porque no funciona el innerHTML con el nuevoElemento
+        let nuevoElemento = `<div class="contenido-post> ${ element.value }  </div>` 
+        console.log(nuevoElemento)
+        preContenido.innerHTML +=  element.value;
+        element.classList.remove("vacio")
+  
+      } else if (element.classList.contains("subtitulos-post")) {
+        const valueFinal = inputSubtitulo.value
+        inputSubtitulo.value = `<h2>       ${valueFinal}       </h2>`
+        preContenido.innerHTML +=  inputSubtitulo.value;
+        inputSubtitulo.classList.remove("vacio")
       } 
     });
   })
@@ -342,6 +359,7 @@ btnQuitarContenido.forEach(elementoQuitar => {
 });
 
 let inputsContenidoPost = document.querySelectorAll(".inputs-contenido-post")
+// Solo cambia el PREVIEW
 inputsContenidoPost.forEach(element => {
   element.addEventListener("change", () => {
    console.log(element.name) 
