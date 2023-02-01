@@ -1,9 +1,9 @@
 body {
     width: 100vw;
     height: 100vh;
-    /*
+    
     overflow-x: hidden;
-    */
+    
     font-family: 'Raleway', sans-serif;
     position: relative;
     box-sizing: border-box;
@@ -130,7 +130,7 @@ footer{
 }
 
 .menu-lista {
-    font-size: 20px;
+    font-size: large;
     align-items: flex-end;  
     margin-right: 20px;
 }
@@ -309,5 +309,8 @@ article {
         font-size: x-small;
         width: 60px;
         margin: 0px 20px;
+    }
+    .galeria-imagenes {
+        display: none
     }
   }
