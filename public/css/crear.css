@@ -78,9 +78,7 @@ body {
     font-size: 14px;
 }
 
-#contenido-post{
-    height: 200px;
-}
+
 
 .label-etiqueta-post {
     display: none;
@@ -218,6 +216,13 @@ body {
     
 }
 
+ p {
+    font-size: medium;
+}
+.datos-post p {
+    font-size: small;
+    margin-bottom: 5px;
+}
 @media (min-width: 1024px) {
     .span-foto {
         margin: 0px 5px 0px 5px;

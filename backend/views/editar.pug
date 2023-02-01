@@ -73,7 +73,7 @@ html(lang="en")
                                 each  value, nombre in nuevoContenido
                                     li(class=`li-${ nombre } li-parrafos`) 
                                         div
-                                        textarea(name=`${ nombre }`, class=`parrafos-post lleno ${ nombre }`) !{value} 
+                                        textarea(name=`${ nombre }`, class=`parrafos-post lleno ${ nombre } inputs-contenido-post`) !{value} 
                                         div
                                         span(class=`quitar-${ nombre } btn-quitar-contenido`) Quitar
                             
@@ -94,13 +94,13 @@ html(lang="en")
                 article(class="preview")
                     h1(class="pre-titulo titulo-post")  !{titulo}
                     img( class="pre-img" src=`${imagen}` alt="Previsualizacion de la Foto")
-                    div.flex-between
+                    div.flex-between.datos-post
                         p(class="pre-fecha") !{fecha}
                         p(class="autor-post") Autor: 
                             strong(class="pre-autor")  !{autor}
-                    div(class="pre-contenido contenido-post") 
-                    each  val in contenido
-                        div.texto-post !{val} 
+                    .pre-contenido
+                        each  value, nombre in nuevoContenido
+                            div(class="contenido-post" data-id=`${ nombre }`) !{ value } 
                 
                  
     script(src="/../js/middlewares-front.js") 
