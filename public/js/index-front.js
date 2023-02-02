@@ -67,6 +67,7 @@ const traerPublicaciones = async () => {
     console.log(newDate)
     fechas[index].textContent = newDate;
   }
+  
 };
 
 

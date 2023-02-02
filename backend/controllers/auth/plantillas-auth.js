@@ -45,14 +45,16 @@ const perfilPlantilla = async (req, res) => {
 
 const indexPlantilla = async (req, res) => {
 
-
   const usuario = req.params.user
   //console.log(colors.bgBlue(usuario))
   const titulo = "Espacio Luz de Luna"
   try {
 
-    const registros = await Post.findAll()
-    const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
+    const registros = await Post.findAll({
+      order: [
+        ['id', 'DESC'],
+    ],
+    });
   
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
     const notificacionesOrdenadas = notificaciones.reverse()
@@ -61,6 +63,8 @@ const indexPlantilla = async (req, res) => {
     //console.log(colors.bgBlue(notificacion_sinleer))
 
     const user = await Usuario.findOne({ where: { usuario }})
+
+    
     
     if(user){
       console.log(colors.bgGreen(notificaciones))
@@ -68,7 +72,7 @@ const indexPlantilla = async (req, res) => {
             const miniName = reduceName[0]
             if(user.rol === "ADMIN") {
               res.render("index/indexAdmin", {
-                    registros: registrosOrdenados,
+                    registros: registros,
                     miniName: miniName,
                     usuario: user.usuario,
                     correo: user.correo,
@@ -82,7 +86,7 @@ const indexPlantilla = async (req, res) => {
             
             } else {
                 res.render("index/indexUser", {
-                      registros: registrosOrdenados,
+                      registros: registros,
                       miniName: miniName,
                       usuario: user.usuario,
                       correo: user.correo,

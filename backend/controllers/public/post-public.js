@@ -16,12 +16,17 @@ cloudinary.config({
 const traerPublicaciones = async (req, res) => {
     try {
        // Traer todos las Publicaciones
-      const registros = await Post.findAll();
-      const registrosOrdenados = registros.sort((a, b) =>  new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
-      console.log(colors.bgBlue(registrosOrdenados))
-
+       const registros = await Post.findAll({
+        order: [
+          ['id', 'DESC'],
+      ],
+      });
+      
+      
+      console.log(colors.bgRed(registros))
+  
       return res.status(200).json({
-        registros: registrosOrdenados
+        registros: registros,
       });
   
     } catch (error) {
@@ -32,13 +37,15 @@ const traerPublicaciones = async (req, res) => {
   const indexPublicPlantilla = async (req, res) => {
  
     try {
-      const registros = await Post.findAll()
-      const registrosOrdenados = registros.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
-   
-      
+      const registros = await Post.findAll({
+        order: [
+          ['id', 'DESC'],
+      ],
+      });
+       
       const titulo = "Espacio Luz de Luna"
       res.render("index/indexPublic", {
-          registros: registrosOrdenados, 
+          registros: registros, 
           titulo,
           usuario: "public",
         })
