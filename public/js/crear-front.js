@@ -25,12 +25,6 @@ const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 
 let texto = "";
 
-// Post de Muestra
-//const textoPost = document.querySelector(".texto-post");
-
-let actualizarHTML = "";
-let etiquetaContenido = [];
-
 /** Seccion de contenido para Agregar parrafos y/o subtitulos **/
 let orden = {
   primer: "vacio",
@@ -46,26 +40,6 @@ let orden = {
   decimoPrimero: "vacio",
   decimoSegundo: "vacio",
   ultimo: "vacio"
-}
-
-
-const traerInfo = async () => {
-  
-  const sesion =  JSON.parse(localStorage.getItem("sesion"));
-  const token = sesion[2]
-  const settings = { 
-      method: 'GET', 
-      headers: { 
-              "Content-Type": "application/json", 
-              "auth-token": token
-            }
-          };
-  try {
-    const fetchResponse = await fetch(`/auth/${sesion[1]}/crear-post`, settings);
-   
-  } catch (error) {
-    console.log(error)
-  }
 }
 
 // Voy llenando los inputs, y luego actualizo el objeto
@@ -91,9 +65,6 @@ btnAgregarParrafo.addEventListener("click", () => {
   liContenedor.classList.add(`li-${ arrayOrden[5][0] }`,"li-parrafos")
   console.log(orden)
   
-  //console.log(liContenedor)
-  //liContenedor[indexValor].classList.add(`li-${ arrayOrden[5][0] }`)
-  // liAgregar.removeAttribute("id")
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
 
@@ -199,96 +170,46 @@ inputFoto.addEventListener("change", (e) => {
   preFoto.src = objectURL;
 });
 
-const arrayEtiquetas = []
-
 
 // CAPAZ QUE PRECISO UN MODO EDICION = FALSE, en crear, para tener en cuenta los editar mientras creo, que afectarian solo a la previsualizacion
+btnPrevisualizarCrear.addEventListener("click", () => {
 
-if(btnPrevisualizarCrear) {
-  btnPrevisualizarCrear.addEventListener("click", () => {
-
-    let elementosVacios = document.querySelectorAll(".vacio")
-    const inputSubtitulo = document.querySelector(".subtitulos-post")
-  
-    elementosVacios.forEach(element => {
-      
-      if(element.classList.contains("vacio") && element.name === "titulo"){
-        inputTitulo.classList.remove("vacio");
-        texto = inputTitulo.value;
-        preTitulo.textContent = texto;
-      } else if (element.classList.contains("vacio") && element.name === "autor") {
-        inputAutor.classList.remove("vacio");
-        texto = inputAutor.value;
-        preAutor.textContent = texto;
-  
-      } else if (element.classList.contains("vacio")  && element.name === "fecha") {
-        inputFecha.classList.remove("vacio");
-        texto = inputFecha.value;
-        preFecha.textContent = texto;
-  
-      } else if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
-        const valueFinal = element.value
-        element.value = `<p>       ${valueFinal}       </p>`
-        // no se porque no funciona el innerHTML con el nuevoElemento
-        let nuevoElemento = `<div class="contenido-post> ${ element.value }  </div>` 
-        console.log(nuevoElemento)
-        preContenido.innerHTML +=  element.value;
-        element.classList.remove("vacio")
-  
-      } else if (element.classList.contains("vacio") && element.classList.contains("subtitulos-post")) {
-        const valueFinal = inputSubtitulo.value
-        inputSubtitulo.value = `<h2>       ${valueFinal}       </h2>`
-        preContenido.innerHTML +=  inputSubtitulo.value;
-        inputSubtitulo.classList.remove("vacio")
-      } 
-    });
-  })
-}
-
-const btnPrevisualizarEditar = document.querySelector("#agregar-texto-editar")
-
-if(btnPrevisualizarEditar) {
-
-  let elementosEditar = document.querySelectorAll(".editar")
+  let elementosVacios = document.querySelectorAll(".vacio")
   const inputSubtitulo = document.querySelector(".subtitulos-post")
-  console.log(elementosEditar)
 
-  btnPrevisualizarEditar.addEventListener("click", () => {
-  
-    elementosEditar.forEach(element => {
-      console.log(element.name)
-      if(element.name === "titulo"){
-        inputTitulo.classList.remove("vacio");
-        texto = inputTitulo.value;
-        preTitulo.textContent = texto;
-      } else if (element.name === "autor") {
-        inputAutor.classList.remove("vacio");
-        texto = inputAutor.value;
-        preAutor.textContent = texto;
-  
-      } else if (element.name === "fecha") {
-        inputFecha.classList.remove("vacio");
-        texto = inputFecha.value;
-        preFecha.textContent = texto;
-      } 
-      else if (element.classList.contains("parrafos-post")) {
-        const valueFinal = element.value
-        element.value = `<p>       ${valueFinal}       </p>`
-        // no se porque no funciona el innerHTML con el nuevoElemento
-        let nuevoElemento = `<div class="contenido-post> ${ element.value }  </div>` 
-        console.log(nuevoElemento)
-        preContenido.innerHTML +=  element.value;
-        element.classList.remove("vacio")
-  
-      } else if (element.classList.contains("subtitulos-post")) {
-        const valueFinal = inputSubtitulo.value
-        inputSubtitulo.value = `<h2>       ${valueFinal}       </h2>`
-        preContenido.innerHTML +=  inputSubtitulo.value;
-        inputSubtitulo.classList.remove("vacio")
-      } 
-    });
-  })
-}
+  elementosVacios.forEach(element => {
+
+    if (element.classList.contains("vacio") && element.name === "titulo") {
+      inputTitulo.classList.remove("vacio");
+      texto = inputTitulo.value;
+      preTitulo.textContent = texto;
+    } else if (element.classList.contains("vacio") && element.name === "autor") {
+      inputAutor.classList.remove("vacio");
+      texto = inputAutor.value;
+      preAutor.textContent = texto;
+
+    } else if (element.classList.contains("vacio") && element.name === "fecha") {
+      inputFecha.classList.remove("vacio");
+      texto = inputFecha.value;
+      preFecha.textContent = texto;
+
+    } else if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
+      const valueFinal = element.value
+      element.value = `<p>       ${valueFinal}       </p>`
+      // no se porque no funciona el innerHTML con el nuevoElemento
+      let nuevoElemento = `<div class="contenido-post> ${element.value}  </div>`
+      console.log(nuevoElemento)
+      preContenido.innerHTML += element.value;
+      element.classList.remove("vacio")
+
+    } else if (element.classList.contains("vacio") && element.classList.contains("subtitulos-post")) {
+      const valueFinal = inputSubtitulo.value
+      inputSubtitulo.value = `<h2>       ${valueFinal}       </h2>`
+      preContenido.innerHTML += inputSubtitulo.value;
+      inputSubtitulo.classList.remove("vacio")
+    }
+  });
+})
 
 
 enviarPost.disabled = true
@@ -347,13 +268,9 @@ const reiniciarOrden = (valorEliminar) => {
 const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
 btnQuitarContenido.forEach(elementoQuitar => {
   elementoQuitar.addEventListener("click", (e) => {
-    //console.log(e.target.classList[0])
     let claseOrden = e.target.classList[0]
     const liPadre = document.querySelector(`.li-${claseOrden}`)
-    //console.log(liPadre)
-    
-    //liPadre.innerHTML = "";
-    // Lo que tengo 
+
     reiniciarOrden(claseOrden)
   })
 });
@@ -370,59 +287,3 @@ inputsContenidoPost.forEach(element => {
   })
 });
 
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  traerInfo()
-
-  // Solo para el editar
-  actualizarOrden();
-
-  document.querySelectorAll(".vacio").forEach((inputsVacios) =>
-    inputsVacios.addEventListener("keypress", (e) => {
-
-      if (e.keyCode == 13) {
-        e.preventDefault();
-
-        if (inputTitulo.value.length > 1 && inputTitulo.classList.contains("vacio")) {
-          console.log("laputamadre")
-          inputTitulo.classList.remove("vacio");
-          texto = inputTitulo.value;
-          preTitulo.textContent = texto;
-        } else if (inputAutor.value.length > 1 && inputAutor.classList.contains("vacio")) {
-          inputAutor.classList.remove("vacio");
-          texto = inputAutor.value;
-          preAutor.textContent = texto;
-        } else if (inputFecha.value.length > 1 && inputFecha.classList.contains("vacio")) {
-          inputFecha.classList.remove("vacio");
-          texto = inputFecha.value;
-          preFecha.textContent = texto;
-        } else {
-          console.log("hola")
-        }
-      }  
-    }));  
-
-
-  inputFoto.addEventListener("keypress", (e) => {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-
-      if (inputTitulo.value && inputTitulo.className == "vacio") {
-        inputTitulo.classList.remove("vacio");
-        texto = inputTitulo.value;
-        preTitulo.textContent = texto;
-      } else if (inputAutor.value && inputAutor.className == "vacio") {
-        inputAutor.classList.remove("vacio");
-        texto = inputAutor.value;
-        preAutor.textContent = texto;
-      } else if (inputFecha.value && inputFecha.className == "vacio") {
-        inputFecha.classList.remove("vacio");
-        texto = inputFecha.value;
-        preFecha.textContent = texto;
-      } 
-    }
-  });
-
-});

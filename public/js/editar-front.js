@@ -25,12 +25,6 @@ const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 
 let texto = "";
 
-// Post de Muestra
-//const textoPost = document.querySelector(".texto-post");
-
-let actualizarHTML = "";
-let etiquetaContenido = [];
-
 /** Seccion de contenido para Agregar parrafos y/o subtitulos **/
 let orden = {
   primer: "vacio",
@@ -181,7 +175,6 @@ const arrayEtiquetas = []
 
 const btnPrevisualizarEditar = document.querySelector("#agregar-texto-editar")
 
-
 btnPrevisualizarEditar.addEventListener("click", () => {
   const inputSubtitulo = document.querySelector(".subtitulos-post")
   let elementosEditar = document.querySelectorAll(".editar")
@@ -260,13 +253,9 @@ const reiniciarOrden = (valorEliminar) => {
 const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
 btnQuitarContenido.forEach(elementoQuitar => {
   elementoQuitar.addEventListener("click", (e) => {
-    //console.log(e.target.classList[0])
     let claseOrden = e.target.classList[0]
     const liPadre = document.querySelector(`.li-${claseOrden}`)
-    //console.log(liPadre)
     
-    //liPadre.innerHTML = "";
-    // Lo que tengo 
     reiniciarOrden(claseOrden)
   })
 });
@@ -289,27 +278,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Solo para el editar
   actualizarOrden();
-
-
-
-  inputFoto.addEventListener("keypress", (e) => {
-    if (e.keyCode == 13) {
-      e.preventDefault();
-
-      if (inputTitulo.value && inputTitulo.className == "vacio") {
-        inputTitulo.classList.remove("vacio");
-        texto = inputTitulo.value;
-        preTitulo.textContent = texto;
-      } else if (inputAutor.value && inputAutor.className == "vacio") {
-        inputAutor.classList.remove("vacio");
-        texto = inputAutor.value;
-        preAutor.textContent = texto;
-      } else if (inputFecha.value && inputFecha.className == "vacio") {
-        inputFecha.classList.remove("vacio");
-        texto = inputFecha.value;
-        preFecha.textContent = texto;
-      } 
-    }
-  });
 
 });
