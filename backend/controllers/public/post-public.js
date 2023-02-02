@@ -18,7 +18,7 @@ const traerPublicaciones = async (req, res) => {
        // Traer todos las Publicaciones
       const registros = await Post.findAll();
       const registrosOrdenados = registros.sort((a, b) =>  new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
-  
+      console.log(colors.bgBlue(registrosOrdenados))
 
       return res.status(200).json({
         registros: registrosOrdenados

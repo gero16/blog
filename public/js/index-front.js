@@ -60,6 +60,7 @@ const traerPublicaciones = async () => {
   const fechas = document.querySelectorAll(".post-fecha")
 
   for (let index = 0; index < registros.length; index++) {
+    console.log(registros[index].fecha)
     let separar = registros[index].fecha.split("-")
     let date = [separar[2], separar[1], separar[0]]
     let newDate = date.join("-")
