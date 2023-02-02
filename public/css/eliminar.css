@@ -1,11 +1,11 @@
 body {
-    background-image: url("../img/fondo.png");
+   
 
 }
 
 
 .div-eliminar {
-    background-color: rgba(223, 219, 219, 0.8);
+    background-color: rgba(235, 232, 232, 0.8);
     border-radius: 5px;
     border: 1px solid rgb(175, 172, 172);
     color: rgb(48, 47, 46);
@@ -42,4 +42,15 @@ body {
 
 .delete a {
     color: white;
+}
+
+.volver-inicio:hover  {
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+    transform:scale(1.10); 
+    filter: brightness(125%);
+}
+.volver-inicio a {
+    font-size: x-large;
+
 }

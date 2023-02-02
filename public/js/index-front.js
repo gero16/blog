@@ -63,6 +63,7 @@ const traerPublicaciones = async () => {
     let separar = registros[index].fecha.split("-")
     let date = [separar[2], separar[1], separar[0]]
     let newDate = date.join("-")
+    console.log(newDate)
     fechas[index].textContent = newDate;
   }
 };
