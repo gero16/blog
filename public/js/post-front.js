@@ -161,18 +161,20 @@ if(admin) {
    });
 }
 
+if(admin) {
+   editarComentario.forEach(comentario => {
+      const sesion = JSON.parse(localStorage.getItem('sesion'));
+      const admin = sesion[1]
+   
+      comentario.addEventListener("click", () => {
+         const idComentario = comentario.parentElement.dataset.id
+         console.log(comentario.parentNode.parentElement.children[2])
+         inputComentario.value = comentario.parentNode.parentElement.children[2].textContent
+         btnAddComentario.classList.add("editar-coment")
+      })   
+   });
+}
 
-editarComentario.forEach(comentario => {
-   const sesion = JSON.parse(localStorage.getItem('sesion'));
-   const admin = sesion[1]
-
-   comentario.addEventListener("click", () => {
-      const idComentario = comentario.parentElement.dataset.id
-      console.log(comentario.parentNode.parentElement.children[2])
-      inputComentario.value = comentario.parentNode.parentElement.children[2].textContent
-      btnAddComentario.classList.add("editar-coment")
-   })   
-});
 
 
 window.onload = async function () {
