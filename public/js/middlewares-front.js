@@ -82,10 +82,8 @@ if(updateImg){
 
 
 const btnNotificaciones = document.querySelector(".li-btn-notificaciones")
-console.log(btnNotificaciones)
 const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
-console.log()
 const divNotificacion = document.querySelector(".notificacion-noleida")
 
 if(btnNotificaciones){
