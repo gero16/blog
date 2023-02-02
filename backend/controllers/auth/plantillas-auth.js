@@ -63,6 +63,7 @@ const indexPlantilla = async (req, res) => {
     const user = await Usuario.findOne({ where: { usuario }})
     
     if(user){
+      console.log(colors.bgGreen(notificaciones))
       const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
             if(user.rol === "ADMIN") {

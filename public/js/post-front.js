@@ -129,38 +129,39 @@ btnAddComentario.addEventListener("click", async () => {
 })
 
 
-
-eliminarComentario.forEach(comentario => {
-   const sesion = JSON.parse(localStorage.getItem('sesion'));
-   const admin = sesion[1]
-
-   comentario.addEventListener("click", () => {
-      console.log(comentario.parentElement.dataset.id)
-      const idComentario = comentario.parentElement.dataset.id
-   
-      const settings = {
-         method: 'POST',
-         headers: {
-           Accept: 'application/json',
-             'Content-Type': 'application/json',
-           }
-         };
-         
-      const mandarInfo = async () => {
-         try {
-            const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloP[4] }/eliminar-comentario/${ idComentario }`, settings);
-             if(fetchResponse.status === 200) {
-               console.log("Mensaje eliminado Correctamente!")
-               window.location.reload()
-             }
-             
-         } catch (error) {
-            console.log(error)
+const sesion = JSON.parse(localStorage.getItem('sesion'));
+const admin = sesion[1]
+if(admin) {
+   eliminarComentario.forEach(comentario => {
+      comentario.addEventListener("click", () => {
+         console.log(comentario.parentElement.dataset.id)
+         const idComentario = comentario.parentElement.dataset.id
+      
+         const settings = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+                'Content-Type': 'application/json',
+              }
+            };
+            
+         const mandarInfo = async () => {
+            try {
+               const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloP[4] }/eliminar-comentario/${ idComentario }`, settings);
+                if(fetchResponse.status === 200) {
+                  console.log("Mensaje eliminado Correctamente!")
+                  window.location.reload()
+                }
+                
+            } catch (error) {
+               console.log(error)
+            }
          }
-      }
-      mandarInfo()
-   })   
-});
+         mandarInfo()
+      })   
+   });
+}
+
 
 editarComentario.forEach(comentario => {
    const sesion = JSON.parse(localStorage.getItem('sesion'));
