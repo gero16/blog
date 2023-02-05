@@ -58,7 +58,9 @@ if(btnLogin){
     if(data.msg === 'Su cuenta fue eliminada'){
       crearMensaje( "Su Cuenta fue Eliminada!")
     }
-
+    if (data.msg === 'El usuario no es correcto') {
+      crearMensaje("El Usuario y/o Constraseña son Incorrectos!")
+    }
     console.log(data.msg)
   })  
 }

@@ -2,55 +2,6 @@ const blog = document.querySelector(".blog");
 const refCrear = document.querySelector(".ref-crear")
 const publicIMG = document.querySelector(".avatar-user")
 
-window.onload = async function (e) {
-  e.preventDefault()
-
-  await traerPublicaciones();
-
-  const urlPost = document.querySelectorAll(".post")
-
-  const sesion = JSON.parse(localStorage.getItem('sesion'));
-  
-  if(window.location.pathname === "/") {
-    urlPost.forEach(element => {
-      element.addEventListener("click", (e) => {
-        window.location.href = `/publicaciones/${e.target.parentNode.dataset.id}`
-    })
-  })}
-  
-  if(sesion && window.location.pathname === "/") {
-     window.location.href = `/auth/${sesion[1]}/index`
-  }
- 
-  if(sesion) {
-    localStorage.removeItem("imagen");
-    
-    const [correo, usuario, token, rol] = sesion;
-
-    if(correo == null || usuario == null || token == null || rol == null) {
-      console.log("Elimino sesion porque sus datos estan en null")
-      localStorage.removeItem('sesion');
-    }
-} else {
-    const divImagen = document.querySelector(".img-user")
- 
-    function randomImage(min, max) {
-      const num = Math.floor((Math.random() * (max - min + 1)) + min);
-      const imagen =  num;
-      const userPublic = localStorage.getItem("imagen");
-
-      if(!userPublic) {
-        const data = ["public", imagen]
-        const public = localStorage.setItem("imagen", JSON.stringify(data) );
-        const avatarImagen = document.createElement("img")
-        avatarImagen.src = `/../img/avatar${num}.png`
-        divImagen.append(avatarImagen)
-      }
-  }
-  randomImage(0, 6);
-  }
-}
-
 
 const traerPublicaciones = async () => {
   const resultado = await fetch("/publicaciones");
@@ -138,10 +89,59 @@ seleccionImagen.addEventListener("click", (e) => {
 })
 
 
+window.onload = async function (e) {
+  e.preventDefault()
 
+  const imgsPublicaciones = document.querySelectorAll(".post-img")
+  console.log(imgsPublicaciones)
 
+  await traerPublicaciones();
 
+  const urlPost = document.querySelectorAll(".post")
 
+  const sesion = JSON.parse(localStorage.getItem('sesion'));
+  
+  if(window.location.pathname === "/") {
+    urlPost.forEach(element => {
+      element.addEventListener("click", (e) => {
+        window.location.href = `/publicaciones/${e.target.parentNode.dataset.id}`
+    })
+  })}
+  
+  if(sesion && window.location.pathname === "/") {
+     window.location.href = `/auth/${sesion[1]}/index`
+  }
+ 
+  if(sesion) {
+    localStorage.removeItem("imagen");
+    
+    const [correo, usuario, token, rol] = sesion;
 
+    if(correo == null || usuario == null || token == null || rol == null) {
+      console.log("Elimino sesion porque sus datos estan en null")
+      localStorage.removeItem('sesion');
+    }
+} else {
+    const divImagen = document.querySelector(".img-user")
+ 
+    function randomImage(min, max) {
+      const num = Math.floor((Math.random() * (max - min + 1)) + min);
+      const imagen =  num;
+      const userPublic = localStorage.getItem("imagen");
 
+      if(!userPublic) {
+        const data = ["public", imagen]
+        const public = localStorage.setItem("imagen", JSON.stringify(data) );
+        const avatarImagen = document.createElement("img")
+        avatarImagen.src = `/../img/avatar${num}.png`
+        divImagen.append(avatarImagen)
+      }
+  }
 
+  imgsPublicaciones.forEach(element => {
+    console.log(element)
+  });
+  
+  randomImage(0, 6);
+  }
+}

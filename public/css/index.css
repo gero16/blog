@@ -37,6 +37,10 @@
     width: 100%;
 }
 
+.imagen-700x300{
+    width: 130%;
+}
+
 .post-fecha, .post-autor {
     font-size: small
 }
@@ -119,11 +123,11 @@
 }
 
 .flechas:hover {
-    transition: all 0.5s ease-out;
-    transform:scale(1.10); 
     filter: brightness(125%);
-
+    
 }
+
+
 
 .imagen-galeria-mini {
    width: 100px;

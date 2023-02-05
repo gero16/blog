@@ -59,23 +59,38 @@ body {
     transition: background-color 0.2s;
 }
 
+
+.contenedor-ingresar {
+    width: 400px;
+    overflow: hidden;
+}
+.contenedor-ingresar:hover {
+    transition: all 0.5s ease-out;
+    transform:scale(1.05);    
+ 
+}
+
 #login {
+    display: block;
     width: 100%;
-    font-size: 18px;
+    font-size: large;
     padding: 15px;
-    margin-top: 20px;
+    margin-top: 25px;
     background-color: #053c5a;
     transition: background-color 0.2s;
     border: 0;
     font-weight: bold;
-    color: #ffffff;
+    color: #ffffff;  
     text-align: center;
     text-shadow: 1px 1px 2px rgb(65, 65, 65);
+    
 }
 
 #login:hover{
     filter: brightness(1.20);
     cursor: pointer;
+    transition: all 0.5s ease-out;
+    transform:scale(1.05); 
 
 }
 
@@ -106,9 +121,12 @@ body {
     width: 100%;
 }
 
-.recuperar-password {
+.recuperar-password:hover {
     cursor: pointer;
+    filter: brightness(1.5);
 }
+
+
 .recuperar-password a {
     font-size: medium;
 }
