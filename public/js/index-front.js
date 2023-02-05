@@ -11,14 +11,11 @@ const traerPublicaciones = async () => {
   const fechas = document.querySelectorAll(".post-fecha")
 
   for (let index = 0; index < registros.length; index++) {
-    console.log(registros[index].fecha)
     let separar = registros[index].fecha.split("-")
     let date = [separar[2], separar[1], separar[0]]
     let newDate = date.join("-")
-    console.log(newDate)
     fechas[index].textContent = newDate;
   }
-  
 };
 
 
@@ -29,7 +26,6 @@ const imgMax = document.querySelector(".imagen-galeria-max")
 const seleccionImagen = document.querySelector(".seleccion-imagen")
 const imgMin = document.querySelectorAll(".imagen-galeria-mini")
 const body = document.querySelector("body")
-console.log(imgMin)
 
 
 imgMin.forEach(imagen => {
@@ -84,7 +80,6 @@ seleccionImagen.addEventListener("click", (e) => {
   if(!e.target.classList.contains("flechas")) {
     seleccionImagen.classList.toggle("mostrar-imagen")
     seleccionImagen.classList.toggle("ocultar-imagen")
-
   }
 })
 
@@ -93,7 +88,6 @@ window.onload = async function (e) {
   e.preventDefault()
 
   const imgsPublicaciones = document.querySelectorAll(".post-img")
-  console.log(imgsPublicaciones)
 
   await traerPublicaciones();
 
@@ -139,7 +133,7 @@ window.onload = async function (e) {
   }
 
   imgsPublicaciones.forEach(element => {
-    console.log(element)
+    //console.log(element)
   });
   
   randomImage(0, 6);
