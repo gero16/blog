@@ -100,7 +100,7 @@ const crearPost = async (req, res) => {
 
 const authAgregarComentario = async (req, res) => {
     const { editar, id_comentario } = req.body
-    console.log(colors.bgRed(req.body))
+    //console.log(colors.bgRed(req.body))
     const id = Date.now()
     const date = new Date()
     const fecha = date.toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
@@ -192,14 +192,14 @@ const authAgregarComentario = async (req, res) => {
     // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
     const newID = Date.now();
-    console.log(editar)
+
     let contenido = [];
     const filtrarContenido = [primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo];
           filtrarContenido.forEach(element => {
               if(element != undefined) {
                 contenido.push(element)
               }});
-  console.log(colors.bgBlue(body))
+
     try {
 
       let post = await Post.findOne({ where  : { id }})
@@ -209,8 +209,16 @@ const authAgregarComentario = async (req, res) => {
         function (error, result) {console.log(result);});
       
         const { secure_url } = result;  
+          
+        const extraerImagen = post.imagen.split("/")
+        const imagenId = extraerImagen[8].split(".")
+        const publicId = `${ extraerImagen[7] }/${ imagenId[0] }`
+        const resultEliminar = await cloudinary.uploader.destroy(`${ publicId }`, function(error, result) {
+          console.log(result, error) 
+        });
         
-        await post.update({
+        console.log(colors.bgCyan(publicId))
+          await post.update({
               titulo,
               fecha,
               autor: autor,
@@ -221,14 +229,14 @@ const authAgregarComentario = async (req, res) => {
             });
   
       } else {
-        await post.update({ 
-          titulo,
-          fecha,
-          autor,
-          imagen,
-          contenido,
-          url: tituloURL
-        });     
+          await post.update({ 
+              titulo,
+              fecha,
+              autor,
+              imagen,
+              contenido,
+              url: tituloURL
+            });
       }
   
       return res.status(200).render("ok", {
@@ -252,15 +260,22 @@ const authAgregarComentario = async (req, res) => {
         const deleteComentarios = await Comentario.findOne({ where: { id_post:  req.params.id } });
 
         if(deleteComentarios) {
-          console.log(colors.bgCyan(deleteComentarios))
+          //console.log(colors.bgCyan(deleteComentarios))
           const deleteUsuarioComentarios = await Usuario_Comentario.findOne({ where: { id_comentario: deleteComentarios.id} });
-          console.log(colors.bgGreen(deleteUsuarioComentarios))
+          //console.log(colors.bgGreen(deleteUsuarioComentarios))
           await deleteComentarios.destroy()
           await deleteUsuarioComentarios.destroy()
         }
-      
+       
+         const extraerImagen = deletePost.imagen.split("/")
+         const imagenId = extraerImagen[8].split(".")
+         const publicId = `${ extraerImagen[7] }/${ imagenId[0] }`
+         const result = await cloudinary.uploader.destroy(`${ publicId }`, function(error, result) {
+           console.log(result, error) 
+         });
+     
         await deletePost.destroy();
-        
+
         res.status(200).render("ok", {
           mensaje: "Publicación eliminada correctamente!"
         })

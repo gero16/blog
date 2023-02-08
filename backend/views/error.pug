@@ -14,31 +14,18 @@ html(lang="en")
         title #{titulo}
     body 
 
-        
-  
-        header.flex-between 
-            .flex-center
-                a(href="/")   
-                    img(class="logo" src="/../img/logito3.jpg" )
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/`) Inicio
-                    li
-                        img(src="/../img/menu.png")
-
         div(class="container")
-            .div-errores.flex-center 
+            .div-errores.flex-column-center
                 if error == 401
-                    img(src="/../img/401b.png", alt="", srcset="")
+                    img(src="/../img/401.webp", alt="imagen del error 401", srcset="")
                 if error == 404
-                    img(src="/../img/404.png", alt="", srcset="")
+                    img(src="/../img/404.webp", alt="imagen del error 404", srcset="")
                 if error == 400
-                    h1 Error 400 
+                    img(src="/../img/400.webp", alt="imagen del error 400", srcset="") 
                     h2 !{mensaje}
+
+                span 
+                    a(href="/") Volver al Inicio
                    
         div.container
             .flex-center

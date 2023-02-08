@@ -44,7 +44,6 @@ router.get("/:user/perfil", perfilPlantilla)
 
 
 
-
 // Seccion actualizacion de contenido
 router.post("/:user/editar-perfil", editarPerfil)
 

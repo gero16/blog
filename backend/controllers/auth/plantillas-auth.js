@@ -14,7 +14,6 @@ const perfilPlantilla = async (req, res) => {
     // console.log(colors.bgRed(notificaciones))
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
     const notificacionesOrdenadas = notificaciones.reverse()
-    // console.log(colors.bgRed(user.dataValues))
     const titulo = "Perfil"
    if(user.rol === "ADMIN") {
     res.render("perfil/perfilAdmin", {
@@ -46,7 +45,6 @@ const perfilPlantilla = async (req, res) => {
 const indexPlantilla = async (req, res) => {
 
   const usuario = req.params.user
-  //console.log(colors.bgBlue(usuario))
   const titulo = "Espacio Luz de Luna"
   try {
 
@@ -58,7 +56,7 @@ const indexPlantilla = async (req, res) => {
   
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
     const notificacionesOrdenadas = notificaciones.reverse()
-    // console.log(colors.bgRed(notificaciones))
+
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
     //console.log(colors.bgBlue(notificacion_sinleer))
 
@@ -67,7 +65,7 @@ const indexPlantilla = async (req, res) => {
     
     
     if(user){
-      console.log(colors.bgGreen(notificaciones))
+
       const reduceName = user.nombre.split(" ")
             const miniName = reduceName[0]
             if(user.rol === "ADMIN") {
@@ -112,7 +110,7 @@ const crearPostPlantilla = async (req, res) => {
 
   const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.admin }});
   const notificacionesOrdenadas = notificaciones.reverse()
-  // console.log(colors.bgRed(notificaciones))
+
   const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
 
   try {
@@ -133,7 +131,7 @@ const crearPostPlantilla = async (req, res) => {
 
 
 const authPostPlantilla =  async (req, res) => {
-  //console.log(colors.bgGreen(req.params))
+
     const usuario = req.params.user
     const url = req.params.titulo
 
@@ -149,7 +147,6 @@ const authPostPlantilla =  async (req, res) => {
 
         const user = await Usuario.findOne({ where: {usuario} })
 
-        //const admin = await
         const post_admin = await Admin_Post.findOne({where : { id_post : datos.id }})
         const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
          

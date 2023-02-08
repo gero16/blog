@@ -1,3 +1,20 @@
 .div-errores{
-    
+    width: 50vw;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.div-errores img {
+    width: 450px;
+}
+
+span {
+    cursor: pointer;
+    margin: 10px 0px 0px 0px;
+    transition: all 0.5s ease-out;
+}
+
+span:hover {
+    transition: all 0.5s ease-out;
+    transform:scale(1.10); 
 }
