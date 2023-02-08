@@ -24,7 +24,7 @@ const crearPost = async (req, res) => {
   if(existePost) {
     res.status(400).render("error", {
       error: 400,
-      mensaje: "Ya existe una Publicacion con el mismo titulo"
+      mensaje: "Ya existe una Publicación con el mismo título"
     })
   } else {
   

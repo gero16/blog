@@ -19,9 +19,6 @@ const traerPublicaciones = async () => {
 };
 
 
-
-
-
 const imgMax = document.querySelector(".imagen-galeria-max")
 const seleccionImagen = document.querySelector(".seleccion-imagen")
 const imgMin = document.querySelectorAll(".imagen-galeria-mini")
@@ -130,6 +127,14 @@ window.onload = async function (e) {
         avatarImagen.src = `/../img/avatar${num}.png`
         divImagen.append(avatarImagen)
       }
+    
+      const user = window.location.pathname.split("/")
+      if(userPublic &&  user[3] && user[3] === "index") {
+     
+        console.log("No deberia estar aqui")
+        window.location.href = "/"
+      }
+    
   }
 
   imgsPublicaciones.forEach(element => {

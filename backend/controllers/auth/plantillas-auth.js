@@ -6,8 +6,6 @@ const perfilPlantilla = async (req, res) => {
   
 
   try {
- 
-
     const user = await Usuario.findOne({where: {usuario: req.params.user}})
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
     
@@ -16,6 +14,7 @@ const perfilPlantilla = async (req, res) => {
     const notificacionesOrdenadas = notificaciones.reverse()
     const titulo = "Perfil"
    if(user.rol === "ADMIN") {
+
     res.render("perfil/perfilAdmin", {
       usuario: user.usuario,
       correo: user.correo,
@@ -26,7 +25,9 @@ const perfilPlantilla = async (req, res) => {
       notificacion_sinleer,
       cantidad_notificaciones : notificacion_sinleer.length
     })
+
    } else {
+
     res.render("perfil/perfilUser", {
       usuario: user.usuario,
       correo: user.correo,
@@ -35,7 +36,7 @@ const perfilPlantilla = async (req, res) => {
       titulo,
     })
    }
- 
+
   } catch (error) {
     console.log(error)
   }
@@ -52,7 +53,7 @@ const indexPlantilla = async (req, res) => {
       order: [
         ['id', 'DESC'],
     ],
-    });
+  });
   
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.user }});
     const notificacionesOrdenadas = notificaciones.reverse()

@@ -42,7 +42,6 @@ if(logout) {
 
 }
 
-
 const sendToken = async () => {
   if(getSesion) {
     const sesion =  JSON.parse(localStorage.getItem('sesion'));
@@ -140,6 +139,7 @@ if(notificacionNumero){
 const imgPhoneMenu = document.querySelector(".img-menu") 
 imgPhoneMenu.addEventListener("click", () => {
   const menuPhone = document.querySelector(".ocultar-transition") 
+  console.log(menuPhone)
   if(menuPhone.classList.contains("active")) {
     return menuPhone.classList.remove("active")
   } 

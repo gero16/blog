@@ -284,6 +284,7 @@ article {
     max-height: 0;
 }
 
+/* No entiendo bien como funciona esto */
 .ocultar-transition.active {
     opacity: 1;
     max-height: 9999999px;
