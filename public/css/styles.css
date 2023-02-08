@@ -147,6 +147,10 @@ footer{
     color: white;
 }
 
+.menu-lista a:hover {
+    filter: brightness(1.1);
+    font-weight: bold;
+}
 .principal {
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
