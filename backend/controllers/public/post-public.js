@@ -77,7 +77,7 @@ const traerPublicaciones = async (req, res) => {
       numComentarios = comentarios.length +1
      }
 
-    return res.status(200).render("post/publicPost", {
+    return res.status(200).render("post/postPublic", {
       id: id,
       url,
       titulo: titulo,

@@ -1,13 +1,13 @@
 const { Router } = require('express');
 
-const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario, infoSesion, crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index-auth');
-const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario, editarComentario } = require('../controllers/auth/post-auth');
-const {  postPlantilla, eliminarPlantilla, editarPostPlantilla, authPostPlantilla, perfil, olvidePasswordPlantilla, cambiarPassword, perfilPlantilla } = require('../controllers/auth/plantillas-auth');
+const {  indexPlantilla, crearUsuario, confirmarCuenta, loginUsuario,  crearPostPlantilla, getUsuarios } = require ('../controllers/auth/index-auth');
+const { authAgregarComentario, crearPost, actualizarPost, eliminarPost, eliminarComentario   } = require('../controllers/auth/post-auth');
+const {  eliminarPlantilla, editarPostPlantilla, authPostPlantilla,  olvidePasswordPlantilla, cambiarPassword, perfilPlantilla } = require('../controllers/auth/plantillas-auth');
 
 const { sesion, getSesion, logoutUsuario, validateToken, editarPerfil, olvidePassword, comprobarPassword, nuevoPassword, adminNotificaciones, actualizarNotificacion } = require('../controllers/auth/usuarios-auth');
 
 const { esAdmin } = require('../helpers/validators');
-const { checkAuth, verifyToken, checkEmptyData, datosExistentes } = require('../middleware/auth');
+const { checkAuth, verifyToken, checkEmptyData, datosExistentes, verifyTokenPlantilla, verifyTokenGet } = require('../middleware/auth-middleware');
 
 const router = Router();
 
@@ -30,13 +30,11 @@ router.get("/:user/index", indexPlantilla)
 
 router.post("/:user/info-sesion", sesion)
 
-router.get("/:user/info-sesion", getSesion)
-
 router.get("/:user/publicaciones/:titulo",  authPostPlantilla)
 
-router.get("/:admin/crear-post", esAdmin, crearPostPlantilla)
+router.get("/:admin/crear-post", crearPostPlantilla)
 
-router.get("/:admin/editar/:titulo", esAdmin, editarPostPlantilla)
+router.get("/:admin/editar/:titulo",  editarPostPlantilla)
 
 router.get("/:admin/eliminar/:titulo", esAdmin, eliminarPlantilla)
 

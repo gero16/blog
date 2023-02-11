@@ -167,7 +167,7 @@ const authPostPlantilla =  async (req, res) => {
 
         if(user.rol == "ADMIN") {
             console.log("En Admin")
-            res.render("post/adminPost", {
+            res.render("post/postAdmin", {
               id: id,
               usuario,
               url : url,
@@ -186,7 +186,7 @@ const authPostPlantilla =  async (req, res) => {
               cantidad_notificaciones : notificacion_sinleer.length
           })
         } else {
-            res.render("post/userPost", {
+            res.render("post/postUser", {
               id: id,
               usuario,
               url : url,

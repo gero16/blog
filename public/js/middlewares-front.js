@@ -8,7 +8,6 @@ const getSesion = JSON.parse(localStorage.getItem('sesion'));
 const cerrarSesion = async (e) => {
     e.preventDefault()   
 
-    const getSesion = JSON.parse(localStorage.getItem('sesion'));
     const usuario = getSesion[1]
     
     localStorage.removeItem('sesion');
@@ -41,6 +40,33 @@ if(logout) {
   logout.addEventListener("click", cerrarSesion)
 
 }
+
+console.log(window.location.pathname)
+/*
+const sendTokenGet= async () => {
+
+    const sesion =  JSON.parse(localStorage.getItem('sesion'));
+    const token = sesion ? sesion[2] : null
+    console.log(token)
+    const settings = { 
+        method: 'GET', 
+        headers: { 
+          "Content-Type": "application/json", 
+          "auth-token": token },
+    };
+    
+    try {
+        const fetchResponse = await fetch(`${ window.location.pathname} `, settings);
+        console.log(fetchResponse)
+       
+        console.log(data)
+    } catch (e) {
+        return e;
+    } 
+    
+}
+sendTokenGet()
+*/
 
 const sendToken = async () => {
   if(getSesion) {
