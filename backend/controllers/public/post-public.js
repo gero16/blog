@@ -22,8 +22,6 @@ const traerPublicaciones = async (req, res) => {
       ],
       });
       
-      
-      console.log(colors.bgRed(registros))
   
       return res.status(200).json({
         registros: registros,
@@ -112,7 +110,7 @@ const traerPublicaciones = async (req, res) => {
           imagen_usuario: req.body.imagen_usuario,
         })
         
-        console.log(colors.bgRed(req.body.autor_post))
+
         const notifiaciones = new Notificaciones ({
           id: id + 12 +3,
           nombre_admin: req.body.autor_post,
