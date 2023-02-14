@@ -93,8 +93,8 @@ const Comentario = sequelize.define('Comentario', {
       type: DataTypes.STRING
     },
     
-    sesion: {
-      type: DataTypes.BOOLEAN            
+    token_sesion: {
+      type: DataTypes.STRING        
     },
     rol: {
       type: DataTypes.STRING,

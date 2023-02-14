@@ -8,9 +8,9 @@ const multer = require("multer");
 
 const sequelize = require("./backend/db/db")
 
-const post = require("./backend/routes/post-routes")
-const auth = require("./backend/routes/auth-routes")
-const public = require("./backend/routes/public-routes");
+const auth = require("./backend/routes/auth/auth-routes")
+const post = require("./backend/routes/public/post-routes") 
+const public = require("./backend/routes/public/public-routes");
 const { rutaInexistente } = require('./backend/helpers/validators');
 
 const app = express()

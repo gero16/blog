@@ -55,41 +55,62 @@ const checkAuth = async (req, res, next) => {
 
 
 // middleware to validate token (rutas protegidas)
-const verifyToken = (req, res, next) => {
-        //console.log(colors.bgMagenta( req.header('auth-token')))
+const verifyToken = async (req, res, next) => {
         const token = req.header('auth-token')
-        console.log(colors.bgYellow(token))
+        console.log(colors.bgWhite(token))
+        console.log("hola")
 
-        if (!token) return res.status(401).json({ error: 'Acceso denegado' })
+        if (!token) {
+     
+            return res.status(401).render("error", {
+                error: 401,
+                mensaje: "No tiene autorización para realizar esta acción"
+              })
+        }
 
         try {
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
             req.body = token
      
-            next() // continuamos
+            next()
         } catch (error) {
-            res.status(400).json({error: 'Token inválido'})
+            console.log("Se cumple la condicion")
+            return res.status(401).render("error", {
+                error: 401,
+                mensaje: "Token inválido"
+              })
         }
 }
 
-const verifyTokenGet = (req, res, next) => {
-    //console.log(colors.bgMagenta( req.header('auth-token')))
-    const token = req.header('auth-token')
-    console.log(colors.bgRed(token))
+const verifyTokenGet = async (req, res, next) => {
+    const usuario = req.params.admin
 
-    //if (!token) return res.status(401).json({ error: 'Acceso denegado' })
-/*
+    const usuarioToken = await Usuario.findOne({ where : { usuario : usuario }})
+   // console.log(colors.bgWhite(usuarioToken.token_sesion))
+    const token_sesion = usuarioToken ? usuarioToken.token_sesion : undefined
+
+
+    if(token_sesion == undefined) {
+        return res.status(401).render("error", {
+            error: 401,
+            mensaje: "No tiene autorización para realizar esta acción"
+          })
+    }
+    
     try {
-        const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+        const verified = jwt.verify(token_sesion, process.env.SECRETORPRIVATEKEY)
         req.user = verified
-        req.body = token
-   
-        next() // continuamos
+        req.body = token_sesion
+ 
+        next()
     } catch (error) {
-        res.status(400).json({error: 'Token inválido'})
-    }*/
-    next()
+        console.log("Se cumple la condicion")
+        return res.status(401).render("error", {
+            error: 401,
+            mensaje: "Token inválido"
+          })
+    }
 }
 
 

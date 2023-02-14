@@ -16,13 +16,15 @@ html(lang="en")
 
         div(class="container")
             .div-errores.flex-column-center
-                if error == 401
+                if error === 401
                     img(src="/../img/401.webp", alt="imagen del error 401", srcset="")
-                if error == 404
+                    h2 !{ mensaje }
+                if error === 404
                     img(src="/../img/404.webp", alt="imagen del error 404", srcset="")
-                if error == 400
+                    h2 !{ mensaje }
+                if error === 400
                     img(src="/../img/400.webp", alt="imagen del error 400", srcset="") 
-                    h2 !{mensaje}
+                    h2 !{ mensaje }
 
                 span 
                     a(href="/") Volver al Inicio

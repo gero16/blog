@@ -102,7 +102,7 @@ const indexPlantilla = async (req, res) => {
 }
 
 const crearPostPlantilla = async (req, res) => {
-
+  
   const date =  new Date();
   const month = String(date.getMonth() + 1).padStart(2, '0'); //obteniendo mes
   const day = String(date.getDate()).padStart(2, '0'); //obteniendo dia
@@ -131,19 +131,15 @@ const crearPostPlantilla = async (req, res) => {
 
 
 
-const authPostPlantilla =  async (req, res) => {
+const  userPostPlantilla =  async (req, res) => {
 
     const usuario = req.params.user
     const url = req.params.titulo
 
     try {
-      
-      const datos = await Post.findOne({where: {url}})
-      const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : usuario }});
-       const notificacionesOrdenadas = notificaciones.reverse()
-      const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+      const datos = await Post.findOne({ where: { url }})
 
-      if(datos){
+      if(datos) {
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
@@ -165,52 +161,83 @@ const authPostPlantilla =  async (req, res) => {
         const date = [separar[2], separar[1], separar[0]]
         const newDate = date.join("-")
 
-        if(user.rol == "ADMIN") {
-            console.log("En Admin")
-            res.render("post/postAdmin", {
-              id: id,
-              usuario,
-              url : url,
-              titulo: titulo,
-              miniName: miniName,
-              contenido: contenido,
-              imagen: imagen,
-              autor: autor,
-              fecha: newDate,
-              comentarios: comentarios,
-              usuario_perfil: user.imagen,
-              numComentarios: numComentarios,
-              admin_post : admin.usuario,
-              notificaciones: notificacionesOrdenadas,
-              notificacion_sinleer,
-              cantidad_notificaciones : notificacion_sinleer.length
-          })
-        } else {
-            res.render("post/postUser", {
-              id: id,
-              usuario,
-              url : url,
-              titulo: titulo,
-              contenido: contenido,
-              miniName: miniName,
-              imagen: imagen,
-              autor: autor,
-              fecha: fecha,
-              comentarios: comentarios,
-              usuario_perfil: user.imagen,
-              numComentarios: numComentarios,
-              admin_post : admin.usuario,
-              notificaciones,
-              notificacion_sinleer,
-              cantidad_notificaciones : notificacion_sinleer.length
-          })
+        res.render("post/postUser", {
+          id: id,
+          usuario,
+          url : url,
+          titulo: titulo,
+          contenido: contenido,
+          miniName: miniName,
+          imagen: imagen,
+          autor: autor,
+          fecha: fecha,
+          comentarios: comentarios,
+          usuario_perfil: user.imagen,
+          numComentarios: numComentarios,
+          admin_post : admin.usuario,
+        })
       } 
-      }
-     
   } catch (error) {
     console.log(error) 
   } 
 }
+
+const adminPostPlantilla = async (req, res) => {
+  const usuario = req.params.admin
+  const url = req.params.titulo
+  try {
+      
+    const datos = await Post.findOne({ where: { url }})
+    const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : usuario }});
+     const notificacionesOrdenadas = notificaciones.reverse()
+    const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+
+    if(datos) {
+      const {id, titulo, contenido, imagen, autor, fecha}  = datos
+
+      const user = await Usuario.findOne({ where: { usuario } })
+
+      const post_admin = await Admin_Post.findOne({where : { id_post : datos.id }})
+      const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
+       
+      const comentarios = await Comentario.findAll({where : {id_post : id}});
+      
+      const reduceName = user.nombre.split(" ")
+      const miniName = reduceName[0]
+      let numComentarios = 0;
+
+      if(comentarios.length > 1) {
+       numComentarios = comentarios.length +1
+      }
+      
+      const separar = fecha.split("-")
+      const date = [separar[2], separar[1], separar[0]]
+      const newDate = date.join("-")
+
+          res.render("post/postAdmin", {
+            id: id,
+            usuario,
+            url : url,
+            titulo: titulo,
+            miniName: miniName,
+            contenido: contenido,
+            imagen: imagen,
+            autor: autor,
+            fecha: newDate,
+            comentarios: comentarios,
+            usuario_perfil: user.imagen,
+            numComentarios: numComentarios,
+            admin_post : admin.usuario,
+            notificaciones: notificacionesOrdenadas,
+            notificacion_sinleer,
+            cantidad_notificaciones : notificacion_sinleer.length
+        })
+    }
+   
+} catch (error) {
+  console.log(error) 
+} 
+} 
 
 const eliminarPlantilla = async (req, res) => {
   const url = req.params.titulo
@@ -339,8 +366,11 @@ const editarPostPlantilla = async (req, res) => {
   }
 }
 const errorPlantilla = (req, res) => {
- 
-  res.render("error")
+  const { mensaje } = req.body;
+  res.status(401).render("error", {
+    error: 401,
+    mensaje: mensaje,
+  })
 }
 
 const olvidePasswordPlantilla = (req, res) => {
@@ -358,11 +388,14 @@ const cambiarPassword = (req, res) => {
   })
 }
 
+
+
 module.exports = {
     perfilPlantilla,
     crearPostPlantilla,
     indexPlantilla,
-    authPostPlantilla,
+    adminPostPlantilla,
+    userPostPlantilla,
     eliminarPlantilla,
     editarPostPlantilla,
     errorPlantilla,

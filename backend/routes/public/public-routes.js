@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { errorPlantilla } = require('../controllers/auth/plantillas-auth');
-const { indexPublicPlantilla, postPlantillaPublic } = require('../controllers/public/post-public');
+const { errorPlantilla } = require('../../controllers/auth/plantillas-auth');
+const { indexPublicPlantilla, postPlantillaPublic } = require('../../controllers/public/post-public');
 
 const router = Router();
 

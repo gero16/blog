@@ -33,7 +33,6 @@ h3 {
 .contenedor-flex{
     display: flex;
     justify-content: space-between;
-    align-items:baseline;
 }
 
 .contenedor-imagen {
