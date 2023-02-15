@@ -8,7 +8,12 @@ const multer = require("multer");
 
 const sequelize = require("./backend/db/db")
 
-const auth = require("./backend/routes/auth/auth-routes")
+const authToken = require("./backend/routes/auth/token-routes")
+const authPost = require("./backend/routes/auth/post-routes")
+const authPlantillas = require("./backend/routes/auth/plantillas-routes")
+const authUsuario = require("./backend/routes/auth/usuario-routes")
+const authPasswords = require("./backend/routes/auth/passwords-routes")
+const authNotificaciones = require("./backend/routes/auth/notificaciones-routes")
 const post = require("./backend/routes/public/post-routes") 
 const public = require("./backend/routes/public/public-routes");
 const { rutaInexistente } = require('./backend/helpers/validators');
@@ -48,11 +53,12 @@ const storage = multer.diskStorage({
 app.use(multer({storage}).single("imagen")) // Ve si estamos enviando una img al servidor
 
 app.use("/", public)
-app.use("/auth", auth)
+app.use("/auth", [ authToken, authUsuario, authPlantillas, authPlantillas, authPost, authPasswords, authNotificaciones ])
+
 app.use("/publicaciones", post)
 
 // Solo me funciono de esta forma
-/
+
 app.use('/img', express.static(path.join(__dirname, 'public/img')));
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 app.use('/css', express.static(path.join(__dirname, 'public/css')));

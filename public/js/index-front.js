@@ -120,7 +120,7 @@ window.onload = async function (e) {
       const imagen =  num;
       const userPublic = localStorage.getItem("imagen");
 
-      if(!userPublic) {
+      if(!userPublic  &&  window.location.pathname !== "/") {
         const data = ["public", imagen]
         const public = localStorage.setItem("imagen", JSON.stringify(data) );
         const avatarImagen = document.createElement("img")

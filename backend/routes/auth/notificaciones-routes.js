@@ -1,0 +1,14 @@
+const { Router } = require('express');
+
+const { adminNotificaciones, actualizarNotificacion } = require('../../controllers/auth/usuarios-auth');
+
+const router = Router();
+
+
+router.get("/:admin/notificaciones", adminNotificaciones)
+
+router.post("/:admin/notificaciones", actualizarNotificacion)
+
+
+
+module.exports = router;

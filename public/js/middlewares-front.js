@@ -2,7 +2,6 @@
 
 
 
-window.onload = async function (e) {
   const titulo = document.querySelector(".titulo-post")
   const editar = document.querySelector(".editar")
   const eliminar = document.querySelector(".eliminar")
@@ -29,6 +28,7 @@ window.onload = async function (e) {
         }};
       try {
         const fetchResponse = await fetch(`/auth/${usuario}/logout`, settings);
+        console.log(fetchResponse)
         if(fetchResponse.ok == true) {
           window.location.href = "/"
         }
@@ -46,32 +46,34 @@ window.onload = async function (e) {
   
   }
   
-  console.log(window.location.pathname)
 
-  const sendTokenGet = async () => {
+  const sendTokenPlantilla = async () => {
   
-    const token = getSesion ? getSesion[2] : "fsdsdf"
+    const token = getSesion ? getSesion[2] : undefined
     const settings = { 
-        method: 'GET', 
+        method: 'POST', 
         headers: { 
           "Content-Type": "application/json", 
           "auth-token": token },
     };
     
     try {
+      if(window.location.pathname !== "/") {
+
         const fetchResponse = await fetch(`/auth/validate-token`, settings);
         console.log(fetchResponse)
+      }
 
       
     } catch (e) {
         return e;
     } 
   }
-  sendTokenGet()
+
+  sendTokenPlantilla()
 
   
   const sendToken = async () => {
-  
       const token = getSesion ? getSesion[2] : null
       console.log(token)
       const settings = { 
@@ -92,7 +94,7 @@ window.onload = async function (e) {
     }
     
   
-  sendToken()
+  //sendToken()
   
   
   const updateImg = document.querySelector(".cambiar-foto")
@@ -172,4 +174,3 @@ window.onload = async function (e) {
     
   })
   
-}

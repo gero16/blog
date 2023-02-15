@@ -69,6 +69,7 @@ const verifyToken = async (req, res, next) => {
         }
 
         try {
+          
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
             req.body = token
@@ -83,7 +84,7 @@ const verifyToken = async (req, res, next) => {
         }
 }
 
-const verifyTokenGet = async (req, res, next) => {
+const verifyTokenPlantillas = async (req, res, next) => {
     const usuario = req.params.admin
 
     const usuarioToken = await Usuario.findOne({ where : { usuario : usuario }})
@@ -99,6 +100,7 @@ const verifyTokenGet = async (req, res, next) => {
     }
     
     try {
+        console.log("Su token es valido!")
         const verified = jwt.verify(token_sesion, process.env.SECRETORPRIVATEKEY)
         req.user = verified
         req.body = token_sesion
@@ -141,7 +143,7 @@ const datosExistentes = async (req, res, next) => {
 module.exports = {
     checkAuth,
     verifyToken,
-    verifyTokenGet,
+    verifyTokenPlantillas,
     checkEmptyData,
     datosExistentes
 } 

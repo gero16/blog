@@ -14,7 +14,7 @@ const perfilPlantilla = async (req, res) => {
     const notificacionesOrdenadas = notificaciones.reverse()
     const titulo = "Perfil"
    if(user.rol === "ADMIN") {
-
+  
     res.render("perfil/perfilAdmin", {
       usuario: user.usuario,
       correo: user.correo,
@@ -27,7 +27,7 @@ const perfilPlantilla = async (req, res) => {
     })
 
    } else {
-
+    console.log("Es usuario")
     res.render("perfil/perfilUser", {
       usuario: user.usuario,
       correo: user.correo,
