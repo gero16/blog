@@ -47,6 +47,9 @@ html(lang="en")
                 div(class="editar-perfil display-none") 
                     form(class="flex-column form-perfil"  method="POST" action=`/auth/${usuario}/editar-perfil`  enctype="multipart/form-data") 
                         ul.lista-editar-perfil
+                            li(style="display:none")  
+                                label(for="") Token 
+                                input(type="text" class="token" name="token")
                             li
                                 label(for="" class="label-crear") Imagen
                                 div(class="flex-column") 

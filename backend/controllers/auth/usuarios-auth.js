@@ -72,6 +72,15 @@ const validateToken = (req, res) => {
       }) 
 }
 
+const errorPlantilla = (req, res) => {
+    console.log("se paso la validacion")
+    const numError = req.body.error
+    const mensaje = req.body.mensaje
+
+    res.status(numError).render("error", {
+        mensaje: mensaje,
+  })
+}
 
 const loginUsuario = async (req, res) => {
 

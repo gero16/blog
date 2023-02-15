@@ -43,6 +43,9 @@ html(lang="en")
                     h1 Crear Publicacion
                     form(class="formulario" action=`/auth/${ usuario }/crear-post` method="POST" enctype="multipart/form-data") 
                         ul
+                            li(style="display:none")  
+                                label(for="") Token 
+                                input(type="text" class="token" name="token")
                             li 
                                 label(for="" class="label-crear") Imagen
                                 div(class="grid-input-img") 
@@ -65,11 +68,10 @@ html(lang="en")
                                 label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Párrafo
                                 label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtítulo  
                 
-                                
                             li(class="agregar-texto") 
                                 span Previsualizar el Contenido
                                 span(data-id="agregar" id="agregar-texto-crear") Previsualizar Publicación
-                                span(class="span-enter")  Presionar Enter 
+                                span(class="span-enter")  Presionar Enter     
 
                             li(class="li-button") 
                                 h3 Terminar Publicación 

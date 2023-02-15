@@ -50,6 +50,9 @@ html(lang="en")
                     h1 Editar Publicacion
                     form(class="formulario" action="/auth/actualizar-post" method="POST" enctype="multipart/form-data") 
                         ul
+                            li(style="display:none")  
+                                label(for="") Token 
+                                input(type="text" class="token" name="token")
                             li 
                                 label(for="") ID 
                                 span(type="text") !{id}

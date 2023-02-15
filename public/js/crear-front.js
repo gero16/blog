@@ -287,3 +287,31 @@ inputsContenidoPost.forEach(element => {
   })
 });
 
+
+/*
+const sendTokenPlantilla = async () => {
+  const url = window.location.pathname
+  const token = getSesion ? getSesion[2] : undefined
+  console.log(token)
+  const settings = { 
+      method: 'POST', 
+      headers: { 
+        "Content-Type": "application/json", 
+        "auth-token": token },
+  };
+  
+  try {
+
+
+      const fetchResponse = await fetch(url, settings);
+      console.log(fetchResponse)
+  
+
+    
+  } catch (e) {
+      return e;
+  } 
+}
+
+sendTokenPlantilla()
+*/

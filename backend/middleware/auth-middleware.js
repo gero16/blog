@@ -56,12 +56,12 @@ const checkAuth = async (req, res, next) => {
 
 // middleware to validate token (rutas protegidas)
 const verifyToken = async (req, res, next) => {
-        const token = req.header('auth-token')
-        console.log(colors.bgWhite(token))
-        console.log("hola")
 
+        const token = req.header('auth-token') || req.body.token
+        console.log(colors.bgWhite(token))
+  
         if (!token) {
-     
+            console.log("!token")
             return res.status(401).render("error", {
                 error: 401,
                 mensaje: "No tiene autorización para realizar esta acción"
@@ -72,11 +72,13 @@ const verifyToken = async (req, res, next) => {
           
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
-            req.body = token
-     
-            next()
+            req.body.token = token
+            console.log(colors.bgRed(verified))
+            if(verified) {
+                next()
+            }
         } catch (error) {
-            console.log("Se cumple la condicion")
+            console.log("error")
             return res.status(401).render("error", {
                 error: 401,
                 mensaje: "Token inválido"
@@ -84,36 +86,6 @@ const verifyToken = async (req, res, next) => {
         }
 }
 
-const verifyTokenPlantillas = async (req, res, next) => {
-    const usuario = req.params.admin
-
-    const usuarioToken = await Usuario.findOne({ where : { usuario : usuario }})
-   // console.log(colors.bgWhite(usuarioToken.token_sesion))
-    const token_sesion = usuarioToken ? usuarioToken.token_sesion : undefined
-
-
-    if(token_sesion == undefined) {
-        return res.status(401).render("error", {
-            error: 401,
-            mensaje: "No tiene autorización para realizar esta acción"
-          })
-    }
-    
-    try {
-        console.log("Su token es valido!")
-        const verified = jwt.verify(token_sesion, process.env.SECRETORPRIVATEKEY)
-        req.user = verified
-        req.body = token_sesion
- 
-        next()
-    } catch (error) {
-        console.log("Se cumple la condicion")
-        return res.status(401).render("error", {
-            error: 401,
-            mensaje: "Token inválido"
-          })
-    }
-}
 
 
 const datosExistentes = async (req, res, next) => {
@@ -143,7 +115,6 @@ const datosExistentes = async (req, res, next) => {
 module.exports = {
     checkAuth,
     verifyToken,
-    verifyTokenPlantillas,
     checkEmptyData,
     datosExistentes
 } 

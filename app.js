@@ -28,7 +28,8 @@ app.set("views", path.join(__dirname, "./backend/views"));
 
 app.use(cors())
 app.use(express.json());
-app.use(express.urlencoded({extended: true})); // Para que funcionen los formularios
+app.use(express.urlencoded({ extended: true })); // Para que funcionen los formularios
+
 
 const conectarBD = async () => {
   try {

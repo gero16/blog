@@ -13,10 +13,11 @@ cloudinary.config({
 
 /*** CREACION DEL POST ***/
 const crearPost = async (req, res) => {
-
+  console.log("Desde crear post")
   const body =  req.body;
   const { admin } = req.params
-  const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo} = body;
+  const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo } = body;
+  console.log(colors.bgBlue(titulo))
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
 
   const adminUser = await Usuario.findOne({ where : { usuario : admin }})
@@ -65,11 +66,11 @@ const crearPost = async (req, res) => {
         id_admin: adminUser.id,
         id_post: id,
       })
-      await nuevoPost.save();
-      await admin_post.save();
-    } else {
+      
+      //await nuevoPost.save();
+      //await admin_post.save();
 
-        
+    } else {
       const nuevoPost = new Post({
         id,
         titulo,
@@ -85,8 +86,8 @@ const crearPost = async (req, res) => {
         id_admin: adminUser.id,
         id_post: id,
       })
-      await nuevoPost.save();
-      await admin_post.save();
+      //await nuevoPost.save();
+      //await admin_post.save();
     }
     
    res.status(200).render("ok", {

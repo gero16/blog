@@ -8,6 +8,9 @@
   const logout = document.querySelector(".logout")
   
   const getSesion = JSON.parse(localStorage.getItem('sesion'));
+
+  const token = document.querySelector(".token")
+  token.value = getSesion[2]
   
   const cerrarSesion = async (e) => {
       e.preventDefault()   
@@ -48,8 +51,9 @@
   
 
   const sendTokenPlantilla = async () => {
-  
+    
     const token = getSesion ? getSesion[2] : undefined
+    console.log(token)
     const settings = { 
         method: 'POST', 
         headers: { 
@@ -73,28 +77,7 @@
   sendTokenPlantilla()
 
   
-  const sendToken = async () => {
-      const token = getSesion ? getSesion[2] : null
-      console.log(token)
-      const settings = { 
-          method: 'POST', 
-          headers: { 
-            "Content-Type": "application/json", 
-            "auth-token": token },
-      };
-      
-      try {
-          const fetchResponse = await fetch(`/auth/validate-token`, settings);
-          console.log(fetchResponse)
 
-        
-      } catch (e) {
-          return e;
-      } 
-    }
-    
-  
-  //sendToken()
   
   
   const updateImg = document.querySelector(".cambiar-foto")
@@ -174,3 +157,4 @@
     
   })
   
+
