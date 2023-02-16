@@ -47,10 +47,10 @@ Configuradas en App.js
 
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/b4urgrwuuqqhg7yd3isz.jpg)
-![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/vijgi7e7fh9ydcjm7gb8.jpg)
-![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516351/govq5ylrlffqydd2c4hv.jpg)
-![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/ule2dmtkwiiqwmoib3jb.jpg)
+$![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/b4urgrwuuqqhg7yd3isz.jpg)
+$![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/vijgi7e7fh9ydcjm7gb8.jpg)
+$![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516351/govq5ylrlffqydd2c4hv.jpg)
+$![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/ule2dmtkwiiqwmoib3jb.jpg)
 
 
 ## Demo en formato gif
