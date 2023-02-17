@@ -10,9 +10,12 @@
   const getSesion = JSON.parse(localStorage.getItem('sesion'));
 
   const token = document.querySelector(".token")
-  token.value = getSesion[2]
-  
-  const cerrarSesion = async (e) => {
+  if(token) {
+    token.value = getSesion ? getSesion[2] : undefined
+  }
+
+  if(getSesion) {
+    const cerrarSesion = async (e) => {
       e.preventDefault()   
   
       const usuario = getSesion[1]
@@ -50,44 +53,8 @@
   }
   
 
-  const sendTokenPlantilla = async () => {
-    
-    const token = getSesion ? getSesion[2] : undefined
-    console.log(token)
-    const settings = { 
-        method: 'POST', 
-        headers: { 
-          "Content-Type": "application/json", 
-          "auth-token": token },
-    };
-    
-    try {
-      if(window.location.pathname !== "/") {
-
-        const fetchResponse = await fetch(`/auth/validate-token`, settings);
-        console.log(fetchResponse)
-      }
-
-      
-    } catch (e) {
-        return e;
-    } 
-  }
-
-  sendTokenPlantilla()
-
   
 
-  
-  
-  const updateImg = document.querySelector(".cambiar-foto")
-  if(updateImg){
-    updateImg.addEventListener("click", () => {
-      
-    })
-  }
-  
-  
   const btnNotificaciones = document.querySelector(".li-btn-notificaciones")
   const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
   const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
@@ -143,6 +110,19 @@
       }
     }
   }
+
+  }
+  
+  
+  const updateImg = document.querySelector(".cambiar-foto")
+  if(updateImg){
+    updateImg.addEventListener("click", () => {
+      
+    })
+  }
+  
+  
+  
   
   const imgPhoneMenu = document.querySelector(".img-menu") 
   imgPhoneMenu.addEventListener("click", () => {
@@ -156,5 +136,40 @@
     } 
     
   })
+
+  const sendTokenPlantilla = async () => {
+    
+    const token = getSesion ? getSesion[2] : undefined 
+    console.log(token)
+    const settings = { 
+        method: 'POST', 
+        headers: { "Content-Type": "application/json", "auth-token": token },
+    };
+    
+    try {
+      if(window.location.pathname !== "/" && window.location.pathname !== `/auth/${ getSesion[1] }`/index) {
+        console.log("No es por aca")
+        const fetchResponse = await fetch(`/auth/validate-token`, settings);
+        const response = await fetchResponse.json()
+        console.log(fetchResponse)
+        if(response.token) {
+          console.log("Tiene permiso para estar en esta plantilla ")
+        } 
+      }
+
+      
+    } catch (e) {
+        return e;
+    } 
+  }
+
+  sendTokenPlantilla()
   
 
+const aCrearPost = document.querySelector(".ref-crear")
+if(aCrearPost) {
+  aCrearPost.addEventListener("click", (e) => {
+    //e.preventDefault()
+    sendTokenPlantilla()
+  })
+}

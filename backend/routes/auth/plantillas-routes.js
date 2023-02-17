@@ -8,7 +8,7 @@ const { verifyToken } = require('../../middleware/auth-middleware');
 
 const router = Router();
 
-router.get("/:user/index", indexPlantilla)
+// router.get("/:user/index", indexPlantilla)
 
 router.post("/:user/info-sesion", sesion)
 
@@ -16,7 +16,7 @@ router.get("/:admin/publicaciones/:titulo", adminPostPlantilla)
 
 router.get("/:user/publicaciones/:titulo",  userPostPlantilla)
 
-router.get("/:admin/crear-post",  crearPostPlantilla)
+router.get("/:admin/crear-post", verifyToken, crearPostPlantilla)
 
 router.get("/:admin/editar/:titulo",  editarPostPlantilla)
 

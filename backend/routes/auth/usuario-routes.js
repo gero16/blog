@@ -7,9 +7,6 @@ const { checkEmptyData, datosExistentes, verifyToken } = require("../../middlewa
 const router = Router();
 
 
-// Seccion actualizacion de contenido
-
-
 router.post('/login', checkEmptyData, loginUsuario);
 
 router.post("/:user/logout", logoutUsuario)

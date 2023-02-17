@@ -102,7 +102,8 @@ const indexPlantilla = async (req, res) => {
 }
 
 const crearPostPlantilla = async (req, res) => {
-  
+  // Traaer informacion sobre si se valido el token de validate-token
+
   const date =  new Date();
   const month = String(date.getMonth() + 1).padStart(2, '0'); //obteniendo mes
   const day = String(date.getDate()).padStart(2, '0'); //obteniendo dia
@@ -388,6 +389,13 @@ const cambiarPassword = (req, res) => {
   })
 }
 
+const errorTokenPlantilla = (req, res) => {
+
+
+  res.status(401).render("error", {
+   
+  })
+}
 
 
 module.exports = {
@@ -400,5 +408,6 @@ module.exports = {
     editarPostPlantilla,
     errorPlantilla,
     olvidePasswordPlantilla,
-    cambiarPassword
+    cambiarPassword,
+    errorTokenPlantilla,
 }

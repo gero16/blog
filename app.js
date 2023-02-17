@@ -8,6 +8,7 @@ const multer = require("multer");
 
 const sequelize = require("./backend/db/db")
 
+const authRoutesPublic = require("./backend/routes/public/auth-routes")
 const authToken = require("./backend/routes/auth/token-routes")
 const authPost = require("./backend/routes/auth/post-routes")
 const authPlantillas = require("./backend/routes/auth/plantillas-routes")
@@ -53,9 +54,9 @@ const storage = multer.diskStorage({
 
 app.use(multer({storage}).single("imagen")) // Ve si estamos enviando una img al servidor
 
-app.use("/", public)
-app.use("/auth", [ authToken, authUsuario, authPlantillas, authPlantillas, authPost, authPasswords, authNotificaciones ])
-
+app.use("/",  public)
+app.use("/auth", authRoutesPublic)
+app.use("/auth", [ authToken, authUsuario, authPlantillas, authPost, authPasswords, authNotificaciones ])
 app.use("/publicaciones", post)
 
 // Solo me funciono de esta forma

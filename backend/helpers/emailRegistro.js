@@ -3,7 +3,7 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const colors = require('colors');
 
-const accountTransport = require("../../account_transport.json");
+const remitente = "ggrito16@gmail.com"
 
 const emailRegistro = async (datos) => {
     const { correo, nombre, token, usuario } = datos;
@@ -55,7 +55,7 @@ const emailRegistro = async (datos) => {
    
   const transporter = createTransport()
   const info = await transporter.sendMail({
-          from: "Espacio Luz de Luna",
+          from:  `"Espacio luz de luna" <${ remitente }>`, // sender address
           to: correo,
           subject: "Confirma tu Cuenta! - Espacio Luz de Luna",
           text: "Confirma tu cuenta para poder ser parte de la comunidad",
@@ -114,7 +114,7 @@ const emailRegistro = async (datos) => {
     const { correo, nombre, token, usuario } = datos;
     console.log(colors.bgBlue(token))
     // Con GMAIL funcionando!
-    const createTransport = () => {
+    const createTransport = ()=> {
         const transporter = nodemailer.createTransport({
           host: "smtp.gmail.com",
           port: 465,

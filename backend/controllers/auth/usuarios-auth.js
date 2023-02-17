@@ -1,6 +1,6 @@
 
 const { Usuario, Usuario_Comentario, Usuario_Sesion, Notificaciones } = require("../../models/model.js")
-const { generarJWT,emailRegistro, generarToken  } = require("../../helpers/index");
+const { generarJWT, emailRegistro, generarToken  } = require("../../helpers/index");
 const cloudinary = require("cloudinary").v2;
 const bcryptjs = require('bcryptjs');
 const colors = require('colors');
@@ -67,10 +67,13 @@ const crearUsuario = async (req, res = response) => {
 
 const validateToken = (req, res) => {
     console.log("se paso la validacion")
-    res.status(200).header("auth-token", req.body).json({
-        token: req.body,
+    console.log(colors.bgBlue(req.body.token))
+    res.status(200).header("auth-token", req.body.token).json({
+        token: req.body.token,
       }) 
+      
 }
+
 
 const errorPlantilla = (req, res) => {
     console.log("se paso la validacion")
@@ -120,6 +123,14 @@ const loginUsuario = async (req, res) => {
 
       const tokenSesion = await generarJWT();
       console.log(tokenSesion)
+
+      await Usuario.update({
+        token_sesion : tokenSesion
+            }, {
+            where: {
+                correo: correo,
+            }
+        });
         
         res.status(200).header("auth-token", tokenSesion).json({
             token: tokenSesion,
@@ -144,8 +155,13 @@ const logoutUsuario = async (req, res) => {
     const { user } = req.params
 
     try {
-        const usuario = await Usuario.findOne({where: { usuario : user} });
-        console.log(usuario.id)
+        await Usuario.update({
+            token_sesion : null
+                }, {
+                where: {
+                    usuario: user,
+                }
+            });
 
 
         res.redirect("/")
@@ -154,7 +170,8 @@ const logoutUsuario = async (req, res) => {
     }
     
 }
-  const confirmarCuenta = async (req, res) => {
+
+const confirmarCuenta = async (req, res) => {
     const { token, user } = req.params
     try {
         const usuario = await Usuario.findOne({where: { usuario : user} });
@@ -173,7 +190,7 @@ const logoutUsuario = async (req, res) => {
     }
   
  
-  }
+}
 
   const olvidePassword = async (req, res) => {
     const { correo } = req.body;

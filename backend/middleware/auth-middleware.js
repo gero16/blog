@@ -56,8 +56,13 @@ const checkAuth = async (req, res, next) => {
 
 // middleware to validate token (rutas protegidas)
 const verifyToken = async (req, res, next) => {
-
-        const token = req.header('auth-token') || req.body.token
+        console.log(colors.bgRed(req.params))
+        const user = req.params.user || req.params.admin
+        
+        const usuario = await Usuario.findOne({ where: { usuario : user } })
+        // console.log(colors.bgRed(usuario))
+        
+        const token = req.header('auth-token') || req.body.token || usuario.token_sesion
         console.log(colors.bgWhite(token))
   
         if (!token) {
@@ -73,7 +78,7 @@ const verifyToken = async (req, res, next) => {
             const verified = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
             req.user = verified
             req.body.token = token
-            console.log(colors.bgRed(verified))
+            //console.log(colors.bgRed(verified))
             if(verified) {
                 next()
             }
