@@ -16,24 +16,44 @@ Configuradas en App.js
 
 1. La ruta "/" (por default) - muestra la pagina principal, con todas las publciaciones disponibles. 
 
-2. La ruta "/auth/:user/index" - Es la pagina principal a la que se redirecciona desde "/" en caso de haber iniciado una sesión por el usuario.
+3. La ruta ":user/confirmar/:token" - Es la ruta 
 
-3. La ruta "/auth/:user/publicaciones/:titulo" - Es la ruta que muestra la publicacion elegida, y donde el usuario puede interactuar haciendo comentarios.
+4. La ruta "/login" - Es usada para que un usuario registrado pueda iniciar sesión 
 
-4. La ruta "/auth/:admin/editar/:titulo" - Es la proporcionada al administrador para editar una publicacion
+5. La ruta ":user/logout" - Se usa para cerrar la sesion del usuario con sesión activa
 
-5. La ruta "/auth/:admin/eliminar/:titulo" - Es la proporcionada al administrador para eliminar una publicacion
+6. La ruta "auth/elgero16/confirmar/:token" - Es la ruta a la que se entra una sola vez por usuario para confirmar su registro
 
-6. La ruta "auth/:admin/crear-post" - Se utiliza para la creacion de publicaciones
+7. La ruta "/auth/:user/index" - Es la pagina principal a la que se redirecciona desde "/" en caso de haber iniciado sesión con un usuario.
 
-8. La ruta "auth/:user/perfil" - Muestra la plantilla donde se ve el perfil del usuario logeado.
+8. La ruta "/auth/:user/publicaciones/:titulo" - Es la ruta que muestra la publicacion elegida. El usuario puedo agregar comentarios
 
-9. La ruta "*" define que toda ruta a la que se quiera acceder mediante el navegador, y no este registrada devuelva una plantilla con el error 404
+9. La ruta "/auth/:admin/editar/:titulo" - Es proporcionada al administrador para editar la publicación deseada
+
+10. La ruta "/auth/:admin/eliminar/:titulo" - Se usa para que el administrador pueda eliminar una publicación deseada
+
+11. La ruta "auth/:admin/crear-post" - Se utiliza para la creacion de publicaciones
+
+12. La ruta "auth/:user/perfil" - Muestra la plantilla donde se ve el perfil con la informacion del usuario que inicio sesión
+
+13. La ruta "auth/validate-token" - Es la ruta a donde se enviara el token de sesion del usuario, una vez entre a una de las rutas que requieren autenticación
+
+14. La ruta "/:user/publicaciones/:titulo/agregar-comentario" - Se utiliza para mandar los datos del mensaje agregado en dicha publicación
+
+15. La ruta "/:admin/publicaciones/:titulo/eliminar-comentario/:id" Se utiliza para que el administrador pueda eliminar comentarios de dicha publicación
+
+16. La ruta "*" define a toda ruta no existente en la aplicacion. Devuelva una plantilla con el error 404
 
 
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1674170555/hnafei5gqfkabswtjgxr.jpg)
+![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/b4urgrwuuqqhg7yd3isz.jpg)
+
+![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/vijgi7e7fh9ydcjm7gb8.jpg)
+
+![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516351/govq5ylrlffqydd2c4hv.jpg)
+
+![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/ule2dmtkwiiqwmoib3jb.jpg)
 
 
 ## Demo en formato gif
