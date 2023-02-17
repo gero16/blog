@@ -12,15 +12,15 @@ const router = Router();
 
 router.post("/:user/info-sesion", sesion)
 
-router.get("/:admin/publicaciones/:titulo", adminPostPlantilla)
+router.get("/:admin/publicaciones/:titulo", verifyToken, adminPostPlantilla)
 
-router.get("/:user/publicaciones/:titulo",  userPostPlantilla)
+router.get("/:user/publicaciones/:titulo",verifyToken,  userPostPlantilla)
 
 router.get("/:admin/crear-post", verifyToken, crearPostPlantilla)
 
-router.get("/:admin/editar/:titulo",  editarPostPlantilla)
+router.get("/:admin/editar/:titulo", verifyToken, editarPostPlantilla)
 
-router.get("/:admin/eliminar/:titulo", eliminarPlantilla)
+router.get("/:admin/eliminar/:titulo", verifyToken, eliminarPlantilla)
 
 router.get("/:user/perfil", perfilPlantilla)
 
