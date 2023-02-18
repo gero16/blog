@@ -57,6 +57,10 @@ Configuradas en App.js
 
 
 ## Demo en formato gif
+###  Iniciar sesión  ###
+![](https://i.imgur.com/r3PB3ma.gif)
+###  Crear una publicación  ###
+![](https://i.imgur.com/4YGunAP.gif)
 
 
 ## Authors
