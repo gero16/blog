@@ -12,8 +12,6 @@ $ npm start
 
 ## Rutas definidas
 
-Configuradas en App.js
-
 1. La ruta "/" (por default) - muestra la pagina principal, con todas las publciaciones disponibles. 
 
 3. La ruta ":user/confirmar/:token" - Es la ruta 
@@ -40,9 +38,9 @@ Configuradas en App.js
 
 14. La ruta "/:user/publicaciones/:titulo/agregar-comentario" - Se utiliza para mandar los datos del mensaje agregado en dicha publicación
 
-15. La ruta "/:admin/publicaciones/:titulo/eliminar-comentario/:id" Se utiliza para que el administrador pueda eliminar comentarios de dicha publicación
+15. La ruta "/:admin/publicaciones/:titulo/eliminar-comentario/:id" - Se utiliza para que el administrador pueda eliminar comentarios de dicha publicación
 
-16. La ruta "*" define a toda ruta no existente en la aplicacion. Devuelva una plantilla con el error 404
+16. La ruta "/*" - define a toda ruta distinta a las anteriores. Devuelve una plantilla con el error 404
 
 
 ## Screenshots
@@ -69,4 +67,4 @@ Configuradas en App.js
 
 ## Authors
 
-Geronimo Nicola 
+~ Geronimo Nicola 
