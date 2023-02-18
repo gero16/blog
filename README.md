@@ -47,12 +47,16 @@ Configuradas en App.js
 
 ## Screenshots
 
+### Pagina Principal ###
 ![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/b4urgrwuuqqhg7yd3isz.jpg)
 
+### Crear Publicación ###
 ![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/vijgi7e7fh9ydcjm7gb8.jpg)
 
+### Editar Publicación ###
 ![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516351/govq5ylrlffqydd2c4hv.jpg)
 
+### Eliminar Publicación ###
 ![App Screenshot](https://res.cloudinary.com/geronicola/image/upload/v1676516350/ule2dmtkwiiqwmoib3jb.jpg)
 
 
