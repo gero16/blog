@@ -1,0 +1,76 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
+        
+        link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
+        link(rel="stylesheet", href="/../css/styles.css")
+        link(rel="stylesheet", href="/../css/perfil.css")
+        link(rel="stylesheet", href="/../css/usuarios.css")
+        link(rel="icon", href="/../img/luna.png", type="image/x-icon")
+        title #{titulo}
+    body 
+
+        
+  
+        header.flex-between 
+            .flex-center
+                a(href="/")   
+                    img(class="logo" src="/../img/logito3.jpg")
+                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
+                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
+            
+            nav.menu 
+                ul(class="flex-around menu-lista")
+                    li
+                        a(href=`/auth/${ usuario }/index`) Inicio
+                    li
+                        a(href=`/auth/${ usuario} /crear-post`) Crear Publicación
+                    li
+                        a(href="#") Nosotros
+                    li 
+                        a(href="#") Perfil 
+                    li
+                        a(href=`/auth/${ usuario }/users`) Administrar Usuarios
+                    li 
+                        a(class="logout") Cerrar Sesión
+
+
+        div(class="container flex-center")
+          main
+            h1 Listado de Usuarios
+            ul.lista-usuarios 
+                each  usuario in usuarios 
+                    li
+                        ul.lista-categorias-usuario.flex 
+                            li.flex-center      
+                                div( class="perfil-imagen" style={"background-image":`url(${ usuario.imagen })`, "background-position": "center center",  "background-repeat": "no-repeat", "background-size" : "cover"})
+                            li.flex-center      
+                                div 
+                                    strong Usuario 
+                                div !{ usuario.usuario }
+                            li.flex-center      
+                                div 
+                                    strong Correo
+                                div !{ usuario.correo }
+                            li.flex-center      
+                                div 
+                                    strong Rol
+                                div !{ usuario.rol }
+                            li.flex-center   
+                                div 
+                                    strong Identificador: 
+                                div !{ usuario.id }
+                            li.flex-center    
+                                a(href=`/auth/${ usuario }/eliminar/${ url }`)
+                                    img(src="/../img/eliminar.png" class="img-eliminar-usuario pointer" alt="Icono para cambiar el rol de un usuario")
+                            li.flex-center    
+                                img(src="/../img/editar.png" class="img-editar-rol pointer" alt="Icono para eliminar un usuario")
+                      
+
+    
+            

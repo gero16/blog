@@ -13,13 +13,12 @@ cloudinary.config({
     secure: true,
   });
   
-const getUsuarios = async (req, res) => {
-    const usuarios = await Usuario.findAll()
+
+const eliminarUsuario = () => {
     
-  
-    res.status(200).json({
-        usuarios,
-    })}
+}
+
+
 
 const crearUsuario = async (req, res = response) => {
 
@@ -286,7 +285,7 @@ const nuevoPassword = async (req, res) => {
         console.log(colors.bgYellow("Password actualizada correctamente!"))
         
         res.status(200).render("ok", {
-            mensaje: "Contraseña actualziada correctamente!",
+            mensaje: "Contraseña actualizada correctamente!",
         })
     } catch (error) {
      console.log(error)   
@@ -408,7 +407,7 @@ const actualizarNotificacion = async (req, res) => {
 
 
 module.exports = {
-    getUsuarios,
+    eliminarUsuario,
     crearUsuario,
     loginUsuario,
     logoutUsuario,

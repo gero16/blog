@@ -1,0 +1,21 @@
+li {
+    gap: 5px;
+}
+
+.img-editar-rol{
+    width: 40px;
+    height: 40px;
+}
+
+.img-eliminar-usuario {
+    width: 40px;
+    height: 40px;
+}
+
+.perfil-imagen {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    box-shadow: 0px 0px 8px 0px rgba(77, 141, 236, 0.5);
+}

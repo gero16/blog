@@ -397,6 +397,23 @@ const errorTokenPlantilla = (req, res) => {
   })
 }
 
+const usuariosPlantilla = async (req, res) => {
+  const { admin } = req.params
+  const usuarios = await Usuario.findAll()
+  const user = await Usuario.findOne({where : { usuario : admin}})
+  console.log(colors.bgYellow(user))
+
+  res.status(200).render("users", {
+      usuario: user.usuario,
+      usuarios: usuarios,
+})
+}
+
+
+const eliminarUsuarioPlantilla = () => {
+
+}
+
 
 module.exports = {
     perfilPlantilla,
@@ -410,4 +427,6 @@ module.exports = {
     olvidePasswordPlantilla,
     cambiarPassword,
     errorTokenPlantilla,
+    eliminarUsuarioPlantilla,
+    usuariosPlantilla
 }
