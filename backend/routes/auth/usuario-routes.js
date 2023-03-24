@@ -16,7 +16,7 @@ router.post("/registrar", datosExistentes, crearUsuario);
 
 router.get("/:user/confirmar/:token", confirmarCuenta)
 
-router.post("/users/eliminar", eliminarUsuario)
+router.post("/:admin/eliminar-usuario/:user", eliminarUsuario)
 
 
 module.exports = router;

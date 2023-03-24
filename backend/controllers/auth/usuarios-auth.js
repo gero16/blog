@@ -14,8 +14,17 @@ cloudinary.config({
   });
   
 
-const eliminarUsuario = () => {
-    
+const eliminarUsuario = async (req, res) => {
+    console.log(colors.bgBlue(req.params.user))
+    const deleteUsuario = await Usuario.findOne({ where: { usuario: req.params.user } });
+
+    console.log(colors.bgGreen(deleteUsuario))
+    await deleteUsuario.destroy()
+    /*
+    res.status(200).render("ok", {
+        mensaje: "Usuario Eliminado Correctamente!",
+  })
+  */
 }
 
 
