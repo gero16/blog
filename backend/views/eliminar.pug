@@ -26,22 +26,23 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${usuario}/index`) Inicio
+                        a(href=`/auth/${ usuario }/index`) Inicio
                     li
-                        a(href=`/auth/${usuario}/crear-post`) Crear Publicación
+                        a(href=`/auth/${ usuario }/crear-post`) Crear Publicación
                     li
                         a(href="#") Nosotros
                     li 
-                        a(href="#") Bienvenido #{name}
+                        a(href="#") Bienvenido #{ name }
                     li 
                         a(class="logout") Cerrar Sesión
 
 
         div(class="container flex-center")
             main.div-eliminar
-                h1 ¿Desea borrar la Publicación: !{titulo}?
+                h1 !{ mensaje } 
+                    span !{ destino }
                 div(class="flex-center")
-                    span.id-borrar !{id} 
+                    span.id-borrar !{ id }  
                 div(class="div-eliminar-btns flex-center")
                     h2.confirm Confirmar 
                     h2.delete 

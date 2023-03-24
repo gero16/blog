@@ -16,9 +16,6 @@ router.post("/registrar", datosExistentes, crearUsuario);
 
 router.get("/:user/confirmar/:token", confirmarCuenta)
 
-router.get("/:admin/users", usuariosPlantilla)
-
-
 router.post("/users/eliminar", eliminarUsuario)
 
 

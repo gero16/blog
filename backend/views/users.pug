@@ -44,29 +44,29 @@ html(lang="en")
           main
             h1 Listado de Usuarios
             ul.lista-usuarios 
-                each  usuario in usuarios 
+                each  user in usuarios 
                     li
                         ul.lista-categorias-usuario.flex 
                             li.flex-center      
-                                div( class="perfil-imagen" style={"background-image":`url(${ usuario.imagen })`, "background-position": "center center",  "background-repeat": "no-repeat", "background-size" : "cover"})
+                                div( class="perfil-imagen" style={"background-image":`url(${ user.imagen })`, "background-position": "center center",  "background-repeat": "no-repeat", "background-size" : "cover"})
                             li.flex-center      
                                 div 
                                     strong Usuario 
-                                div !{ usuario.usuario }
+                                div !{ user.usuario }
                             li.flex-center      
                                 div 
                                     strong Correo
-                                div !{ usuario.correo }
+                                div !{ user.correo }
                             li.flex-center      
                                 div 
                                     strong Rol
-                                div !{ usuario.rol }
+                                div(class="usuario-rol") !{ user.rol }
                             li.flex-center   
                                 div 
-                                    strong Identificador: 
-                                div !{ usuario.id }
+                                    strong Activo: 
+                                div !{ user.estado }
                             li.flex-center    
-                                a(href=`/auth/${ usuario }/eliminar/${ url }`)
+                                a(href=`/auth/${ usuario }/eliminar-usuario/${ user.usuario }`)
                                     img(src="/../img/eliminar.png" class="img-eliminar-usuario pointer" alt="Icono para cambiar el rol de un usuario")
                             li.flex-center    
                                 img(src="/../img/editar.png" class="img-editar-rol pointer" alt="Icono para eliminar un usuario")
@@ -74,3 +74,5 @@ html(lang="en")
 
     
             
+    script(src="/../js/middlewares-front.js")   
+    script(src="/../js/usuarios.js")   

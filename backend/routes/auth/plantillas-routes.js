@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 
-const { indexPlantilla, adminPostPlantilla, userPostPlantilla, crearPostPlantilla, editarPostPlantilla, eliminarPlantilla, perfilPlantilla, errorPlantilla, eliminarUsuarioPlantilla } = require("../../controllers/auth/plantillas-auth")
+const { adminPostPlantilla, userPostPlantilla, crearPostPlantilla, editarPostPlantilla, eliminarPlantilla, perfilPlantilla, errorPlantilla, eliminarUsuarioPlantilla, usuariosPlantilla } = require("../../controllers/auth/plantillas-auth")
 const { sesion } = require("../../controllers/auth/usuarios-auth");
 const { verifyToken } = require('../../middleware/auth-middleware');
 
@@ -26,6 +26,8 @@ router.get("/:user/perfil", perfilPlantilla)
 
 router.get("/error", errorPlantilla)
 
-router.get("user/eliminar", eliminarUsuarioPlantilla)
+router.get("/:admin/users", usuariosPlantilla)
+
+router.get("/:admin/eliminar-usuario/:user", eliminarUsuarioPlantilla)
 
 module.exports = router;

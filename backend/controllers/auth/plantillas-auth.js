@@ -130,8 +130,6 @@ const crearPostPlantilla = async (req, res) => {
   }
 }
 
-
-
 const  userPostPlantilla =  async (req, res) => {
 
     const usuario = req.params.user
@@ -243,15 +241,16 @@ const adminPostPlantilla = async (req, res) => {
 const eliminarPlantilla = async (req, res) => {
   const url = req.params.titulo
 
-  
   const data = await Post.findOne({where: { url }})
-  const {id, titulo, imagen} = data;
+  const { id, titulo, imagen } = data;
 
   const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : req.params.admin }});
   const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
 
     res.render("eliminar", {
       usuario: req.params.admin,
+      mensaje: `¿Desea borrar la Publicación: `,
+      destino: `${ titulo }?`,
       id: id,
       titulo: titulo,
       imagen: imagen,
@@ -401,17 +400,25 @@ const usuariosPlantilla = async (req, res) => {
   const { admin } = req.params
   const usuarios = await Usuario.findAll()
   const user = await Usuario.findOne({where : { usuario : admin}})
-  console.log(colors.bgYellow(user))
 
   res.status(200).render("users", {
       usuario: user.usuario,
       usuarios: usuarios,
-})
-}
+    })
+  }
 
 
-const eliminarUsuarioPlantilla = () => {
-
+const eliminarUsuarioPlantilla = async (req, res) => {
+  const user = await Usuario.findOne({ where: { usuario : req.params.user } })
+  console.log(colors.bgBlue(user))
+  const { id } = user;
+  
+  res.render("eliminar", {
+    usuario: req.params.admin,
+    mensaje: `¿Desea eliminar al Usuario: `,
+    destino: `${ req.params.user }?`,
+    id: id,
+  })
 }
 
 
@@ -427,6 +434,6 @@ module.exports = {
     olvidePasswordPlantilla,
     cambiarPassword,
     errorTokenPlantilla,
+    usuariosPlantilla,
     eliminarUsuarioPlantilla,
-    usuariosPlantilla
 }

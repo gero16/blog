@@ -7,32 +7,6 @@ const remitente = "ggrito16@gmail.com"
 
 const emailRegistro = async (datos) => {
     const { correo, nombre, token, usuario } = datos;
-  /*
-  // Mailtrap de Prueba
-  const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    }
-    })
-
-    const info = await transporter.sendMail({
-      from: "geronicola1696@gmail.com",
-      to: email,
-      subject: "Confima tu cuenta!",
-      text: "Confirma tu cuenta para poder participar en la comunidad",
-      html: ` 
-              <p> Hola: ${name}, debe confirmar tu cuenta en el Espacio Luz de Luna </p>
-              <p> Tu cuenta ya esta lista, solo debes confirmarla en el siguiente enlace: 
-                  <a href="${process.env.URL_FRONTEND}/confirmar/${token}"> Confirmar Cuenta </a> 
-              </p>
-  
-              <p> Si tu no creaste esta cuenta, puedes ignorar este mensaje </p>
-            `
-    })*/
-    //console.log("Mensaje enviado: %s", info.messageId)
 
     // Con GMAIL funcionando!
     const createTransport = () => {
@@ -44,6 +18,7 @@ const emailRegistro = async (datos) => {
             type: "OAuth2",
             clientId:  process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
+            accessUrl : `https://oauth2.googleapis.com/token`,
           },
           // Agregando esto me funciono!!!
           tls: {
@@ -110,7 +85,7 @@ const emailRegistro = async (datos) => {
       console.log("Mensaje enviado: %s", info.messageId)
   };
 
-  const emailRecuperarPassword = async (datos) => {
+const emailRecuperarPassword = async (datos) => {
     const { correo, nombre, token, usuario } = datos;
     console.log(colors.bgBlue(token))
     // Con GMAIL funcionando!
