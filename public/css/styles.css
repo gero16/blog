@@ -311,6 +311,9 @@ article {
     cursor: pointer;
 }
 
+.strong {
+    font-style:oblique;
+}
 
 @media (max-width: 430px) {
     .menu {

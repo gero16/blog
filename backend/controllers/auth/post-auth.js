@@ -13,32 +13,29 @@ cloudinary.config({
 
 /*** CREACION DEL POST ***/
 const crearPost = async (req, res) => {
-  console.log("Desde crear post")
+ 
   const body =  req.body;
   const { admin } = req.params
-  const { titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo } = body;
-  console.log(colors.bgBlue(titulo))
+  const { titulo, autor, imagen, fecha, contenido } = body;
+
+  console.log(colors.bgBlue(body))
+
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
 
   const adminUser = await Usuario.findOne({ where : { usuario : admin }})
   const existePost = await Post.findOne({where : {url : tituloURL}});
+
+
+
   if(existePost) {
     res.status(400).render("error", {
       error: 400,
       mensaje: "Ya existe una Publicación con el mismo título"
     })
+    
   } else {
-  
   const id = Date.now();
   const idAdmin = (Date.now() + 113 + 4 + 2 )
-
-  let contenido = [];
-  const filtrarContenido = [primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo];
-  filtrarContenido.forEach(element => {
-    if(element != undefined) {
-      contenido.push(element)
-    }
-  });
 
   try {
     if(req.file) {
@@ -61,11 +58,7 @@ const crearPost = async (req, res) => {
         url: tituloURL,
       });
 
-      const admin_post = new Admin_Post({
-        id: id +12134,
-        id_admin: adminUser.id,
-        id_post: id,
-      })
+      const admin_post = new Admin_Post({ id: id +12134, id_admin: adminUser.id, id_post: id })
       
       await nuevoPost.save();
       await admin_post.save();
@@ -81,11 +74,7 @@ const crearPost = async (req, res) => {
         url: tituloURL,
       });
 
-      const admin_post = new Admin_Post ({
-        id: idAdmin,
-        id_admin: adminUser.id,
-        id_post: id,
-      })
+      const admin_post = new Admin_Post ({ id: idAdmin, id_admin: adminUser.id, id_post: id })
       await nuevoPost.save();
       await admin_post.save();
     }
@@ -95,8 +84,7 @@ const crearPost = async (req, res) => {
   })
   } catch (error) {
     console.log(error)
-  }
-  }
+  }}
 };
 
 const authAgregarComentario = async (req, res) => {
@@ -189,17 +177,11 @@ const authAgregarComentario = async (req, res) => {
   const actualizarPost = async (req, res) => {
  
     const body = req.body;
-    const {id, titulo, autor, imagen, fecha, primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo, noveno, decimo, editar } = body;
+    const {id, titulo, autor, imagen, fecha, contenido } = body;
     // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
     const newID = Date.now();
 
-    let contenido = [];
-    const filtrarContenido = [primer, segundo, tercero, cuarto, quinto, sexto, septimo, octavo];
-          filtrarContenido.forEach(element => {
-              if(element != undefined) {
-                contenido.push(element)
-              }});
 
     try {
 
@@ -254,7 +236,7 @@ const authAgregarComentario = async (req, res) => {
   
 
     const eliminarPost = async (req, res) => {
-      console.log(req.params.id)
+      console.log(colors.bgBlue(req.params.id))
      
       try {
         const deletePost = await Post.findOne({ where: { id: req.params.id } });

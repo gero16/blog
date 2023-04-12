@@ -14,7 +14,7 @@ router.post("/:admin/crear-post", verifyToken, crearPost)
 
 router.post("/actualizar-post", verifyToken, actualizarPost)
 
-router.post("/eliminar-post/:id", verifyToken,  eliminarPost)
+router.post("/:admin/eliminar-post/:id", verifyToken, eliminarPost)
 
 router.post("/:user/publicaciones/:titulo/agregar-comentario",  authAgregarComentario)
 

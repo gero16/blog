@@ -20,7 +20,7 @@ router.get("/:admin/crear-post", verifyToken, crearPostPlantilla)
 
 router.get("/:admin/editar/:titulo", verifyToken, editarPostPlantilla)
 
-router.get("/:admin/eliminar/:titulo", verifyToken, eliminarPlantilla)
+router.get("/:admin/eliminar-post/:titulo", verifyToken, eliminarPlantilla)
 
 router.get("/:user/perfil", perfilPlantilla)
 

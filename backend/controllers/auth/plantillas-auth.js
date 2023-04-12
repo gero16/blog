@@ -249,8 +249,8 @@ const eliminarPlantilla = async (req, res) => {
 
     res.render("eliminar", {
       usuario: req.params.admin,
-      mensaje: `¿Desea borrar la Publicación: `,
-      destino: `${ titulo }?`,
+      mensaje: `Desea borrar la Publicación: `,
+      destino: `${ titulo }`,
       id: id,
       titulo: titulo,
       imagen: imagen,
@@ -415,8 +415,8 @@ const eliminarUsuarioPlantilla = async (req, res) => {
   
   res.render("eliminar", {
     usuario: req.params.admin,
-    mensaje: `¿Desea eliminar al Usuario: `,
-    destino: `${ req.params.user }?`,
+    mensaje: `Esta seguro que desea eliminar el Usuario: `,
+    destino: `${ req.params.user }`,
     id: id,
   })
 }
