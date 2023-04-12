@@ -21,7 +21,7 @@ if(btnEliminar) {
           try {
             
             if(categoriaEliminar === "eliminar-post") {
-              const fetchResponse = await fetch(`/auth/eliminar-post/${id.textContent}`, settings);
+              const fetchResponse = await fetch(`/auth/${ sesion[1] }/eliminar-post/${ id.textContent }`, settings);
               console.log(fetchResponse)
               if(fetchResponse.status === 200) {
                 console.log("Mensaje Eliminado Correctamente!")

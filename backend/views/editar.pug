@@ -27,11 +27,11 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${usuario}/index`) Inicio
+                        a(href=`/auth/${ usuario }/index`) Inicio
                     li
-                        a(href=`/auth/${usuario}/crear-post`) Crear Publicación
+                        a(href=`/auth/${ usuario }/crear-post`) Crear Publicación
                     li 
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                        a(href=`/auth/${ usuario }/perfil`) Perfil #{miniName}
                     li
                         a(href=`/auth/${ usuario }/users`) Administrar Usuarios
                     li
@@ -50,7 +50,7 @@ html(lang="en")
             main(class="principal")
                 article(class="crear-post") 
                     h1 Editar Publicacion
-                    form(class="formulario" action="/auth/actualizar-post" method="POST" enctype="multipart/form-data") 
+                    form(class="formulario" action=`/auth/${ usuario }/actualizar-post` method="POST" enctype="multipart/form-data") 
                         ul
                             li(style="display:none")  
                                 label(for="") Token 
@@ -79,7 +79,7 @@ html(lang="en")
                                 each  value, nombre in nuevoContenido
                                     li(class=`li-${ nombre } li-parrafos`) 
                                         div
-                                        textarea(name=`${ nombre }`, class=`parrafos-post lleno ${ nombre } inputs-contenido-post`) !{value} 
+                                        textarea(name="contenido", class=`parrafos-post lleno ${ nombre } inputs-contenido-post`) !{value} 
                                         div
                                         span(class=`quitar-${ nombre } btn-quitar-contenido`) Quitar
                             

@@ -25,130 +25,52 @@ const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 
 let texto = "";
 
-/** Seccion de contenido para Agregar parrafos y/o subtitulos **/
-let orden = {
-  primer: "vacio",
-  segundo: "vacio",
-  tercero: "vacio",
-  cuarto: "vacio",
-  quinto: "vacio",
-  sexto: "vacio",
-  septimo: "vacio",
-  octavo: "vacio",
-  noveno: "vacio",
-  decimo: "vacio",
-  decimoPrimero: "vacio",
-  decimoSegundo: "vacio",
-  ultimo: "vacio"
-}
-
-
-// Voy llenando los inputs, y luego actualizo el objeto
-const actualizarOrden = () => {
-  const llenos = document.querySelectorAll(".lleno")
-  let i = 1
-  for (let clave in orden){
-     if(i <= llenos.length) {
-      orden[clave] = "lleno"
-    }
-     i++;
-  }
-}
 
 
 btnAgregarParrafo.addEventListener("click", () => {
 
-  const arrayOrden = Object.entries(orden)
-  const indexValor = arrayOrden.findIndex(element => element[1] == "vacio")
   const divLiContenido = document.querySelector(".div-li-contenido")
-  const liContenedor = document.createElement("li")
-  liContenedor.classList.add(`li-${ arrayOrden[5][0] }`,"li-parrafos")
-  
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
-
+  const liContenedor = document.createElement("li")
+  liContenedor.classList.add("li-parrafos")
   let inputParrafo = document.createElement("textarea")
-  inputParrafo.className = "parrafos-post vacio contenidos-post"
+  inputParrafo.name = "contenido"
+  inputParrafo.className = "parrafos-post contenidos-post vacio input-crear"
 
   const btnQuitar = document.createElement("span")
-  //btnQuitar.className = "btn-quitar-contenido"
+  btnQuitar.className = "btn-quitar-contenido"
   btnQuitar.textContent = "Quitar Parrafo"
- 
 
-  // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
-  for(valor in orden) {
-    if(orden[valor] === "vacio") {
-      // primerParrafo
-      inputParrafo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
-      btnQuitar.className = ` ${ valor } btn-quitar-contenido `
-      
-      liContenedor.append(divVacio1, inputParrafo, divVacio2, btnQuitar)
-      divLiContenido.append(liContenedor)
+  liContenedor.append(divVacio1, inputParrafo, divVacio2, btnQuitar)
+  divLiContenido.append(liContenedor)
 
-      // Cambio el valor del objeto a lleno
-      orden[valor] = "lleno";
-      break;
-    } 
-  }  
-
-btnQuitar.addEventListener("click", (e) => {
-    let contenedorParrafos = document.querySelectorAll(".li-parrafos")
-    // const arrayOrden = Object.entries(orden)
-    console.log(e.target.classList[0])
-    const claveVaciar = e.target.classList[0]
-    console.log(e.target.parentNode)
-    contenedorParrafos[contenedorParrafos.length -1].remove();
-    orden[claveVaciar] = "vacio"
-    console.log(orden)
+  btnQuitar.addEventListener("click", (e) => {
+    e.target.parentNode.remove()
   })
 })
 
 
 btnAgregarSub.addEventListener("click", () => { 
-  const arrayOrden = Object.entries(orden)
-  const indexValor = arrayOrden.findIndex(element => element[1] == "vacio")
-  console.log(indexValor)
   const divLiContenido = document.querySelector(".div-li-contenido")
-  const liContenedor = document.createElement("li")
-  liContenedor.classList.add(`li-${ arrayOrden[5][0] }`,"li-parrafos")
-  console.log(orden)
-  
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
-
+  const liContenedor = document.createElement("li")
+  liContenedor.classList.add("li-subtitulos")
   let inputSubtitulo = document.createElement("textarea")
-  inputSubtitulo.className = "subtitulos-post vacio contenidos-post"
+  inputSubtitulo.name = "contenido"
+  inputSubtitulo.className = "subtitulos-post contenidos-post vacio input-crear"
 
   const btnQuitar = document.createElement("span")
-  //btnQuitar.className = "btn-quitar-contenido"
+  btnQuitar.className = "btn-quitar-contenido"
   btnQuitar.textContent = "Quitar Subtitulo"
- 
 
-  // Encuentro el primer valor vacio, cambio su valor a lleno y termino el bucle
-  for(valor in orden) {
-    if(orden[valor] === "vacio") {
-      // primerParrafo
-      inputSubtitulo.name = valor; // Antes - inputSub.name = valor+"Parrafo";
-      btnQuitar.className = ` ${ valor } btn-quitar-contenido `
-      
-      liContenedor.append(divVacio1, inputSubtitulo, divVacio2, btnQuitar)
-      divLiContenido.append(liContenedor)
-
-      // Cambio el valor del objeto a lleno
-      orden[valor] = "lleno";
-      break;
-    } 
-  }  
+  liContenedor.append(divVacio1, inputSubtitulo, divVacio2, btnQuitar)
+  divLiContenido.append(liContenedor)
+  console.log("Agregando Subtitulo")
 
   btnQuitar.addEventListener("click", (e) => {
-    let contenedorParrafos = document.querySelectorAll(".li-parrafos")
-    // const arrayOrden = Object.entries(orden)
-    console.log(e.target.classList[0])
-    const claveVaciar = e.target.classList[0]
-    console.log(e.target.parentNode)
-    contenedorParrafos[contenedorParrafos.length -1].remove();
-    orden[claveVaciar] = "vacio"
-    console.log(orden)
+    e.target.parentNode.remove()
   })
 })
 
@@ -208,75 +130,28 @@ btnPrevisualizarEditar.addEventListener("click", () => {
 })
  
 
-
-
-const reiniciarOrden = (valorEliminar) => {
-  const separarValorEliminar = valorEliminar.split("-")
-  
-  const arrayOrden = Object.entries(orden)
-
-  const valor = arrayOrden.findIndex(element => element[0] ==  separarValorEliminar[1])
-  console.log(valor)
-
-  let contenedorParrafos = document.querySelectorAll(".li-parrafos")
-  let liParrafos =  Array.apply(null, contenedorParrafos);  
-
-  let parrafos = document.querySelectorAll(`.parrafos-post`)
-  let listaParrafos =  Array.apply(null, parrafos);  
-
-  if(valor == 0) {
-    for ( let i = 0; i < listaParrafos.length -1; i++) {
-      listaParrafos[i].value = listaParrafos[i+1].value  
-  }
-    arrayOrden[liParrafos.length -1][1] = "vacio"
-    contenedorParrafos[contenedorParrafos.length -1].remove();
-
-} else if (valor >= 1 && valor != liParrafos.length-1) {
-   for ( let i = valor; i < listaParrafos.length -1; i++) {
-    listaParrafos[i].value = listaParrafos[i+1].value
-  }
-    contenedorParrafos[contenedorParrafos.length -1].remove();
-    arrayOrden[liParrafos.length -1][1] = "vacio"
-
-} else if (valor == liParrafos.length-1) {
-
-    contenedorParrafos[contenedorParrafos.length -1].remove();
-    arrayOrden[liParrafos.length -1][1] = "vacio"
-}
-/*
-  const object = Object.fromEntries(arrayOrden);
-  console.log(object)
-  */
-}
-
-
 const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
 btnQuitarContenido.forEach(elementoQuitar => {
   elementoQuitar.addEventListener("click", (e) => {
-    let claseOrden = e.target.classList[0]
-    const liPadre = document.querySelector(`.li-${claseOrden}`)
+    e.target.parentNode.remove()
     
-    reiniciarOrden(claseOrden)
   })
 });
 
 let inputsContenidoPost = document.querySelectorAll(".inputs-contenido-post")
+
+/*
 // Solo cambia el PREVIEW
 inputsContenidoPost.forEach(element => {
   element.addEventListener("change", () => {
-   console.log(element.name) 
-   console.log(element.value) 
+    //const index = fruits.findIndex(fruit => fruit === "blueberries");
+    console.log(element)
+    
    const cambiar = document.querySelector(`[data-id=${element.name}]`)
-   cambiar.innerHTML = element.value;
    console.log(cambiar)
+   cambiar.innerHTML = element.value;
   })
 });
+*/
 
 
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  // Solo para el editar
-  actualizarOrden();
-
-});
