@@ -18,6 +18,7 @@ const authNotificaciones = require("./backend/routes/auth/notificaciones-routes"
 const post = require("./backend/routes/public/post-routes") 
 const public = require("./backend/routes/public/public-routes");
 const { rutaInexistente } = require('./backend/helpers/validators');
+const { verifyToken } = require('./backend/middleware/auth-middleware');
 
 const app = express()
 const port = process.env.PORT | 4000
@@ -55,7 +56,8 @@ const storage = multer.diskStorage({
 app.use(multer({storage}).single("imagen")) // Ve si estamos enviando una img al servidor
 
 app.use("/",  public)
-app.use("/auth", authRoutesPublic)
+app.use("/auth",  authRoutesPublic)
+// a Futuro - aca iria el verifyToken
 app.use("/auth", [ authToken, authUsuario, authPlantillas, authPost, authPasswords, authNotificaciones ])
 app.use("/publicaciones", post)
 

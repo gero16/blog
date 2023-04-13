@@ -1,5 +1,5 @@
 
-const { Usuario, Usuario_Comentario, Usuario_Sesion, Notificaciones } = require("../../models/model.js")
+const { Usuario,  Notificaciones } = require("../../models/model.js")
 const { generarJWT, emailRegistro, generarToken  } = require("../../helpers/index");
 const cloudinary = require("cloudinary").v2;
 const bcryptjs = require('bcryptjs');

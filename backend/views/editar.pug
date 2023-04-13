@@ -50,7 +50,7 @@ html(lang="en")
             main(class="principal")
                 article(class="crear-post") 
                     h1 Editar Publicacion
-                    form(class="formulario" action=`/auth/${ usuario }/actualizar-post` method="POST" enctype="multipart/form-data") 
+                    form(class="formulario" action=`/auth/${ usuario }/publicaciones/${ url }/actualizar-post` method="POST" enctype="multipart/form-data") 
                         ul
                             li(style="display:none")  
                                 label(for="") Token 
@@ -72,7 +72,7 @@ html(lang="en")
                                 label(for="text" class="label-crear") Autor
                                 input(type="text" name="autor" id="autor-post"  class="input-crear editar" value=`${autor}`) 
                             li 
-                                label(for="text" class="label-crear") Fecha
+                                label(for="text" class="label-crear") Fecha 
                                 input(type="date" name="fecha" id="fecha-post" class="input-crear editar" value=`${fecha}`)
                                 
                             div(class="div-li-contenido") 

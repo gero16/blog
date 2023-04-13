@@ -16,9 +16,15 @@ const crearPost = async (req, res) => {
  
   const body =  req.body;
   const { admin } = req.params
-  const { titulo, autor, imagen, fecha, contenido } = body;
+  let { titulo, autor, imagen, fecha, contenido } = body;
+  
+  if(typeof(contenido) === "string" ) {
+    contenido = [contenido]
+  }
 
-  console.log(colors.bgBlue(body))
+  console.log(colors.bgBlue(contenido))
+
+  
 
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
 
@@ -177,7 +183,13 @@ const authAgregarComentario = async (req, res) => {
   const actualizarPost = async (req, res) => {
  
     const body = req.body;
-    const {id, titulo, autor, imagen, fecha, contenido } = body;
+    let {id, titulo, autor, imagen, fecha, contenido } = body;
+    console.log(colors.bgCyan(body))
+    
+    if(typeof(contenido) === "string" ) {
+      contenido = [contenido]
+    }
+
     // si se cambio la imagen viene por el req.file, sino es undefined y no hay cambio
     const tituloURL = titulo.toLowerCase().replaceAll(" ","-")
     const newID = Date.now();
@@ -206,7 +218,7 @@ const authAgregarComentario = async (req, res) => {
               fecha,
               autor: autor,
               imagen: req.file.path,
-              contenido: contenido,
+              contenido,
               imagen: secure_url,
               url: tituloURL
             });
@@ -222,6 +234,7 @@ const authAgregarComentario = async (req, res) => {
             });
       }
   
+      console.log(colors.bgBlue("Publicacion Actualizada!!!"))
       return res.status(200).render("ok", {
         mensaje: "Publicación actualizada correctamente!"
       })
@@ -232,7 +245,9 @@ const authAgregarComentario = async (req, res) => {
       res.status(401).render("error", {
         error: 401
       })
-    }} 
+      
+    }
+  } 
   
 
     const eliminarPost = async (req, res) => {

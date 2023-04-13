@@ -25,8 +25,6 @@ const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 
 let texto = "";
 
-
-
 btnAgregarParrafo.addEventListener("click", () => {
 
   const divLiContenido = document.querySelector(".div-li-contenido")
@@ -134,7 +132,6 @@ const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
 btnQuitarContenido.forEach(elementoQuitar => {
   elementoQuitar.addEventListener("click", (e) => {
     e.target.parentNode.remove()
-    
   })
 });
 

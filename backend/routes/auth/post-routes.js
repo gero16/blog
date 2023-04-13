@@ -16,11 +16,11 @@ const router = Router();
 // Ruta a la que se le manda el token header
 router.post("/:user/editar-perfil", verifyToken, editarPerfil)
 
-router.post("/:admin/crear-post", verifyToken, crearPost)
+router.post("/:admin/crear-post", crearPost)
 
-router.post("/:admin/actualizar-post", verifyToken, actualizarPost)
+router.post("/:admin/publicaciones/:titulo/actualizar-post",  actualizarPost)
 
-router.post("/:admin/eliminar-post/:id", verifyToken,  eliminarPost)
+router.post("/:admin/eliminar-post/:id",  eliminarPost)
 
 router.post("/:user/publicaciones/:titulo/agregar-comentario",  authAgregarComentario)
 

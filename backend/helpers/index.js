@@ -1,6 +1,6 @@
-const { generarToken } = require ("./generar-tkn");
+
 const { emailRegistro } = require('./emailRegistro');
-const { generarJWT } = require("./generar-jwt");
+const { generarJWT , generarToken} = require("./generar-token");
 
 
 

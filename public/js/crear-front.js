@@ -113,7 +113,7 @@ btnPrevisualizarCrear.addEventListener("click", () => {
       texto = inputFecha.value;
       preFecha.textContent = texto;
     } 
-
+    
     if(element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
       const valueFinal = element.value
       element.name ="contenido"

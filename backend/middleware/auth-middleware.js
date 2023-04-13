@@ -54,14 +54,14 @@ const checkAuth = async (req, res, next) => {
 }
 
 
-// middleware to validate token (rutas protegidas)
 const verifyToken = async (req, res, next) => {
-        console.log(colors.bgRed(req.params))
         const user = req.params.user || req.params.admin
-        
         const usuario = await Usuario.findOne({ where: { usuario : user } })
-        // console.log(colors.bgRed(usuario))
         
+        /*******
+            Token llega- por params si uso js, o en el body si uso un formulario html 
+        *********/
+
         const token = req.header('auth-token') || req.body.token || usuario.token_sesion
         console.log(colors.bgWhite(token))
   
@@ -79,6 +79,7 @@ const verifyToken = async (req, res, next) => {
             req.user = verified
             req.body.token = token
             //console.log(colors.bgRed(verified))
+
             if(verified) {
                 next()
             }

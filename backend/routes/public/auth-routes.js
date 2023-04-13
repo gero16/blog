@@ -1,7 +1,7 @@
 
 const { Router } = require('express');
 const { indexPlantilla } = require('../../controllers/auth/plantillas-auth');
-const { loginUsuario, logoutUsuario, validateToken } = require('../../controllers/auth/usuarios-auth');
+const { loginUsuario, logoutUsuario  } = require('../../controllers/auth/usuarios-auth');
 const { checkEmptyData } = require('../../middleware/auth-middleware');
 
 
