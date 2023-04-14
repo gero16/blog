@@ -75,10 +75,18 @@ html(lang="en")
                             li
                                 button.btn-editar-perfil Editar Perfil
                 ul.lista-perfil 
-                    li  Informacion del Usuario
-                    li !{name}
-                    li !{usuario}
-                    li !{correo}
+                    li(class="header-lista-perfil")  
+                        span Informacion del Usuario
+                    li(class="flex-between") 
+                        span Usuario 
+                        span !{ usuario }
+                    li(class="flex-between") 
+                        span Nombre 
+                        span !{ name }
+                    li(class="flex-between") 
+                        span Correo 
+                        span !{ correo }
+
                 span(class="actualizar-datos-perfil") Actualizar Datos
                 span(class="volver-mostrar-info display-none") Volver
                 

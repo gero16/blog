@@ -264,9 +264,11 @@ const authAgregarComentario = async (req, res) => {
           await deleteComentarios.destroy()
           await deleteUsuarioComentarios.destroy()
         }
-       
+
          const extraerImagen = deletePost.imagen.split("/")
-         const imagenId = extraerImagen[8].split(".")
+
+         // Por si la foto se llega a subir en la raiz de cloudinary [7], o si se sube bien en la carpeta blog-luz-de-luna
+         const imagenId = extraerImagen[8] ? extraerImagen[8].split(".") : extraerImagen[7].split(".")
          const publicId = `${ extraerImagen[7] }/${ imagenId[0] }`
          const result = await cloudinary.uploader.destroy(`${ publicId }`, function(error, result) {
            console.log(result, error) 

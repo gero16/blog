@@ -50,7 +50,7 @@ html(lang="en")
             main(class="principal")
                 article(class="crear-post") 
                     h1 Editar Publicacion
-                    form(class="formulario" action=`/auth/${ usuario }/publicaciones/${ url }/actualizar-post` method="POST" enctype="multipart/form-data") 
+                    form(class="formulario" action=`/auth/${ usuario }/actualizar-post` method="POST" enctype="multipart/form-data") 
                         ul
                             li(style="display:none")  
                                 label(for="") Token 
@@ -110,8 +110,4 @@ html(lang="en")
                 
                  
     script(src="/../js/middlewares-front.js") 
-    script(src="/../js/editar-front.js") 
-
-                       
-         
-                     
+    script(src="/../js/editar-front.js" )         

@@ -22,8 +22,15 @@ input {
 }
 
 .lista-perfil {
-    
     font-size: 20px;
+    color: rgb(100, 99, 99);
+    width: 350px;
+    min-width: 250px;
+}
+
+.header-lista-perfil{
+    padding: 20px;
+ 
 }
 
 .lista-perfil li {

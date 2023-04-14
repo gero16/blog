@@ -26,7 +26,6 @@ const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 let texto = "";
 
 btnAgregarParrafo.addEventListener("click", () => {
-
   const divLiContenido = document.querySelector(".div-li-contenido")
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
@@ -150,5 +149,6 @@ inputsContenidoPost.forEach(element => {
   })
 });
 */
+
 
 
