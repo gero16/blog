@@ -39,21 +39,15 @@
           window.location.href = "/"
         }
        
-      
       } catch (error) {
         console.log(error)
       }
     
   }
   
-  
   if(logout) {
     logout.addEventListener("click", cerrarSesion)
-  
   }
-  
-
-  
 
   const btnNotificaciones = document.querySelector(".li-btn-notificaciones")
   const btnSalirNotificaciones = document.querySelector(".salir-notificaciones")
@@ -91,8 +85,6 @@
       } catch (error) {
         console.log(error)
       }
-  
-     
     })
   }
   
@@ -106,22 +98,9 @@
     
       for (let i = 0; i < num; i++) {
            liNotificacion[i].classList.add("notificacion-noleida")
-        
+        }
       }
-    }
-  }
-
-  }
-  
-  
-  const updateImg = document.querySelector(".cambiar-foto")
-  if(updateImg){
-    updateImg.addEventListener("click", () => {
-      
-    })
-  }
-  
-  
+    }}
   
   
   const imgPhoneMenu = document.querySelector(".img-menu") 
@@ -134,7 +113,6 @@
     if(menuPhone.className !== "active") {
       return menuPhone.classList.add("active")
     } 
-    
   })
 
   const sendTokenPlantilla = async () => {
@@ -156,8 +134,6 @@
           console.log("Tiene permiso para estar en esta plantilla ")
         } 
       }
-
-      
     } catch (e) {
         return e;
     } 

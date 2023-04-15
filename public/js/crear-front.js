@@ -29,24 +29,34 @@ btnAgregarParrafo.addEventListener("click", () => {
   const divLiContenido = document.querySelector(".div-li-contenido")
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
-  const liContenedor = document.createElement("li")
-  liContenedor.classList.add("li-parrafos")
+  let liContenedor = document.createElement("li")
+  liContenedor.className = "inactive li-parrafos"
+  
   let inputParrafo = document.createElement("textarea")
   inputParrafo.name = "contenido"
-  inputParrafo.className = "parrafos-post contenidos-post vacio input-crear"
-
+  inputParrafo.className = "parrafos-post contenidos-post vacio input-crear active-parrafos"
+  
   const btnQuitar = document.createElement("span")
   btnQuitar.className = "btn-quitar-contenido"
   btnQuitar.textContent = "Quitar Parrafo"
-
+  
   liContenedor.append(divVacio1, inputParrafo, divVacio2, btnQuitar)
   divLiContenido.append(liContenedor)
 
+  // Preciso este setTimeout para que funcione esto
+  setTimeout(() => {  
+    liContenedor.className = "active"
+  }, 300);
+
+
   btnQuitar.addEventListener("click", (e) => {
-    e.target.parentNode.remove()
-
+    liContenedor.className = "inactive"
+    // liContenedor queda invisible, pero sus datos persisten
+    setTimeout(() => {  
+      console.log(e.target.parentNode)
+      e.target.parentNode.remove()
+    }, 1300);
   })
-
 })
 
 

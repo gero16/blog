@@ -25,7 +25,6 @@ const crearPost = async (req, res) => {
   console.log(colors.bgBlue(contenido))
 
   
-
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
 
   const adminUser = await Usuario.findOne({ where : { usuario : admin }})
@@ -66,8 +65,8 @@ const crearPost = async (req, res) => {
 
       const admin_post = new Admin_Post({ id: id +12134, id_admin: adminUser.id, id_post: id })
       
-      await nuevoPost.save();
-      await admin_post.save();
+     // await nuevoPost.save();
+      // await admin_post.save();
 
     } else {
       const nuevoPost = new Post({
@@ -81,8 +80,8 @@ const crearPost = async (req, res) => {
       });
 
       const admin_post = new Admin_Post ({ id: idAdmin, id_admin: adminUser.id, id_post: id })
-      await nuevoPost.save();
-      await admin_post.save();
+      //await nuevoPost.save();
+      //await admin_post.save();
     }
     
    res.status(200).render("ok", {

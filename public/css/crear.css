@@ -197,6 +197,7 @@ body {
 #li-agregar {
     display: flex;
     justify-content: space-around;
+    margin-top: 0px!important
 }
 
 #agregar-input {
@@ -225,6 +226,14 @@ body {
 .datos-post p {
     font-size:x-small;
     margin-bottom: 5px;
+}
+
+.div-li-contenido{
+    min-height: 120px;
+    margin: 5px 0px;
+}
+textarea {
+    height: 70px!important;
 }
 @media (min-width: 1024px) {
     .span-foto {

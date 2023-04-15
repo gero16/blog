@@ -43,7 +43,9 @@ btnAgregarParrafo.addEventListener("click", () => {
   divLiContenido.append(liContenedor)
 
   btnQuitar.addEventListener("click", (e) => {
-    e.target.parentNode.remove()
+    console.log(e.target.parentNode)
+    liContenedor.className = "inactive"
+    //e.target.parentNode.remove()
   })
 })
 
