@@ -48,19 +48,16 @@ const crearUsuario = async (req, res = response) => {
                 confirmado: false,
                 token_confirmar: token,
             })
-    
             
-            emailRegistro({
-                correo,
-                nombre,
-                token,
-                usuario,
-            })
-    
             const salt =  bcryptjs.genSaltSync();
             newUsuario.password =  bcryptjs.hashSync( password, salt );
-           // newUsuario.token = token
-           await newUsuario.save()
+
+      
+         
+            emailRegistro({ correo, nombre, token, usuario })
+        
+            // Esto deberia depender de si emailRegistro me tira un error o no
+           await newUsuario.save() 
           
             res.status(200).render("ok", {
                 mensaje: "Usuario Registrado correctamente!",
@@ -68,7 +65,7 @@ const crearUsuario = async (req, res = response) => {
           })
             
         } catch (error) {
-            console.log(error)
+            console.log(colors.bgRed(error))
             res.status(500)
     }
 }
