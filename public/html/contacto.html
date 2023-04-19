@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <title>ConfiguroWeb</title>
+    <!-- the form awesome library is used to add icons to our form -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <!-- include the stylesheet file -->
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/contacto.css" rel="stylesheet">
+    <link rel="icon" href="../img/luna.png" type="image/x-icon">
+</head>
+<body>
+
+    <div class="container">
+        <main >
+            <h1 class="titulo"> Contacto  | <a  href="/index.html">Espacio Luz de Luna </a> </h1>
+            <form class="contacto-formulario" action="/auth/contacto" method="post">
+               <ul >
+                <li class="flex-evenly">
+                    <label for="">Nombre</label>
+                    <input type="text" name="nombre">
+                </li>
+                <li class="flex-evenly">
+                    <label for="">Correo</label>
+                    <input type="text" name="correo">
+                </li>
+                <li class="flex-evenly">
+                    <label for="">Mensaje</label>
+                    <textarea name="" id="" cols="30" rows="10" name="mensaje"></textarea>
+                </li>
+                <li class="flex-evenly">
+                    <button class="btn-contacto" type="reset"> Borrar </button>
+                 
+                    <button class="btn-contacto" type="submit"> Enviar </button>
+                </li>
+               </ul>
+            </form>
+        </main>
+    </div>
+
+</body>
+    
+</body>
+</html>

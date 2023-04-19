@@ -19,12 +19,17 @@ const eliminarUsuario = async (req, res) => {
     const deleteUsuario = await Usuario.findOne({ where: { usuario: req.params.user } });
 
     console.log(colors.bgGreen(deleteUsuario))
-    await deleteUsuario.destroy()
-    /*
+    //await deleteUsuario.destroy()
+
+    /*******
+        No funciona xq  estoy intentando renderizar en la ruta post de eliminar-usuario y no en la get?
+        En registrar un usuario parto de un formulario html que me lleva al post de auth/registrar,
+        y es ahi donde tengo el render de la plantilla "ok" y por eso funciona
+     *******/
+
     res.status(200).render("ok", {
         mensaje: "Usuario Eliminado Correctamente!",
   })
-  */
 }
 
 
@@ -54,10 +59,10 @@ const crearUsuario = async (req, res = response) => {
 
       
          
-            emailRegistro({ correo, nombre, token, usuario })
-        
+        emailRegistro({ correo, nombre, token, usuario })
+      
             // Esto deberia depender de si emailRegistro me tira un error o no
-           await newUsuario.save() 
+           //await newUsuario.save() 
           
             res.status(200).render("ok", {
                 mensaje: "Usuario Registrado correctamente!",
@@ -411,6 +416,11 @@ const actualizarNotificacion = async (req, res) => {
 }
 
 
+const contacto = (req, res) => {
+    // Me pueden llegar desde public y desde auth
+    console.log(colors.bgGreen(req.body))
+}
+
 
 module.exports = {
     eliminarUsuario,
@@ -426,6 +436,7 @@ module.exports = {
     getSesion,
     editarPerfil,
     adminNotificaciones,
-    actualizarNotificacion
+    actualizarNotificacion,
+    contacto
 }
 

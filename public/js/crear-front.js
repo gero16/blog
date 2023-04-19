@@ -61,14 +61,20 @@ btnAgregarParrafo.addEventListener("click", () => {
 
 
 btnAgregarSub.addEventListener("click", () => { 
+
   const divLiContenido = document.querySelector(".div-li-contenido")
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
-  const liContenedor = document.createElement("li")
-  liContenedor.classList.add("li-subtitulos")
+  let liContenedor = document.createElement("li")
+  liContenedor.className = "inactive li-subtitulos"
+
   let inputSubtitulo = document.createElement("textarea")
   inputSubtitulo.name = "contenido"
-  inputSubtitulo.className = "subtitulos-post contenidos-post vacio input-crear"
+  inputSubtitulo.className = "subtitulos-post contenidos-post vacio input-crear active-subtitulos"
+
+  setTimeout(() => {  
+    liContenedor.className = "active"
+  }, 300);
 
   const btnQuitar = document.createElement("span")
   btnQuitar.className = "btn-quitar-contenido"
@@ -76,10 +82,15 @@ btnAgregarSub.addEventListener("click", () => {
 
   liContenedor.append(divVacio1, inputSubtitulo, divVacio2, btnQuitar)
   divLiContenido.append(liContenedor)
-  console.log("Agregando Subtitulo")
+ 
 
   btnQuitar.addEventListener("click", (e) => {
-    e.target.parentNode.remove()
+    liContenedor.className = "inactive"
+    // liContenedor queda invisible, pero sus datos persisten
+    setTimeout(() => {  
+      console.log(e.target.parentNode)
+      e.target.parentNode.remove()
+    }, 1300);
   })
 })
 

@@ -33,7 +33,7 @@ if(btnEliminar) {
               console.log(fetchResponse)
               if(fetchResponse.status === 200) {
                 console.log("Mensaje Eliminado Correctamente!")
-                window.location.assign(`/auth/${ newLocation[2] }/users`)
+                //window.location.assign(`/auth/${ newLocation[2] }/users`)
               }
             }
             

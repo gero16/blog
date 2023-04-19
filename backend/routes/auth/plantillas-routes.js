@@ -20,13 +20,13 @@ router.get("/:admin/crear-post", verifyToken, crearPostPlantilla)
 
 router.get("/:admin/editar/:titulo", verifyToken, editarPostPlantilla)
 
-router.get("/:admin/eliminar-post/:titulo", verifyToken, eliminarPlantilla)
-
 router.get("/:user/perfil", perfilPlantilla)
 
 router.get("/error", errorPlantilla)
 
 router.get("/:admin/users", usuariosPlantilla)
+
+router.get("/:admin/eliminar-post/:titulo", verifyToken, eliminarPlantilla)
 
 router.get("/:admin/eliminar-usuario/:user", eliminarUsuarioPlantilla)
 

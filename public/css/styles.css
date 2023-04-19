@@ -91,6 +91,11 @@ footer{
     justify-content: space-around;
 }
 
+.flex-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .flex-column{
     display: flex;
     flex-direction: column;

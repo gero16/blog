@@ -20,10 +20,11 @@ const emailRegistro = async (datos) => {
               clientId:  process.env.CLIENT_ID,
               clientSecret:  process.env.CLIENT_SECRET,
               refreshToken: process.env.REFRESH_TOKEN,
-              accessToken: token,
+              accessToken: process.env.ACCESS_TOKEN,
               expires: 12345
           },
           logger,
+          debug: true
       },
       {
           from: `"Espacio luz de luna" <${ process.env.USER_GOOGLE }>`
@@ -63,13 +64,14 @@ const emailRegistro = async (datos) => {
   
   };
 
-transporter.sendMail(message, (error, info) => {
+ transporter.sendMail(message, (error, info) => {
       if (error) {
         console.log('Ha ocurrido un Error!');
         console.log(colors.bgRed(error.message));
+        return
       }
-      console.log(colors.bgRed('Mensaje enviado correctamente!'));
-      //console.log(colors.bgRed(info.response));
+      //console.log(colors.bgRed('Mensaje enviado correctamente!'));
+      console.log(colors.bgRed(info.response));
       transporter.close();
 
     });

@@ -143,4 +143,7 @@ window.onload = async function (e) {
   
   randomImage(0, 6);
   }
+
 }
+
+

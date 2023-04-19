@@ -33,7 +33,7 @@ btnAgregarParrafo.addEventListener("click", () => {
   liContenedor.classList.add("li-parrafos")
   let inputParrafo = document.createElement("textarea")
   inputParrafo.name = "contenido"
-  inputParrafo.className = "parrafos-post contenidos-post vacio input-crear"
+  inputParrafo.className = "parrafos-post contenidos-post vacio input-crear active-parrafos"
 
   const btnQuitar = document.createElement("span")
   btnQuitar.className = "btn-quitar-contenido"
@@ -42,10 +42,16 @@ btnAgregarParrafo.addEventListener("click", () => {
   liContenedor.append(divVacio1, inputParrafo, divVacio2, btnQuitar)
   divLiContenido.append(liContenedor)
 
+  setTimeout(() => {  
+    liContenedor.className = "active"
+  }, 300);
+
   btnQuitar.addEventListener("click", (e) => {
-    console.log(e.target.parentNode)
     liContenedor.className = "inactive"
-    //e.target.parentNode.remove()
+    setTimeout(() => {  
+      console.log(e.target.parentNode)
+      e.target.parentNode.remove()
+    }, 1300);
   })
 })
 
@@ -54,11 +60,16 @@ btnAgregarSub.addEventListener("click", () => {
   const divLiContenido = document.querySelector(".div-li-contenido")
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
-  const liContenedor = document.createElement("li")
-  liContenedor.classList.add("li-subtitulos")
+  let liContenedor = document.createElement("li")
+  liContenedor.className = "inactive li-subtitulos"
+
   let inputSubtitulo = document.createElement("textarea")
   inputSubtitulo.name = "contenido"
-  inputSubtitulo.className = "subtitulos-post contenidos-post vacio input-crear"
+  inputSubtitulo.className = "subtitulos-post contenidos-post vacio input-crear active-subtitulos"
+
+  setTimeout(() => {  
+    liContenedor.className = "active"
+  }, 300);
 
   const btnQuitar = document.createElement("span")
   btnQuitar.className = "btn-quitar-contenido"
@@ -66,10 +77,14 @@ btnAgregarSub.addEventListener("click", () => {
 
   liContenedor.append(divVacio1, inputSubtitulo, divVacio2, btnQuitar)
   divLiContenido.append(liContenedor)
-  console.log("Agregando Subtitulo")
-
+ 
   btnQuitar.addEventListener("click", (e) => {
-    e.target.parentNode.remove()
+    liContenedor.className = "inactive"
+    // liContenedor queda invisible, pero sus datos persisten
+    setTimeout(() => {  
+      console.log(e.target.parentNode)
+      e.target.parentNode.remove()
+    }, 1300);
   })
 })
 
@@ -151,6 +166,19 @@ inputsContenidoPost.forEach(element => {
   })
 });
 */
+
+
+const btnsQuitar = document.querySelectorAll(".btn-quitar-precargado")
+btnsQuitar.forEach(quitar => {
+  quitar.addEventListener("click", (e) => {
+    e.target.parentNode.className = "inactive"
+    setTimeout(() => {  
+      e.target.parentNode.remove()
+    }, 1300);
+  })
+});
+
+
 
 
 
