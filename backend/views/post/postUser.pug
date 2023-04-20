@@ -12,7 +12,6 @@ html(lang="en")
         link(rel="stylesheet", href="/../css/post.css")
         link(rel="icon", href="/img/luna.png", type="image/x-icon")
         title Publicaciones - #{titulo}
-
     body 
         header.flex-between 
             .flex-center 
@@ -41,12 +40,7 @@ html(lang="en")
                 
                     .contenedor-flex 
                         h1(class="titulo-post") #{titulo} 
-                        div.algo
-                            a(href=`/auth/${usuario}/editar/${url}`)
-                                button(class=`editar`) Editar
-                            a(href=`/auth/${usuario}/eliminar/${url}`)
-                                img(src="/../img/eliminar.png" class="img-eliminar")
-                             
+        
                     .contenedor-imagen
                         img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
                     .contenedor-flex 
@@ -54,7 +48,6 @@ html(lang="en")
                             strong.autor-post  #{autor}
                         p.fecha-post #{fecha}
 
-                   
                     .contenedor-flex 
                         ul(class="texto-post") 
                             -let dataID = 1
@@ -71,8 +64,9 @@ html(lang="en")
                                 span.comentario-fecha= comentario.fecha
                             span.comentario-mensaje= comentario.mensaje
                             div(class="comentario-actions" data-id=comentario.id)
-                                span(class="editar-comentario") Editar
-                                span(class="eliminar-comentario") Eliminar 
+                                if usuario == comentario.usuario
+                                    span(class="editar-comentario") Editar
+                                    span(class="eliminar-comentario") Eliminar 
                     
                     .seccion-comentarios 
                         .img-user 
@@ -85,7 +79,7 @@ html(lang="en")
                             label(for="") Comentario
                                 div 
                                     textarea(name="" class="comentario") 
-                        button(class="btn-comentario") Publicar Comentario
+                        button(class="btn-comentario") Publicar Chupapija
                     
                                
                     

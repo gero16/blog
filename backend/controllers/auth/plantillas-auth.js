@@ -131,7 +131,6 @@ const crearPostPlantilla = async (req, res) => {
 }
 
 const  userPostPlantilla =  async (req, res) => {
-
     const usuario = req.params.user
     const url = req.params.titulo
 
@@ -184,6 +183,7 @@ const  userPostPlantilla =  async (req, res) => {
 const adminPostPlantilla = async (req, res) => {
   const usuario = req.params.admin
   const url = req.params.titulo
+  console.log(colors.bgGreen("En admin"))
   try {
       
     const datos = await Post.findOne({ where: { url }})

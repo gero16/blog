@@ -12,9 +12,10 @@ const router = Router();
 
 router.post("/:user/info-sesion", sesion)
 
+// si uso ("/user/publicaciones/:titulo") - acceder desde un link se me complica para distinguir el :user del :admin
+router.get("/publicaciones/:user/:titulo",verifyToken,  userPostPlantilla)
+// verificar es esAdmin
 router.get("/:admin/publicaciones/:titulo", verifyToken, adminPostPlantilla)
-
-router.get("/:user/publicaciones/:titulo",verifyToken,  userPostPlantilla)
 
 router.get("/:admin/crear-post", verifyToken, crearPostPlantilla)
 

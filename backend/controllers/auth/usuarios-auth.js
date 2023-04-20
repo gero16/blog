@@ -61,8 +61,8 @@ const crearUsuario = async (req, res = response) => {
          
         emailRegistro({ correo, nombre, token, usuario })
       
-            // Esto deberia depender de si emailRegistro me tira un error o no
-           //await newUsuario.save() 
+        // Esto deberia depender de si emailRegistro me tira un error o no
+        await newUsuario.save() 
           
             res.status(200).render("ok", {
                 mensaje: "Usuario Registrado correctamente!",

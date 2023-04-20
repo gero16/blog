@@ -38,7 +38,7 @@ html(lang="en")
                 span.frase-cabecera.flex-center Inserte su frase de cabecera 
                 .blog
                     each  publicacion in registros
-                        a(href=`/auth/${ usuario }/publicaciones/${ publicacion.url}`) 
+                        a(href=`/auth/publicaciones/${ usuario }/${ publicacion.url}/`) 
                             div(class="post"  data-id=`${ publicacion.url }`)
 
                                 div(class="div-imagen" data-id=`${ publicacion.url }`)
