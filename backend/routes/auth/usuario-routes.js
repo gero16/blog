@@ -18,7 +18,7 @@ router.get("/:user/confirmar/:token", confirmarCuenta)
 
 router.post("/:admin/eliminar-usuario/:user", eliminarUsuario)
 
-// router.post("/contacto",  contacto)
+ router.post("/contacto",  contacto)
 
 
 module.exports = router;

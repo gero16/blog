@@ -151,8 +151,76 @@ const emailRecuperarPassword = async (datos) => {
       console.log("Mensaje enviado: %s", info.messageId)
   };
 
+const emailRegistroPrueba = async (datos) => {
+    const { correo, nombre, token, usuario } = datos;
+  console.log(colors.bgGreen(datos))
+    let logger = bunyan.createLogger({
+      name: 'nodemailer'
+  });
+
+  logger.level('trace');
+
+  let transporter = nodemailer.createTransport(
+      {
+          service: 'Gmail',
+          auth: {
+              type: 'OAuth2',
+              user:  process.env.USER_GOOGLE,
+              clientId:  process.env.CLIENT_ID,
+              clientSecret:  process.env.CLIENT_SECRET,
+              refreshToken: process.env.REFRESH_TOKEN,
+              accessToken: process.env.ACCESS_TOKEN,
+              expires: 12345
+          },
+          logger,
+          debug: true
+      },
+      {
+          from: `"Espacio luz de luna" <${ process.env.USER_GOOGLE }>`
+         
+      }
+  );
+
+  let message = {
+      to: correo,
+      subject: "Correo de Prueba! - Espacio Luz de Luna",
+      text: "Ya te lo dije!",
+      html: ` 
+      <head>
+        <meta charset="utf-8">
+        <style>
+          * { font-size: 18px; text-align: center; }
+          button { padding: 10px; background-color: #25064D; color: white; border-radius: 5px; border: none; }
+          button:hover { cursor: pointer }
+        </style>
+      </head>
+  
+      <body>
+        <p> Hola <strong> ${ nombre } </strong>, este es un correo de prueba </p>
+  
+        <p> Si tu no creaste una cuenta asociada a este correo electronico puedes ignorar este mensaje </p>
+  
+      </body>
+    `,
+  
+  };
+
+ transporter.sendMail(message, (error, info) => {
+      if (error) {
+        console.log('Ha ocurrido un Error!');
+        console.log(colors.bgRed(error.message));
+        return
+      }
+      //console.log(colors.bgRed('Mensaje enviado correctamente!'));
+      console.log(colors.bgRed(info.response));
+      transporter.close();
+
+    });
+  }
+
  
   module.exports = {
     emailRegistro,
-    emailRecuperarPassword
+    emailRecuperarPassword,
+    emailRegistroPrueba
   } 

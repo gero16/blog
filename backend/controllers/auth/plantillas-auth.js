@@ -402,6 +402,7 @@ const usuariosPlantilla = async (req, res) => {
   const user = await Usuario.findOne({where : { usuario : admin}})
 
   res.status(200).render("users", {
+      titulo: "Espacio Luz de Luna",
       usuario: user.usuario,
       usuarios: usuarios,
     })

@@ -4,7 +4,7 @@ const { generarJWT, emailRegistro, generarToken  } = require("../../helpers/inde
 const cloudinary = require("cloudinary").v2;
 const bcryptjs = require('bcryptjs');
 const colors = require('colors');
-const { emailRecuperarPassword } = require("../../helpers/emailRegistro.js");
+const { emailRecuperarPassword, emailRegistroPrueba } = require("../../helpers/emailRegistro.js");
 
 cloudinary.config({
     cloud_name: "geronicola",
@@ -411,14 +411,17 @@ const actualizarNotificacion = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
-
-
 }
 
 
 const contacto = (req, res) => {
     // Me pueden llegar desde public y desde auth
     console.log(colors.bgGreen(req.body))
+    emailRegistroPrueba(req.body)
+
+    res.status(200).render("ok", {
+        mensaje: "Correo de Prueba Enviado Correctamente Papa!",
+  })
 }
 
 
