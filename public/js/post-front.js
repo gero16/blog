@@ -72,8 +72,6 @@ btnAddComentario.addEventListener("click", async () => {
    
    const comentarioActions = document.querySelector(".comentario-actions")
    if(!btnAddComentario.classList.contains("editar-coment")){
-
-    
       try {
          const fetchResponse = await (fetch(url, {
                method: "POST",
@@ -186,5 +184,6 @@ window.onload = async function () {
 }
 
 if(userPublic) {
+   console.log("User public")
    imgUser.src = `/img/avatar${userPublic[1]}.png`
  }

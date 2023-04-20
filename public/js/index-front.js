@@ -24,7 +24,6 @@ const seleccionImagen = document.querySelector(".seleccion-imagen")
 const imgMin = document.querySelectorAll(".imagen-galeria-mini")
 const body = document.querySelector("body")
 
-
 imgMin.forEach(imagen => {
   imagen.addEventListener("click", (e) => {
     let separar = e.target.src.split("/")
@@ -112,20 +111,24 @@ window.onload = async function (e) {
       console.log("Elimino sesion porque sus datos estan en null")
       localStorage.removeItem('sesion');
     }
-} else {
-    const divImagen = document.querySelector(".img-user")
- 
-    function randomImage(min, max) {
+} 
+  if(!sesion) {
+   
+    const randomImage = (min, max) => {
       const num = Math.floor((Math.random() * (max - min + 1)) + min);
       const imagen =  num;
       const userPublic = localStorage.getItem("imagen");
 
+      // Esto lo hago la primera vez que entro a la pagina
+      if(!userPublic  &&  window.location.pathname === "/") {
+        const data = ["public", imagen]
+        localStorage.setItem("imagen", JSON.stringify(data) );
+      }
+
+      // Por si hubo algun error y se borro, lo agrego devuelta
       if(!userPublic  &&  window.location.pathname !== "/") {
         const data = ["public", imagen]
-        const public = localStorage.setItem("imagen", JSON.stringify(data) );
-        const avatarImagen = document.createElement("img")
-        avatarImagen.src = `/../img/avatar${num}.png`
-        divImagen.append(avatarImagen)
+        localStorage.setItem("imagen", JSON.stringify(data) );
       }
     
       const user = window.location.pathname.split("/")
@@ -136,14 +139,8 @@ window.onload = async function (e) {
       }
     
   }
-
-  imgsPublicaciones.forEach(element => {
-    //console.log(element)
-  });
-  
   randomImage(0, 6);
   }
-
 }
 
 
