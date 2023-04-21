@@ -58,10 +58,7 @@ const traerPublicaciones = async (req, res) => {
       // Traer todos las Publicaciones
      const post = await Post.findOne({where : {url : req.params.titulo}});
      console.log(colors.bgRed(post))
-     const post_admin = await Admin_Post.findOne({where : { id_post : post.id }})
-     console.log(colors.bgBlue(post_admin))
-     const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
-   
+
      const {id, url, titulo, contenido, imagen, autor, fecha} = post
      const comentarios = await Comentario.findAll({where : {id_post : id}});
  
@@ -85,7 +82,6 @@ const traerPublicaciones = async (req, res) => {
       fecha: newDate,
       comentarios: comentarios,
       numComentarios,
-      admin_post : admin.usuario,
       
   })
    } catch (error) {

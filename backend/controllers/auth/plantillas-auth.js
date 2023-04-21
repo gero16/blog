@@ -44,7 +44,6 @@ const perfilPlantilla = async (req, res) => {
 }
 
 const indexPlantilla = async (req, res) => {
-
   const usuario = req.params.user
   const titulo = "Espacio Luz de Luna"
   try {
@@ -62,40 +61,36 @@ const indexPlantilla = async (req, res) => {
     //console.log(colors.bgBlue(notificacion_sinleer))
 
     const user = await Usuario.findOne({ where: { usuario }})
-
-    
     
     if(user){
-
       const reduceName = user.nombre.split(" ")
-            const miniName = reduceName[0]
-            if(user.rol === "ADMIN") {
-              res.render("index/indexAdmin", {
-                    registros: registros,
-                    miniName: miniName,
-                    usuario: user.usuario,
-                    correo: user.correo,
-                    name: user.nombre,
-                    rol: user.rol,
-                    titulo,
-                    notificaciones: notificacionesOrdenadas,
-                    notificacion_sinleer,
-                    cantidad_notificaciones : notificacion_sinleer.length
-                })
-            
-            } else {
-                res.render("index/indexUser", {
-                      registros: registros,
-                      miniName: miniName,
-                      usuario: user.usuario,
-                      correo: user.correo,
-                      name: user.nombre,
-                      rol: user.rol,
-                      titulo,
-                      
-                      })
-                    } 
-    }
+        const miniName = reduceName[0]
+        if(user.rol === "ADMIN") {
+          res.render("index/indexAdmin", {
+                registros: registros,
+                miniName: miniName,
+                usuario: user.usuario,
+                correo: user.correo,
+                name: user.nombre,
+                rol: user.rol,
+                titulo,
+                notificaciones: notificacionesOrdenadas,
+                notificacion_sinleer,
+                cantidad_notificaciones : notificacion_sinleer.length
+            })
+        
+        } else {
+            res.render("index/indexUser", {
+                  registros: registros,
+                  miniName: miniName,
+                  usuario: user.usuario,
+                  correo: user.correo,
+                  name: user.nombre,
+                  rol: user.rol,
+                  titulo,
+                  })
+                }
+              }
   } catch (error) {
     console.log(error)
   } 
@@ -130,7 +125,7 @@ const crearPostPlantilla = async (req, res) => {
   }
 }
 
-const  userPostPlantilla =  async (req, res) => {
+const userPostPlantilla =  async (req, res) => {
     const usuario = req.params.user
     const url = req.params.titulo
 
@@ -141,10 +136,7 @@ const  userPostPlantilla =  async (req, res) => {
         const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
         const user = await Usuario.findOne({ where: {usuario} })
-
-        const post_admin = await Admin_Post.findOne({where : { id_post : datos.id }})
-        const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
-         
+      
         const comentarios = await Comentario.findAll({where : {id_post : id}});
         
         const reduceName = user.nombre.split(" ")
@@ -172,7 +164,6 @@ const  userPostPlantilla =  async (req, res) => {
           comentarios: comentarios,
           usuario_perfil: user.imagen,
           numComentarios: numComentarios,
-          admin_post : admin.usuario,
         })
       } 
   } catch (error) {
@@ -183,10 +174,11 @@ const  userPostPlantilla =  async (req, res) => {
 const adminPostPlantilla = async (req, res) => {
   const usuario = req.params.admin
   const url = req.params.titulo
-  console.log(colors.bgGreen("En admin"))
   try {
       
     const datos = await Post.findOne({ where: { url }})
+    console.log(colors.bgMagenta(datos))
+
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : usuario }});
      const notificacionesOrdenadas = notificaciones.reverse()
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
@@ -195,10 +187,7 @@ const adminPostPlantilla = async (req, res) => {
       const {id, titulo, contenido, imagen, autor, fecha}  = datos
 
       const user = await Usuario.findOne({ where: { usuario } })
-
-      const post_admin = await Admin_Post.findOne({where : { id_post : datos.id }})
-      const admin = await Usuario.findOne({ where: { id : post_admin.id_admin } })
-       
+ 
       const comentarios = await Comentario.findAll({where : {id_post : id}});
       
       const reduceName = user.nombre.split(" ")
@@ -226,7 +215,6 @@ const adminPostPlantilla = async (req, res) => {
             comentarios: comentarios,
             usuario_perfil: user.imagen,
             numComentarios: numComentarios,
-            admin_post : admin.usuario,
             notificaciones: notificacionesOrdenadas,
             notificacion_sinleer,
             cantidad_notificaciones : notificacion_sinleer.length

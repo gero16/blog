@@ -55,7 +55,6 @@ btnAddComentario.addEventListener("click", async () => {
    console.log(imgUser.src)
    const data = {
       usuario: inputUsuario.value,
-      autor_post: adminPost.textContent,
       mensaje: inputComentario.value,
       url_publicacion: sesion ? tituloP[4] : tituloP[2],
       editar: false,
