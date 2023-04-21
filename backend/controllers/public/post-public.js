@@ -97,7 +97,9 @@ const traerPublicaciones = async (req, res) => {
   const agregarComentario = async (req, res) => {
     console.log(colors.bgBlue(req.body))
     const id = Date.now()
-    const date = new Date().toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+    const date = new Date()
+    const fecha = date.toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+    const actual = date.toLocaleTimeString('es-uy')
     try {
        const registro = await Post.findOne({where : {url : req.params.url}});
 
@@ -105,7 +107,8 @@ const traerPublicaciones = async (req, res) => {
           id,
           usuario: req.body.usuario,
           mensaje: req.body.mensaje,
-          fecha: date,
+          fecha: fecha,
+          hora: actual,
           id_post: parseInt(registro.id),
           imagen_usuario: req.body.imagen_usuario,
         })
@@ -116,7 +119,10 @@ const traerPublicaciones = async (req, res) => {
           nombre_admin: req.body.autor_post,
           nombre_remitente: req.body.usuario,
           url_publicacion: req.body.url_publicacion,
+          fecha : fecha,
+          hora: actual,
           mensaje: req.body.mensaje,
+          imagen_remitente: req.body.imagen_usuario,
         })
         
         await notifiaciones.save()

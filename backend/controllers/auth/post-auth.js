@@ -65,8 +65,8 @@ const crearPost = async (req, res) => {
 
       const admin_post = new Admin_Post({ id: id +12134, id_admin: adminUser.id, id_post: id })
       
-     // await nuevoPost.save();
-      // await admin_post.save();
+     await nuevoPost.save();
+      await admin_post.save();
 
     } else {
       const nuevoPost = new Post({
@@ -80,8 +80,8 @@ const crearPost = async (req, res) => {
       });
 
       const admin_post = new Admin_Post ({ id: idAdmin, id_admin: adminUser.id, id_post: id })
-      //await nuevoPost.save();
-      //await admin_post.save();
+      await nuevoPost.save();
+      await admin_post.save();
     }
     
    res.status(200).render("ok", {
@@ -106,7 +106,6 @@ const authAgregarComentario = async (req, res) => {
        const user = await Usuario.findOne({where : {usuario : req.params.user}})
 
       if(editar === false) {
-        
         const newComentario = new Comentario ({
           id,
           usuario: req.body.usuario,
@@ -132,7 +131,7 @@ const authAgregarComentario = async (req, res) => {
             fecha: fecha,
             hora: actual,
             mensaje: req.body.mensaje,
-            imagen_remitente: req.body.imagen_usuario
+            imagen_remitente: user.imagen
           })
         
         await newComentario.save()
