@@ -1,7 +1,8 @@
 
 const colors = require('colors')
 const cloudinary = require("cloudinary").v2;
-const { Post, Comentario, Notificaciones, Admin_Post, Usuario } = require("../../models/model")
+const { Post, Comentario, Notificaciones, Admin_Post, Usuario } = require("../../models/model");
+const { dateActual } = require('../../middleware/auth-middleware');
 require("multer");
 
 cloudinary.config({
@@ -91,11 +92,9 @@ const traerPublicaciones = async (req, res) => {
   
 
   const agregarComentario = async (req, res) => {
-    console.log(colors.bgBlue(req.body))
     const id = Date.now()
-    const date = new Date()
-    const fecha = date.toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    const actual = date.toLocaleTimeString('es-uy')
+    const {fecha, actual } = dateActual()
+    
     try {
        const registro = await Post.findOne({where : {url : req.params.url}});
 
@@ -128,6 +127,7 @@ const traerPublicaciones = async (req, res) => {
     } catch (error) {
         console.log(error)
     }
+    
   }
 
 

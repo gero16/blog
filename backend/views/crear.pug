@@ -69,16 +69,20 @@ html(lang="en")
                             li(id="li-agregar") 
                                 label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Párrafo
                                 label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtítulo  
-                
+
+
                             li(class="agregar-texto") 
                                 span Previsualizar el Contenido
                                 span(data-id="agregar" id="agregar-texto-crear") Previsualizar Publicación
                                 span(class="span-enter")  Presionar Enter     
 
                             li(class="li-button") 
-                                h3 Terminar Publicación 
-                                button(id="enviar-post" type="submit") Finalizar
-                            
+                                label Terminar Publicación 
+                                input(id="enviar-post" type="submit" value="Finalizar" disabled)
+
+                    div(class="flex-center inactive div-alert")
+                        span(class="alert") Debe agregar por lo menos un Parrafo!
+
                 article(class="preview")
                     h2 Mostrar Publicación
                     h2(class="pre-titulo titulo-post")  

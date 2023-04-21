@@ -44,8 +44,6 @@ const crearMensaje = (msg, anterior) => {
    }, 6000)
 } 
 
- 
-
 const urlActual = window.location.href
 
 const adminPost = document.querySelector(".label-admin")

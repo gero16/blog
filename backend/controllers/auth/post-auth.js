@@ -3,6 +3,7 @@ const colors = require('colors');
 const cloudinary = require("cloudinary").v2;
 require("multer");
 const path = require("path");
+const { dateActual } = require("../../middleware/auth-middleware");
 
 cloudinary.config({
   cloud_name: "geronicola",
@@ -17,20 +18,23 @@ const crearPost = async (req, res) => {
   const body =  req.body;
   const { admin } = req.params
   let { titulo, autor, imagen, fecha, contenido } = body;
+
+  if(!titulo || !contenido) {
+    res.status(400).render("error", {
+      error: 400,
+      mensaje: "Tiene que haber un titulo"
+    })
+    return
+  }
   
   if(typeof(contenido) === "string" ) {
     contenido = [contenido]
   }
 
-  console.log(colors.bgBlue(contenido))
-
-  
   let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
 
   const adminUser = await Usuario.findOne({ where : { usuario : admin }})
   const existePost = await Post.findOne({where : {url : tituloURL}});
-
-
 
   if(existePost) {
     res.status(400).render("error", {
@@ -94,12 +98,9 @@ const crearPost = async (req, res) => {
 
 const authAgregarComentario = async (req, res) => {
     const { editar, id_comentario } = req.body
-    //console.log(colors.bgRed(req.body))
     const id = Date.now()
-    const date = new Date()
-    const fecha = date.toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    const actual = date.toLocaleTimeString('es-uy');
-  console.log(actual)
+    const {fecha, actual } = dateActual()
+
     try {
        const post = await Post.findOne({where : {url : req.params.titulo}});
     
@@ -117,11 +118,7 @@ const authAgregarComentario = async (req, res) => {
           id_post: post.id,
         })
        
-        const usuario_comentarios = new Usuario_Comentario ({
-            id : id + 103,
-            id_usuario: user.id,
-            id_comentario: id,
-          })
+        const usuario_comentarios = new Usuario_Comentario ({ id : id + 103, id_usuario: user.id, id_comentario: id })
         
           const notifiaciones = new Notificaciones ({
             id: id + 12 +3,
@@ -137,40 +134,40 @@ const authAgregarComentario = async (req, res) => {
         await newComentario.save()
         await usuario_comentarios.save()
         await notifiaciones.save()
-  
-      
+
         res.status(200).send("Mensaje Agregado!")
+
       } else {
-        const comentario = await Comentario.findOne({where : {id : id_comentario}})
-        const usuario_comentario = await Usuario_Comentario.findOne({where : {id_comentario : id_comentario}})
+          const comentario = await Comentario.findOne({where : {id : id_comentario}})
+          const usuario_comentario = await Usuario_Comentario.findOne({where : {id_comentario : id_comentario}})
 
-        const mensajeNotificacion = req.body.mensaje.slice(0, 21)
-    
-        await comentario.update({
-          id : id_comentario,
-          usuario: req.body.usuario,
-          mensaje: req.body.mensaje,
-          fecha: comentario.fecha,
-          hora: actual,
-          usuario_registrado: comentario.usuario_registrado,
-          imagen_usuario: comentario.imagen_usuario,
-          id_post: comentario.id_post
-        });
-        
-        const notifiaciones = new Notificaciones ({
-          id: id + 12 +3,
-          nombre_admin: req.body.autor_post,
-          nombre_remitente: req.body.usuario,
-          url_publicacion: req.body.url_publicacion,
-          mensaje: mensajeNotificacion,
-          hora: actual,
-          fecha: fecha,
-          imagen_remitente: req.body.imagen_usuario
-        })
+          const mensajeNotificacion = req.body.mensaje.slice(0, 21)
+      
+          await comentario.update({
+            id : id_comentario,
+            usuario: req.body.usuario,
+            mensaje: req.body.mensaje,
+            fecha: comentario.fecha,
+            hora: actual,
+            usuario_registrado: comentario.usuario_registrado,
+            imagen_usuario: comentario.imagen_usuario,
+            id_post: comentario.id_post
+          });
+          
+          const notifiaciones = new Notificaciones ({
+            id: id + 12 +3,
+            nombre_admin: req.body.autor_post,
+            nombre_remitente: req.body.usuario,
+            url_publicacion: req.body.url_publicacion,
+            mensaje: mensajeNotificacion,
+            hora: actual,
+            fecha: fecha,
+            imagen_remitente: req.body.imagen_usuario
+          })
 
-        await notifiaciones.save()
+          await notifiaciones.save()
 
-        res.status(200).send("Mensaje Actualizado!")
+          res.status(200).send("Mensaje Actualizado!")
       }
        
     } catch (error) {

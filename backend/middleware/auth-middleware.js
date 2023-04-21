@@ -117,10 +117,20 @@ const datosExistentes = async (req, res, next) => {
 }
 
 
+// MOVERLO A HELPERS
+const dateActual = () => {
+    const date = new Date()
+    const fecha = date.toLocaleDateString('es-uy', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+    const actual = date.toLocaleTimeString('es-uy')
+
+    return { fecha, actual }
+}
+
 
 module.exports = {
     checkAuth,
     verifyToken,
     checkEmptyData,
-    datosExistentes
+    datosExistentes,
+    dateActual
 } 

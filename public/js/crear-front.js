@@ -57,11 +57,16 @@ btnAgregarParrafo.addEventListener("click", () => {
       e.target.parentNode.remove()
     }, 1300);
   })
+
+
+inputParrafo.addEventListener("change", () => {
+  if(inputTitulo.value !== "")
+    enviarPost.disabled = false
+  })
 })
 
 
 btnAgregarSub.addEventListener("click", () => { 
-
   const divLiContenido = document.querySelector(".div-li-contenido")
   const divVacio1 = document.createElement("div")
   const divVacio2 = document.createElement("div")
@@ -156,17 +161,8 @@ btnPrevisualizarCrear.addEventListener("click", () => {
   });
 })
 
-enviarPost.disabled = true
-inputTitulo.addEventListener("change", () => {
-  if(inputTitulo) {
-    enviarPost.disabled = false
-  }
-})
 
-// en editar plantilla
-if(inputTitulo) {
-  enviarPost.disabled = false
-}
+
 
 const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
 btnQuitarContenido.forEach(elementoQuitar => {
