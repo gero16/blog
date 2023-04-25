@@ -1,7 +1,3 @@
-
-
-
-
   const titulo = document.querySelector(".titulo-post")
   const editar = document.querySelector(".editar")
   const eliminar = document.querySelector(".eliminar")

@@ -1,9 +1,5 @@
 import { agregar, agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, btnPrevisualizarCrear, divAgregarInputs, enviarPost, formulario, inputAutor, inputContenido, 
-  inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, previsualizar, terminarContenido } from "./helpers.mjs";
-
-console.log(formulario)
-
-
+ inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, previsualizar, terminarContenido } from "./helpers-front.mjs";
 
 btnAgregarParrafo.addEventListener("click", agregarParrafo)
 

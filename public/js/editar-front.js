@@ -1,5 +1,5 @@
 import { agregar, agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, btnPrevisualizarCrear, divAgregarInputs, enviarPost, formulario, inputAutor, inputContenido, 
-  inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, terminarContenido } from "./helpers.mjs";
+  inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, terminarContenido } from "./helpers-front.mjs";
 
 let texto = "";
 
