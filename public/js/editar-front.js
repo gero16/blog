@@ -1,92 +1,11 @@
-const agregar = document.querySelector(`[data-id="agregar"]`);
-
-// inputs del Formulario para crear el POST
-const formulario = document.querySelector(".formulario");
-const inputFoto = document.querySelector("#imagen-post");
-const inputContenido = document.querySelector("#contenido-post");
-const inputTitulo = document.querySelector("#titulo-post");
-const inputAutor = document.querySelector("#autor-post");
-const inputFecha = document.querySelector("#fecha-post");
-const enviarPost = document.querySelector("#enviar-post");
-const terminarContenido = document.querySelector("#terminar");
-
-// etiquetas donde previsualizar del Contenido
-const preTitulo = document.querySelector(".pre-titulo");
-const preAutor = document.querySelector(".pre-autor");
-let preContenido = document.querySelector(".pre-contenido");
-const preFecha = document.querySelector(".pre-fecha");
-const preFoto = document.querySelector(".pre-img");
-
-// Botones para agregar el CONTENIDO
-const btnAgregarParrafo = document.querySelector(".agregar-parrafo")
-const divAgregarInputs = document.querySelector(".div-agregar-inputs")
-const btnAgregarSub = document.querySelector(".agregar-subtitulo")
-const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
+import { agregar, agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, btnPrevisualizarCrear, divAgregarInputs, enviarPost, formulario, inputAutor, inputContenido, 
+  inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, terminarContenido } from "./helpers.mjs";
 
 let texto = "";
 
-btnAgregarParrafo.addEventListener("click", () => {
-  const divLiContenido = document.querySelector(".div-li-contenido")
-  const divVacio1 = document.createElement("div")
-  const divVacio2 = document.createElement("div")
-  const liContenedor = document.createElement("li")
-  liContenedor.classList.add("li-parrafos")
-  let inputParrafo = document.createElement("textarea")
-  inputParrafo.name = "contenido"
-  inputParrafo.className = "parrafos-post contenidos-post vacio input-crear active-parrafos"
+btnAgregarParrafo.addEventListener("click", agregarParrafo)
 
-  const btnQuitar = document.createElement("span")
-  btnQuitar.className = "btn-quitar-contenido"
-  btnQuitar.textContent = "Quitar Parrafo"
-
-  liContenedor.append(divVacio1, inputParrafo, divVacio2, btnQuitar)
-  divLiContenido.append(liContenedor)
-
-  setTimeout(() => {  
-    liContenedor.className = "active"
-  }, 300);
-
-  btnQuitar.addEventListener("click", (e) => {
-    liContenedor.className = "inactive"
-    setTimeout(() => {  
-      console.log(e.target.parentNode)
-      e.target.parentNode.remove()
-    }, 1300);
-  })
-})
-
-
-btnAgregarSub.addEventListener("click", () => { 
-  const divLiContenido = document.querySelector(".div-li-contenido")
-  const divVacio1 = document.createElement("div")
-  const divVacio2 = document.createElement("div")
-  let liContenedor = document.createElement("li")
-  liContenedor.className = "inactive li-subtitulos"
-
-  let inputSubtitulo = document.createElement("textarea")
-  inputSubtitulo.name = "contenido"
-  inputSubtitulo.className = "subtitulos-post contenidos-post vacio input-crear active-subtitulos"
-
-  setTimeout(() => {  
-    liContenedor.className = "active"
-  }, 300);
-
-  const btnQuitar = document.createElement("span")
-  btnQuitar.className = "btn-quitar-contenido"
-  btnQuitar.textContent = "Quitar Subtitulo"
-
-  liContenedor.append(divVacio1, inputSubtitulo, divVacio2, btnQuitar)
-  divLiContenido.append(liContenedor)
- 
-  btnQuitar.addEventListener("click", (e) => {
-    liContenedor.className = "inactive"
-    // liContenedor queda invisible, pero sus datos persisten
-    setTimeout(() => {  
-      console.log(e.target.parentNode)
-      e.target.parentNode.remove()
-    }, 1300);
-  })
-})
+btnAgregarSub.addEventListener("click", agregarSubtitulo)
 
 
 inputFoto.addEventListener("change", (e) => {
