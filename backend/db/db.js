@@ -20,9 +20,7 @@ const conectarBD = async () => {
     }
 }
 
- 
-
-  module.exports = {
+module.exports = {
     sequelize,
     conectarBD
-  }
+}

@@ -170,10 +170,7 @@ if(admin) {
    });
 }
 
-
-
 window.onload = async function () {
- 
    const sesion = JSON.parse(localStorage.getItem('sesion'));
    if(sesion) {
       const [user, email, token, rol] = sesion;
@@ -184,3 +181,4 @@ if(userPublic) {
    console.log("User public")
    imgUser.src = `/img/avatar${userPublic[1]}.png`
  }
+

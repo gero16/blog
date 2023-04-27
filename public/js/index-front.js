@@ -1,7 +1,18 @@
+import { getSesion } from "./helpers-front.mjs";
+
 const blog = document.querySelector(".blog");
 const refCrear = document.querySelector(".ref-crear")
 const publicIMG = document.querySelector(".avatar-user")
+const imagenes = document.querySelectorAll(".post-img")
 
+let posicionActual = 1;
+const flechaDer = document.querySelector(".flecha-der")
+const flechaIzq = document.querySelector(".flecha-izq")
+
+const imgMax = document.querySelector(".imagen-galeria-max")
+const seleccionImagen = document.querySelector(".seleccion-imagen")
+const imgMin = document.querySelectorAll(".imagen-galeria-mini")
+const body = document.querySelector("body")
 
 const traerPublicaciones = async () => {
   const resultado = await fetch("/publicaciones");
@@ -17,12 +28,6 @@ const traerPublicaciones = async () => {
     fechas[index].textContent = newDate;
   }
 };
-
-
-const imgMax = document.querySelector(".imagen-galeria-max")
-const seleccionImagen = document.querySelector(".seleccion-imagen")
-const imgMin = document.querySelectorAll(".imagen-galeria-mini")
-const body = document.querySelector("body")
 
 imgMin.forEach(imagen => {
   imagen.addEventListener("click", (e) => {
@@ -40,10 +45,6 @@ imgMin.forEach(imagen => {
     }
   })
 });
-
-let posicionActual = 1;
-const flechaDer = document.querySelector(".flecha-der")
-const flechaIzq = document.querySelector(".flecha-izq")
 
 flechaDer.addEventListener("click", () => {
   if(posicionActual === 4) {
@@ -70,8 +71,6 @@ flechaIzq.addEventListener("click", () => {
 }
 })
 
-
-
 seleccionImagen.addEventListener("click", (e) => {
   if(!e.target.classList.contains("flechas")) {
     seleccionImagen.classList.toggle("mostrar-imagen")
@@ -79,41 +78,38 @@ seleccionImagen.addEventListener("click", (e) => {
   }
 })
 
-
 window.onload = async function (e) {
   e.preventDefault()
-
-  const imgsPublicaciones = document.querySelectorAll(".post-img")
 
   await traerPublicaciones();
 
   const urlPost = document.querySelectorAll(".post")
 
-  const sesion = JSON.parse(localStorage.getItem('sesion'));
-  
   if(window.location.pathname === "/") {
     urlPost.forEach(element => {
       element.addEventListener("click", (e) => {
         window.location.href = `/publicaciones/${e.target.parentNode.dataset.id}`
+      })
     })
-  })}
+  }
   
-  if(sesion && window.location.pathname === "/") {
-     window.location.href = `/auth/${sesion[1]}/index`
+  if(getSesion && window.location.pathname === "/") {
+     window.location.href = `/auth/${getSesion[1]}/index`
   }
  
-  if(sesion) {
+  if(getSesion) {
     localStorage.removeItem("imagen");
     
-    const [correo, usuario, token, rol] = sesion;
+    const [correo, usuario, token, rol] = getSesion;
 
     if(correo == null || usuario == null || token == null || rol == null) {
       console.log("Elimino sesion porque sus datos estan en null")
       localStorage.removeItem('sesion');
     }
-} 
-  if(!sesion) {
-   
+  }
+
+  if(!getSesion) {
+
     const randomImage = (min, max) => {
       const num = Math.floor((Math.random() * (max - min + 1)) + min);
       const imagen =  num;
@@ -138,9 +134,37 @@ window.onload = async function (e) {
         window.location.href = "/"
       }
     
+    }
+    randomImage(0, 6);
   }
-  randomImage(0, 6);
-  }
+
 }
 
+const getAspectRatio = (w, h) => {
+  let rem;
+  let newW = w;
+  let newH = h;
+
+  while (h != 0) {
+      rem = w % h;
+      w = h;
+      h = rem;
+  }
+
+  newH = newH / w;
+  newW = newW / w;
+
+  //console.log("Aspect Ratio: " + newW + ":" + newH);
+  return
+}
+
+imagenes.forEach(element => {
+  let foto= new Image();
+  foto.src= element.src
+  getAspectRatio(foto.width, foto.height)
+  if(foto.width < foto.height  ) {
+    element.classList.add("img-more-width")
+    element.parentNode.classList.add("post-more-width")
+  }
+});
 

@@ -23,6 +23,70 @@ export const divAgregarInputs = document.querySelector(".div-agregar-inputs")
 export const btnAgregarSub = document.querySelector(".agregar-subtitulo")
 export const btnPrevisualizarCrear = document.querySelector("#agregar-texto-crear")
 
+// Esto solo aplica para mandar el token post en Formularios - crear / editar
+export const token = document.querySelector(".token")
+
+// Menu
+export const imgPhoneMenu = document.querySelector(".img-menu") 
+export const menuPhone = document.querySelector(".ocultar-transition") 
+
+// SESION
+export const getSesion = JSON.parse(localStorage.getItem('sesion'));
+
+export const sendTokenPlantilla = async () => {
+  
+  const token = getSesion ? getSesion[2] : undefined 
+  console.log(token)
+  const settings = { 
+      method: 'POST', 
+      headers: { "Content-Type": "application/json", "auth-token": token },
+  };
+  
+  try {
+    if(window.location.pathname !== "/" && window.location.pathname !== `/auth/${ getSesion[1] }`/index) {
+      console.log("No es por aca")
+      const fetchResponse = await fetch(`/auth/validate-token`, settings);
+      const response = await fetchResponse.json()
+      console.log(fetchResponse)
+      if(response.token) {
+        console.log("Tiene permiso para estar en esta plantilla ")
+      } 
+    }
+  } catch (e) {
+      return e;
+  } 
+}
+
+export const logout = document.querySelector(".logout")
+export const cerrarSesion = async (e) => {
+  e.preventDefault()   
+
+  const usuario = getSesion[1]
+  
+  localStorage.removeItem('sesion');
+  
+  const data = {
+    usuario:usuario,
+  }
+
+  const settings = {
+    method: 'POST',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+  }};
+  try {
+    const fetchResponse = await fetch(`/auth/${usuario}/logout`, settings);
+    console.log(fetchResponse)
+    if(fetchResponse.ok == true) {
+      window.location.href = "/"
+    }
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 export const agregarParrafo = () => {
     const divLiContenido = document.querySelector(".div-li-contenido")
