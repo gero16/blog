@@ -27,11 +27,11 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${usuario}/index`) Inicio
+                        a(href=`/auth/admin/${ usuario }/index`) Inicio
                     li
-                        a(href=`/auth/${usuario}/crear-post`) Crear Publicación 
+                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
                     li 
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                        a(href=`/auth/admin/${ usuario }/perfil`) Perfil #{ iniName }
                     li
                         a(href="#") Nosotros
                     li 
@@ -133,7 +133,7 @@ html(lang="en")
                             span(class="notificacion-numero  notificacion-numero-mobile") !{ cantidad_notificaciones }
                   
 
-        script(src="/js/middlewares-front.js" type="module")            
+        script(src="/../js/middlewares-front.js")           
         script(src="/../js/perfil-front.js")  
                     
 

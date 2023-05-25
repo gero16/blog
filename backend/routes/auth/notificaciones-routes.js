@@ -5,9 +5,9 @@ const { adminNotificaciones, actualizarNotificacion } = require('../../controlle
 const router = Router();
 
 
-router.get("/:admin/notificaciones", adminNotificaciones)
+router.get("/admin/:admin/notificaciones", adminNotificaciones)
 
-router.post("/:admin/notificaciones", actualizarNotificacion)
+router.post("/admin/:admin/notificaciones", actualizarNotificacion)
 
 
 

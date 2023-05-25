@@ -27,15 +27,15 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${usuario}/index`) Inicio
+                        a(href=`/auth/admin/${ usuario }/index`) Inicio
                     li
-                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`) Crear Publicacion
+                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
                     li
                         a(href="#") Nosotros
                     li 
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                        a(href=`/auth/perfil/${ usuario }`) Perfil #{ iniName }
                     li
-                        a(href=`/auth/${ usuario }/users`) Administrar Usuarios
+                        a(href=`/auth/usuarios/${ usuario }`) Administrar Usuarios
                     li 
                         a(class="logout") Cerrar Sesión
                     li
@@ -45,26 +45,28 @@ html(lang="en")
 
     
         div(class="container")
-            div(class="pagina-post")
-                .contenido-post 
+            main(class="pagina-post")
+                article(class="contenido-post") 
                 
-                    .contenedor-flex 
+                    section(class="contenedor-flex") 
                         h1(class="titulo-post") #{ titulo } 
                         .flex
-                            a(href=`/auth/${ usuario }/editar/${ url }`)
+                            a(href=`/auth/admin/${ usuario }/editar/${ url }`)
                                 button(class=`editar`) Editar
-                            a(href=`/auth/${ usuario }/eliminar-post/${ url }`)
+
+                            a(href=`/auth/admin/${ usuario }/eliminar-post/${ url }`)
                                 img(src="/../img/eliminar.png" class="img-eliminar")
                              
-                    .contenedor-imagen
+                    section(class="contenedor-imagen")
                         img(src=`${imagen}`, alt="" class="foto-post" id="imagen")
-                    .contenedor-flex 
+
+                    section(class="contenedor-flex") 
                         p.autor-post Escrito por
                             strong.autor-post  #{ autor }
                         p.fecha-post #{ fecha }
 
                    
-                    .contenedor-flex 
+                    section(class="contenedor-flex") 
                         ul(class="texto-post") 
                             -let dataID = 1
                             each  val in contenido

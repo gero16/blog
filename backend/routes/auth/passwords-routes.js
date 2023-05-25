@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { olvidePasswordPlantilla, cambiarPassword } = require('../../controllers/auth/plantillas-auth');
+const { olvidePasswordPlantilla, cambiarPassword } = require('../../controllers/auth/plantillas');
 const { olvidePassword, comprobarPassword, nuevoPassword } = require('../../controllers/auth/usuarios-auth');
 
 

@@ -1,8 +1,5 @@
 import { getSesion } from "./helpers-front.mjs";
 
-const blog = document.querySelector(".blog");
-const refCrear = document.querySelector(".ref-crear")
-const publicIMG = document.querySelector(".avatar-user")
 const imagenes = document.querySelectorAll(".post-img")
 
 let posicionActual = 1;
@@ -12,7 +9,6 @@ const flechaIzq = document.querySelector(".flecha-izq")
 const imgMax = document.querySelector(".imagen-galeria-max")
 const seleccionImagen = document.querySelector(".seleccion-imagen")
 const imgMin = document.querySelectorAll(".imagen-galeria-mini")
-const body = document.querySelector("body")
 
 const traerPublicaciones = async () => {
   const resultado = await fetch("/publicaciones");
@@ -85,17 +81,21 @@ window.onload = async function (e) {
 
   const urlPost = document.querySelectorAll(".post")
 
-  if(window.location.pathname === "/") {
+
     urlPost.forEach(element => {
       element.addEventListener("click", (e) => {
         window.location.href = `/publicaciones/${e.target.parentNode.dataset.id}`
       })
     })
-  }
+
   
-  if(getSesion && window.location.pathname === "/") {
-     window.location.href = `/auth/${getSesion[1]}/index`
+  if(getSesion && window.location.pathname === "/" && getSesion[3] ==="ADMIN") {
+     window.location.href = `/auth/admin/${getSesion[1]}/index`
   }
+
+  if(getSesion && window.location.pathname === "/" && getSesion[3] ==="USER") {
+    window.location.href = `/auth/index/usuario/${getSesion[1]}`
+ }
  
   if(getSesion) {
     localStorage.removeItem("imagen");

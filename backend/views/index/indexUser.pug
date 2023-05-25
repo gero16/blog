@@ -24,11 +24,11 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${usuario}/index`) Inicio
+                        a(href=`/auth/index/${usuario}`) Inicio
                     li
                         a(href="#") Nosotros
                     li
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                        a(href=`/auth/perfil/${ usuario }`) Perfil #{ iniName }
                     li 
                         a(class="logout") Cerrar Sesión
                     li
@@ -42,7 +42,7 @@ html(lang="en")
                             div(class="post"  data-id=`${ publicacion.url }`)
 
                                 div(class="div-imagen" data-id=`${ publicacion.url }`)
-                                    img(src=`${ publicacion.imagen }`, class="post-img" alt="")
+                                    img(src=`${ publicacion.imagen }`, class="post-img" alt="" width="400" height="200")
 
                                 div(class="post-div-contenido" data-id=`${ publicacion.url }`)
                                     div(class="header-contenido flex-between")
@@ -83,5 +83,5 @@ html(lang="en")
                 div Tel: 26131674 
                 div Cel: 26131674
                 
-    script(src="/js/middlewares-front.js" type="module") 
-    script(src="/js/index-front.js" type="module")   
+    script(src="/js/middlewares-front.js" type="module")  
+    script(src="/js/index-front.js" type="module") 

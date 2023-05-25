@@ -32,8 +32,6 @@ const eliminarUsuario = async (req, res) => {
   })
 }
 
-
-
 const crearUsuario = async (req, res = response) => {
 
     const id = Date.now();
@@ -83,7 +81,6 @@ const validateToken = (req, res) => {
       }) 
       
 }
-
 
 const errorPlantilla = (req, res) => {
     console.log("se paso la validacion")
@@ -159,7 +156,6 @@ const loginUsuario = async (req, res) => {
     
 }
 
-
 const logoutUsuario = async (req, res) => {
     console.log(colors.bgBlue(req.params))
     const { user } = req.params
@@ -202,7 +198,7 @@ const confirmarCuenta = async (req, res) => {
  
 }
 
-  const olvidePassword = async (req, res) => {
+const olvidePassword = async (req, res) => {
     const { correo } = req.body;
 
     const existeUsuario = await Usuario.findOne({where: { correo }});
@@ -245,7 +241,6 @@ const confirmarCuenta = async (req, res) => {
         console.log(error)
     }
 }
-
 
 const comprobarPassword = async (req,res, next) => {
     const { token } = req.params;
@@ -301,14 +296,6 @@ const nuevoPassword = async (req, res) => {
     } catch (error) {
      console.log(error)   
     }
-}
-
-const sesion = (req, res) => {
-    const token = req.body.token
-    console.log(colors.red(req.body.token))
-    res.status(200).json({
-        token,
-    })
 }
 
 const getSesion = (req, res) => {
@@ -413,7 +400,6 @@ const actualizarNotificacion = async (req, res) => {
     }
 }
 
-
 const contacto = (req, res) => {
     // Me pueden llegar desde public y desde auth
     console.log(colors.bgGreen(req.body))
@@ -435,7 +421,6 @@ module.exports = {
     comprobarPassword,
     nuevoPassword,
     validateToken,
-    sesion,
     getSesion,
     editarPerfil,
     adminNotificaciones,

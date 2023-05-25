@@ -1,7 +1,7 @@
 
 const { Router } = require('express');
 
-const { errorTokenPlantilla } = require('../../controllers/auth/plantillas-auth');
+const { errorTokenPlantilla } = require('../../controllers/auth/plantillas');
 const { validateToken  } = require("../../controllers/auth/usuarios-auth");
 const { verifyToken  } = require("../../middleware/auth-middleware");
 
@@ -12,9 +12,6 @@ const router = Router();
 
 // Este token es el que verifica las
 router.post("/validate-token", verifyToken, validateToken)
-
-
-
 router.get("/error", errorTokenPlantilla)
 
 

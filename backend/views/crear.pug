@@ -24,17 +24,15 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${ usuario }/index`) Inicio
+                        a(href=`/auth/admin/${ usuario }/index`) Inicio
                     li
-                        a(href=`/auth/${ usuario }/crear-post`) Crear Publicación
-                    li 
-                        a(href=`/auth/${ usuario }/perfil`) Perfil #{miniName}
-                    li
-                        a(href=`/auth/${ usuario }/users`) Administrar Usuarios
+                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
                     li
                         a(href="#") Nosotros
                     li
-                        a(href="#") Contacto
+                        a(href=`/auth/admin/${ usuario }/perfil`) Perfil #{ iniName }
+                    li
+                        a(href=`/auth/admin/${ usuario }/usuarios/`) Administrar Usuarios
                     li 
                         a(class="logout") Cerrar Sesión
                   
@@ -94,7 +92,7 @@ html(lang="en")
                     .pre-contenido
                   
                 
-        script(src="/js/middlewares-front.js" type="module")         
+        script(src="/js/middlewares-front.js" type="module")          
         script(src="/../js/crear-front.js" type="module")     
 
 

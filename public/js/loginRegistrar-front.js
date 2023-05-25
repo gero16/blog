@@ -45,9 +45,10 @@ if(btnLogin){
     if(fetchResponse.status === 200){
       const dataSesion = [data.correo, data.usuario,  data.token, data.rol]
       localStorage.setItem("sesion", JSON.stringify(dataSesion) );
-      window.location.assign(`/auth/${data.usuario}/index`)
+      window.location.assign(`/`)
       return false;
     } 
+    
     if(data.msg === 'El usuario no fue confirmado'){
       crearMensaje("Debe Confirmar su Cuenta!")
     }

@@ -27,18 +27,21 @@ html(lang="en")
             nav.menu 
                 ul(class="flex-around menu-lista")
                     li
-                        a(href=`/auth/${ usuario }/index`) Inicio
+                        a(href=`/auth/admin/${ usuario }/index`) Inicio
                     li
-                        a(href=`/auth/${ usuario}/crear-post`) Crear Publicación
+                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
                     li
                         a(href="#") Nosotros
-                    li 
-                        a(href="#") Perfil 
                     li
-                        a(href=`/auth/${ usuario }/users`) Administrar Usuarios
+                        a(href=`/auth/admin/${ usuario }/perfil`) Perfil #{ iniName }
+                    li
+                        a(href=`/auth/admin/${ usuario }/usuarios/`) Administrar Usuarios
                     li 
                         a(class="logout") Cerrar Sesión
-
+                    li
+                        div(class="li-btn-notificaciones") 
+                            img(src="/../img/notificacion.png" class="icono-notificacion")
+                            span(class="notificacion-numero notificacion-numero-normal") !{ cantidad_notificaciones }
 
         div(class="container flex-center")
           main

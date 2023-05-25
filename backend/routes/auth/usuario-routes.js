@@ -1,6 +1,4 @@
 const { Router } = require('express');
-const { usuariosPlantilla } = require('../../controllers/auth/plantillas-auth');
-
 
 const { loginUsuario, logoutUsuario, crearUsuario, confirmarCuenta, getUsuarios, validateToken, eliminarUsuario, contacto } = require("../../controllers/auth/usuarios-auth");
 const { checkEmptyData, datosExistentes, verifyToken } = require("../../middleware/auth-middleware");

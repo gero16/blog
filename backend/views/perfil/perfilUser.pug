@@ -29,7 +29,7 @@ html(lang="en")
                     li
                         a(href=`/auth/${usuario}/index`) Inicio
                     li 
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
+                        a(href=`/auth/perfil/${ usuario }`) Perfil #{ iniName }
                     li
                         a(href="#") Nosotros
                     li 
@@ -103,7 +103,7 @@ html(lang="en")
                         a(class="logout") Cerrar Sesión
                   
 
-        script(src="/js/middlewares-front.js" type="module")           
+        script(src="/../js/middlewares-front.js")           
         script(src="/../js/perfil-front.js")  
                     
 

@@ -63,6 +63,9 @@ const verifyToken = async (req, res, next) => {
         *********/
 
         const token = req.header('auth-token') || req.body.token || usuario.token_sesion
+
+        console.log(colors.bgBlue(req.header('auth-token')))
+        console.log(colors.bgRed(req.body.token))
         console.log(colors.bgWhite(token))
   
         if (!token) {
