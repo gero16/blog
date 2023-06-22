@@ -44,11 +44,11 @@ html(lang="en")
 
     
         main.container 
-                span.frase-cabecera.flex-center Inserte su frase de cabecera 
+                span.frase-cabecera.flex-center Un gran poder conlleva una gran responsabilidad
                 .blog
                     each  publicacion in registros
                         a(href=`/auth/admin/${ usuario }/publicaciones/${ publicacion.url}`) 
-                            div(class="post"  data-id=`${ publicacion.url }`)
+                            div(class=`post ${publicacion.url}`  data-id=`${ publicacion.url }`)
 
                                 div(class="div-imagen" data-id=`${ publicacion.url }`)
                                     img(src=`${ publicacion.imagen }`, class="post-img" alt="" width="400" height="200")
@@ -96,29 +96,6 @@ html(lang="en")
                         div(class="li-notificaciones-mobile") 
                             span Notificaciones
                             span(class="notificacion-numero  notificacion-numero-mobile") !{ cantidad_notificaciones }
-        
-        .seleccion-imagen.ocultar-imagen
-            img(src="/img/circulo-de-flecha2.png", alt="" class="flechas flecha-izq") 
-            
-            img(class="imagen-galeria-max" src="/img/foto1.jpg", alt="")
-
-            img(src="/img/circulo-de-flecha1.png", alt="" class="flechas flecha-der")
-
-        .galeria-imagenes.text-align-center
-            h3 Galeria de Fotos
-            .flex-center
-                span.flecha-izq
-                    img(src="/img/circulo-de-flecha2.png", alt="" class="flechas-mini")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto1.jpg", alt="")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto2.jpg", alt="")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto3.jpg", alt="")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto4.jpg", alt="")
-                span.flecha-der
-                    img(src="/img/circulo-de-flecha1.png", alt="" class="flechas-mini")
          
         footer(class="flex-around")
             div Copyright © 2023 - Espacio Luz de Luna 

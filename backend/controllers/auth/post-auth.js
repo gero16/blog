@@ -72,8 +72,8 @@ const crearPost = async (req, res) => {
 
       const admin_post = new Admin_Post({ id: id +12134, id_admin: adminUser.id, id_post: id })
       
-    //await nuevoPost.save();
-    //await admin_post.save();
+    await nuevoPost.save();
+    await admin_post.save();
 
     } else {
       const nuevoPost = new Post({
@@ -87,8 +87,8 @@ const crearPost = async (req, res) => {
       });
 
       const admin_post = new Admin_Post ({ id: idAdmin, id_admin: adminUser.id, id_post: id })
-      //await nuevoPost.save();
-      //await admin_post.save();
+      await nuevoPost.save();
+      await admin_post.save();
     }
     
    res.status(200).render("ok", {

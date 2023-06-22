@@ -53,31 +53,6 @@ html(lang="en")
                                         span(class="post-fecha")  !{ publicacion.fecha }
                                     h2(class="post-titulo")  !{ publicacion.titulo }
                                     div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
-            
-        .seleccion-imagen.ocultar-imagen
-            span.flecha-izq.flechas 
-                img(src="/img/circulo-de-flecha2.png", alt="" class="flechas") 
-            
-            img(class="imagen-galeria-max" src="/img/foto1.jpg", alt="")
-
-            span.flecha-der.flechas 
-                img(src="/img/circulo-de-flecha1.png", alt="" class="flechas")
-
-        .galeria-imagenes.text-align-center
-            h3 Galeria de Fotos
-            .flex-center
-                span.flecha-izq
-                    img(src="/img/circulo-de-flecha2.png", alt="" class="flechas-mini")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto1.jpg", alt="")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto2.jpg", alt="")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto3.jpg", alt="")
-                div.div-galeria-imagen
-                    img(class="imagen-galeria-mini" src="/img/foto2.jpg", alt="")
-                span.flecha-der
-                    img(src="/img/circulo-de-flecha1.png", alt="" class="flechas-mini")
     
         footer(class="flex-around")
             div Copyright © 2023 - Espacio Luz de Luna 

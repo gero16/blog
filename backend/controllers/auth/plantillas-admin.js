@@ -19,7 +19,9 @@ const indexAdminPlantilla = async (req, res) => {
           ['id', 'DESC'],
       ],
     });
-    
+
+
+      console.log(colors.bgBlue(registros))
       const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
 
       const notificacionesOrdenadas = notificaciones.reverse()
