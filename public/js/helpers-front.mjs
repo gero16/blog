@@ -123,7 +123,7 @@ export const agregarParrafo = () => {
 
 
 inputParrafo.addEventListener("change", () => {
-  if(inputTitulo.value !== "")
+  if(inputTitulo.value !== "" && inputFoto.value !== "")
     enviarPost.disabled = false
   })
 }

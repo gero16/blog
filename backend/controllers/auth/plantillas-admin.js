@@ -284,26 +284,8 @@ const editarPostPlantilla = async (req, res) => {
             cantidad_notificaciones : notificacion_sinleer.length
           })
         }
-    } else {
-      res.render("editar", {
-        id: id,
-        url: title,
-        titulo: titulo,
-        contenido: contenido,
-        usuario: user,
-        autor: autor,
-        fecha: fecha,
-        nuevoContenido: newOrden,
-        notificaciones,
-        notificacion_sinleer,
-        cantidad_notificaciones : notificacion_sinleer.length
-      })
-    }
-  } else {
-
-    return
-  }
-  
+    } 
+  }   
   } catch (error) {
       console.log(colors.red(error))
       res.status(400).render("error", {

@@ -72,28 +72,19 @@ const crearPost = async (req, res) => {
 
       const admin_post = new Admin_Post({ id: id +12134, id_admin: adminUser.id, id_post: id })
       
-    await nuevoPost.save();
-    await admin_post.save();
-
-    } else {
-      const nuevoPost = new Post({
-        id,
-        titulo,
-        fecha,
-        autor: autor,
-        contenido,
-        imagen,
-        url: tituloURL,
-      });
-
-      const admin_post = new Admin_Post ({ id: idAdmin, id_admin: adminUser.id, id_post: id })
       await nuevoPost.save();
       await admin_post.save();
+
+      res.status(200).render("ok", {
+        mensaje: "Publicación agregada exitosamente!"
+      })
+    } else {
+      // OBLIGATORIO SUBIR CON FOTO
+      res.status(404).render("error", {
+        error: 400,
+        mensaje: "Debe subir una foto para su publicación"
+      })
     }
-    
-   res.status(200).render("ok", {
-    mensaje: "Publicación agregada exitosamente!"
-  })
   } catch (error) {
     console.log(error)
   }}
@@ -181,7 +172,7 @@ const authAgregarComentario = async (req, res) => {
   const actualizarPost = async (req, res) => {
  
     const body = req.body;
-    let {id, titulo, autor, imagen, fecha, contenido } = body;
+    let {id, titulo, autor, fecha, contenido } = body;
     console.log(colors.bgCyan(body))
     
     if(typeof(contenido) === "string" ) {
@@ -226,7 +217,7 @@ const authAgregarComentario = async (req, res) => {
               titulo,
               fecha,
               autor,
-              imagen,
+              imagen : post.imagen,
               contenido,
               url: tituloURL
             });
