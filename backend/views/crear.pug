@@ -14,27 +14,7 @@ html(lang="en")
         title #{titulo}
     body 
        
-        header.flex-between 
-            .flex-center 
-                a(href="/")  
-                    img(class="logo" src="/img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/auth/admin/${ usuario }/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/admin/${ usuario }/perfil`) Perfil #{ iniName }
-                    li
-                        a(href=`/auth/admin/${ usuario }/usuarios/`) Administrar Usuarios
-                    li 
-                        a(class="logout") Cerrar Sesión
+        include includes/headerAdmin.pug 
                   
     
         div(class="container")
@@ -47,13 +27,13 @@ html(lang="en")
                                 label(for="") Token 
                                 input(type="text" class="token" name="token")
                             li 
-                                label(for="" class="label-crear") Imagen
+                                label(for="" class="label-crear") *Imagen
                                 div(class="grid-input-img") 
                                     input(type="file" name="imagen" id="imagen-post" style="display: none" class="vacio input-crear") 
                                     label(for="imagen-post" class="label-imagen") Seleccionar Archivo
                                     span(class="span-foto") Ningun archivo Seleccionado.
                             li 
-                                label(for="text" class="label-crear") Titulo
+                                label(for="text" class="label-crear") *Titulo
                                 input(type="text" name="titulo" id="titulo-post" class="vacio input-crear")                      
                             li 
                                 label(for="text" class="label-crear") Autor
@@ -65,7 +45,7 @@ html(lang="en")
                             div(class="div-li-contenido") 
 
                             li(id="li-agregar") 
-                                label(for="text" class="btn-agregar agregar-parrafo label-crear") Agregar Párrafo
+                                label(for="text" class="btn-agregar agregar-parrafo label-crear") *Agregar Párrafo
                                 label(for="text" class="btn-agregar agregar-subtitulo label-crear") Agregar Subtítulo  
 
 
@@ -78,8 +58,8 @@ html(lang="en")
                                 label Terminar Publicación 
                                 input(id="enviar-post" type="submit" value="Finalizar" disabled)
 
-                    div(class="flex-center inactive div-alert")
-                        span(class="alert") Debe agregar por lo menos un Parrafo!
+                    div(class="flex-center div-alert")
+                    div(class="campos-obligatorios") * Campos obligatorios
 
                 article(class="preview")
                     h2 Mostrar Publicación
@@ -91,8 +71,11 @@ html(lang="en")
                         p(class="pre-fecha") !{fecha}
                     .pre-contenido
                   
+        include includes/divNotificaciones.pug 
+                                    
+        include includes/menuPhone.pug 
                 
-        script(src="/js/middlewares-front.js" type="module")          
+        script(src="/js/helpers/middlewares-front.js" type="module")          
         script(src="/../js/crear-front.js" type="module")     
 
 

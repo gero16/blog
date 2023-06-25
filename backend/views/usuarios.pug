@@ -15,33 +15,7 @@ html(lang="en")
         title #{titulo}
     body 
 
-        
-  
-        header.flex-between 
-            .flex-center
-                a(href="/")   
-                    img(class="logo" src="/../img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/auth/admin/${ usuario }/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/admin/${ usuario }/perfil`) Perfil #{ iniName }
-                    li
-                        a(href=`/auth/admin/${ usuario }/usuarios/`) Administrar Usuarios
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        div(class="li-btn-notificaciones") 
-                            img(src="/../img/notificacion.png" class="icono-notificacion")
-                            span(class="notificacion-numero notificacion-numero-normal") !{ cantidad_notificaciones }
+        include includes/headerAdmin.pug
 
         div(class="container flex-center")
           main
@@ -73,9 +47,11 @@ html(lang="en")
                                     img(src="/../img/eliminar.png" class="img-eliminar-usuario pointer" alt="Icono para cambiar el rol de un usuario")
                             li.flex-center    
                                 img(src="/../img/editar.png" class="img-editar-rol pointer" alt="Icono para eliminar un usuario")
-                      
 
-    
-            
-    script(src="/js/middlewares-front.js" type="module")    
+        include includes/divNotificaciones.pug 
+                                    
+        include includes/menuPhone.pug 
+
+
+    script(src="/js/helpers/middlewares-front.js" type="module")    
     script(src="/../js/usuarios.js")   

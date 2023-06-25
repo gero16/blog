@@ -15,49 +15,30 @@ html(lang="en")
 
     body 
 
-        header.flex-between 
-            .flex-center 
-                img(class="logo" src="/img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/auth/index/${usuario}`) Inicio
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/perfil/${ usuario }`) Perfil #{ iniName }
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        img( class="img-menu" src="/img/menu.png" alt="Icono menu")
+        include ../includes/headerUser.pug
     
         .container 
-                span.frase-cabecera.flex-center Inserte su frase de cabecera 
-                .blog
-                    each  publicacion in registros
-                        a(href=`/auth/publicaciones/${ usuario }/${ publicacion.url}/`) 
-                            div(class="post"  data-id=`${ publicacion.url }`)
+            .blog
+                each  publicacion in registros
+                    a(href=`/auth/publicaciones/${ usuario }/${ publicacion.url}/`) 
+                        div(class="post"  data-id=`${ publicacion.url }`)
 
-                                div(class="div-imagen" data-id=`${ publicacion.url }`)
-                                    img(src=`${ publicacion.imagen }`, class="post-img" alt="" width="400" height="200")
+                            div(class="div-imagen" data-id=`${ publicacion.url }`)
+                                img(src=`${ publicacion.imagen }`, class="post-img" alt="" width="400" height="200")
 
-                                div(class="post-div-contenido" data-id=`${ publicacion.url }`)
-                                    div(class="header-contenido flex-between")
-                                        span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
-                                            strong !{ publicacion.autor }
-                                        span(class="post-fecha")  !{ publicacion.fecha }
-                                    h2(class="post-titulo")  !{ publicacion.titulo }
-                                    div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
-            
-    
-        footer(class="flex-around")
+                            div(class="post-div-contenido" data-id=`${ publicacion.url }`)
+                                div(class="header-contenido flex-between")
+                                    span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
+                                        strong !{ publicacion.autor }
+                                    span(class="post-fecha")  !{ publicacion.fecha }
+                                h2(class="post-titulo")  !{ publicacion.titulo }
+                                div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
+        
+        footer(class="flex-around")      
             div Copyright © 2023 - Espacio Luz de Luna 
             div 
                 div Tel: 26131674 
                 div Cel: 26131674
                 
-    script(src="/js/middlewares-front.js" type="module")  
+    script(src="/js/helpers/middlewares-front.js" type="module")  
     script(src="/js/index-front.js" type="module") 

@@ -7,7 +7,6 @@ html(lang="en")
         link(rel="preconnect", href="https://fonts.googleapis.com")
         link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
        
-       
         link(href="https://fonts.googleapis.com/css2?family=Estonia&family=Mulish:ital,wght@0,400;1,700&family=Raleway:ital,wght@0,400;1,700&family=Roboto+Slab&display=swap" rel="stylesheet")
         link(rel="stylesheet", href="/css/styles.css")
         link(rel="stylesheet", href="/css/index.css")
@@ -15,93 +14,31 @@ html(lang="en")
         title #{titulo}
 
     body 
-
-        header.flex-between 
-            .flex-center.header-elementos 
-                img(class="logo" src="/img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/auth/admin/${ usuario }/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/admin/${ usuario }/perfil`) Perfil #{ iniName }
-                    li
-                        a(href=`/auth/admin/${ usuario }/usuarios`) Administrar Usuarios
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        div(class="li-btn-notificaciones") 
-                            img(src="/../img/notificacion.png" class="icono-notificacion")
-                            span(class="notificacion-numero notificacion-numero-normal") !{ cantidad_notificaciones }
-        
-
     
-        main.container 
-                span.frase-cabecera.flex-center Un gran poder conlleva una gran responsabilidad
-                .blog
-                    each  publicacion in registros
-                        a(href=`/auth/admin/${ usuario }/publicaciones/${ publicacion.url}`) 
-                            div(class=`post ${publicacion.url}`  data-id=`${ publicacion.url }`)
-
-                                div(class="div-imagen" data-id=`${ publicacion.url }`)
-                                    img(src=`${ publicacion.imagen }`, class="post-img" alt="" width="400" height="200")
-
-                                div(class="post-div-contenido" data-id=`${ publicacion.url }`)
-                                    div(class="header-contenido flex-between")
-                                        span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
-                                            strong !{ publicacion.autor }
-                                        span(class="post-fecha")  !{ publicacion.fecha }
-                                    h2(class="post-titulo")  !{ publicacion.titulo }
-                                    div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
+        include ../includes/headerAdmin.pug
                         
-        div(class="contenedor-notificaciones")
-            div(class="titulo-notificaciones") 
-                h3 Notificaciones
-            ul(class="lista-notificaciones") 
-                each notificacion in notificaciones 
-                    li.li-notificacion
-                        a(href=`/auth/elgero16/publicaciones/${ notificacion.url_publicacion }`)  
-                            div(class="div-notificacion flex-between") 
-                                div(class="img-user")
-                                    img(src=`${ notificacion.imagen_remitente }`, alt="" class="avatar-notificacion")
-                                div(class="div-mensaje-notificacion ")
-                                    p(class="mensaje-notificacion") 
-                                        strong !{ notificacion.nombre_remitente } 
-                                        span ha comentado tu Publicación : "!{ notificacion.mensaje }..." 
-                                    span(class="fecha-mensaje-notificacion")  !{ notificacion.fecha } 
-                                    br/
-                                    span(class="fecha-mensaje-notificacion") a las !{ notificacion.hora }
+        main.container 
+            .blog
+                each  publicacion in registros
+                    a(href=`/auth/admin/${ usuario }/publicaciones/${ publicacion.url}`) 
+                        div(class="post"  data-id=`${ publicacion.url }`)
+
+                            div(class="div-imagen" data-id=`${ publicacion.url }`)
+                                img(src=`${ publicacion.imagen }`, class="post-img" alt="" width="400" height="200")
+
+                            div(class="post-div-contenido" data-id=`${ publicacion.url }`)
+                                div(class="header-contenido flex-between")
+                                    span(class="post-autor" data-id=`${ publicacion.url }`) Autor: 
+                                        strong !{ publicacion.autor }
+                                    span(class="post-fecha")  !{ publicacion.fecha }
+                                h2(class="post-titulo")  !{ publicacion.titulo }
+                                div(class="post-contenido" data-id=`${ publicacion.url }`) !{ publicacion.contenido[0] }
+                        
+        include ../includes/divNotificaciones.pug 
                                     
-                 
-        nav.menu-phone.ocultar-transition
-                ul(class="flex-column text-align-center menu-lista-phone ")
-                    li
-                        a(href=`/auth/${usuario}/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`)  Crear Publicación
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        div(class="li-notificaciones-mobile") 
-                            span Notificaciones
-                            span(class="notificacion-numero  notificacion-numero-mobile") !{ cantidad_notificaciones }
-         
-        footer(class="flex-around")
-            div Copyright © 2023 - Espacio Luz de Luna 
-            div 
-                div Tel: 26133333 
-                div Cel: 26133334
+        include ../includes/menuPhone.pug 
+
+        include ../includes/footer.pug 
                 
-    script(src="/js/middlewares-front.js" type="module") 
+    script(src="/js/helpers/middlewares-front.js" type="module") 
     script(src="/js/index-front.js" type="module") 

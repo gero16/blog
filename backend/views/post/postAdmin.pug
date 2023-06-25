@@ -16,34 +16,8 @@ html(lang="en")
        
     body 
 
-        
-  
-        header.flex-between 
-            .flex-center 
-                img(class="logo" src="/../img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/auth/admin/${ usuario }/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/admin/${ usuario }/crear-post`)  Crear Publicación
-                    li
-                        a(href="#") Nosotros
-                    li 
-                        a(href=`/auth/perfil/${ usuario }`) Perfil #{ iniName }
-                    li
-                        a(href=`/auth/usuarios/${ usuario }`) Administrar Usuarios
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        div(class="li-btn-notificaciones") 
-                            img(src="/../img/notificacion.png" class="icono-notificacion")
-                            span(class="notificacion-numero notificacion-numero-normal") !{ cantidad_notificaciones }
+        include ../includes/headerAdmin.pug
 
-    
         div(class="container")
             main(class="pagina-post")
                 article(class="contenido-post") 
@@ -70,7 +44,7 @@ html(lang="en")
                         ul(class="texto-post") 
                             -let dataID = 1
                             each  val in contenido
-                                li !{val}
+                                li.li-contenido !{val}
                  
                     .contenedor-comentarios
                         h3 Comentarios (!{ numComentarios })
@@ -80,7 +54,7 @@ html(lang="en")
                                     img(src=`${comentario.imagen_usuario}`)
                                     span.comentario-usuario= comentario.usuario
                                 span.comentario-fecha= comentario.fecha
-                            span.comentario-mensaje= comentario.mensaje
+                            span(class=`comentario-mensaje` id=`${comentario.id}` data-id=`${comentario.id}`) !{comentario.mensaje}
                             div(class="comentario-actions" data-id=comentario.id)
                                 span(class="editar-comentario") Editar
                                 span(class="eliminar-comentario") Eliminar 
@@ -91,7 +65,8 @@ html(lang="en")
                             div( class="avatar-user" style={"background-image":`url(${ usuario_perfil })`, "background-position": "50% 45%", "background-size" : "62px 62px" })
                             label Nombre
                             input(type="text" name="user" id="" class="input-user-name" value=`${usuario}`) 
-                            
+                            label(class="label-admin" style="display: none") !{ admin_post }
+                            input(type="text" name="autor_post" id="" class="autor-publicacion" value=`${admin_post}`  style="display: none")  
 
 
                         .contenido-comentario 
@@ -100,46 +75,13 @@ html(lang="en")
                                     textarea(name="" class="comentario") 
                         button(class="btn-comentario") Publicar Comentario
 
-        // NOTIFICACIONES   
-        div(class="contenedor-notificaciones")
-            div(class="titulo-notificaciones") 
-                h3 Notificaciones
-            ul(class="lista-notificaciones") 
-                each notificacion in notificaciones 
-                    li.li-notificacion
-                        a(href=`/auth/elgero16/publicaciones/${ notificacion.url_publicacion }`)  
-                            div(class="div-notificacion flex-between") 
-                                div(class="img-user")
-                                    img(src=`${ notificacion.imagen_remitente }`, alt="" class="avatar-notificacion")
-                                div(class="div-mensaje-notificacion ")
-                                    p(class="mensaje-notificacion") 
-                                        strong !{ notificacion.nombre_remitente } 
-                                        span ha comentado tu Publicación : "!{ notificacion.mensaje }..." 
-                                    span(class="fecha-mensaje-notificacion")  !{ notificacion.fecha } 
-                                    br/
-                                    span(class="fecha-mensaje-notificacion") a las !{ notificacion.hora }
+        include ../includes/divNotificaciones.pug 
                                     
-                 
-        nav.menu-phone.ocultar-transition
-                ul(class="flex-column text-align-center menu-lista-phone ")
-                    li
-                        a(href=`/auth/${usuario}/index`) Inicio
-                    li
-                        a(class="ref-crear" href=`/auth/${usuario}/crear-post`)  Crear Publicacion
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href=`/auth/${usuario}/perfil`) Perfil #{miniName}
-                    li 
-                        a(class="logout") Cerrar Sesión
-                    li
-                        div(class="li-notificaciones-mobile") 
-                            span Notificaciones
-                            span(class="notificacion-numero  notificacion-numero-mobile") !{ cantidad_notificaciones }  
-                    
+        include ../includes/menuPhone.pug 
+
+        include ../includes/footer.pug
                                
-                    
-   
-    script(src="/js/middlewares-front.js" type="module")  
-    script(src="/../js/post-front.js") 
+
+    script(src="/js/helpers/middlewares-front.js" type="module")  
+    script(src="/../js/post-front.js" type="module") 
                      

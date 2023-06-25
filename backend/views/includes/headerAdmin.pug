@@ -1,0 +1,40 @@
+
+header.flex-between 
+    .flex-center.header-elementos 
+        img(class="logo" src="/img/logito3.jpg")
+        span(class="span-autor") Master Reiki Usui Rose Mary Alvez
+        img( class="img-menu" src="/img/menu.png" alt="Icono menu")
+    
+    nav.menu 
+            ul(class="flex-around menu-lista")
+                li
+                    a(href=`/auth/admin/${ usuario }/index` class="flex-column-center  a-nav") 
+                        img(src="/img/home.png", alt="" class="icon-nav flex-column-center")
+                        span Inicio
+
+                li
+                    a(href=`/auth/admin/${ usuario }/crear-post` class="ref-crear flex-column-center  a-nav")  
+                        img(src="/img/add.png", alt="" class="icon-nav")
+                        span Crear Publicación 
+            
+                li
+                    a(href=`/auth/admin/${ usuario }/perfil` class="flex-column-center  a-nav")  
+                        img(src="/img/perfil.png", alt="" class="icon-nav")
+                        span Perfil
+
+                li
+                    a(href=`/auth/admin/${ usuario }/usuarios` class="flex-column-center a-nav")  
+                        img(src="/img/usuarios.png", alt="" class="icon-nav")
+                        span Administrar Usuarios 
+                li
+                    a(class="logout flex-column-center  a-nav") 
+                        img(src="/img/cerrar-sesion.png", alt="" class="icon-nav")
+                        span Cerrar Sesión
+
+                li
+                    div(class="li-btn-notificaciones") 
+                        img(src="/../img/notificacion.png" class="icono-notificacion")
+                        span(class="notificacion-numero notificacion-numero-normal") !{ cantidad_notificaciones }
+                        
+
+

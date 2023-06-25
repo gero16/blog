@@ -1,14 +1,25 @@
-import { cerrarSesion, getSesion, imgPhoneMenu, logout, menuPhone, sendTokenPlantilla, token } from "./helpers-front.mjs"
+import { cerrarSesion, getSesion, imgPhoneMenu, logout, menuPhone, sendTokenPlantilla, token, userPublic } from "./helpers-front.mjs"
 
 const btnNotificaciones = document.querySelector(".li-btn-notificaciones")
 const modalNotificaciones = document.querySelector(".contenedor-notificaciones")
 const notificacionNumero = document.querySelector(".notificacion-numero")
 const liNotificacion = document.querySelectorAll(".li-notificacion")
 
-if(token) {
-  token.value = getSesion ? getSesion[2] : undefined
+const updateNotificacion = async () => {
+  const settings = {method: 'POST', headers: { Accept: 'application/json','Content-Type': 'application/json'}};
+  try {
+    const fetchResponse = await fetch(`/auth/admin/${ getSesion[1] }/notificaciones`, settings);
+    console.log(fetchResponse)
+      if(fetchResponse.status === 200) {
+        if(!modalNotificaciones.classList.contains("active")) {
+          window.location.reload()
+          document.querySelector(".notificacion-numero").innerHTML = "0"
+        }
+      }
+  } catch (error) {
+    console.log(error)
+  }
 }
-
 if(getSesion) {
 
   if(logout) {
@@ -18,30 +29,8 @@ if(getSesion) {
   if(btnNotificaciones && getSesion[3] === "ADMIN") {
     btnNotificaciones.addEventListener("click", async () => {
       modalNotificaciones.classList.toggle("active")
-        // Hacer un POST para cambiar el estado de las notifaciones de leido a true
-        const data = {
-          notificacion : true,
-        }
 
-        const settings = {
-          method: 'POST',
-          headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-        }};
-
-        try {
-          const fetchResponse = await fetch(`/auth/admin/${ getSesion[1] }/notificaciones`, settings);
-          console.log(fetchResponse)
-            if(fetchResponse.status === 200) {
-              if(!modalNotificaciones.classList.contains("active")) {
-                window.location.reload()
-                document.querySelector(".notificacion-numero").innerHTML = "0"
-              }
-            }
-      } catch (error) {
-        console.log(error)
-      }
+      updateNotificacion()
     })
   }
 
@@ -66,4 +55,7 @@ imgPhoneMenu.addEventListener("click", () => {
   } 
 })
 
-sendTokenPlantilla()
+
+if(!userPublic) {
+  sendTokenPlantilla()
+}

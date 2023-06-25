@@ -17,28 +17,9 @@ html(lang="en")
         title #{titulo}
         
     body 
-        header.flex-between 
-            .flex-center 
-                a(href="/")  
-                    img(class="logo" src="/../img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href=`/auth/${usuario}/index`) Inicio
-                    li 
-                        a(href=`/auth/perfil/${ usuario }`) Perfil #{ iniName }
-                    li
-                        a(href="#") Nosotros
-                    li 
-                        a(href="#") Bienvenido #{name}
-                    li 
-                        a(class="logout") Cerrar Sesión
-  
-                     
     
+        include ../includes/headerUser.pug
+  
         div(class="container")
             h1 Bienvenido a su Perfil
 
@@ -103,7 +84,7 @@ html(lang="en")
                         a(class="logout") Cerrar Sesión
                   
 
-        script(src="/../js/middlewares-front.js")           
+        script(src="/../js/helpers/middlewares-front.js")           
         script(src="/../js/perfil-front.js")  
                     
 

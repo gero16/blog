@@ -1,6 +1,6 @@
 export const agregar = document.querySelector(`[data-id="agregar"]`);
 
-// inputs del Formulario para crear el POST
+// Inputs del Formulario para crear el POST
 export const formulario = document.querySelector(".formulario");
 export const inputFoto = document.querySelector("#imagen-post");
 export const inputContenido = document.querySelector("#contenido-post");
@@ -10,7 +10,7 @@ export const inputFecha = document.querySelector("#fecha-post");
 export const enviarPost = document.querySelector("#enviar-post");
 export const terminarContenido = document.querySelector("#terminar");
 
-// etiquetas donde previsualizar del Contenido
+// Etiquetas donde previsualizar del Contenido
 export const preTitulo = document.querySelector(".pre-titulo");
 export const preAutor = document.querySelector(".pre-autor");
 export let preContenido = document.querySelector(".pre-contenido");
@@ -32,6 +32,20 @@ export const menuPhone = document.querySelector(".ocultar-transition")
 
 // SESION
 export const getSesion = JSON.parse(localStorage.getItem('sesion'));
+export const userPublic = JSON.parse(localStorage.getItem("imagen"));
+
+
+export const crearMensaje = (msg, container) => {
+  const mensaje = document.createElement("span")
+  mensaje.classList.add("alert")
+  mensaje.textContent = msg
+  document.querySelector(`${container}`).append(mensaje)
+
+  setTimeout(() => {
+    mensaje.remove()
+  }, 6000)
+  
+}
 
 export const sendTokenPlantilla = async () => {
   
@@ -58,6 +72,7 @@ export const sendTokenPlantilla = async () => {
 }
 
 export const logout = document.querySelector(".logout")
+
 export const cerrarSesion = async (e) => {
   e.preventDefault()   
 
@@ -118,14 +133,9 @@ export const agregarParrafo = () => {
     setTimeout(() => {  
       console.log(e.target.parentNode)
       e.target.parentNode.remove()
-    }, 1300);
+    }, 2000);
   })
 
-
-inputParrafo.addEventListener("change", () => {
-  if(inputTitulo.value !== "" && inputFoto.value !== "")
-    enviarPost.disabled = false
-  })
 }
 
 export const agregarSubtitulo = () => {
@@ -204,4 +214,11 @@ let inputsCrear = document.querySelectorAll(".input-crear")
       inputSubtitulo.classList.remove("vacio")
     }
   });
+
+  const inputParrafo = document.querySelector(".parrafos-post")
+  
+  if(inputTitulo.value === "" ) crearMensaje("Tiene que agregar un titulo!", ".div-alert")
+  else if(inputFoto.value === "") crearMensaje("Tiene que agregar una imagen!", ".div-alert")
+  else if(!inputParrafo || inputParrafo.value === "") crearMensaje("Tiene que agregar un parrafo!", ".div-alert")
+  else if(inputTitulo.value !== "" && inputFoto.value !== "" && inputParrafo.value !== "") enviarPost.disabled = false
 }

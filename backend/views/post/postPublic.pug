@@ -13,25 +13,8 @@ html(lang="en")
         link(rel="icon", href="/img/luna.png", type="image/x-icon")
         title Publicaciones - #{titulo}
     body 
-        header.flex-between 
-            .flex-center 
-                img(class="logo" src="/../img/logito3.jpg")
-                span(class="span-autor") Master Reiki Usui Rose Mary Alvez
-                img( class="img-menu" src="/../img/menu.png" alt="Icono menu")
-            
-            nav.menu 
-                ul(class="flex-around menu-lista")
-                    li
-                        a(href="/") Inicio
-                    li
-                        a(href="") Contacto
-                    li
-                        a(href="#") Nosotros
-                    li
-                        a(href="/login.html") Iniciar Sesion
-                    li
-                        a(href="/registro.html") Registrarse
     
+        include ../includes/headerPublic.pug
         
         div(class="container")
 
@@ -70,6 +53,8 @@ html(lang="en")
                             label Nombre
                             input(type="text" name="user" id="" class="input-user-name") 
                             label(class="label-admin" style="display: none") !{ admin_post }
+                            input(type="text" name="autor_post" id="" class="autor-publicacion" value=`${admin_post}`  style="display: none")  
+
 
 
                         .contenido-comentario 
@@ -78,6 +63,6 @@ html(lang="en")
                                     textarea(name="" class="comentario") 
                         button(class="btn-comentario") Publicar Comentario
                           
-    script(src="/js/middlewares-front.js" type="module")                
-    script(src="/../js/post-front.js") 
+    script(src="/js/helpers/middlewares-front.js" type="module")                
+    script(src="/../js/post-front.js" type="module") 
                      

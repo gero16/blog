@@ -1,4 +1,4 @@
-import { getSesion } from "./helpers-front.mjs";
+import { getSesion } from "./helpers/helpers-front.mjs";
 
 const imagenes = document.querySelectorAll(".post-img")
 
@@ -42,37 +42,9 @@ imgMin.forEach(imagen => {
   })
 });
 
-flechaDer.addEventListener("click", () => {
-  if(posicionActual === 4) {
-    console.log(posicionActual)
-    posicionActual = 1;
-    imgMax.src = `/img/foto${ posicionActual}.jpg`
-  } else {
-    console.log(posicionActual)
-    posicionActual++;
-    imgMax.src = `/img/foto${ posicionActual }.jpg`
 
-}
-})
 
-flechaIzq.addEventListener("click", () => {
-  if(posicionActual === 1) {
-    console.log(posicionActual)
-    posicionActual = 4;
-    imgMax.src = `/img/foto${ posicionActual}.jpg`
-  } else {
-    posicionActual--;
-    console.log(posicionActual)
-    imgMax.src = `/img/foto${ posicionActual }.jpg`
-}
-})
 
-seleccionImagen.addEventListener("click", (e) => {
-  if(!e.target.classList.contains("flechas")) {
-    seleccionImagen.classList.toggle("mostrar-imagen")
-    seleccionImagen.classList.toggle("ocultar-imagen")
-  }
-})
 
 window.onload = async function (e) {
   e.preventDefault()
