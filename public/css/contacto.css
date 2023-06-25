@@ -1,5 +1,6 @@
-body {
-  
+.titulo-contacto  {
+    color: #505050;
+    text-align: center;
 }
 .contacto-formulario {
     margin: 10px auto;
@@ -15,6 +16,10 @@ h1 {
 
 li{
     margin: 10px 0px;
+}
+
+label {
+    color: #414141;
 }
 
 input {

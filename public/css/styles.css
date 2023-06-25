@@ -1,9 +1,21 @@
+:root {
+    --header-color: #100540;
+  }
+  
+  footer{
+    font-size: x-small;
+    background-color: rgb(233, 240, 245);
+    height: 30px;
+    padding: 30px 0px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 body {
     width: 100vw;
     height: 100vh;
-    
     overflow-x: hidden;
-    
     font-family: 'Raleway', sans-serif;
     position: relative;
     box-sizing: border-box;
@@ -31,22 +43,12 @@ body, h1, h2, h3, ul, li, p, a {
 }
 
 header {
-    background-color: #100540;
+    background-color: var(--header-color);
     color: white;
     height: 100px;
     align-items: center;
 }
 
-footer{
-    font-size: x-small;
-    background-color: rgb(233, 240, 245);
-    height: 30px;
-    padding: 30px 0px;
-    position: absolute;
-    bottom: -10;
-    width: 100%;
- 
-}
 
 .color-principal {
     background-color: #100540;
@@ -111,11 +113,14 @@ footer{
 .display-none {
     display: none;
 }
+
 .text-align-center{
     text-align: center;
 }
+
+
 .span-autor {
-    font-size: 12px;
+    font-size: smaller;
     margin: 0px 0px 0px 0px;
 }
 
@@ -125,7 +130,7 @@ footer{
 }
 
 .logo{
-    height: 75px;
+    height: 85px;
     margin: 0px 0px 0px 20px;
 }
 
@@ -142,10 +147,19 @@ footer{
     font-size: large;
     align-items: flex-end;  
     margin-right: 20px;
+    gap: 25px;
 }
 
+.icon-nav {
+    width: 25px;
+}
+
+.a-nav {
+    gap: 2px;
+    text-align: center;
+}
 .menu-lista li {
-    margin: 45px 15px;
+
 }
 
 .menu-lista a {
@@ -195,7 +209,8 @@ article {
 }
 
 .icono-notificacion {
-    width: 28px;
+    width: 32px;
+    margin-left: 10px;
 }
 
 .notificacion-numero {
@@ -338,11 +353,11 @@ article {
     text-align: center;
     font-size: 12px;
     color: rgb(95, 33, 33);
-    background-color: #eeaab0;
+    background-color: #eeaab0; 
     border-radius: 5px;
     padding: 15px;
-
 }
+
 
 @media (max-width: 430px) {
     .menu {

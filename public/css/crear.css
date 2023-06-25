@@ -86,7 +86,7 @@ body {
 
 
 .parrafos-post {
-    height: 100px;
+    height: 130px;
     margin-bottom: 5px;
 }
 
@@ -240,9 +240,13 @@ body {
     min-height: 120px;
     margin: 5px 0px;
 }
-textarea {
-    height: 70px!important;
+
+
+.campos-obligatorios {
+    font-size: 14px;
 }
+
+
 @media (min-width: 1024px) {
     .span-foto {
         margin: 0px 5px 0px 5px;
