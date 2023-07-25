@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken")
-
 const colors = require('colors');
-const { Usuario } = require("../models/model");
+const { Usuario, Post } = require("../models/model");
 
 
 const checkEmptyData = (req, res, next) =>{
@@ -12,7 +11,7 @@ const checkEmptyData = (req, res, next) =>{
         console.log("Empty data")
         const err = new Error("Ni el correo ni la contraseña pueden estar vacios")
         res.status(501).json({msg: err.message})  
-
+        return
      } else {
         next();
      }
@@ -53,7 +52,6 @@ const checkAuth = async (req, res, next) => {
     next();
 }
 
-
 const verifyToken = async (req, res, next) => {
         const user = req.params.user || req.params.admin
         const usuario = await Usuario.findOne({ where: { usuario : user } })
@@ -63,9 +61,6 @@ const verifyToken = async (req, res, next) => {
         *********/
 
         const token = req.header('auth-token') || req.body.token || usuario.token_sesion
-
-        console.log(colors.bgBlue(req.header('auth-token')))
-        console.log(colors.bgRed(req.body.token))
         console.log(colors.bgWhite(token))
   
         if (!token) {
@@ -94,8 +89,6 @@ const verifyToken = async (req, res, next) => {
               })
         }
 }
-
-
 
 const datosExistentes = async (req, res, next) => {
     try {
@@ -129,11 +122,124 @@ const dateActual = () => {
     return { fecha, actual }
 }
 
+const validarTitulo = async (req, res, next) => {
+    const { titulo } = req.body;
+    let tituloURL = titulo.toLowerCase().replaceAll(" ","-")
+    const existePost = await Post.findOne({where : {url : tituloURL}});
+    if(existePost) {
+        return res.status(400).render("error", {
+          error: 400,
+          mensaje: "Ya existe una Publicación con el mismo título"
+        })
+    }
+
+    next()
+}
+
+const validarPublicacionEditar = async (req, res, next) => {
+    let id = req.body.id
+    
+    let { titulo, contenido } = req.body;
+    if(!titulo) {
+        res.status(400).render("error", {
+          error: 400,
+          mensaje: "Tiene que haber un titulo"
+        })
+        return
+      }
+    if(!contenido) {
+        res.status(400).render("error", {
+          error: 400,
+          mensaje: "Tiene que haber un parrafo"
+        })
+        return
+    }
+
+    if(!req.file && post.imagen) {
+        return res.status(400).render("error", {
+            error: 400,
+            mensaje: "Su publicación debe contener una imagen"
+          })
+    }
+    
+    let post = await Post.findOne({ where  : {  id }})
+    req.middleware = post
+    next()
+}
+
+const validarPublicacionCrear = (req, res , next) => {
+    
+    let { titulo, contenido } = req.body;
+    if(!titulo) {
+        res.status(400).render("error", {
+          error: 400,
+          mensaje: "Tiene que haber un titulo"
+        })
+        return
+      }
+    if(!contenido) {
+        res.status(400).render("error", {
+          error: 400,
+          mensaje: "Tiene que haber un parrafo"
+        })
+        return
+    }
+
+    if(!req.file) {
+        return res.status(400).render("error", {
+            error: 400,
+            mensaje: "Su publicación debe contener una imagen"
+          })
+    }
+    
+    next()
+}
+
+const validarLogin = async (req, res, next) => {
+    const { correo, password } = req.body;
+    console.log(colors.bgGreen(req.body))
+    try {
+        const usuario = await Usuario.findOne({where : {correo: correo}})
+        console.log(colors.bgGreen(usuario))
+     
+              // console.log(colors.bgBlue(usuario.id))
+            if ( !usuario ) {
+                return res.status(400).json({
+                    msg: 'El usuario no es correcto'
+                });
+            }
+    
+            if ( !usuario.confirmado ) {
+                return res.status(400).json({
+                    msg: 'El usuario no fue confirmado'
+                });
+            }
+    
+            // SI el usuario está activo
+            if ( !usuario.estado ) {
+                return res.status(400).json({
+                    msg: 'Su cuenta fue eliminada'
+                });
+            }
+    
+            req.middleware = usuario
+            next()
+    } catch (error) {
+        console.log(error)
+        return;
+    }
+}
+
+
 
 module.exports = {
     checkAuth,
     verifyToken,
     checkEmptyData,
     datosExistentes,
-    dateActual
+    dateActual,
+    validarPublicacionCrear,
+    validarPublicacionEditar,
+    validarTitulo,
+    validarLogin
 } 

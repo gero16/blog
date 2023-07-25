@@ -34,6 +34,9 @@ export const menuPhone = document.querySelector(".ocultar-transition")
 export const getSesion = JSON.parse(localStorage.getItem('sesion'));
 export const userPublic = JSON.parse(localStorage.getItem("imagen"));
 
+export const deshabilitarBtnFinalizar = () => {
+  enviarPost.disabled = true
+}
 
 export const crearMensaje = (msg, container) => {
   const mensaje = document.createElement("span")
@@ -126,6 +129,8 @@ export const agregarParrafo = () => {
     liContenedor.className = "active"
   }, 300);
 
+  
+  enviarPost.disabled = false
 
   btnQuitar.addEventListener("click", (e) => {
     liContenedor.className = "inactive"
@@ -222,3 +227,4 @@ let inputsCrear = document.querySelectorAll(".input-crear")
   else if(!inputParrafo || inputParrafo.value === "") crearMensaje("Tiene que agregar un parrafo!", ".div-alert")
   else if(inputTitulo.value !== "" && inputFoto.value !== "" && inputParrafo.value !== "") enviarPost.disabled = false
 }
+

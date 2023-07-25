@@ -26,8 +26,11 @@ html(lang="en")
                     img(src="/../img/400.webp", alt="imagen del error 400", srcset="") 
                     h2 !{ mensaje }
 
-                span 
-                    a(href="/") Volver al Inicio
+                span
+                    if volver === "atras"
+                        a(href="/") Volver a Atras
+                    if volver === "inicio" 
+                        a(href="/") Volver al Inicio
                    
         div.container
             .flex-center

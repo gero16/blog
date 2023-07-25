@@ -1,11 +1,6 @@
 import { getSesion } from "./helpers/helpers-front.mjs";
 
 const imagenes = document.querySelectorAll(".post-img")
-
-let posicionActual = 1;
-const flechaDer = document.querySelector(".flecha-der")
-const flechaIzq = document.querySelector(".flecha-izq")
-
 const imgMax = document.querySelector(".imagen-galeria-max")
 const seleccionImagen = document.querySelector(".seleccion-imagen")
 const imgMin = document.querySelectorAll(".imagen-galeria-mini")
@@ -41,9 +36,6 @@ imgMin.forEach(imagen => {
     }
   })
 });
-
-
-
 
 
 window.onload = async function (e) {

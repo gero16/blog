@@ -1,12 +1,9 @@
 const { Router } = require('express');
 
-const { loginUsuario, logoutUsuario, crearUsuario, confirmarCuenta, getUsuarios, validateToken, eliminarUsuario, contacto } = require("../../controllers/auth/usuarios-auth");
-const { checkEmptyData, datosExistentes, verifyToken } = require("../../middleware/auth-middleware");
+const { loginUsuario, logoutUsuario, crearUsuario, confirmarCuenta, eliminarUsuario, contacto } = require("../../controllers/auth/usuarios-auth");
+const { checkEmptyData, datosExistentes } = require("../../middleware/auth-middleware");
 
 const router = Router();
-
-
-router.post('/login', checkEmptyData, loginUsuario);
 
 router.post("/:user/logout", logoutUsuario)
 

@@ -4,7 +4,7 @@ const colors = require("colors")
 const path = require("path");
 const multer = require("multer");
 
-const authRoutesPublic = require("./backend/routes/public/auth-routes")
+const authRoutesPublic = require("./backend/routes/public/authPublic-routes")
 const authToken = require("./backend/routes/auth/token-routes")
 const authPost = require("./backend/routes/auth/post-routes")
 const authPlantillas = require("./backend/routes/auth/plantillas-routes")

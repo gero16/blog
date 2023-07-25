@@ -15,11 +15,17 @@ const esAdmin = async (req, res, next) => {
       } else {
         console.log("No tiene permisos")
         res.status(401).render("error", {
-          error: 401
+          error: 401,
+          volver: "inicio"
       })
     }
     } catch (error) {
       console.log(error)
+      res.status(401).render("error", {
+        error: 401,
+        mensaje: "No tiene autorización para estar aqui",
+        volver: "inicio"
+    })
     }
   }
 
@@ -29,12 +35,23 @@ const validToken = (req, res, next) => {
 
 const rutaInexistente = (req, res) => {
   res.status(401).render("error", {
-    error: 404
+    error: 404,
+    volver: "inicio"
 })
 }
+
+
+class ValidationErrorLogin extends Error {
+  constructor (message) {
+    super(message)
+    this.name = "ValidationError"
+  }
+}
+
 
 module.exports = {
     esAdmin,
     validToken,
-    rutaInexistente
+    rutaInexistente,
+    ValidationErrorLogin
 }

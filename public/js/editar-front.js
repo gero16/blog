@@ -1,5 +1,7 @@
-import { agregar, agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, btnPrevisualizarCrear, divAgregarInputs, enviarPost, formulario, inputAutor, inputContenido, 
-  inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, terminarContenido } from "./helpers-front.mjs";
+import { agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, 
+         crearMensaje, enviarPost,  inputAutor, inputFecha, inputFoto, inputTitulo, 
+         preAutor, preContenido, preFecha, preFoto, preTitulo } 
+from "./helpers/helpers-front.mjs";
 
 let texto = "";
 
@@ -23,17 +25,14 @@ inputFoto.addEventListener("change", (e) => {
   preFoto.src = objectURL;
 });
 
-const arrayEtiquetas = []
-
 
 // CAPAZ QUE PRECISO UN MODO EDICION = FALSE, en crear, para tener en cuenta los editar mientras creo, que afectarian solo a la previsualizacion
-
 const btnPrevisualizarEditar = document.querySelector("#agregar-texto-editar")
-
 btnPrevisualizarEditar.addEventListener("click", () => {
   const inputSubtitulo = document.querySelector(".subtitulos-post")
   let elementosEditar = document.querySelectorAll(".editar")
   let elementosVacios = document.querySelectorAll(".vacio")
+
   elementosEditar.forEach(element => {
     if (element.name === "titulo") {
       texto = inputTitulo.value;
@@ -47,8 +46,7 @@ btnPrevisualizarEditar.addEventListener("click", () => {
       preFecha.textContent = texto;
     }
   })
-  
-  console.log(elementosVacios)
+
   elementosVacios.forEach(element => {
     if (element.classList.contains("vacio") && element.classList.contains("parrafos-post")) {
         element.value = `<p>       ${element.value}       </p>`
@@ -60,42 +58,50 @@ btnPrevisualizarEditar.addEventListener("click", () => {
       element.classList.remove("vacio")
     }
   })
+  
+  const inputParrafo = document.querySelector(".parrafos-post")
+  // Evaluo cuando estoy creando o editando
+  if(inputTitulo.value === "" ) crearMensaje("Tiene que agregar un titulo!", ".div-alert")
+  else if(preFoto.src ==="" && inputFoto.value === "") crearMensaje("Tiene que agregar una imagen!", ".div-alert")
+  else if(!inputParrafo || inputParrafo.value === "") crearMensaje("Tiene que agregar un parrafo!", ".div-alert")
+  else if(inputTitulo.value !== "" && inputFoto.value !== "" && inputParrafo.value !== "") enviarPost.disabled = false
 })
- 
 
-const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
-btnQuitarContenido.forEach(elementoQuitar => {
-  elementoQuitar.addEventListener("click", (e) => {
-    e.target.parentNode.remove()
-  })
-});
+// Evaluo sobre todo cuando estoy editando
+inputTitulo.addEventListener("change", (e) =>{
+  if(e.target.value === "") enviarPost.disabled = true
+})
 
-let inputsContenidoPost = document.querySelectorAll(".inputs-contenido-post")
-
-/*
-// Solo cambia el PREVIEW
-inputsContenidoPost.forEach(element => {
-  element.addEventListener("change", () => {
-    //const index = fruits.findIndex(fruit => fruit === "blueberries");
-    console.log(element)
-    
-   const cambiar = document.querySelector(`[data-id=${element.name}]`)
-   console.log(cambiar)
-   cambiar.innerHTML = element.value;
-  })
-});
-*/
-
-
+// Tambien lo tengo como inputParrafo
+const divContenido = document.querySelector(".div-li-contenido")
 const btnsQuitar = document.querySelectorAll(".btn-quitar-precargado")
 btnsQuitar.forEach(quitar => {
   quitar.addEventListener("click", (e) => {
+    console.log("hola")
     e.target.parentNode.className = "inactive"
-    setTimeout(() => {  
-      e.target.parentNode.remove()
-    }, 1300);
+
+    const deshabilitarFinalizar = () => {
+      console.log(divContenido.children.length === 0)
+      if(divContenido.children.length === 0) enviarPost.disabled = true
+      return
+    }
+
+    let promise = new Promise(function(resolve, reject) {
+      setTimeout(() => resolve(e.target.parentNode.remove()), 1300);
+    })
+    promise.then(() => deshabilitarFinalizar())
   })
 });
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,37 +1,20 @@
-
-let autorHTML = document.querySelector(".strong-autor-post");
-let textoHTML = document.querySelector(".texto-post");
-let tituloHTML = document.querySelector(".titulo-post")
-let subtituloHTML = document.querySelector(".subtitulo-post");
-let imagenHTML = document.querySelector(".foto-post");
-const btnEditar = document.querySelector(".editar")
-const iconosEditar = document.querySelectorAll(".ico-editar")
-
-
-const inputs = document.querySelectorAll(".inputs")
-const btnActualizar = document.querySelector(".actualizar")
-const btnGuardar = document.querySelectorAll(".guardar")
+import { getSesion, userPublic } from "./helpers/helpers-front.mjs"
 
 const eliminarComentario = document.querySelectorAll(".eliminar-comentario")
 const editarComentario = document.querySelectorAll(".editar-comentario")
 
-let actualizarHTML = "";
-let etiquetaContenido = [];
-
-const url = window.location.href;
-
 const inputUsuario = document.querySelector(".input-user-name")
 const inputComentario = document.querySelector(".comentario")
+const inputAutor = document.querySelector(".autor-publicacion")
+
 const btnAddComentario = document.querySelector(".btn-comentario")
 const seccionComentarios = document.querySelector(".seccion-comentarios")
-const divUsuarioComentario = document.querySelector(".img-user")
 
 const urlPost = window.location.pathname
 const tituloP = urlPost.split("/")
 
 const imgUser = document.querySelector(".avatar-user")
-const userPublic = JSON.parse(localStorage.getItem("imagen"));
-console.log(userPublic)
+
 
 const crearMensaje = (msg, anterior) => {
    const mensaje = document.createElement("span")
@@ -45,21 +28,42 @@ const crearMensaje = (msg, anterior) => {
 } 
 
 const urlActual = window.location.href
-
 const adminPost = document.querySelector(".label-admin")
 
-btnAddComentario.addEventListener("click", async () => {
-   const sesion = JSON.parse(localStorage.getItem('sesion'));
-   console.log(imgUser.src)
-   const data = {
-      usuario: inputUsuario.value,
-      mensaje: inputComentario.value,
-      url_publicacion: sesion ? tituloP[4] : tituloP[2],
-      editar: false,
-      imagen_usuario: userPublic ? `/img/avatar${userPublic[1]}.png` : imgUser.src,
+const postComentario = async (url, data) => {
+   try {
+      const fetchResponse = await (fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+               "Content-Type": "application/json",
+            },
+         })
+       )
+       console.log(fetchResponse)
+       if(fetchResponse.ok === true) {
+         console.log("Mensaje agregado Correctamente!")
+         window.location.reload()
+       }
+       
+   } catch (error) {
+      console.log(error)
    }
-   console.log(data)
-   let url = `${urlActual}/agregar-comentario`
+}
+
+btnAddComentario.addEventListener("click", async () => {
+
+   const data = {
+              usuario: inputUsuario.value,
+              mensaje: inputComentario.value,
+          autor_post : inputAutor.value,
+      url_publicacion: getSesion ? tituloP[4] : tituloP[2],
+               editar: false,
+       imagen_usuario: userPublic ? `/img/avatar${userPublic[1]}.png` : imgUser.src,
+   }
+
+   let urlAgregarComentario = `${urlActual}/agregar-comentario`
+   let urlEditarComentario =`${urlActual}/editar-comentario`
 
    if(inputComentario.value.length > 249) {
       console.log("Su mensaje es demasaido largo")
@@ -68,80 +72,45 @@ btnAddComentario.addEventListener("click", async () => {
    }
    
    const comentarioActions = document.querySelector(".comentario-actions")
+
    if(!btnAddComentario.classList.contains("editar-coment")){
-      try {
-         const fetchResponse = await (fetch(url, {
-               method: "POST",
-               body: JSON.stringify(data),
-               headers: {
-                  "Content-Type": "application/json",
-               },
-            })
-          )
-          console.log(fetchResponse)
-          if(fetchResponse.ok === true) {
-            console.log("Mensaje agregado Correctamente!")
-            window.location.reload()
-          }
-          
-      } catch (error) {
-         console.log(error)
-      }
+      postComentario(urlAgregarComentario, data)
+
    } else {
       const idActualizar = comentarioActions.dataset.id;
-    
       const data = {
-         usuario: inputUsuario.value,
-         autor_post: adminPost.textContent,
-         mensaje: inputComentario.value,
-         editar: true,
-         id_comentario: idActualizar,
-         imagen_usuario: imgUser.src
+                usuario: inputUsuario.value,
+             autor_post: adminPost.textContent,
+                mensaje: inputComentario.value,
+             autor_post: inputAutor.value,
+                 editar: true,
+          id_comentario: idActualizar,
+         imagen_usuario: imgUser.src,
       }
-
-      try {
-         const fetchResponse = await (fetch(url, {
-               method: "POST",
-               body: JSON.stringify(data),
-               headers: {
-                  "Content-Type": "application/json",
-               },
-            })
-          )
-          console.log(fetchResponse)
-          if(fetchResponse.status === 200) {
-            console.log("Mensaje Actualizado Correctamente!")
-
-            window.location.reload()
-          }
-          
-      } catch (error) {
-         console.log(error)
-      }
+      postComentario(urlEditarComentario, data)
    }
 })
 
 
-const sesion = JSON.parse(localStorage.getItem('sesion'));
-const admin = sesion ? sesion[1] : null
-console.log(admin)
-if(admin) {
+
+// Eliminar comentario
+if(getSesion && getSesion[3] === "ADMIN") {
    eliminarComentario.forEach(comentario => {
       comentario.addEventListener("click", () => {
          console.log(comentario.parentElement.dataset.id)
          const idComentario = comentario.parentElement.dataset.id
       
-         const settings = {
-            method: 'POST',
+         const settings = { 
+            method: 'POST', 
             headers: {
-              Accept: 'application/json',
-                'Content-Type': 'application/json',
-              }
-            };
-            
+               Accept: 'application/json', 'Content-Type': 'application/json',
+            }
+         }
+      
          const mandarInfo = async () => {
+            let url = `/auth/admin/${ getSesion[1] }/publicaciones/${ tituloP[4] }/eliminar-comentario/${ idComentario }`
             try {
-               const fetchResponse = await fetch(`/auth/${ admin }/publicaciones/${ tituloP[4] }/eliminar-comentario/${ idComentario }`, settings);
+               const fetchResponse = await fetch(url, settings);
                 if(fetchResponse.status === 200) {
                   console.log("Mensaje eliminado Correctamente!")
                   window.location.reload()
@@ -156,26 +125,22 @@ if(admin) {
    });
 }
 
-if(admin) {
+// Editar Comentario
+if(getSesion && getSesion[3] === "ADMIN") {
    editarComentario.forEach(comentario => {
-      const sesion = JSON.parse(localStorage.getItem('sesion'));
-      const admin = sesion[1]
-   
       comentario.addEventListener("click", () => {
          const idComentario = comentario.parentElement.dataset.id
-         console.log(comentario.parentNode.parentElement.children[2])
-         inputComentario.value = comentario.parentNode.parentElement.children[2].textContent
-         btnAddComentario.classList.add("editar-coment")
+         const mensajeComentario = comentario.parentElement.previousElementSibling
+         
+         if(idComentario == mensajeComentario.dataset.id){
+            inputComentario.value = mensajeComentario.textContent
+            btnAddComentario.classList.add("editar-coment")
+         }
+        
       })   
    });
 }
 
-window.onload = async function () {
-   const sesion = JSON.parse(localStorage.getItem('sesion'));
-   if(sesion) {
-      const [user, email, token, rol] = sesion;
-   }
-}
 
 if(userPublic) {
    console.log("User public")

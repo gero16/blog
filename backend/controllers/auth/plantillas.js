@@ -43,9 +43,8 @@ const indexUserPlantilla = async (req, res) => {
       correo: user.correo,
       name: user.nombre,
       rol: user.rol,
-      titulo,
+      titulo : titulo,
       })
-
   }
     
   } catch (error) {
@@ -145,7 +144,7 @@ const eliminarUsuarioPlantilla = async (req, res) => {
 
 
 module.exports = {
-  indexUserPlantilla,
+    indexUserPlantilla,
     perfilPlantilla,
     userPostPlantilla,
     errorPlantilla,

@@ -19,9 +19,7 @@ const indexAdminPlantilla = async (req, res) => {
           ['id', 'DESC'],
       ],
     });
-
-
-      console.log(colors.bgBlue(registros))
+    
       const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
 
       const notificacionesOrdenadas = notificaciones.reverse()
@@ -31,7 +29,6 @@ const indexAdminPlantilla = async (req, res) => {
       
       const reduceName = user.nombre.split(" ")
       const miniName = reduceName[0]
-         
       res.render("index/indexAdmin", {
             registros: registros,
             miniName: miniName,
@@ -48,6 +45,7 @@ const indexAdminPlantilla = async (req, res) => {
       res.status(400).render("error", {
         mensaje: "Ha ocurrido un error al renderizar la pagina principal",
         error: 400,
+        volver: "inicio"
       })
     } 
 }
@@ -78,6 +76,7 @@ const perfilAdmin = async (req, res) => {
       res.status(400).render("error", {
         mensaje: "Ha ocurrido un error al renderizar el perfil",
         error: 400,
+        volver: "inicio"
       })
     }
   
@@ -111,6 +110,7 @@ const crearPostPlantilla = async (req, res) => {
       res.status(400).render("error", {
         mensaje: "Ha ocurrido un error al renderizar el perfil",
         error: 400,
+        volver: "inicio",
       })
     }
 }
@@ -121,8 +121,7 @@ const adminPostPlantilla = async (req, res) => {
     try {
         
       const datos = await Post.findOne({ where: { url }})
-      console.log(colors.bgMagenta(datos))
-  
+     
       const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : usuario }});
        const notificacionesOrdenadas = notificaciones.reverse()
       const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
@@ -146,23 +145,23 @@ const adminPostPlantilla = async (req, res) => {
         const date = [separar[2], separar[1], separar[0]]
         const newDate = date.join("-")
   
-            res.render("post/postAdmin", {
-              id: id,
-              usuario,
-              url : url,
-              titulo: titulo,
-              miniName: miniName,
-              contenido: contenido,
-              imagen: imagen,
-              autor: autor,
-              fecha: newDate,
-              comentarios: comentarios,
-              usuario_perfil: user.imagen,
-              numComentarios: numComentarios,
-              notificaciones: notificacionesOrdenadas,
-              notificacion_sinleer,
-              cantidad_notificaciones : notificacion_sinleer.length
-          })
+        res.render("post/postAdmin", {
+          id: id,
+          usuario,
+          url : url,
+          titulo: titulo,
+          miniName: miniName,
+          contenido: contenido,
+          imagen: imagen,
+          autor: autor,
+          fecha: newDate,
+          comentarios: comentarios,
+          usuario_perfil: user.imagen,
+          numComentarios: numComentarios,
+          notificaciones: notificacionesOrdenadas,
+          notificacion_sinleer,
+          cantidad_notificaciones : notificacion_sinleer.length
+        })
       }
      
   } catch (error) {
@@ -170,6 +169,7 @@ const adminPostPlantilla = async (req, res) => {
     res.status(400).render("error", {
       mensaje: "Ha ocurrido un error al renderizar el perfil",
       error: 400,
+      volver: "inicio",
     })
   } 
 } 
@@ -199,6 +199,7 @@ const eliminarPlantilla = async (req, res) => {
     res.status(400).render("error", {
       mensaje: "Ha ocurrido un error al renderizar la plantilla",
       error: 400,
+      volver: "inicio",
     })
   }
 }
@@ -210,108 +211,70 @@ const editarPostPlantilla = async (req, res) => {
     const title = req.params.titulo
 
     const data = await Post.findOne({where: { url: title }})
-
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : user }});
     const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
-
-    let orden = {
-      primer: "vacio",
-      segundo: "vacio",
-      tercero: "vacio",
-      cuarto: "vacio",
-      quinto: "vacio",
-      sexto: "vacio",
-      septimo: "vacio",
-      octavo: "vacio",
-      noveno: "vacio",
-      decimo: "vacio",
-      decimoPrimero: "vacio",
-      decimoSegundo: "vacio"
-    }
     
     if(data){
       const {id, titulo, contenido, imagen, autor, fecha} = data;
-    
-      const newOrden = {}
-
-      let valores = Object.values(orden)
-      let keys = Object.keys(orden)
-      
-      for(let i=0; i< valores.length; i++){
-      
-        if(valores[i] === "vacio" && contenido[i]) {
-          let key = keys[i]
-          newOrden[key] = contenido[i]
-          //return nuevoContenido
-        }
-        
-    }
-    
-    if(imagen){
-      const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
-      // Puede que no la haya subido a cloudinary
-        if(image[1]){
-          const img = image[1].split("/");
-          res.render("editar", {
-            id: id,
-            url: title,
-            titulo: titulo,
-            contenido: contenido,
-            imagenMin: img[1] || null,
-            imagen: imagen,
-            usuario: user,
-            autor: autor,
-            fecha: fecha,
-            nuevoContenido: newOrden,
-            notificaciones,
-            notificacion_sinleer,
-            cantidad_notificaciones : notificacion_sinleer.length
-          })
-        } else {
-          res.render("editar", {
-            id: id,
-            url: title,
-            titulo: titulo,
-            contenido: contenido,
-            imagenMin: "imagen",
-            imagen: imagen,
-            usuario: user,
-            autor: autor,
-            fecha: fecha,
-            nuevoContenido: newOrden,
-            notificaciones,
-            notificacion_sinleer,
-            cantidad_notificaciones : notificacion_sinleer.length
-          })
-        }
+      if(imagen){
+        const image = imagen.split("https://res.cloudinary.com/geronicola/image/upload/")
+        console.log(colors.bgYellow(image))
+   
+        const img = image[1].split("/");
+        res.render("editar", {
+          id: id,
+          url: title,
+          titulo: titulo,
+          contenido: contenido,
+          imagenMin: img[1] || null,
+          imagen: imagen,
+          usuario: user,
+          autor: autor,
+          fecha: fecha,
+          notificaciones,
+          notificacion_sinleer,
+          cantidad_notificaciones : notificacion_sinleer.length
+        })  
     } 
-  }   
+  }
+  
   } catch (error) {
-      console.log(colors.red(error))
       res.status(400).render("error", {
         mensaje: "Ha ocurrido un error",
         error: 400,
+        volver: "inicio",
       })
   }
 }
   
 const usuariosPlantilla = async (req, res) => {
-  console.log(colors.bgCyan("hola"))
   const { admin } = req.params
   try {
     const usuarios = await Usuario.findAll()
     const user = await Usuario.findOne({where : { usuario : admin}})
+
+    const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
+    const notificacionesOrdenadas = notificaciones.reverse()
+    const notificacion_sinleer = notificaciones.filter(notificacion => notificacion.leida === false)
+
+    //console.log(colors.bgBlue(notificacionesOrdenadas))
   
     res.status(200).render("usuarios", {
         titulo: "Espacio Luz de Luna",
         usuario: user.usuario,
         usuarios: usuarios,
+        css2: "usuarios",
+        css: "perfil",
+        notificaciones: notificacionesOrdenadas,
+        notificacion_sinleer,
+        cantidad_notificaciones : notificacion_sinleer.length
       })
     
   } catch (error) {
     res.status(400).render("error", {
       mensaje: "Ha ocurrido un error al renderizar la plantilla",
       error: 400,
+      volver: "inicio",
     })
   }
 }

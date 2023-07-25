@@ -1,8 +1,8 @@
-const { crearPost, actualizarPost, eliminarPost, authAgregarComentario, eliminarComentario } = require("../../controllers/auth/post-auth")
+const { crearPost, actualizarPost, eliminarPost, eliminarComentario, agregarComentario, editarComentario } = require("../../controllers/auth/post-auth")
 const { editarPerfil } = require("../../controllers/auth/usuarios-auth")
 
 const { Router } = require('express');
-const { verifyToken } = require("../../middleware/auth-middleware");
+const { verifyToken, validarTitulo, validarPublicacionCrear, validarPublicacionEditar } = require("../../middleware/auth-middleware");
 
 const router = Router();
 
@@ -16,14 +16,16 @@ const router = Router();
 // Ruta a la que se le manda el token header
 router.post("/:user/editar-perfil", verifyToken, editarPerfil)
 
-router.post("/:admin/crear-post", verifyToken, crearPost)
+router.post("/:admin/crear-post", [verifyToken, validarTitulo, validarPublicacionCrear], crearPost)
 
-router.post("/:admin/actualizar-post", verifyToken,  actualizarPost)
+router.post("/:admin/actualizar-post", [verifyToken, validarPublicacionEditar],  actualizarPost)
 
-router.post("/:admin/eliminar-post/:id", verifyToken, eliminarPost)
+router.post("/:admin/eliminar-post/:id",  eliminarPost)
 
-router.post("/:user/publicaciones/:titulo/agregar-comentario",  authAgregarComentario)
+router.post("/admin/:user/publicaciones/:titulo/agregar-comentario",  agregarComentario)
 
-router.post("/:admin/publicaciones/:titulo/eliminar-comentario/:id",  eliminarComentario)
+router.post("/admin/:user/publicaciones/:titulo/editar-comentario",  editarComentario)
+
+router.post("/admin/:admin/publicaciones/:titulo/eliminar-comentario/:id",  eliminarComentario)
 
 module.exports = router;

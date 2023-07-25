@@ -82,45 +82,13 @@ const validateToken = (req, res) => {
       
 }
 
-const errorPlantilla = (req, res) => {
-    console.log("se paso la validacion")
-    const numError = req.body.error
-    const mensaje = req.body.mensaje
-
-    res.status(numError).render("error", {
-        mensaje: mensaje,
-  })
-}
 
 const loginUsuario = async (req, res) => {
-
     const { correo, password } = req.body;
-    
+    const usuario = req.middleware
     try {
-    
-      const usuario = await Usuario.findOne({where : {correo: correo}})
- 
-          // console.log(colors.bgBlue(usuario.id))
-        if ( !usuario ) {
-            return res.status(400).json({
-                msg: 'El usuario no es correcto'
-            });
-        }
 
-        if ( !usuario.confirmado ) {
-            return res.status(400).json({
-                msg: 'El usuario no fue confirmado'
-            });
-        }
-
-        // SI el usuario está activo
-        if ( !usuario.estado ) {
-            return res.status(400).json({
-                msg: 'Su cuenta fue eliminada'
-            });
-        }
-
-      const validPassword = bcryptjs.compareSync( password, usuario.password );
+    const validPassword = bcryptjs.compareSync( password, usuario.password );
 
       if ( !validPassword ) {
           return res.status(400).json({
@@ -129,8 +97,7 @@ const loginUsuario = async (req, res) => {
       }
 
       const tokenSesion = await generarJWT();
-      console.log(tokenSesion)
-
+      
       await Usuario.update({
         token_sesion : tokenSesion
             }, {
@@ -139,6 +106,7 @@ const loginUsuario = async (req, res) => {
             }
         });
         
+        
         res.status(200).header("auth-token", tokenSesion).json({
             token: tokenSesion,
             nombre:  usuario.nombre,
@@ -146,6 +114,7 @@ const loginUsuario = async (req, res) => {
             correo: usuario.correo,
             rol: usuario.rol
         })
+        
 
     } catch (error) {
         console.log(error)
@@ -192,7 +161,7 @@ const confirmarCuenta = async (req, res) => {
           })
         }
     } catch (error) {
-        
+        console.log(error)
     }
   
  
@@ -209,8 +178,6 @@ const olvidePassword = async (req, res) => {
     }
 
     try {
-     
-   
         await existeUsuario.update({
             id: existeUsuario.id,
             nombre : existeUsuario.nombre,
@@ -362,6 +329,7 @@ const editarPerfil = async (req, res) => {
         console.log(error)
         res.status(401).render("error", {
             mensaje: "HA OCURRIDO UN ERROR",
+            volver: "atras"
       })
         
     }
@@ -369,8 +337,8 @@ const editarPerfil = async (req, res) => {
 
 const adminNotificaciones = async (req, res) => {
     const { admin } = req.params
-    
     const notificaciones = await Notificaciones.findAll({where : { nombre_admin  : admin }});
+    console.log(colors.bgRed(notificaciones))
     const notificacionesOrdenadas = notificaciones.reverse()
 
     return res.status(200).json({
@@ -383,7 +351,7 @@ const actualizarNotificacion = async (req, res) => {
 
     try {
         // const notificaciones_admin = await Notificaciones.findAll({where : { nombre_admin  : admin }});
-        const actualizar = await Notificaciones.update({
+        await Notificaciones.update({
             leida : true
         }, {
             where: {
@@ -391,8 +359,6 @@ const actualizarNotificacion = async (req, res) => {
             }
         });
     
-        console.log(colors.bgCyan(actualizar))
-
         res.status(200).json({msg: "Comementario Leido"})
        
     } catch (error) {

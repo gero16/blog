@@ -1,19 +1,8 @@
+import { crearMensaje } from "./helpers/helpers-front.mjs"
+
 const btnLogin = document.querySelector("#login")
-const divLogin = document.querySelector(".login")
-const tituloLogin = document.querySelector(".titulo-login")
 const btnRegistro = document.querySelector("#registro")
 
-const crearMensaje = (msg) => {
-  const mensaje = document.createElement("span")
-  mensaje.classList.add("alert")
-  mensaje.textContent = msg
-  divLogin.append(mensaje)
-
-  setTimeout(() => {
-    mensaje.remove()
-  }, 6000)
-  
-}
 
 if(btnLogin){
   btnLogin.addEventListener("click", async (e) => {
@@ -34,8 +23,9 @@ if(btnLogin){
           }
         };
     
+      
     if(correo.value === "" || password.value === ""){
-        crearMensaje("El Usuario y/o Contraseña no pueden quedar vacios")
+        crearMensaje("El Usuario y/o Contraseña no pueden quedar vacios", ".login")
     }
     const fetchResponse = await fetch(`/auth/login`, settings);
     console.log(fetchResponse)
@@ -50,17 +40,17 @@ if(btnLogin){
     } 
     
     if(data.msg === 'El usuario no fue confirmado'){
-      crearMensaje("Debe Confirmar su Cuenta!")
+      crearMensaje("Debe Confirmar su Cuenta!", ".login")
     }
     if (data.msg === 'La contraseña no es correcta') {
-      crearMensaje("El Usuario y/o Constraseña son Incorrectos!")
+      crearMensaje("El Usuario y/o Constraseña son Incorrectos!", ".login")
     }
    
     if(data.msg === 'Su cuenta fue eliminada'){
-      crearMensaje( "Su Cuenta fue Eliminada!")
+      crearMensaje( "Su Cuenta fue Eliminada!", ".login")
     }
     if (data.msg === 'El usuario no es correcto') {
-      crearMensaje("El Usuario y/o Constraseña son Incorrectos!")
+      crearMensaje("El Usuario y/o Constraseña son Incorrectos!", ".login")
     }
     console.log(data.msg)
   })  

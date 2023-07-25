@@ -1,10 +1,10 @@
-import { agregar, agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, btnPrevisualizarCrear, divAgregarInputs, enviarPost, formulario, inputAutor, inputContenido, 
- inputFecha, inputFoto, inputTitulo, preAutor, preContenido, preFecha, preFoto, preTitulo, previsualizar, terminarContenido } from "./helpers-front.mjs";
+import { 
+    agregarParrafo, agregarSubtitulo, btnAgregarParrafo, btnAgregarSub, btnPrevisualizarCrear, inputFoto,preFoto,  previsualizar
+  } from "./helpers/helpers-front.mjs";
 
 btnAgregarParrafo.addEventListener("click", agregarParrafo)
 
 btnAgregarSub.addEventListener("click", agregarSubtitulo)
-
 
 inputFoto.addEventListener("change", (e) => {
   // Esto le hago para poner manualmente el nombre de la foto a la derecha del "input"
@@ -24,7 +24,6 @@ inputFoto.addEventListener("change", (e) => {
 
 // CAPAZ QUE PRECISO UN MODO EDICION = FALSE, en crear, para tener en cuenta los editar mientras creo, que afectarian solo a la previsualizacion
 btnPrevisualizarCrear.addEventListener("click", previsualizar)
-
 
 const btnQuitarContenido = document.querySelectorAll(".btn-quitar-contenido")
 btnQuitarContenido.forEach(elementoQuitar => {

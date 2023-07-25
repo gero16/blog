@@ -58,7 +58,6 @@ const traerPublicaciones = async (req, res) => {
     try {
       // Traer todos las Publicaciones
      const post = await Post.findOne({where : {url : req.params.titulo}});
-     console.log(colors.bgRed(post))
 
      const {id, url, titulo, contenido, imagen, autor, fecha} = post
      const comentarios = await Comentario.findAll({where : {id_post : id}});
@@ -83,6 +82,7 @@ const traerPublicaciones = async (req, res) => {
       fecha: newDate,
       comentarios: comentarios,
       numComentarios,
+      admin_post : post.autor
       
   })
    } catch (error) {
@@ -108,7 +108,7 @@ const traerPublicaciones = async (req, res) => {
           imagen_usuario: req.body.imagen_usuario,
         })
         
-
+        console.log(colors.bgBlue(req.body))
         const notifiaciones = new Notificaciones ({
           id: id + 12 +3,
           nombre_admin: req.body.autor_post,
