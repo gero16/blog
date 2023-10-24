@@ -110,6 +110,12 @@ header {
     align-items: center;
   }
 
+  .flex-center-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 .display-none {
     display: none;
 }
@@ -209,21 +215,29 @@ article {
 }
 
 .icono-notificacion {
-    width: 32px;
+    transition: 0.5s;
+    width: 35px;
     margin-left: 10px;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.icono-notificacion:hover {
+    transition: 0.5s;
+    filter: brightness(1.3);
+    background-color: rgb(17, 119, 160);
 }
 
 .notificacion-numero {
-    background-color: rgb(112, 9, 9);
+    background-color: rgb(17, 119, 160);
     color: white;
     border-radius: 60%;
-    padding: 3px;
+    padding: 3.5px;
     font-size: xx-small;
-    
 }
 .notificacion-numero-normal {
     position: absolute;
-    right: 0px;
+    right: 8px;
 }
 
 .div-notificacion {
